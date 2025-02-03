@@ -1,0 +1,219 @@
+/* Réinitialisation des marges et padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police plus moderne */
+}
+
+/* Page Acceuil */
+/* Haut de page */
+.Page-Accueil {
+    background: #1f2443;
+    background-position: center;
+    background-size: cover;
+    padding: 10px 10%;
+    min-height: 100vh;  /* On s'assure que la page occupe toute la hauteur */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    padding: 10px;
+}
+
+header .logo {
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid gold;
+    box-shadow: 0 0 0 2px rgb(142, 141, 83);
+}
+
+header .menu {
+    display: flex;
+    list-style: none;
+}
+
+header .menu li {
+    margin: 0 15px;
+}
+
+header .menu li a {
+    text-decoration: none;
+    text-transform: capitalize;
+    color: aliceblue;
+    font-size: 18px;
+}
+
+header .menu li a:hover {
+    text-decoration: underline;
+}
+
+/* Contenu principal */
+.Page-Accueil-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: aliceblue;
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+.Page-Accueil-text h1 {
+    font-size: 40px;
+    text-transform: capitalize;
+    margin: 20px 0;
+}
+
+.Page-Accueil-text p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+
+.Page-Accueil-text ul li {
+    margin: 5px 0;
+}
+
+.Page-Accueil-text a {
+    color: aliceblue;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    border: 2px solid aliceblue;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.85s;
+    margin-top: 20px;
+}
+
+.Page-Accueil-text a:hover {
+    letter-spacing: 1px;
+    border: 2px solid #e7e1e1;
+    color: #fcf9fc;
+}
+
+/* Footer */
+footer {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    background-color: #1f2443;
+    padding: 20px 0;
+}
+
+footer .bas-de-page {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+footer .bas-de-page li {
+    display: inline;
+}
+
+footer .bas-de-page li a {
+    text-decoration: none;
+    color: aliceblue;
+    font-size: 14px;
+}
+
+footer .bas-de-page li a:hover {
+    text-decoration: underline;
+}
+
+
+.Page-Accueil2{
+    background:#1f2443;
+    background-position: center;
+    background-size: cover;
+    padding: 10px 10%;
+    height: 100vh;    
+}
+/*Destination*/
+
+.Titre {
+    text-align: center;
+    margin-top: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #f5eff2;
+    font-size: 25px;
+}
+
+.Soustitre {
+    text-align: center;
+    margin-top: 30px;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 20px;
+    color: aliceblue;
+}
+
+
+.ListePhotos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 50px;
+    padding: 0 22.5%;
+}
+
+.ListePhotos .gallerie-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: 0.5s;
+    border-radius: inherit;
+}
+
+.ListePhotos .gallerie-img {
+    width: 49%;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 1%;
+    cursor: pointer;
+}
+
+.ListePhotos .gallerie-img:hover img{
+    transform: scale(1.2);
+
+}
+
+.Lieux {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%; 
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0; 
+    transition: opacity 0.5s ease-in-out;
+}
+
+.gallerie-img:hover .Lieux {
+    opacity: 1;
+}
+
