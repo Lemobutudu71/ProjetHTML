@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police plus moderne */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 
 /* Page Acceuil */
@@ -13,7 +13,7 @@
     background-position: center;
     background-size: cover;
     padding: 10px 10%;
-    min-height: 100vh;  /* On s'assure que la page occupe toute la hauteur */
+    min-height: 100vh;  
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,7 +26,8 @@ header {
     justify-content: space-between;
     width: 100%;
     padding: 10px;
-    min-height: 100px;
+    min-height: auto;
+
 }
 
 header .logo {
@@ -57,6 +58,28 @@ header .menu li a:hover {
     text-decoration: underline;
 }
 
+@media (max-width: 768px) { /* pour les petits écrans */
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 15px 10px;
+    }
+
+    header .logo {
+        height: 70px; 
+    }
+
+    header .menu {
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 10px;
+    }
+
+    header .menu li {
+        margin: 5px 0;
+    }
+}
 
 
 /* Contenu principal */
@@ -139,33 +162,77 @@ footer .bas-de-page li a:hover {
 }
 
 
-.Page-Accueil2{
-    background:#1f2443;
-    background-position: center;
-    background-size: cover;
-    padding: 10px 10%;
-    height: 100vh;    
+/*Page Accueil2*/
+
+.Page-Accueil2-text{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: aliceblue;
+    font-size: 20px;
+    padding: 0 10px;
 }
-/*Destination*/
+.Page-Accueil2-text h1 {
+    font-size: 40px;
+    text-transform: capitalize;
+    margin: 20px 0;
+}
+
+.Page-Accueil2-text ul li {
+    margin: 5px 0;
+    display: inline;
+    margin-right: 10px;
+    
+}
+
+.recherche {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    padding: 20px;
+    border-radius: 10px;     
+    width: 8%;             
+    margin: 20px auto;      
+}
+
+.recherche input {
+    padding: 15px 25px;
+    font-size: 15px;  
+    width: 80; 
+    border-radius: 10px;      
+}
+.recherche button {
+    padding: 15px 35px;
+    font-size: 15px;  
+    border-radius: 10px;
+}
+
+.recherche button:hover{
+    cursor: pointer;
+    color: #1f2443;
+    background-color:#bdb7bd;
+}
+/*Destinations*/
 
 .Titre {
-    text-align: center;
+    text-align: center; /* Centre le texte de l'élément p */
     margin-top: 50px;
+}
+
+.Titre a {
     text-transform: uppercase;
     font-weight: bold;
     color: #f5eff2;
     font-size: 25px;
+    text-decoration: none;  /* Enlève la décoration de lien par défaut */
 }
 
-.Soustitre {
-    text-align: center;
-    margin-top: 30px;
-    font-weight: bold;
-    text-transform: capitalize;
-    font-size: 20px;
-    color: aliceblue;
+.Titre a:hover{
+    text-decoration: underline;
 }
-
 
 .ListePhotos {
     display: flex;
@@ -219,4 +286,6 @@ footer .bas-de-page li a:hover {
 .gallerie-img:hover .Lieux {
     opacity: 1;
 }
+
+/*Page filtres*/
 

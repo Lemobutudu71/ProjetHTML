@@ -7,7 +7,68 @@
     <link rel="stylesheet" href="CSS.css">
 </head>
 <body>
+    <section class="Page-Accueil">
+        <header>
+            <div class="ProfilPicture">
+                <img src="images/LOGO.jpg" alt="logo" width="200" class="logo">
+            </div>
+            <ul class="menu">
+                <li><a href="PageAccueil.html">Accueil</a></li>
+                <li><a href="DESTINATIONS.html">Réserver</a></li>
+                <li><a href="PageAccueil2.html">Rechercher</a></li>
+                <li><a href="#">Contacts</a></li>
+                <li><a href="#">Espace client</a></li>
+            </ul>
+        </header>
+        <div class="Page-Accueil-text">
+            <h1>Rechercher un voyage</h1>
+            <form action="#" method="GET" class="search-form">
+                <div class="form-group">
+                    <label for="date-depart">Date de départ :</label>
+                    <input type="date" id="date-depart" name="date-depart" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="date-retour">Date de retour :</label>
+                    <input type="date" id="date-retour" name="date-retour" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lieu">Séjour :</label>
+                    <select id="lieu" name="lieu">
+                        <option value="Poudlard">Poudlard</option>
+                        <option value="Tatooine">Tatooine</option>
+                        <option value="Fondcombe">Fondcombe</option>
+                        <option value="Jurrasic Park">Jurrasic Park</option>
+                    </select>
+                </div>
+
+                <!-- Champ Options à changer -->
+                <div class="form-group">
+                    <label for="options">Options supplémentaires :</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="options" value="all-inclusive"> Tout compris</label>
+                        <label><input type="checkbox" name="options" value="activites"> Activités incluses</label>
+                        <label><input type="checkbox" name="options" value="hotel"> Hôtel 5 étoiles</label>
+                    </div>
+                </div>
+
+                <!-- Bouton de recherche -->
+                <div class="form-group">
+                    <button type="submit">Rechercher</button>
+                </div>
+            </form>
+        </div>
+        <footer>
+            <ul class="bas-de-page">
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">&Agrave; propos</a></li>
+            </ul>
+        </footer>
     
+    </section>
+
     
 </body>
 </html>
