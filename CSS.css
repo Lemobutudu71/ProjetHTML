@@ -188,6 +188,19 @@ footer .bas-de-page li a:hover {
     
 }
 
+.Page-Accueil-text a {
+    color: aliceblue;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    border: 2px solid aliceblue;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.85s;
+    margin-top: 20px;
+}
+
+
 .recherche {
     display: flex;
     justify-content: center; 
@@ -215,7 +228,7 @@ footer .bas-de-page li a:hover {
     color: #1f2443;
     background-color:#bdb7bd;
 }
-/*Destinations*/
+
 
 .Titre {
     text-align: center; /* Centre le texte de l'élément p */
@@ -287,5 +300,50 @@ footer .bas-de-page li a:hover {
     opacity: 1;
 }
 
-/*Page filtres*/
+/*Page inscription*/
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Compte {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
 
