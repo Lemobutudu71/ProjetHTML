@@ -21,13 +21,26 @@
         </header>
         <div class="container">
             <div class="Compte">
-                <h2 class="h2">Connexion</h2>
-                <form>
-                    <input class="champs" name="email" type="email" placeholder="Email" required>
-                    <input class="champs" name="password" type="password" placeholder="Mot de passe" required>
-                    <button class="button" type="submit">Se connecter</button>
-                </form>
-                <p class="redirection"><a href="#">Mot de passe oublié ?</a></p>
+                    <h2 class="h2">Mon Profil</h2>
+                    <form>
+                        <div class="profil">
+                            <label for="nom">Nom :</label>
+                            <input type="text" name="nom" value="...">
+                        </div>
+                        <div class="profil">
+                            <label for="prenom">Prénom :</label>
+                            <input type="text"  name="prenom"value="...">
+                        </div>
+                        <div class="profil">
+                            <label for="email">Email :</label>
+                            <input type="email" name="email" value="jean.dupont@example.com">
+                        </div>
+                        <div class="profil">
+                            <label for="password">Mot de passe :</label>
+                            <input type="password" name="password" value="password123">
+                        </div>
+                        <button type="submit" class="button">Enregistrer</button>
+                    </form>
             </div>
         </div>
         <footer>
@@ -36,7 +49,8 @@
                 <li><a href="#">Politique de confidentialité</a></li>
                 <li><a href="#">&Agrave; propos</a></li>
             </ul>
-        </footer>
+        </footer> 
     </section>
+    
 </body>
 </html>
