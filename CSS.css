@@ -9,8 +9,8 @@
 /* Page Acceuil */
 /* Haut de page */
 .Page-Accueil {
-    background: #1f2443;
-    background-position: center;
+    background: linear-gradient(rgba(0,0,0,0.7),#010006),url("images/fond.jpg");
+    box-sizing: border-box;
     background-size: cover;
     padding: 10px 10%;
     min-height: 100vh;  
@@ -25,17 +25,17 @@ header {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     min-height: auto;
-
 }
 
 header .logo {
     height: 90px;
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid gold;
-    box-shadow: 0 0 0 2px rgb(142, 141, 83);
+    border: 2px solid #FFC300    ;
+    box-shadow: 0 0 0 2px rgb(237, 195, 6);
+    
 }
 
 header .menu {
@@ -50,8 +50,10 @@ header .menu li {
 header .menu li a {
     text-decoration: none;
     text-transform: capitalize;
-    color: aliceblue;
     font-size: 18px;
+    color: #D4AF37 ;
+    font-weight: bold;
+    
 }
 
 header .menu li a:hover {
@@ -89,8 +91,8 @@ header .menu li a:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    color: aliceblue;
+    text-align: justify;
+    color: #FFD700;
     font-size: 20px;
     padding: 0 10px;
 }
@@ -112,21 +114,24 @@ header .menu li a:hover {
 }
 
 .Page-Accueil-text a {
-    color: aliceblue;
+    color: gold;
     text-decoration: none;
-    text-transform: uppercase;
     padding: 10px 30px;
-    border: 2px solid aliceblue;
-    border-radius: 6px;
+    border-radius: 5px;
+    font-size: 18px;
     font-weight: bold;
-    transition: 0.85s;
+    transition: all 0.3s ease-in-out;
     margin-top: 20px;
+    border: 2px solid #FFD700;
+    transition: 0.85s;
+    text-transform: uppercase;
 }
 
 .Page-Accueil-text a:hover {
+    background: gold; 
+    border: 2px solid gold;
+    color: rgb(13, 30, 75); 
     letter-spacing: 1px;
-    border: 2px solid #e7e1e1;
-    color: #fcf9fc;
 }
 
 /* Footer */
@@ -134,7 +139,6 @@ footer {
     position: relative;
     text-align: center;
     width: 100%;
-    background-color: #1f2443;
     padding: 20px 0;
 }
 
@@ -153,7 +157,7 @@ footer .bas-de-page li {
 
 footer .bas-de-page li a {
     text-decoration: none;
-    color: aliceblue;
+    color: #FFD700;
     font-size: 14px;
 }
 
@@ -171,7 +175,7 @@ footer .bas-de-page li a:hover {
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: aliceblue;
+    color: #FFD700;
     font-size: 20px;
     padding: 0 10px;
 }
@@ -188,18 +192,40 @@ footer .bas-de-page li a:hover {
     
 }
 
-.Page-Accueil-text a {
-    color: aliceblue;
-    text-decoration: none;
-    text-transform: uppercase;
-    padding: 10px 30px;
-    border: 2px solid aliceblue;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: 0.85s;
-    margin-top: 20px;
+.fondateurs {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    margin-top: 50px;
 }
 
+.fondateurs h2 {
+    color: gold;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.Cadre{
+    text-align: center;
+}
+
+.Cadre img {
+    width: 120px; 
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%; 
+    border: 3px solid gold;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.Cadre p {
+    margin-top: 10px;
+    color: gold;
+    font-size: 18px;
+    font-weight: bold;
+}
 
 .recherche {
     display: flex;
@@ -208,7 +234,7 @@ footer .bas-de-page li a:hover {
     padding: 20px;
     border-radius: 10px;     
     width: 8%;             
-    margin: 20px auto;      
+    margin: 20px auto; 
 }
 
 .recherche input {
