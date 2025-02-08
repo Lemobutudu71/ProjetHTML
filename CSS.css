@@ -12,6 +12,7 @@
     background: linear-gradient(rgba(0,0,0,0.7),#010006),url("images/fond.jpg");
     box-sizing: border-box;
     background-size: cover;
+    background-position: center;
     padding: 10px 10%;
     min-height: 100vh;  
     display: flex;
@@ -27,6 +28,7 @@ header {
     width: 100%;
     padding: 15px;
     min-height: auto;
+    margin-bottom: 50px;
 }
 
 header .logo {
@@ -113,7 +115,7 @@ header .menu li a:hover {
     margin: 5px 0;
 }
 
-.Page-Accueil-text a {
+.Page-Accueil-button {
     color: gold;
     text-decoration: none;
     padding: 10px 30px;
@@ -121,13 +123,13 @@ header .menu li a:hover {
     font-size: 18px;
     font-weight: bold;
     transition: all 0.3s ease-in-out;
-    margin-top: 20px;
+    margin-top: 50px;
     border: 2px solid #FFD700;
     transition: 0.85s;
     text-transform: uppercase;
 }
 
-.Page-Accueil-text a:hover {
+.Page-Accueil-button:hover {
     background: gold; 
     border: 2px solid gold;
     color: rgb(13, 30, 75); 
@@ -149,6 +151,7 @@ footer .bas-de-page {
     display: flex;
     justify-content: center;
     gap: 20px;
+    margin-top: 50px;
 }
 
 footer .bas-de-page li {
@@ -178,6 +181,8 @@ footer .bas-de-page li a:hover {
     color: #FFD700;
     font-size: 20px;
     padding: 0 10px;
+    margin-top: 50px ;
+    margin-bottom: 50px ;
 }
 .Page-Accueil2-text h1 {
     font-size: 40px;
@@ -195,9 +200,10 @@ footer .bas-de-page li a:hover {
 .fondateurs {
     display: flex;
     justify-content: center;
-    gap: 50px;
+    gap: 70px;
     flex-wrap: wrap;
-    margin-top: 50px;
+    margin-top: 80px;
+    margin-bottom: 50px;
 }
 
 .fondateurs h2 {
@@ -209,21 +215,26 @@ footer .bas-de-page li a:hover {
 
 .Cadre{
     text-align: center;
+    width: 180px;
 }
 
 .Cadre img {
-    width: 120px; 
-    height: 120px;
+    width: 150px; 
+    height: 150px;
     object-fit: cover;
     border-radius: 50%; 
     border: 3px solid gold;
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
 }
 
+.Cadre img:hover {
+    transform: scale(1.1);
+}
+
 .Cadre p {
     margin-top: 10px;
     color: gold;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -232,33 +243,59 @@ footer .bas-de-page li a:hover {
     justify-content: center; 
     align-items: center;     
     padding: 20px;
-    border-radius: 10px;     
-    width: 8%;             
-    margin: 20px auto; 
+    border-radius: 10px;               
+    margin: 40px auto; 
+    
 }
 
 .recherche input {
     padding: 15px 25px;
     font-size: 15px;  
-    width: 80; 
-    border-radius: 10px;      
+    width: 350px; 
+    border-radius: 10px; 
+    border: 2px solid gold;
+    background: rgba(20, 44, 77, 0.8); /* Fond noir légèrement transparent */
+    color: gold;
+    outline: none;
+    transition: all 0.3s ease-in-out;  
+    margin-top: 50px;     
 }
+
+.recherche input:focus {
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
 .recherche button {
     padding: 15px 35px;
     font-size: 15px;  
     border-radius: 10px;
+    border: 2px solid gold;
+    background: gold;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 50px;
 }
 
 .recherche button:hover{
     cursor: pointer;
-    color: #1f2443;
-    background-color:#bdb7bd;
+    background: #FFD700;
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    
+}
+
+.recherche button:active {
+    transform: scale(0.95);
 }
 
 
 .Titre {
     text-align: center; /* Centre le texte de l'élément p */
     margin-top: 50px;
+    font-weight: bold;
 }
 
 .Titre a {
@@ -314,7 +351,7 @@ footer .bas-de-page li a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: aliceblue;
+    color: #FFD700;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
