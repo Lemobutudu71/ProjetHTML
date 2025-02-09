@@ -4,8 +4,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    
 }
-
 
 /* Page Acceuil */
 /* Haut de page */
@@ -432,8 +432,8 @@ select {
 }
 .btn-filtre:hover{
     background: #FFD700;
- box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+     transform: scale(1.05);
 
 }
 button:active {
@@ -497,8 +497,6 @@ button:active {
     transition: all 0.3s ease-in-out;
 }
 
-
-
 .button:hover {
     background-color: #FFD700;
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
@@ -547,19 +545,23 @@ button:active {
 
 
 /*Page administrateur*/
+
 .Administrateur {
-    width: 80%;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 900px;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    text-align: center;
     overflow-x: auto;
+    
 }
 
 .table-titre{
-    text-align: center;
-    color: #333;
+    color: gold;
+    font-size: 26px;
+    margin-bottom: 20px;
 }
 
 table {
@@ -569,14 +571,10 @@ table {
 }
 
 th, td {
+    background-color: gold;
+    color: black;
     padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
-}
-
-th {
-    background-color: #007bff;
-    color: white;
+    border: 1px solid #141414;
 }
 
 .status {
@@ -597,7 +595,7 @@ th {
 }
 
 .ban-btn {
-    background-color: #dc3545;
+    background: #dc3545;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -607,4 +605,19 @@ th {
 
 .ban-btn:hover {
     background-color: #c82333;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px; 
+}
+
+::-webkit-scrollbar-track {
+    background: black;
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: gold;
+    border-radius: 10px;
 }
