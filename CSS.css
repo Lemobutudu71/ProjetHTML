@@ -342,6 +342,19 @@ footer .bas-de-page li a:hover {
 
 }
 
+.Prix {
+    position: absolute;
+    bottom: -10px; 
+    left: 0;
+    width: 100%;
+    color: #FFD700;
+    font-size: 14px; 
+    text-align: center;
+    padding: 5px 0; 
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
 .Lieux {
     position: absolute;
     top: 0;
@@ -363,15 +376,38 @@ footer .bas-de-page li a:hover {
 .gallerie-img:hover .Lieux {
     opacity: 1;
 }
-/*Page filtres*/
+.gallerie-img:hover .Prix {
+    opacity: 1;  
+}
 
-.search-form {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 30px;
-    border-radius: 10px;
-    max-width: 500px;
-    margin: 40px auto;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+
+/*Page filtres*/
+.date-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.date-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.date-input label {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: gold;
+}
+
+.date-input input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid gold;
+    background: rgba(255, 255, 255, 0.1);
+    color: gold;
 }
 
 .form-group {
@@ -387,57 +423,16 @@ footer .bas-de-page li a:hover {
     margin-bottom: 8px;
 }
 
-.input-select {
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 2px solid gold;
-    background: rgba(255, 255, 255, 0.1);
-    color: gold;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;;
-}
 
 select {
     background-color: rgb(27, 26, 26); 
-    color: gold; /* Texte doré */
+    color: gold; 
     border: 2px solid gold;
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
+    width: 100%;
     cursor: pointer;
-}
-
-.input-select:focus {
-    border-color: #FFD700;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
-.checkbox-group input {
-    margin-right: 10px;
-    transform: scale(1.2);
-    cursor: pointer;
-}
-
-.btn-filtre{
-    padding: 12px;
-    font-size: 18px;
-    border-radius: 5px;
-    border: 2px solid gold;
-    background: gold;
-    color: black;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-.btn-filtre:hover{
-    background: #FFD700;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-     transform: scale(1.05);
-
-}
-button:active {
-    transform: scale(0.95);
 }
 
 @media (max-width: 600px) {
@@ -446,7 +441,6 @@ button:active {
         padding: 20px;
     }
 }
-
 
 /*Page inscription*/
 .container {

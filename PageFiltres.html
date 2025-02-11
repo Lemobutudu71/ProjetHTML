@@ -6,6 +6,7 @@
     <title>MovieTrip</title>
     <link rel="stylesheet" href="CSS.css">
 </head>
+
 <body>
     <section class="Page-Accueil">
         <header>
@@ -21,46 +22,79 @@
         </header>
         <div class="Page-Accueil-text">
             <h1>Rechercher un voyage</h1>
-            <form action="#" method="GET" class="search-form">
-                <div class="form-group">
+            <div class="date-container">
+                <div class="date-input">
                     <label for="date-depart">Date de départ :</label>
                     <input class="input-select" type="date" id="date-depart" name="date-depart" required>
                 </div>
 
-                <div class="form-group">
+                <div class="date-input">
                     <label for="date-retour">Date de retour :</label>
                     <input  class="input-select" type="date" id="date-retour" name="date-retour" required>
                 </div>
+            </div>
+           
+            
+            <div class="form-group">
+                <label for="options"><h2>Filtres :</h2></label>
 
-                <div class="form-group">
-                    <label for="lieu">Séjour :</label>
-                    <select  id="lieu" name="lieu">
-                        <option value="Poudlard">Poudlard</option>
-                        <option value="Tatooine">Tatooine</option>
-                        <option value="Fondcombe">Fondcombe</option>
-                        <option value="Jurrasic Park">Isla Nublar</option>
-                        <option value="Jurrasic Park">Pandora</option>
-                        <option value="Jurrasic Park">Westeros</option>
+                <label for="transport">Mode de transport:</label>
+                <select  id="transport" name="transport">
+                    <option value="Poudlard">Vaisseau spatial</option>
+                    <option value="Tatooine">Bateau</option>
+                    <option value="Fondcombe">Poudre de cheminette</option>
+                    <option value="Jurrasic Park">Cheval</option>
+                    <option value="Jurrasic Park">Avion</option>
+                    <option value="Jurrasic Park"></option>
+                </select>
 
+                <label for="transport">Logement:</label>
+                <select  id="Logement" name="Logement">
+                    <option value="Poudlard">Château</option>
+                    <option value="Tatooine">Chez l'habitant</option>
+                    <option value="Fondcombe">Magique</option>
+                    <option value="Jurrasic Park">Maison</option>
+                    <option value="Jurrasic Park">Arbre Maison</option>
+                    <option value="Jurrasic Park">Hôtel 5 étoiles</option>
+                </select>
 
-                    </select>
+            </div>    
+            <div class="ListePhotos">
+                <div class="gallerie-img">
+                    <img src="images/Poudlard-scaled.jpg" alt="Chateau Harry Potter" width="200">
+                    <div class="Lieux"><p>Poudlard</p></div>
+                    <div class="Prix"><p>A partir de 3000€</p></div>
                 </div>
-
-               
-                <div class="form-group">
-                    <label for="options">Options supplémentaires :</label>
-                    <div class="checkbox-group">
-                        <label><input class="input-select" type="checkbox" name="options" value="all-inclusive">Tout compris</label>
-                        <label><input class="input-select" type="checkbox" name="options" value="activites">Activités incluses</label>
-                        <label><input class="input-select" type="checkbox" name="options" value="hotel">Logement</label>
-                        <label><input class="input-select" type="checkbox" name="options" value="hotel">Transport</label>
-                    </div>
+                <div class="gallerie-img">
+                    <img src="images/Seigneur des anneaux.jpeg" alt="Chateau des elfes" width="200">
+                    <div class="Lieux"><p>Fondcombe</p></div>
+                    <div class="Prix"><p>A partir de 2000 €</p></div>
                 </div>
-                <div class="form-group">
-                    <button class="btn-filtre" type="submit">Rechercher</button>
+                <div class="gallerie-img">
+                    <img src="images/Tatooine.jpg" alt="Planète Star Wars" width="200">
+                    <div class="Lieux"><p>Tatooine</p></div>
+                    <div class="Prix"><p>A partir de 3500 €</p></div>
                 </div>
-            </form>
+                <div class="gallerie-img">
+                    <img src="images/1186175.png" alt="Jurrasic Park" width="200">
+                    <div class="Lieux"><p>Isla Nublar</p></div>
+                    <div class="Prix"><p>A partir de 1500 €</p></div>
+                </div>
+                <div class="gallerie-img">
+                    <img src="images/Avatar.jpg" alt="Avatar paysage" width="200">
+                    <div class="Lieux"><p>Pandora</p></div>
+                    <div class="Prix"><p>A partir de 5000 €</p></div>
+                </div>
+                <div class="gallerie-img">
+                    <img src="images/GOT.webp" alt="Avatar paysage" width="200">
+                    <div class="Lieux"><p>Westeros</p></div>
+                    <div class="Prix"><p>A partir de 5300 €</p></div>
+                </div>
+            </div>
         </div>
+
+        
+        
         <footer>
             <ul class="bas-de-page">
                 <li><a href="#">Mentions légales</a></li>
@@ -69,8 +103,6 @@
             </ul>
         </footer>
     
-    </section>
-
-    
+    </section> 
 </body>
 </html>
