@@ -315,7 +315,7 @@ footer .bas-de-page li a:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 100%;
+    width: 125%;
     margin-top: 50px;
     padding: 0 22.5%;
 }
@@ -410,19 +410,25 @@ footer .bas-de-page li a:hover {
     color: gold;
 }
 
-.form-group {
-    margin-bottom: 20px;
+.filters-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espace entre les éléments */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.filter-input {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.form-group label {
-    font-size: 18px;
-    font-weight: bold;
+.filter-input label {
+    margin-bottom: 5px;
+    font-size: 16px;
     color: gold;
-    margin-bottom: 8px;
 }
-
 
 select {
     background-color: rgb(27, 26, 26); 
@@ -431,10 +437,9 @@ select {
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
-    width: 100%;
+    width: 200px; /* Ajuster la largeur pour l'horizontalité */
     cursor: pointer;
 }
-
 @media (max-width: 600px) {
     .search-form {
         width: 90%;
