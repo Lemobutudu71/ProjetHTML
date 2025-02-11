@@ -387,7 +387,7 @@ footer .bas-de-page li a:hover {
     justify-content: center;
     gap: 20px;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
+  
 }
 
 .date-input {
@@ -410,12 +410,28 @@ footer .bas-de-page li a:hover {
     color: gold;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+    
+    filter: invert(70%) sepia(100%) saturate(500%) hue-rotate(10deg) brightness(100%) contrast(90%);
+    cursor: pointer;
+}
+
+
+/* Masquer l'icône et ajouter une image personnalisée */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: url("https://e7.pngegg.com/pngimages/904/526/png-clipart-computer-icons-online-calendar-information-agenda-miscellaneous-calendar.png") no-repeat center;
+    background-size: contain;
+    width: 25px;
+    height: 25px;
+    opacity: 1;
+}
+
 .filters-container {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Espace entre les éléments */
+    gap: 20px;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
+   
 }
 
 .filter-input {
