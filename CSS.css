@@ -592,22 +592,13 @@ select {
 
 /*Page administrateur*/
 
-.Administrateur {
-    width: 90%;
-    max-width: 900px;
-    background: rgba(0, 0, 0, 0.85);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-    text-align: center;
-    overflow-x: auto;
-    
-}
-
 .table-titre{
     color: gold;
     font-size: 26px;
     margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 table {
@@ -617,40 +608,51 @@ table {
 }
 
 th, td {
-    background-color: gold;
-    color: black;
+    background-color: #141414;
+    color: rgb(233, 186, 34);
     padding: 12px;
     border: 1px solid #141414;
 }
+
 
 .status {
     font-weight: bold;
 }
 
-.vip-btn {
-    background-color: #28a745;
-    color: white;
+.Oui-btn{
+    background-color: #FFD700; 
+    color: #000000;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.profil-btn {
+    background-color: #343A40; 
+    color: #FFD700;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.profil-btn:hover {
+    background-color: #1d252b;
+}
+.Oui-btn:hover {
+    background-color: #DAA520
+}
+
+.Non-btn {
+    background-color: #aa711c; 
+    color: #f7f3f3;
     border: none;
     padding: 8px 12px;
     cursor: pointer;
     border-radius: 5px;
 }
 
-.vip-btn:hover {
-    background-color: #218838;
-}
-
-.ban-btn {
-    background: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.ban-btn:hover {
-    background-color: #c82333;
+.Non-btn:hover {
+    background-color:  #6b4813;
 }
 
 ::-webkit-scrollbar {
