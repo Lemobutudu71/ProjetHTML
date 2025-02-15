@@ -380,9 +380,9 @@ footer .bas-de-page li a:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 125%;
+    width: 100%;
     margin-top: 50px;
-    padding: 0 22.5%;
+    padding: 0 10%;
 }
 
 .ListePhotos .gallerie-img img {
@@ -445,7 +445,25 @@ footer .bas-de-page li a:hover {
     opacity: 1;  
 }
 
+@media screen and (max-width: 600px) {
+    .ListePhotos {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 5%;
+    }
 
+    .ListePhotos .gallerie-img {
+        width: 90%;  
+    }
+
+    .Lieux {
+        font-size: 16px;
+    }
+
+    .Prix {
+        font-size: 12px;
+    }
+}
 /*Page filtres*/
 .date-container {
     display: flex;
@@ -503,6 +521,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 150px
 }
 
 .filter-input label {
@@ -518,13 +537,26 @@ select {
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
-    width: 200px; /* Ajuster la largeur pour l'horizontalité */
+    width: 100%; /* Ajuster la largeur pour l'horizontalité */
     cursor: pointer;
 }
-@media (max-width: 600px) {
-    .search-form {
-        width: 90%;
-        padding: 20px;
+@media screen and (max-width: 600px) {
+    .date-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filters-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-input {
+        width: 100%;
+    }
+
+    .date-input {
+        width: 100%;
     }
 }
 
