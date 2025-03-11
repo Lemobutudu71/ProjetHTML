@@ -4,7 +4,7 @@
         $file = 'utilisateur.json';
 
         
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {// Vérifier si le formulaire a été soumis
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {// Vérifier si le formulaire a été soumis
         
         $nom = trim($_POST['nom']);
         $prenom = trim($_POST['prenom']);
@@ -33,15 +33,15 @@
                 "prenom" => $prenom,
                 "email" => $email,
                 "password" =>  $hashedPassword,
-
             ];
 
-        }
+    
 
         $users[] = $newUser;// Ajouter le nouvel utilisateur
         file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT));  // Enregistrement dans le fichier JSON
         header("Location: PageSeconnecter.php"); // Rediriger vers la page de connexion après l'inscription
         } 
+    }
       
         ?>
 

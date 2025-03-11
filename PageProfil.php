@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user'])) {
+    header("Location: PageInscription.php"); 
+    exit;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['deconnecter'])) {
+    session_unset();// Détruire toutes les variables de session
+    session_destroy();// Détruire la session
+    header("Location: PageAccueil.php"); 
+    exit;
+}
+
+// Si l'utilisateur est connecté, récupérer ses informations de session
+$user = $_SESSION['user']; 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,26 +44,31 @@
         </header>
         <div class="container">
             <div class="Compte">
-                    <h2 class="h2">Mon Profil</h2>
-                    <form>
-                        <div class="profil">
-                            <label for="nom">Nom :</label>
-                            <input type="text" name="nom" value="...">
-                        </div>
-                        <div class="profil">
-                            <label for="prenom">Prénom :</label>
-                            <input type="text"  name="prenom"value="...">
-                        </div>
-                        <div class="profil">
-                            <label for="email">Email :</label>
-                            <input type="email" name="email" value="antoine.mrmlt@gmail.com">
-                        </div>
-                        <div class="profil">
-                            <label for="password">Mot de passe :</label>
-                            <input type="password" name="password" value="password123">
-                        </div>
-                        <button type="submit" class="button">Modifier</button>
-                    </form>
+                <h2 class="h2">Mon Profil</h2>
+                <form action="PageProfil.php" method="post">
+                    <div class="profil">
+                        <label for="nom">Nom :</label>
+                        <input type="text" name="nom" value="<?php echo htmlspecialchars($user['nom']); ?>" disabled>
+                    </div>
+                    <div class="profil">
+                        <label for="prenom">Prénom :</label>
+                        <input type="text" name="prenom" value="<?php echo htmlspecialchars($user['prenom']); ?>" disabled>
+                    </div>
+                    <div class="profil">
+                        <label for="email">Email :</label>
+                        <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" disabled>
+                    </div>
+                    <div class="profil">
+                        <label for="password">Mot de passe :</label>
+                        <input type="password" name="password" value="********" disabled>
+                    </div>
+                    <button type="submit" class="button">Modifier</button>
+                </form>
+
+                <!-- Formulaire de déconnexion -->
+                <form action="PageProfil.php" method="post">
+                    <button type="submit" name="deconnecter" class="button">Se déconnecter</button>
+                </form>
             </div>
         </div>
         <footer>
@@ -55,6 +80,5 @@
             </ul>
         </footer> 
     </section>
-    
 </body>
 </html>

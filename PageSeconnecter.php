@@ -1,17 +1,19 @@
 <?php
 session_start();
 
-
-if (isset($_SESSION['user'])) { // Si  déjà connecté, on redirige vers la page Accueil
-    header("Location: PageAcceuil.php");
+// Si l'utilisateur est déjà connecté, rediriger vers la page Profil
+if (isset($_SESSION['user'])) {
+    header("Location: PageProfil.php");
     exit;
 }
 
 $file = 'utilisateur.json';
 
+// Gestion de la connexion
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
+    $error_message = '';
 
     if (file_exists($file)) {
         $users = json_decode(file_get_contents($file), true);
@@ -26,8 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         "prenom" => $user['prenom'],
                         "email" => $user['email']
                     ];
-
-                    // Rediriger vers la page du profil après connexion réussie
+                    // Rediriger vers la page Profil après connexion réussie
                     header("Location: PageProfil.php");
                     exit;
                 } else {
@@ -36,13 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
+
     // Si aucune correspondance, afficher un message d'erreur
-    if (!isset($error_message)) {
+    if (empty($error_message)) {
         $error_message = "L'email n'existe pas.";
     }
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,14 +66,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <ul class="menu">
                 <li><a href="PageAccueil.php">Accueil</a></li>
                 <li><a href="PageAccueil2.php">Rechercher</a></li>
-                <li><a href="PageInscription.php">Se connecter</a></li>
+                <li><a href="PageSeconnecter.php">Se connecter</a></li>
                 <li><a href="PageProfil.php">Profil</a></li>
             </ul>
         </header>
+
         <div class="container">
             <div class="Compte">
                 <h2 class="h2">Connexion</h2>
-                <?php if (isset($error_message)) echo "<p style='color: red;'>$error_message</p>"; ?>
+                <?php if (isset($error_message) && $error_message != ''): ?>
+                    <p style="color: red;"><?php echo $error_message; ?></p>
+                <?php endif; ?>
                 <form action="PageSeconnecter.php" method="post">
                     <input class="champs" name="email" type="email" placeholder="Email" required>
                     <input class="champs" name="password" type="password" placeholder="Mot de passe" required>
@@ -80,6 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p class="redirection"><a href="#">Mot de passe oublié ?</a></p>
             </div>
         </div>
+
         <footer>
             <ul class="bas-de-page">
                 <li><a href="#">Mentions légales</a></li>
