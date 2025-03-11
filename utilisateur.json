@@ -3,6 +3,13 @@
         "nom": "MARMELAT",
         "prenom": "Antoine",
         "email": "antoinemarmelat@gmail.com",
-        "password": "$2y$10$qDUjvSJ7tsU5UlOmt\/vl7OKPt5eG.bBBqSrWDZEVDk8sAB\/noyVoi"
-    }
+        "password": "$2y$10$UbUGkNFWwiX\/Ysj.Usg6N.EDWJBBENi9ISm3R3Bf8uyvz5qydiXpW"
+    },
+    {
+        "nom": "MARMELAT",
+        "prenom": "paul",
+        "email": "pmarmelat@gmail.com",
+        "password": "$2y$10$V7wYQcCAx1TVlFS9omJxJuT0a9XtMAExO2RBhd1vOlCiDYqX0\/8H2"
+    },
+    null
 ]

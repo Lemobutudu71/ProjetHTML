@@ -1,3 +1,49 @@
+<?php
+session_start();
+
+
+if (isset($_SESSION['user'])) { // Si  déjà connecté, on redirige vers la page Accueil
+    header("Location: PageAcceuil.php");
+    exit;
+}
+
+$file = 'utilisateur.json';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    if (file_exists($file)) {
+        $users = json_decode(file_get_contents($file), true);
+
+        // Parcourir la liste des utilisateurs pour trouver une correspondance
+        foreach ($users as $user) {
+            if ($user['email'] === $email) {
+                if (password_verify($password, $user['password'])) {
+                    // Enregistrer l'utilisateur en session
+                    $_SESSION['user'] = [
+                        "nom" => $user['nom'],
+                        "prenom" => $user['prenom'],
+                        "email" => $user['email']
+                    ];
+
+                    // Rediriger vers la page du profil après connexion réussie
+                    header("Location: PageProfil.php");
+                    exit;
+                } else {
+                    $error_message = "Le mot de passe est incorrect.";
+                }
+            }
+        }
+    }
+    // Si aucune correspondance, afficher un message d'erreur
+    if (!isset($error_message)) {
+        $error_message = "L'email n'existe pas.";
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +72,8 @@
         <div class="container">
             <div class="Compte">
                 <h2 class="h2">Connexion</h2>
-                <form>
+                <?php if (isset($error_message)) echo "<p style='color: red;'>$error_message</p>"; ?>
+                <form action="PageSeconnecter.php" method="post">
                     <input class="champs" name="email" type="email" placeholder="Email" required>
                     <input class="champs" name="password" type="password" placeholder="Mot de passe" required>
                     <button class="button" type="submit">Se connecter</button>
