@@ -17,10 +17,10 @@
             </div>
             <nav>
                 <ul class="menu">
-                    <li><a href="PageAccueil.html">Accueil</a></li>
-                    <li><a href="PageAccueil2.html">Rechercher</a></li>
-                    <li><a href="PageInscription.html">Se connecter</a></li>
-                    <li><a href="PageProfil.html">Profil</a></li>
+                    <li><a href="PageAccueil.php">Accueil</a></li>
+                    <li><a href="PageAccueil2.php">Rechercher</a></li>
+                    <li><a href="PageInscription.php">Se connecter</a></li>
+                    <li><a href="PageProfil.php">Profil</a></li>
                 </ul>
             </nav>
         </header>
@@ -43,14 +43,14 @@
                 Movietrip réalise vos rêves de cinéma. 
                 Préparez-vous à une immersion totale et réservez votre voyage dès maintenant !</p>
             </p>
-            <a class="Page-Accueil-button" href="PageAccueil2.html" >Réserver un séjour</a>
+            <a class="Page-Accueil-button" href="PageAccueil2.php" >Réserver un séjour</a>
         </div>
         <footer>
             <ul class="bas-de-page">
                 <li><a href="#">Mentions légales</a></li>
                 <li><a href="#">Politique de confidentialité</a></li>
                 <li><a href="#">&Agrave; propos</a></li>
-                <li><a href="pageAdministrateur.html">Administrateur</a></li>
+                <li><a href="pageAdministrateur.php">Administrateur</a></li>
 
             </ul>
         </footer> 
