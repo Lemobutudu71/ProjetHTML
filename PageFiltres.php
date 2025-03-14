@@ -78,11 +78,15 @@
 
 
             <div class="ListePhotos">
+            
                 <div class="gallerie-img">
-                    <img src="images/Poudlard-scaled.jpg" alt="Chateau Harry Potter" width="200">
-                    <div class="Lieux"><p>Poudlard</p></div>
-                    <div class="Prix"><p>&Agrave; partir de 3666€</p></div>
+                    <a href="Destinations/Poudlard.html">
+                        <img src="images/Poudlard-scaled.jpg" alt="Chateau Harry Potter" width="200">
+                        <div class="Lieux"><p>Poudlard</p></div>
+                        <div class="Prix"><p>&Agrave; partir de 3666€</p></div>
+                    </a>
                 </div>
+            
                 <div class="gallerie-img">
                     <img src="images/Seigneur des anneaux.jpeg" alt="Chateau des elfes Seigneur des anneaux" width="200">
                     <div class="Lieux"><p>Fondcombe</p></div>

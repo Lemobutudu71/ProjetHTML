@@ -57,26 +57,37 @@
         <h2 class="Titre">NOS S&Eacute;JOURS TENDANCES</h2>
     
         <div class="ListePhotos">
-            <div class="gallerie-img">
-                <img src="images/Poudlard-scaled.jpg" alt="Chateau Harry Potter" width="200">
-                <div class="Lieux"><p>Poudlard</p></div>
-            </div>
-            <div class="gallerie-img">
-                <img src="images/Seigneur des anneaux.jpeg" alt="Chateau des elfes" width="200">
-                <div class="Lieux"><p>Fondcombe</p></div>
-            </div>
-            <div class="gallerie-img">
-                <img src="images/Tatooine.jpg" alt="Planète Star Wars" width="200">
-                <div class="Lieux"><p>Tatooine</p></div>
-            </div>
+                <div class="gallerie-img">
+                    <a href="Destinations/Poudlard.html">
+                        <img src="images/Poudlard-scaled.jpg" alt="Chateau Harry Potter" width="200">
+                        <div class="Lieux"><p>Poudlard</p></div>
+                    </a>
+                </div>
+            
+                <div class="gallerie-img">
+                    <img src="images/Seigneur des anneaux.jpeg" alt="Chateau des elfes" width="200">
+                    <div class="Lieux"><p>Fondcombe</p></div>
+                </div>
+            
+        
+                <div class="gallerie-img">
+                    <img src="images/Tatooine.jpg" alt="Planète Star Wars" width="200">
+                    <div class="Lieux"><p>Tatooine</p></div>
+                </div>
+            
+            
             <div class="gallerie-img">
                 <img src="images/1186175.png" alt="Jurrasic Park" width="200">
                 <div class="Lieux"><p>Isla Nublar</p></div>
             </div>
+            
+          
             <div class="gallerie-img">
                 <img src="images/Avatar.jpg" alt="Avatar paysage" width="200">
                 <div class="Lieux"><p>Pandora</p></div>
             </div>
+           
+            
             <div class="gallerie-img">
                 <img src="images/GOT.webp" alt="Avatar paysage" width="200">
                 <div class="Lieux"><p>Westeros</p></div>

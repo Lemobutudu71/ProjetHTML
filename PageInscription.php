@@ -9,7 +9,7 @@
         $nom = trim($_POST['nom']);
         $prenom = trim($_POST['prenom']);
         $email = trim($_POST['email']);
-        $password = trim($_POST['password']); // Hachage du mot de passe chercher hashage avec bcrypt
+        $password = trim($_POST['password']); // Hachage du mot de passe chercher hashage avec bcrypt mdp = Antoine
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
 
         

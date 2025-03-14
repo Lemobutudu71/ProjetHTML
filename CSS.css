@@ -359,28 +359,35 @@ footer .bas-de-page li a:hover {
     width: 100%;
     margin-top: 50px;
     padding: 0 10%;
+    gap: 2%;
 }
-
+.ListePhotos .gallerie-img a {
+    text-decoration: none; /* Enlève le soulignement */
+    color: inherit; /* Garde la couleur du texte */
+    display: inline-block; /* Étend la zone cliquable */
+    width: 100%; /* Prend toute la largeur disponible */
+    height: 100%; /* Prend toute la hauteur disponible */
+}
 .ListePhotos .gallerie-img img {
     width: 100%;
     height: auto;
     object-fit: cover;
     transition: 0.5s;
     border-radius: inherit;
+    display: block;
 }
 
 .ListePhotos .gallerie-img {
-    width: 49%;
+    width: 48%;
     border-radius: 15px;
     overflow: hidden;
     position: relative;
-    margin-bottom: 1%;
+    margin-bottom: 20px;
     cursor: pointer;
 }
 
 .ListePhotos .gallerie-img:hover img{
     transform: scale(1.2);
-
 }
 
 .Prix {

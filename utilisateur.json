@@ -1,0 +1,9 @@
+[
+    {
+        "nom": "MARMELAT",
+        "prenom": "Antoine",
+        "email": "antoinemarmelat@gmail.com",
+        "password": "$2y$10$tGZYhWylsablI4SZ0Ewp0e\/q7qm1vkqoBqLHWWBZaq3FoXdsqZYQy",
+        "role": "admin"
+    }
+]
