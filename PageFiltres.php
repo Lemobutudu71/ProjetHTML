@@ -166,9 +166,9 @@ if (!isset($_SESSION['user'])) {
                     <div class="Prix"><p>&Agrave; partir de 4784€</p></div>
                 </div>
                 <div class="gallerie-img">
-                    <img src="images/Optimus.jpg" alt="Planète des singes" width="200">
-                    <div class="Lieux"><p>Cité des singes</p></div>
-                    <div class="Prix"><p>&Agrave; partir de 1902€</p></div>
+                    <img src="images/Optimus.jpg" alt="Désert dans Dune" width="200">
+                    <div class="Lieux"><p>Arrakis</p></div>
+                    <div class="Prix"><p>&Agrave; partir de 3102€</p></div>
                 </div>
                 
 
