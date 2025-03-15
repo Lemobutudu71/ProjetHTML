@@ -145,6 +145,31 @@ if (!isset($_SESSION['user'])) {
                     <div class="Lieux"><p>Cybertron</p></div>
                     <div class="Prix"><p>&Agrave; partir de 4444€</p></div>
                 </div>
+                <div class="gallerie-img">
+                    <img src="images/Optimus.jpg" alt="bateau RMS Titanic" width="200">
+                    <div class="Lieux"><p>Océan Atlantique Nord</p></div>
+                    <div class="Prix"><p>&Agrave; partir de 6450€</p></div>
+                </div>
+                <div class="gallerie-img">
+                    <img src="images/Optimus.jpg" alt="Chateau des rois et reines de Narnia" width="200">
+                    <div class="Lieux"><p>Cair Paravel</p></div>
+                    <div class="Prix"><p>&Agrave; partir de 3709€</p></div>
+                </div>
+                <div class="gallerie-img">
+                    <img src="images/Optimus.jpg" alt="Port Royal" width="200">
+                    <div class="Lieux"><p>Jamaïque</p></div>
+                    <div class="Prix"><p>&Agrave; partir de 4540€</p></div>
+                </div>
+                <div class="gallerie-img">
+                    <img src="images/Optimus.jpg" alt="Royaume dans Shrek" width="200">
+                    <div class="Lieux"><p>Far far away</p></div>
+                    <div class="Prix"><p>&Agrave; partir de 4784€</p></div>
+                </div>
+                <div class="gallerie-img">
+                    <img src="images/Optimus.jpg" alt="Planète des singes" width="200">
+                    <div class="Lieux"><p>Cité des singes</p></div>
+                    <div class="Prix"><p>&Agrave; partir de 1902€</p></div>
+                </div>
                 
 
             </div>
