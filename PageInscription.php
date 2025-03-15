@@ -1,7 +1,13 @@
 <?php
     session_start();
-        // Fichier JSON pour stocker les utilisateurs
-        $file = 'utilisateur.json';
+
+    if (isset($_SESSION['user'])) {
+        header("Location: PageProfil.php");
+        exit();
+    }
+
+    // Fichier JSON pour stocker les utilisateurs
+    $file = 'utilisateur.json';
 
         
     if ($_SERVER["REQUEST_METHOD"] == "POST") {// Vérifier si le formulaire a été soumis
@@ -9,6 +15,7 @@
         $nom = trim($_POST['nom']);
         $prenom = trim($_POST['prenom']);
         $email = trim($_POST['email']);
+        $role = trim($_POST['role']);
         $password = trim($_POST['password']); // Hachage du mot de passe chercher hashage avec bcrypt mdp = Antoine
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
 
@@ -32,10 +39,9 @@
                 "nom" => $nom,
                 "prenom" => $prenom,
                 "email" => $email,
+                "role" => $role,
                 "password" =>  $hashedPassword,
             ];
-
-    
 
         $users[] = $newUser;// Ajouter le nouvel utilisateur
         file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT));  // Enregistrement dans le fichier JSON
@@ -43,7 +49,7 @@
         } 
     }
       
-        ?>
+?>
 
 
 <!DOCTYPE html>
@@ -81,6 +87,10 @@
                     <input class="champs" name="nom" type="text" placeholder="Nom" required>
                     <input class="champs" name="prenom" type="text" placeholder="Prénom" required>
                     <input class="champs" name="email" type="email" placeholder="Email" required>
+                    <select class="champs" name="role" required>
+                        <option value="user">Utilisateur</option>
+                        <option value="admin">Administrateur</option>
+                    </select>
                     <input class="champs" name="password" type="password" placeholder="Mot de passe" required>
                     <button class="button" type="submit">S'inscrire</button>
                 </form>

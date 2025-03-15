@@ -59,6 +59,10 @@ $user = $_SESSION['user'];
                         <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" disabled>
                     </div>
                     <div class="profil">
+                        <label for="role">Role :</label>
+                        <input type="text" name="role" value="<?php echo htmlspecialchars($user['role']); ?>" disabled>
+                    </div>
+                    <div class="profil">
                         <label for="password">Mot de passe :</label>
                         <input type="password" name="password" value="********" disabled>
                     </div>

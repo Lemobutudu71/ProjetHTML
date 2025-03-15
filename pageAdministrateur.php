@@ -1,3 +1,26 @@
+<?php
+session_start();
+
+// Vérifier si l'utilisateur est connecté et s'il est admin
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+    header("Location: PageAccueil.php"); // Redirection si non admin
+    exit();
+}
+
+// Charger les utilisateurs depuis le fichier JSON
+$file = 'utilisateur.json';
+$users = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
+
+// Pagination
+$usersPerPage = 3; // Nombre d'utilisateurs par page
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; // Récupérer la page actuelle
+$totalUsers = count($users);
+$totalPages = ceil($totalUsers / $usersPerPage);
+$startIndex = ($page - 1) * $usersPerPage;
+$usersToShow = array_slice($users, $startIndex, $usersPerPage);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,52 +60,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php foreach ($usersToShow as $index => $user): ?>
                     <tr>
-                        <td>1</td>
-                        <td>Skywalker</td>
-                        <td>Luke</td>
-                        <td>luke.skywalker@starwars.com</td>
+                        <td><?php echo $startIndex + $index + 1; ?></td>
+                        <td><?php echo htmlspecialchars($user['nom']); ?></td>
+                        <td><?php echo htmlspecialchars($user['prenom']); ?></td>
+                        <td><?php echo htmlspecialchars($user['email']); ?></td>
                         <td><button class="Oui-btn">Oui</button></td>
                         <td><button class="Non-btn">Non</button></td>
                         <td><button class="profil-btn">Voir</button></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Stark</td>
-                        <td>Tony</td>
-                        <td>tony.stark@marvel.com</td>
-                        <td><button class="Oui-btn">Oui</button></td>
-                        <td><button class="Non-btn">Non</button></td>
-                        <td><button class="profil-btn">Voir</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Potter</td>
-                        <td>Harry</td>
-                        <td>harry.potter@hogwarts.com</td>
-                        <td><button class="Non-btn">Non</button></td>
-                        <td><button class="Non-btn">Non</button></td>
-                        <td><button class="profil-btn">Voir</button></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Wayne</td>
-                        <td>Bruce</td>
-                        <td>bruce.wayne@dc.com</td>
-                        <td><button class="Oui-btn">Oui</button></td>
-                        <td><button class="Non-btn">Non</button></td>
-                        <td><button class="profil-btn">Voir</button></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Winston</td>
-                        <td>John</td>
-                        <td>john.winston@johnwick.com</td>
-                        <td><button class="Oui-btn">Oui</button></td>
-                        <td><button class="Oui-btn">Oui</button></td>
-                        <td><button class="profil-btn">Voir</button></td>
-                    </tr>
-                </tbody>
+                <?php endforeach; ?>
+            </tbody>
             </table>
         <footer>
             <ul class="bas-de-page">

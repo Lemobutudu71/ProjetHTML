@@ -26,7 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['user'] = [
                         "nom" => $user['nom'],
                         "prenom" => $user['prenom'],
-                        "email" => $user['email']
+                        "email" => $user['email'],
+                        "role" => $user['role']
                     ];
                     // Rediriger vers la page Profil après connexion réussie
                     header("Location: PageProfil.php");
