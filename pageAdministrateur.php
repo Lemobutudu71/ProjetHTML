@@ -12,7 +12,7 @@ $file = 'utilisateur.json';
 $users = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
 
 // Pagination
-$usersPerPage = 3; // Nombre d'utilisateurs par page
+$usersPerPage = 1; // Nombre d'utilisateurs par page
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; // Récupérer la page actuelle
 $totalUsers = count($users);
 $totalPages = ceil($totalUsers / $usersPerPage);
@@ -60,19 +60,33 @@ $usersToShow = array_slice($users, $startIndex, $usersPerPage);
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($usersToShow as $index => $user): ?>
-                    <tr>
-                        <td><?php echo $startIndex + $index + 1; ?></td>
-                        <td><?php echo htmlspecialchars($user['nom']); ?></td>
-                        <td><?php echo htmlspecialchars($user['prenom']); ?></td>
-                        <td><?php echo htmlspecialchars($user['email']); ?></td>
-                        <td><button class="Oui-btn">Oui</button></td>
-                        <td><button class="Non-btn">Non</button></td>
-                        <td><button class="profil-btn">Voir</button></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
+                    <?php foreach ($usersToShow as $index => $user): ?>
+                        <tr>
+                            <td><?php echo $startIndex + $index + 1; ?></td>
+                            <td><?php echo htmlspecialchars($user['nom']); ?></td>
+                            <td><?php echo htmlspecialchars($user['prenom']); ?></td>
+                            <td><?php echo htmlspecialchars($user['email']); ?></td>
+                            <td><button class="Oui-btn">Oui</button></td>
+                            <td><button class="Non-btn">Non</button></td>
+                            <td><button class="profil-btn">Voir</button></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
+
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?php echo $page - 1; ?>">Précédent</a>
+            <?php endif; ?>
+
+            <span>Page <?php echo $page; ?> sur <?php echo $totalPages; ?></span>
+
+            <?php if ($page < $totalPages): ?>
+                <a href="?page=<?php echo $page + 1; ?>">Suivant</a>
+            <?php endif; ?>
+        </div>
+
+
         <footer>
             <ul class="bas-de-page">
                 <li><a href="#">Mentions légales</a></li>

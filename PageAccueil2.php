@@ -1,14 +1,4 @@
-<?php
 
-session_start();
-
-// Vérifie si l'utilisateur est déjà connecté, sinon redirige vers la page d'inscription
-if (!isset($_SESSION['user'])) {
-    header("Location: PageInscription.php");
-    exit;
-}
-
-?>
 
 
 
