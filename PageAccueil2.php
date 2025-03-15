@@ -70,32 +70,42 @@
                 </div>
             
                 <div class="gallerie-img">
-                    <img src="images/Seigneur des anneaux.jpeg" alt="Chateau des elfes" width="200">
-                    <div class="Lieux"><p>Fondcombe</p></div>
+                    <a href="Destinations/Fondcombe.html">
+                       <img src="images/Seigneur des anneaux.jpeg" alt="Chateau des elfes" width="200">
+                      <div class="Lieux"><p>Fondcombe</p></div>
+                    </a>
                 </div>
             
         
                 <div class="gallerie-img">
-                    <img src="images/Tatooine.jpg" alt="Planète Star Wars" width="200">
-                    <div class="Lieux"><p>Tatooine</p></div>
+                    <a href="Destinations/Tatooine.html">
+                       <img src="images/Tatooine.jpg" alt="Planète Star Wars" width="200">
+                       <div class="Lieux"><p>Tatooine</p></div>
+                    </a>
                 </div>
             
             
             <div class="gallerie-img">
-                <img src="images/1186175.png" alt="Jurrasic Park" width="200">
-                <div class="Lieux"><p>Isla Nublar</p></div>
+                <a href="Destinations/IslaNublar.html">
+                   <img src="images/1186175.png" alt="Jurrasic Park" width="200">
+                   <div class="Lieux"><p>Isla Nublar</p></div>
+                </a>
             </div>
             
           
             <div class="gallerie-img">
-                <img src="images/Avatar.jpg" alt="Avatar paysage" width="200">
-                <div class="Lieux"><p>Pandora</p></div>
+                <a href="Destinations/Pandora.html">
+                   <img src="images/Avatar.jpg" alt="Avatar paysage" width="200">
+                   <div class="Lieux"><p>Pandora</p></div>
+                </a>
             </div>
            
             
             <div class="gallerie-img">
-                <img src="images/GOT.webp" alt="Avatar paysage" width="200">
-                <div class="Lieux"><p>Westeros</p></div>
+                <a href="Destinations/Westeros.html">
+                   <img src="images/GOT.webp" alt="Avatar paysage" width="200">
+                   <div class="Lieux"><p>Westeros</p></div>
+                </a>
             </div>
         </div>
     
