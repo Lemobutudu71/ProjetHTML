@@ -94,7 +94,7 @@ if (!isset($_SESSION['user'])) {
             
                 <div class="gallerie-img">
                     <a href="Destinations/Poudlard.html">
-                        <img src="images/Poudlard-scaled.jpg" alt="Chateau Harry Potter" width="200">
+                        <img src="images/Poudlard-scaled.jpg" alt="Chateau Harry Potter" >
                         <div class="Lieux"><p>Poudlard</p></div>
                         <div class="Prix"><p>&Agrave; partir de 3666€</p></div>
                     </a>
@@ -102,98 +102,98 @@ if (!isset($_SESSION['user'])) {
             
                 <div class="gallerie-img">
                     <a href="Destinations/Fondcombe.html">
-                        <img src="images/Seigneur des anneaux.jpeg" alt="Chateau des elfes Seigneur des anneaux" width="200">
+                        <img src="images/Seigneur des anneaux.jpeg" alt="Chateau des elfes Seigneur des anneaux" >
                         <div class="Lieux"><p>Fondcombe</p></div>
                         <div class="Prix"><p>&Agrave; partir de 2456 €</p></div>
                     </a>    
                 </div>
                 <div class="gallerie-img">
                     <a href="Destinations/Tatooine.html">
-                        <img src="images/Tatooine.jpg" alt="Planète Star Wars" width="200">
+                        <img src="images/Tatooine.jpg" alt="Planète Star Wars" >
                         <div class="Lieux"><p>Tatooine</p></div>
                         <div class="Prix"><p>&Agrave; partir de 3578 €</p></div>
                     </a>    
                 </div>
                 <div class="gallerie-img">
                     <a href="Destinations/Isla Nublar.html">
-                       <img src="images/1186175.png" alt="Jurrasic Park" width="200">
+                       <img src="images/1186175.png" alt="Jurrasic Park">
                        <div class="Lieux"><p>Isla Nublar</p></div>
                        <div class="Prix"><p>&Agrave; partir de 1498 €</p></div>
                     </a>
                 </div>
                 <div class="gallerie-img">
                     <a href="Destinations/Pandora.html">
-                        <img src="images/Avatar.jpg" alt="Avatar paysage" width="200">
+                        <img src="images/Avatar.jpg" alt="Avatar paysage" >
                         <div class="Lieux"><p>Pandora</p></div>
                         <div class="Prix"><p>&Agrave; partir de 2018 €</p></div>
                     </a>    
                 </div>
                 <div class="gallerie-img">
                     <a href="Destinations/Westeros.html">
-                        <img src="images/GOT.webp" alt="Game of Thrones" width="200">
+                        <img src="images/GOT.webp" alt="Game of Thrones" >
                         <div class="Lieux"><p>Westeros</p></div>
                         <div class="Prix"><p>&Agrave; partir de 5300 €</p></div>
                     </a>    
                 </div>
                 <div class="gallerie-img">
                     <a href="Destinations/LosAngeles.html">
-                        <img src="images/Blade runner.jpg" alt="Blade Runner" width="200">
+                        <img src="images/Blade runner.jpg" alt="Blade Runner" >
                         <div class="Lieux"><p>Los Angeles (2049)</p></div>
                         <div class="Prix"><p>&Agrave; partir de 3141,592653 €</p></div>
                     </a>    
                 </div>
                 <div class="gallerie-img">
                     <a href="Destinations/Radiatorsprings.html">
-                        <img src="images/radiator_springs.jpg" alt="Flash McQueen" width="200">
+                        <img src="images/radiator_springs.jpg" alt="Flash McQueen" >
                         <div class="Lieux"><p>Radiator springs</p></div>
                         <div class="Prix"><p>&Agrave; partir de 2005 €</p></div>
                     </a>    
                 </div>
                 <div class="gallerie-img">
                     <a href="Destinations/Hawkins.html">
-                        <img src="images/Hawkins.jpg" alt="Stranger Things" width="200">
+                        <img src="images/Hawkins.jpg" alt="Stranger Things">
                         <div class="Lieux"><p>Hawkins</p></div>
                         <div class="Prix"><p>&Agrave; partir de 1998€</p></div>
                     </a>
                 </div>
                 <div class="gallerie-img">
                     <a href="Destinations/Cybertron.html">
-                        <img src="images/Optimus.jpg" alt="Transformers" width="200">
+                        <img src="images/Optimus.jpg" alt="Transformers" >
                         <div class="Lieux"><p>Cybertron</p></div>
                         <div class="Prix"><p>&Agrave; partir de 4444€</p></div>
                     </a>    
                 </div>
                 <div class="gallerie-img">
-                    <a href="Destinations/OceanAtlantiquenord.html">
-                        <img src="images/titanic.jpg" alt="bateau RMS Titanic" width="200">
-                        <div class="Lieux"><p>Océan Atlantique Nord</p></div>
+                    <a href="Destinations/Titanic.html">
+                        <img src="images/titanic.jpg" alt="bateau RMS Titanic">
+                        <div class="Lieux"><p>Titanic</p></div>
                         <div class="Prix"><p>&Agrave; partir de 6450€</p></div>
                     </a>    
                 </div>
                 <div class="gallerie-img">
-                    <a href="Destinations/CairParavel.html">
-                        <img src="images/CairParavel.jpg" alt="Chateau des rois et reines de Narnia" width="200">
-                        <div class="Lieux"><p>Cair Paravel</p></div>
+                    <a href="Destinations/Narnia.html">
+                        <img src="images/Narnia.jpg" alt="Monde de Narnia">
+                        <div class="Lieux"><p>Narnia</p></div>
                         <div class="Prix"><p>&Agrave; partir de 3709€</p></div>
                     </a>    
                 </div>
                 <div class="gallerie-img">
                     <a href="Destinations/Jamaïque.html">
-                        <img src="images/Portroyal.jpg" alt="Port Royal" width="200">
-                        <div class="Lieux"><p>Jamaïque</p></div>
+                        <img src="images/PirateCaraibe.jpg" alt="Pirates des Caraïbes" >
+                        <div class="Lieux"><p>Pirate des Caraïbes</p></div>
                         <div class="Prix"><p>&Agrave; partir de 4540€</p></div>
                     </a>    
                 </div>
                 <div class="gallerie-img">
                     <a href="Destinations/Farfaraway.html">
-                        <img src="images/Shrek-far-far-away.jpg" alt="Royaume dans Shrek" width="200">
+                        <img src="images/Shrek.webp" alt="Royaume dans Shrek">
                         <div class="Lieux"><p>Far far away</p></div>
                         <div class="Prix"><p>&Agrave; partir de 4784€</p></div>
                     </a>
                 </div>
                 <div class="gallerie-img">
                     <a href="Destinations/Arrakis.html">
-                        <img src="images/Arrakis.jpg" alt="Désert dans Dune" width="200">
+                        <img src="images/Arrakis.jpg" alt="Désert dans Dune" >
                         <div class="Lieux"><p>Arrakis</p></div>
                         <div class="Prix"><p>&Agrave; partir de 3102€</p></div>
                     </a>    
