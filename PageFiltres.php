@@ -115,7 +115,7 @@ if (!isset($_SESSION['user'])) {
                     </a>    
                 </div>
                 <div class="gallerie-img">
-                    <a href="Destinations/Isla Nublar.html">
+                    <a href="Destinations/IslaNublar.html">
                        <img src="images/1186175.png" alt="Jurrasic Park">
                        <div class="Lieux"><p>Isla Nublar</p></div>
                        <div class="Prix"><p>&Agrave; partir de 1498 €</p></div>
@@ -178,7 +178,7 @@ if (!isset($_SESSION['user'])) {
                     </a>    
                 </div>
                 <div class="gallerie-img">
-                    <a href="Destinations/Jamaïque.html">
+                    <a href="Destinations/Pirate.html">
                         <img src="images/PirateCaraibe.jpg" alt="Pirates des Caraïbes" >
                         <div class="Lieux"><p>Pirate des Caraïbes</p></div>
                         <div class="Prix"><p>&Agrave; partir de 4540€</p></div>
