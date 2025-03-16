@@ -8,6 +8,30 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
+
+$voyagesJson = file_get_contents("voyages.json");
+$voyages = json_decode($voyagesJson, true);
+
+// Vérifier si la lecture du JSON a réussi
+if ($voyages === null) {
+    die("Erreur lors du chargement des voyages.");
+}
+
+// Définir le nombre de voyages par page
+$voyagesParPage = 4;
+
+// Récupérer le numéro de la page actuelle (par défaut 1)
+$pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// Calculer l'index de départ
+$depart = ($pageActuelle - 1) * $voyagesParPage;
+
+// Extraire les voyages pour la page actuelle
+$voyagesPage = array_slice($voyages, $depart, $voyagesParPage);
+
+// Nombre total de pages
+$totalPages = ceil(count($voyages) / $voyagesParPage);
+
 ?>
 
 
@@ -91,115 +115,28 @@ if (!isset($_SESSION['user'])) {
 
 
             <div class="ListePhotos">
-            
-                <div class="gallerie-img">
-                    <a href="Destinations/Poudlard.html">
-                        <img src="images/Poudlard-scaled.jpg" alt="Chateau Harry Potter" >
-                        <div class="Lieux"><p>Poudlard</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 3666€</p></div>
-                    </a>
-                </div>
-            
-                <div class="gallerie-img">
-                    <a href="Destinations/Fondcombe.html">
-                        <img src="images/Seigneur des anneaux.jpeg" alt="Chateau des elfes Seigneur des anneaux" >
-                        <div class="Lieux"><p>Fondcombe</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 2456 €</p></div>
-                    </a>    
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/Tatooine.html">
-                        <img src="images/Tatooine.jpg" alt="Planète Star Wars" >
-                        <div class="Lieux"><p>Tatooine</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 3578 €</p></div>
-                    </a>    
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/IslaNublar.html">
-                       <img src="images/1186175.png" alt="Jurrasic Park">
-                       <div class="Lieux"><p>Isla Nublar</p></div>
-                       <div class="Prix"><p>&Agrave; partir de 1498 €</p></div>
-                    </a>
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/Pandora.html">
-                        <img src="images/Avatar.jpg" alt="Avatar paysage" >
-                        <div class="Lieux"><p>Pandora</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 2018 €</p></div>
-                    </a>    
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/Westeros.html">
-                        <img src="images/GOT.webp" alt="Game of Thrones" >
-                        <div class="Lieux"><p>Westeros</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 5300 €</p></div>
-                    </a>    
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/LosAngeles.html">
-                        <img src="images/Blade runner.jpg" alt="Blade Runner" >
-                        <div class="Lieux"><p>Los Angeles (2049)</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 3141,592653 €</p></div>
-                    </a>    
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/Radiatorsprings.html">
-                        <img src="images/radiator_springs.jpg" alt="Flash McQueen" >
-                        <div class="Lieux"><p>Radiator springs</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 2005 €</p></div>
-                    </a>    
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/Hawkins.html">
-                        <img src="images/Hawkins.jpg" alt="Stranger Things">
-                        <div class="Lieux"><p>Hawkins</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 1998€</p></div>
-                    </a>
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/Cybertron.html">
-                        <img src="images/Optimus.jpg" alt="Transformers" >
-                        <div class="Lieux"><p>Cybertron</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 4444€</p></div>
-                    </a>    
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/Titanic.html">
-                        <img src="images/titanic.jpg" alt="bateau RMS Titanic">
-                        <div class="Lieux"><p>Titanic</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 6450€</p></div>
-                    </a>    
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/Narnia.html">
-                        <img src="images/Narnia.jpg" alt="Monde de Narnia">
-                        <div class="Lieux"><p>Narnia</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 3709€</p></div>
-                    </a>    
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/Pirate.html">
-                        <img src="images/PirateCaraibe.jpg" alt="Pirates des Caraïbes" >
-                        <div class="Lieux"><p>Pirate des Caraïbes</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 4540€</p></div>
-                    </a>    
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/Farfaraway.html">
-                        <img src="images/Shrek.webp" alt="Royaume dans Shrek">
-                        <div class="Lieux"><p>Far far away</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 4784€</p></div>
-                    </a>
-                </div>
-                <div class="gallerie-img">
-                    <a href="Destinations/Arrakis.html">
-                        <img src="images/Arrakis.jpg" alt="Désert dans Dune" >
-                        <div class="Lieux"><p>Arrakis</p></div>
-                        <div class="Prix"><p>&Agrave; partir de 3102€</p></div>
-                    </a>    
-                </div>
+                <?php foreach ($voyagesPage as $voyage): ?>
+                    <div class="gallerie-img">
+                        <a href="<?= htmlspecialchars($voyage['lien']) ?>">
+                            <img src="<?= htmlspecialchars($voyage['image']) ?>" alt="<?= htmlspecialchars($voyage['nom']) ?>">
+                            <div class="Lieux"><p><?= htmlspecialchars($voyage['nom']) ?></p></div>
+                            <div class="Prix"><p>À partir de <?= number_format($voyage['prix'], 2, ',', ' ') ?>€</p></div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="pagination">
+                <?php if ($pageActuelle > 1): ?>
+                    <a href="?page=<?= $pageActuelle - 1 ?>">Précédent</a>
+                <?php endif; ?>
                 
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?page=<?= $i ?>" <?= ($i == $pageActuelle) ? 'class="active"' : '' ?>><?= $i ?></a>
+                <?php endfor; ?>
 
+                <?php if ($pageActuelle < $totalPages): ?>
+                    <a href="?page=<?= $pageActuelle + 1 ?>">Suivant</a>
+                <?php endif; ?>
             </div>
         </div>
 

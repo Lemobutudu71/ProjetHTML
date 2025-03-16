@@ -358,29 +358,9 @@ footer .bas-de-page li a:hover {
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
-    height: 100%;
     margin-top: 50px;
     padding: 0 10%;
     gap: 2%;
-}
-.ListePhotos .gallerie-img a {
-    text-decoration: none; 
-    color: inherit; 
-    display: inline-block; 
-    width: 100%; 
-    height: 100%;
-     
-}
-.ListePhotos .gallerie-img img {
-    width: 100%;
-    height: 150%;
-    object-fit: cover;
-    transition: 0.5s;
-    border-radius: inherit;
-    display: block;
-    position: absolute; 
-    top: 0;
-    left: 0;
 }
 
 .ListePhotos .gallerie-img {
@@ -390,10 +370,27 @@ footer .bas-de-page li a:hover {
     position: relative;
     margin-bottom: 20px;
     cursor: pointer;
-    
+    aspect-ratio: 16/9; 
 }
 
-.ListePhotos .gallerie-img:hover img{
+.ListePhotos .gallerie-img a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.ListePhotos .gallerie-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+    border-radius: inherit;
+    display: block;
+}
+
+.ListePhotos .gallerie-img:hover img {
     transform: scale(1.2);
 }
 

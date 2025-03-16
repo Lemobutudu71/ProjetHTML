@@ -1,9 +1,92 @@
 [
     {
-        "Destination": "Poudlard",
-        "date-depart": "",
-        "date-arrivée": "",
-        "durée": "",
-        "": "admin"
+        "nom": "Poudlard",
+        "image": "images/Poudlard-scaled.jpg",
+        "lien": "Destinations/Poudlard.html",
+        "prix": 3666
+    },
+    {
+        "nom": "Fondcombe",
+        "image": "images/Seigneur des anneaux.jpeg",
+        "lien": "Destinations/Fondcombe.html",
+        "prix": 2456
+    },
+    {
+        "nom": "Tatooine",
+        "image": "images/Tatooine.jpg",
+        "lien": "Destinations/Tatooine.html",
+        "prix": 3578
+    },
+    {
+        "nom": "Isla Nublar",
+        "image": "images/1186175.png",
+        "lien": "Destinations/IslaNublar.html",
+        "prix": 1498
+    },
+    {
+        "nom": "Pandora",
+        "image": "images/Avatar.jpg",
+        "lien": "Destinations/Pandora.html",
+        "prix": 2018
+    },
+    {
+        "nom": "Westeros",
+        "image": "images/GOT.webp",
+        "lien": "Destinations/Westeros.html",
+        "prix": 5300
+    },
+    {
+        "nom": "LosAngeles",
+        "image": "images/Blade runner.jpg",
+        "lien": "Destinations/LosAngeles.html",
+        "prix": 3141
+    },
+    {
+        "nom": "Radiator springs",
+        "image": "images/radiator_springs.jpg",
+        "lien": "Destinations/Radiatorsprings.html",
+        "prix": 2005
+    }, 
+    {
+        "nom": "Hawkins",
+        "image": "images/Hawkins.jpg",
+        "lien": "Destinations/Hawkins.html",
+        "prix": 1998
+    },
+    {
+        "nom": "Cybertron",
+        "image": "images/Optimus.jpg",
+        "lien": "Destinations/Cybertron.html",
+        "prix": 4444
+    }, 
+    {
+        "nom": "Titanic",
+        "image": "images/titanic.jpg",
+        "lien": "Destinations/Titanic.html",
+        "prix": 6450
+    },  
+    {
+        "nom": "Narnia",
+        "image": "images/Narnia.jpg",
+        "lien": "Destinations/Narnia.html",
+        "prix": 3709
+    }, 
+    {
+        "nom": "Pirates des Caraïbes",
+        "image": "images/PirateCaraibe.jpg",
+        "lien": "Destinations/Pirate.html",
+        "prix": 4540
+    },
+    {
+        "nom": "Far far away",
+        "image": "images/Shrek.webp",
+        "lien": "Destinations/Farfaraway.html",
+        "prix": 4784
+    },
+    {
+        "nom": "Arrakis",
+        "image": "images/Arrakis.jpg",
+        "lien": "Destinations/Arrakis.html",
+        "prix": 3102
     }
-]
+]   
