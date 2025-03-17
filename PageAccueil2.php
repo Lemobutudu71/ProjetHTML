@@ -1,5 +1,27 @@
 
+<?php
+session_start();
 
+
+$voyagesJson = file_get_contents("voyages.json");
+$voyages = json_decode($voyagesJson, true);
+
+if ($voyages === null) {
+    die("Erreur lors du chargement des voyages.");
+}
+
+// Récupérer le mot-clé de recherche (GET)
+$motCle = isset($_GET['search']) ? strtolower(trim($_GET['search'])) : '';
+
+// Filtrer les voyages si un mot-clé est entré
+$voyagesFiltres = array_filter($voyages, function ($voyage) use ($motCle) {
+    return empty($motCle) || stripos($voyage['nom'], $motCle) !== false;
+});
+
+$voyagesTendances = file_get_contents("voyagestendances.json");
+$voyagesT = json_decode($voyagesTendances, true);
+
+?>
 
 
 
@@ -55,59 +77,42 @@
                 Alors, prêts à embarquer ? Movietrip vous attend, baguette (ou sabre laser) en main !"</p>
         
         <div class="recherche">
-            <input type="search" placeholder="Destinations (Films)">
-            <button>Rechercher</button>
+            <form method="GET" class="recherche">
+                <input type="text" name="search" placeholder="Rechercher un voyage..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+                <button type="submit">Rechercher</button>
+            </form>
         </div>
+        <h2 class="Titre">
+                <?= empty($motCle) ? "NOS SÉJOURS TENDANCES" : "RÉSULTATS DE VOTRE RECHERCHE" ?>
+            </h2>
 
-        <h2 class="Titre">NOS S&Eacute;JOURS TENDANCES</h2>
-    
-        <div class="ListePhotos">
-                <div class="gallerie-img">
-                    <a href="Destinations/Poudlard.html">
-                        <img src="images/Poudlard-scaled.jpg" alt="Chateau Harry Potter" width="200">
-                        <div class="Lieux"><p>Poudlard</p></div>
-                    </a>
-                </div>
-            
-                <div class="gallerie-img">
-                    <a href="Destinations/Fondcombe.html">
-                       <img src="images/Seigneur des anneaux.jpeg" alt="Chateau des elfes" width="200">
-                      <div class="Lieux"><p>Fondcombe</p></div>
-                    </a>
-                </div>
-            
-        
-                <div class="gallerie-img">
-                    <a href="Destinations/Tatooine.html">
-                       <img src="images/Tatooine.jpg" alt="Planète Star Wars" width="200">
-                       <div class="Lieux"><p>Tatooine</p></div>
-                    </a>
-                </div>
-            
-            
-            <div class="gallerie-img">
-                <a href="Destinations/IslaNublar.html">
-                   <img src="images/1186175.png" alt="Jurrasic Park" width="200">
-                   <div class="Lieux"><p>Isla Nublar</p></div>
-                </a>
+            <div class="ListePhotos">
+                <?php if (empty($motCle)): ?>
+                    <!-- Affichage des voyages tendances par défaut -->
+                    <?php foreach ($voyagesT as $voyage): ?>
+                        <div class="gallerie-img">
+                            <a href="<?= htmlspecialchars($voyage['lien']) ?>">
+                                <img src="<?= htmlspecialchars($voyage['image']) ?>" alt="<?= htmlspecialchars($voyage['nom']) ?>" width="200">
+                                <div class="Lieux"><p><?= htmlspecialchars($voyage['nom']) ?></p></div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <!-- Affichage des résultats de recherche -->
+                    <?php if (empty($voyagesFiltres)): ?>
+                        <p>Aucun voyage trouvé pour "<?= htmlspecialchars($motCle) ?>"</p>
+                    <?php else: ?>
+                        <?php foreach ($voyagesFiltres as $voyage): ?>
+                            <div class="gallerie-img">
+                                <a href="<?= htmlspecialchars($voyage['lien']) ?>">
+                                    <img src="<?= htmlspecialchars($voyage['image']) ?>" alt="<?= htmlspecialchars($voyage['nom']) ?>" width="200">
+                                    <div class="Lieux"><p><?= htmlspecialchars($voyage['nom']) ?></p></div>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                <?php endif; ?>
             </div>
-            
-          
-            <div class="gallerie-img">
-                <a href="Destinations/Pandora.html">
-                   <img src="images/Avatar.jpg" alt="Avatar paysage" width="200">
-                   <div class="Lieux"><p>Pandora</p></div>
-                </a>
-            </div>
-           
-            
-            <div class="gallerie-img">
-                <a href="Destinations/Westeros.html">
-                   <img src="images/GOT.webp" alt="Avatar paysage" width="200">
-                   <div class="Lieux"><p>Westeros</p></div>
-                </a>
-            </div>
-        </div>
     
         <a class="Page-Accueil-button" href="PageFiltres.php">cliquer ici pour plus de choix</a>
     </div>

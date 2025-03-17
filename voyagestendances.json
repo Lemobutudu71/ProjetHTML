@@ -1,0 +1,38 @@
+[
+    {
+        "nom": "Poudlard",
+        "image": "images/Poudlard-scaled.jpg",
+        "lien": "Destinations/Poudlard.html",
+        "prix": 3666
+    },
+    {
+        "nom": "Fondcombe",
+        "image": "images/Seigneur des anneaux.jpeg",
+        "lien": "Destinations/Fondcombe.html",
+        "prix": 2456
+    },
+    {
+        "nom": "Tatooine",
+        "image": "images/Tatooine.jpg",
+        "lien": "Destinations/Tatooine.html",
+        "prix": 3578
+    },
+    {
+        "nom": "Isla Nublar",
+        "image": "images/1186175.png",
+        "lien": "Destinations/IslaNublar.html",
+        "prix": 1498
+    },
+    {
+        "nom": "Pandora",
+        "image": "images/Avatar.jpg",
+        "lien": "Destinations/Pandora.html",
+        "prix": 2018
+    },
+    {
+        "nom": "Westeros",
+        "image": "images/GOT.webp",
+        "lien": "Destinations/Westeros.html",
+        "prix": 5300
+    }
+]    
