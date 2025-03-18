@@ -25,7 +25,7 @@
         "image": "images/Tatooine.jpg",
         "lien": "Destinations/Tatooine.php",
         "prix": 3578,
-        "transport": ["-","Vaisseau spatial"],
+        "transport": ["-","Vaisseau"],
         "logement": ["-","Chez-habitant", "Camping", "Maison", "Hôtel"],
         "monde": ["-","Futuriste"]
     },
@@ -95,7 +95,7 @@
         "image": "images/Optimus.jpg",
         "lien": "Destinations/Cybertron.php",
         "prix": 4444,
-        "transport": ["-","Vaisseau spatial"],
+        "transport": ["-","Vaisseau"],
         "logement": ["-","Maison", "Hôtel"],
         "monde": ["-","Futuriste", "Surnaturel"]
     }, 
@@ -146,7 +146,7 @@
         "image": "images/Arrakis.jpg",
         "lien": "Destinations/Arrakis.php",
         "prix": 3102,
-        "transport": ["-","Vaisseau spatial"],
+        "transport": ["-","Vaisseau"],
         "logement": ["-","Chez-habitant", "Camping", "Maison"],
         "monde": ["-","Surnaturel", "Éxotique"]
     }
