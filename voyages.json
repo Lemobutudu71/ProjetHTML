@@ -1,6 +1,7 @@
 [
     {
         "nom": "Poudlard",
+        "mot-clés": ["Harry Potter", "Poudlard", "sorcellerie", "magie", "Gryffondor", "Serpentard", "Quidditch", "Dumbledore", "Voldemort"],
         "image": "images/Poudlard-scaled.jpg",
         "lien": "Destinations/Poudlard.html",
         "prix": 3666,
@@ -10,6 +11,7 @@
     },
     {
         "nom": "Fondcombe",
+        "mot-clés": ["Seigneur des anneaux", "Frodon", "Gandalf", "Sauron", "Hobbit", "Gollum", "Mordor"],
         "image": "images/Seigneur des anneaux.jpeg",
         "lien": "Destinations/Fondcombe.html",
         "prix": 2456,
@@ -19,6 +21,7 @@
     },
     {
         "nom": "Tatooine",
+        "mot-clés":["Star Wars", "Tatooine", "Jedi", "Dark Vador", "Luke Skywalker","jedi", "Yoda", "Etoile de la mort", "Faucon Millenium"],
         "image": "images/Tatooine.jpg",
         "lien": "Destinations/Tatooine.html",
         "prix": 3578,
@@ -28,6 +31,7 @@
     },
     {
         "nom": "Isla Nublar",
+        "mot-clés": ["Jurassic Park", "Isla Nublar", "dinosaure", "T-Rex", "Vélociraptor", "Jurassic World"],
         "image": "images/1186175.png",
         "lien": "Destinations/IslaNublar.html",
         "prix": 1498,
@@ -37,6 +41,7 @@
     },
     {
         "nom": "Pandora",
+        "mot-clés": ["Avatar", "Pandora", "Na'vi", "Jake Sully"],
         "image": "images/Avatar.jpg",
         "lien": "Destinations/Pandora.html",
         "prix": 2018,
@@ -46,6 +51,7 @@
     },
     {
         "nom": "Westeros",
+        "mot-clés":["Game of Thrones", "Westeros", "Trône de Fer", "Stark", "Lannister", "Targaryen", "Dragon", "Winterfell"],
         "image": "images/GOT.webp",
         "lien": "Destinations/Westeros.html",
         "prix": 5300,
@@ -55,6 +61,7 @@
     },
     {
         "nom": "LosAngeles",
+        "mot-clés": ["Blade Runner", "Los Angeles", "futur", "Cyberpunk", "science-fiction"],
         "image": "images/Blade runner.jpg",
         "lien": "Destinations/LosAngeles.html",
         "prix": 3141,
@@ -64,6 +71,7 @@
     },
     {
         "nom": "Radiator springs",
+        "mot-clés": ["Cars", "Radiator Springs", "Flash McQueen", "Route 66", "Disney"],
         "image": "images/radiator_springs.jpg",
         "lien": "Destinations/Radiatorsprings.html",
         "prix": 2005,
@@ -73,6 +81,7 @@
     }, 
     {
         "nom": "Hawkins",
+        "mot-clés": ["Stranger Things", "Hawkins", "Upside Down", "Eleven", "Demogorgon", "Monde à l'envers"],
         "image": "images/Hawkins.jpg",
         "lien": "Destinations/Hawkins.html",
         "prix": 1998,
@@ -82,6 +91,7 @@
     },
     {
         "nom": "Cybertron",
+        "mot-clés": ["Transformers", "Cybertron", "Optimus Prime", "Bumblebee", "Decepticons", "Autobots"],
         "image": "images/Optimus.jpg",
         "lien": "Destinations/Cybertron.html",
         "prix": 4444,
@@ -91,6 +101,7 @@
     }, 
     {
         "nom": "Titanic",
+        "mot-clés": ["Titanic", "Rose", "Jack", "Iceberg", "Paquebot", "Leonardo DiCaprio"],
         "image": "images/titanic.jpg",
         "lien": "Destinations/Titanic.html",
         "prix": 6450,
@@ -100,6 +111,7 @@
     },  
     {
         "nom": "Narnia",
+        "mot-clés": ["Narnia", "Aslan", "Lucy", "Peter", "Susan", "Edmund", "C.S. Lewis"],
         "image": "images/Narnia.jpg",
         "lien": "Destinations/Narnia.html",
         "prix": 3709,
@@ -109,6 +121,7 @@
     }, 
     {
         "nom": "Pirates des Caraïbes",
+        "mot-clés": ["Pirates des Caraïbes", "Jack Sparrow", "Barbossa", "Elizabeth Swann",  "Black Pearl"],
         "image": "images/PirateCaraibe.jpg",
         "lien": "Destinations/Pirate.html",
         "prix": 4540,
@@ -119,6 +132,7 @@
     },
     {
         "nom": "Far far away",
+        "mot-clés": ["Shrek", "Fiona", "Donkey", "Far far away", "Ogre", "Prince Charmant", "Fée", "Dragon"],
         "image": "images/Shrek.webp",
         "lien": "Destinations/Farfaraway.html",
         "prix": 4784,
@@ -128,6 +142,7 @@
     },
     {
         "nom": "Arrakis",
+        "mot-clés": ["Dune", "Arrakis", "Paul Atréides", "Frank Herbert", "Gom Jabbar"],
         "image": "images/Arrakis.jpg",
         "lien": "Destinations/Arrakis.html",
         "prix": 3102,
