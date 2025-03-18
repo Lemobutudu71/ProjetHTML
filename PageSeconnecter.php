@@ -67,7 +67,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <ul class="menu">
                 <li><a href="PageAccueil.php">Accueil</a></li>
                 <li><a href="PageAccueil2.php">Rechercher</a></li>
-                <li><a href="PageSeconnecter.php">Se connecter</a></li>
+                <?php if (isset($_SESSION['user'])): ?>
+                     <li><a href="PagePanier.php">Mon panier</a></li>
+                <?php else: ?>
+                        <li><a href="PageInscription.php">Se connecter</a></li>
+                <?php endif; ?>
                 <li><a href="PageProfil.php">Profil</a></li>
             </ul>
         </header>
