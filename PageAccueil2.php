@@ -10,12 +10,24 @@ if ($voyages === null) {
     die("Erreur lors du chargement des voyages.");
 }
 
-// Récupérer le mot-clé de recherche (GET)
 $motCle = isset($_GET['search']) ? strtolower(trim($_GET['search'])) : '';
 
 // Filtrer les voyages si un mot-clé est entré
 $voyagesFiltres = array_filter($voyages, function ($voyage) use ($motCle) {
-    return empty($motCle) || stripos($voyage['nom'], $motCle) !== false;
+    if (empty($motCle)) {
+        return true; // Si pas de recherche, afficher tous les voyages
+    }
+
+    // Vérifier uniquement dans les mots-clés
+    if (isset($voyage['mot-clés']) && is_array($voyage['mot-clés'])) {
+        foreach ($voyage['mot-clés'] as $mot) {
+            if (stripos($mot, $motCle) !== false) {
+                return true; // Mot-clé trouvé, inclure ce voyage
+            }
+        }
+    }
+
+    return false; // Exclure le voyage si aucun mot-clé ne correspond
 });
 
 $voyagesTendances = file_get_contents("voyagestendances.json");
