@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 // Vérifie si l'utilisateur est déjà connecté, sinon redirige vers la page d'inscription
@@ -8,7 +7,7 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-
+// Charger les données des voyages à partir du fichier JSON
 $voyagesJson = file_get_contents("voyages.json");
 $voyages = json_decode($voyagesJson, true);
 
@@ -20,20 +19,35 @@ if ($voyages === null) {
 // Définir le nombre de voyages par page
 $voyagesParPage = 4;
 
-// Récupérer le numéro de la page actuelle (par défaut 1)
-$pageActuelle = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+// Variables pour filtrer les voyages
+$filtrageActif = isset($_GET['filtrer']);
+$transport = $filtrageActif && isset($_GET['transport']) ? $_GET['transport'] : ''; 
+$logement = $filtrageActif && isset($_GET['logement']) ? $_GET['logement'] : ''; 
+$monde = $filtrageActif && isset($_GET['monde']) ? $_GET['monde'] : ''; 
 
-// Calculer l'index de départ
+// Appliquer les filtres
+$voyagesFiltres = array_filter($voyages, function ($voyage) use ($transport, $logement, $monde) {
+    if ($transport === '' && $logement === '' && $monde === '') {
+        return true;
+    }
+
+    return 
+        ($transport === '' || in_array($transport, $voyage['transport'])) &&
+        ($logement === '' || in_array($logement, $voyage['logement'])) &&
+        ($monde === '' || in_array($monde, $voyage['monde']));
+});
+
+// Si aucun filtrage, afficher tous les voyages
+$voyagesAffiches = $filtrageActif ? $voyagesFiltres : $voyages;
+
+// Pagination
+$totalVoyages = count($voyagesAffiches);
+$totalPages = ceil($totalVoyages / $voyagesParPage);
+$pageActuelle = isset($_GET['page']) ? max(1, min($totalPages, (int)$_GET['page'])) : 1;
 $depart = ($pageActuelle - 1) * $voyagesParPage;
-
-// Extraire les voyages pour la page actuelle
-$voyagesPage = array_slice($voyages, $depart, $voyagesParPage);
-
-// Nombre total de pages
-$totalPages = ceil(count($voyages) / $voyagesParPage);
+$voyagesPage = array_slice($voyagesAffiches, $depart, $voyagesParPage);
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +62,7 @@ $totalPages = ceil(count($voyages) / $voyagesParPage);
     <section class="Page-Accueil">
         <video autoplay loop muted id="bg-video">
             <source src="images/Vidéo5.mp4" type="video/mp4">
-        </video> 
+        </video>
         <header>
             <div class="ProfilPicture">
                 <img src="images/LOGO.jpg" alt="logo" width="200" class="logo">
@@ -62,57 +76,53 @@ $totalPages = ceil(count($voyages) / $voyagesParPage);
         </header>
         <div class="Page-Accueil-text">
             <h1>Rechercher un voyage</h1>
-            <div class="date-container">
-                <div class="date-input">
-                    <label for="date-depart">Date de départ :</label>
-                    <input  type="date" id="date-depart" name="date-depart" required>
+            
+            <form method="GET"> 
+                <div class="filters-container">
+                    <div class="filter-input">
+                        <label for="transport">Moyen d'accès:</label>
+                        <select id="transport" name="transport">
+                            <option value="">-</option>
+                            <option value="Vaisseau" <?= ($transport === "Vaisseau") ? "selected" : "" ?>>Vaisseau spatial</option>
+                            <option value="Bateau" <?= ($transport === "Bateau") ? "selected" : "" ?>>Bateau</option>
+                            <option value="Poudre-cheminette" <?= ($transport === "Poudre-cheminette") ? "selected" : "" ?>>Poudre de cheminette</option>
+                            <option value="Cheval" <?= ($transport === "Cheval") ? "selected" : "" ?>>Cheval</option>
+                            <option value="Avion" <?= ($transport === "Avion") ? "selected" : "" ?>>Avion</option>
+                            <option value="Voiture" <?= ($transport === "Voiture") ? "selected" : "" ?>>Voiture</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-input">
+                        <label for="logement">Logement:</label>
+                        <select id="logement" name="logement">
+                            <option value="">-</option>
+                            <option value="Château" <?= ($logement === "Château") ? "selected" : "" ?>>Château</option>
+                            <option value="Chez-habitant" <?= ($logement === "Chez-habitant") ? "selected" : "" ?>>Chez l'habitant</option>
+                            <option value="Camping" <?= ($logement === "Camping") ? "selected" : "" ?>>Camping</option>
+                            <option value="Maison" <?= ($logement === "Maison") ? "selected" : "" ?>>Maison</option>
+                            <option value="Hôtel" <?= ($logement === "Hôtel") ? "selected" : "" ?>>Hôtel</option>
+                            <option value="Cabine" <?= ($logement === "Cabine") ? "selected" : "" ?>>Cabine</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-input">
+                        <label for="monde">Monde:</label>
+                        <select id="monde" name="monde">
+                            <option value="">-</option>
+                            <option value="Médiéval" <?= ($monde === "Médiéval") ? "selected" : "" ?>>Médiéval</option>
+                            <option value="Magique" <?= ($monde === "Magique") ? "selected" : "" ?>>Magique</option>
+                            <option value="Préhistorique" <?= ($monde === "Préhistorique") ? "selected" : "" ?>>Préhistorique</option>
+                            <option value="Futuriste" <?= ($monde === "Futuriste") ? "selected" : "" ?>>Futuriste</option>
+                            <option value="Éxotique" <?= ($monde === "Éxotique") ? "selected" : "" ?>>Éxotique</option>
+                            <option value="Surnaturel" <?= ($monde === "Surnaturel") ? "selected" : "" ?>>Surnaturel</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="date-input">
-                    <label for="date-retour">Date de retour :</label>
-                    <input type="date" id="date-retour" name="date-retour" required>
+                <div class="recherche">
+                    <button type="submit" name="filtrer">Appliquer les filtres</button>
                 </div>
-            </div>
-           
-            
-            <div class="filters-container">
-                <div class="filter-input">
-                    <label for="transport">Moyen d'accès:</label>
-                    <select id="transport" name="transport" >
-                        <option value="Vaisseau">Vaisseau spatial</option>
-                        <option value="Bateau">Bateau</option>
-                        <option value="Poudre-cheminette">Poudre de cheminette</option>
-                        <option value="Cheval">Cheval</option>
-                        <option value="Avion">Avion</option>
-                        <option value="Voiture">Voiture</option>
-                    </select>
-                </div>
-            
-                <div class="filter-input">
-                    <label for="Logement">Logement:</label>
-                    <select id="Logement" name="Logement">
-                        <option value="chateau">Château</option>
-                        <option value="Chez-habitant">Chez l'habitant</option>
-                        <option value="camping">Camping</option>
-                        <option value="Maison">Maison</option>
-                        <option value="Hotel">Hôtel 5 étoiles</option>
-                        
-                    </select>
-                </div>
-            
-                <div class="filter-input">
-                    <label for="Logement">Monde:</label>
-                    <select id="Logement" name="Logement">
-                        <option value="medieval">Médiéval</option>
-                        <option value="magique">Magique</option>
-                        <option value="prehistorique">Préhistorique</option>
-                        <option value="Futuriste">Futuriste</option>
-                        <option value="exotique">&Eacute;xotique</option>
-                        <option value="Surnaturel">Surnaturel</option>
-                    </select>
-                </div>
-            </div>
-
+            </form>
 
             <div class="ListePhotos">
                 <?php foreach ($voyagesPage as $voyage): ?>
@@ -125,23 +135,22 @@ $totalPages = ceil(count($voyages) / $voyagesParPage);
                     </div>
                 <?php endforeach; ?>
             </div>
+
             <div class="pagination">
                 <?php if ($pageActuelle > 1): ?>
-                    <a href="?page=<?= $pageActuelle - 1 ?>">Précédent</a>
+                    <a href="?page=<?= $pageActuelle - 1 ?>&transport=<?= urlencode($transport) ?>&logement=<?= urlencode($logement) ?>&monde=<?= urlencode($monde) ?><?= $filtrageActif ? '&filtrer=1' : '' ?>">Précédent</a>
                 <?php endif; ?>
                 
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <a href="?page=<?= $i ?>" <?= ($i == $pageActuelle) ? 'class="active"' : '' ?>><?= $i ?></a>
+                    <a href="?page=<?= $i ?>&transport=<?= urlencode($transport) ?>&logement=<?= urlencode($logement) ?>&monde=<?= urlencode($monde) ?><?= $filtrageActif ? '&filtrer=1' : '' ?>" <?= ($i == $pageActuelle) ? 'class="active"' : '' ?>><?= $i ?></a>
                 <?php endfor; ?>
 
                 <?php if ($pageActuelle < $totalPages): ?>
-                    <a href="?page=<?= $pageActuelle + 1 ?>">Suivant</a>
+                    <a href="?page=<?= $pageActuelle + 1 ?>&transport=<?= urlencode($transport) ?>&logement=<?= urlencode($logement) ?>&monde=<?= urlencode($monde) ?><?= $filtrageActif ? '&filtrer=1' : '' ?>">Suivant</a>
                 <?php endif; ?>
             </div>
         </div>
 
-        
-        
         <footer>
             <ul class="bas-de-page">
                 <li><a href="#">Mentions légales</a></li>

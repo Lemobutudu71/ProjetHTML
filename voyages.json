@@ -3,90 +3,136 @@
         "nom": "Poudlard",
         "image": "images/Poudlard-scaled.jpg",
         "lien": "Destinations/Poudlard.html",
-        "prix": 3666
+        "prix": 3666,
+        "transport": ["-", "Poudre-cheminette", "Train"],
+        "logement": ["-","Château", "Chez-habitant", "Camping", "Maison", "Hôtel"],
+        "monde": ["-","Magique", "Surnaturel"]
     },
     {
         "nom": "Fondcombe",
         "image": "images/Seigneur des anneaux.jpeg",
         "lien": "Destinations/Fondcombe.html",
-        "prix": 2456
+        "prix": 2456,
+        "transport": ["-","Cheval"],
+        "logement": ["-","Château", "Chez-habitant", "Camping", "Maison"],
+        "monde": ["-","Magique", "Médiéval","Surnaturel"]
     },
     {
         "nom": "Tatooine",
         "image": "images/Tatooine.jpg",
         "lien": "Destinations/Tatooine.html",
-        "prix": 3578
+        "prix": 3578,
+        "transport": ["-","Vaisseau spatial"],
+        "logement": ["-","Chez-habitant", "Camping", "Maison", "Hôtel"],
+        "monde": ["-","Futuriste"]
     },
     {
         "nom": "Isla Nublar",
         "image": "images/1186175.png",
         "lien": "Destinations/IslaNublar.html",
-        "prix": 1498
+        "prix": 1498,
+        "transport": ["-","Bateau", "Avion"],
+        "logement": ["-","Camping", "Maison", "Hôtel"],
+        "monde": ["-","Préhistorique"]    
     },
     {
         "nom": "Pandora",
         "image": "images/Avatar.jpg",
         "lien": "Destinations/Pandora.html",
-        "prix": 2018
+        "prix": 2018,
+        "transport": ["-","Avion"],
+        "logement": ["-","Chez-habitant", "Camping", "Maison"],
+        "monde": ["-","Éxotique"]    
     },
     {
         "nom": "Westeros",
         "image": "images/GOT.webp",
         "lien": "Destinations/Westeros.html",
-        "prix": 5300
+        "prix": 5300,
+        "transport": ["-","Bateau", "Cheval"],
+        "logement": ["-","Château", "Chez-habitant", "Camping", "Maison"],
+        "monde": ["-","Médiéval", "Magique", "Surnaturel"]
     },
     {
         "nom": "LosAngeles",
         "image": "images/Blade runner.jpg",
         "lien": "Destinations/LosAngeles.html",
-        "prix": 3141
+        "prix": 3141,
+        "transport": ["-","Avion", "Voiture"],
+        "logement": ["-","Chez-habitant","Maison", "Hôtel"],
+        "monde": ["-","Futuriste"]
     },
     {
         "nom": "Radiator springs",
         "image": "images/radiator_springs.jpg",
         "lien": "Destinations/Radiatorsprings.html",
-        "prix": 2005
+        "prix": 2005,
+        "transport": ["-","Voiture"],
+        "logement": ["-","Chez-habitant", "Maison", "Hôtel"],
+        "monde": ["-","Surnaturel"]
     }, 
     {
         "nom": "Hawkins",
         "image": "images/Hawkins.jpg",
         "lien": "Destinations/Hawkins.html",
-        "prix": 1998
+        "prix": 1998,
+        "transport": ["-","Voiture", "Avion"],
+        "logement": ["-","Chez-habitant", "Camping", "Maison", "Hôtel"],
+        "monde": ["-","Surnaturel"]
     },
     {
         "nom": "Cybertron",
         "image": "images/Optimus.jpg",
         "lien": "Destinations/Cybertron.html",
-        "prix": 4444
+        "prix": 4444,
+        "transport": ["-","Vaisseau spatial"],
+        "logement": ["-","Maison", "Hôtel"],
+        "monde": ["-","Futuriste", "Surnaturel"]
     }, 
     {
         "nom": "Titanic",
         "image": "images/titanic.jpg",
         "lien": "Destinations/Titanic.html",
-        "prix": 6450
+        "prix": 6450,
+        "transport": ["-","Bateau"],
+        "logement": ["-","Cabine"],
+        "monde": ["-","Éxotique"]
     },  
     {
         "nom": "Narnia",
         "image": "images/Narnia.jpg",
         "lien": "Destinations/Narnia.html",
-        "prix": 3709
+        "prix": 3709,
+        "transport": ["-","Cheval"],
+        "logement": ["-","Chez-habitant", "Camping", "Maison", "Chateau"],
+        "monde": ["-","Surnaturel", "Médiéval", "Magique"]
     }, 
     {
         "nom": "Pirates des Caraïbes",
         "image": "images/PirateCaraibe.jpg",
         "lien": "Destinations/Pirate.html",
-        "prix": 4540
+        "prix": 4540,
+        "transport": ["-","Bateau"],
+        "logement": ["-","Chez-habitant", "Camping", "Maison","Cabine"],
+        "monde": ["-","Surnaturel"]
+
     },
     {
         "nom": "Far far away",
         "image": "images/Shrek.webp",
         "lien": "Destinations/Farfaraway.html",
-        "prix": 4784
+        "prix": 4784,
+        "transport": ["-","Cheval"],
+        "logement": ["-","Chez-habitant", "Camping", "Maison", "Chateau"],
+        "monde": ["-","Surnaturel", "Médiéval", "Magique"]
     },
     {
         "nom": "Arrakis",
         "image": "images/Arrakis.jpg",
         "lien": "Destinations/Arrakis.html",
-        "prix": 3102
+        "prix": 3102,
+        "transport": ["-","Vaisseau spatial"],
+        "logement": ["-","Chez-habitant", "Camping", "Maison"],
+        "monde": ["-","Surnaturel", "Éxotique"]
     }
 ]   

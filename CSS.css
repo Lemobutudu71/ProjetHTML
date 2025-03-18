@@ -495,6 +495,30 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 1;
 }
 
+.recherche button {
+    padding: 15px 35px;
+    font-size: 15px;  
+    border-radius: 10px;
+    border: 2px solid gold;
+    background: gold;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 50px;
+}
+
+.recherche button:hover{
+    cursor: pointer;
+    background: #FFD700;
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    
+}
+
+.recherche button:active {
+    transform: scale(0.95);
+}
 .filters-container {
     display: flex;
     justify-content: center;
