@@ -839,8 +839,11 @@ th, td {
 
 .options-group {
     margin-bottom: 20px;
+    font-size: 1.2rem; 
+    color: gold; 
+    font-weight: bold;
+   
 }
-
 
 .activites-label {
     cursor: pointer; 
@@ -867,4 +870,57 @@ th, td {
     display: block; 
 }
 
+.section {
+    padding: 30px;  /* Espacement interne de la section */
+    margin-top: 20px;  /* Espacement au-dessus de la section */
+    border-radius: 10px;  /* Coins arrondis */
+    margin-bottom: 40px;  /* Espacement en bas de la section */
+}
+
+/* Titre de la section */
+.section h2 {
+    font-size: 2rem;
+    color: gold;  /* Couleur du texte */
+    font-weight: bold;
+    margin-bottom: 20px;  /* Espacement sous le titre */
+}
+
+/* Liste des activités */
+ul {
+    list-style-type: disc;  /* Style de puce par défaut */
+    padding-left: 20px;  /* Espacement à gauche pour la liste */
+    margin-bottom: 20px;  /* Espacement en bas de la liste */
+}
+
+ul li {
+    font-size: 1.2rem;  /* Taille de la police des éléments de la liste */
+    color: gold;  /* Couleur de texte des éléments de liste */
+    margin-bottom: 10px;  /* Espacement entre les éléments de la liste */
+}
+
+.options-group .activites-options select {
+    width: 22%; /* Largeur du select */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+.options-group .activites-options label{
+    margin-right: 10px;
+    font-size: 1rem;
+    color: gold;
+    font-weight: normal;
+}
+
+.options-group  select {
+    width: 35%; /* Largeur du select */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
 

@@ -42,20 +42,21 @@ session_start();
                 Traversez le Chemin de Traverse, goûtez aux chocogrenouilles et vivez une aventure digne des plus grands sorciers !</p>
             
             <div class="buttons-container">
-                <a href="#poudlard" class="Page-Accueil-button">JOUR 1-3 : Poudlard</a>
-                <a href="#chemin-traverse" class="Page-Accueil-button">JOUR 4-6 : Préaulard</a>
+                <a href="#poudlard" class="Page-Accueil-button">JOUR 1-4 : Poudlard</a>
+                <a href="#chemin-traverse" class="Page-Accueil-button">JOUR 5-7 : Pré-au-lard</a>
             </div>
 
             <div id="poudlard" class="section">
-                <h2>JOUR 1-3 : Poudlard</h2>
-                 <ul>
-                    <li>Visitez le célèbre château de Poudlard ainsi que la maison de Hagrid</li>
-                    <li>Assistez à des cours</li>
-                    <li>Participer à un match de Quiditch</li>
-                </ul>
+                <h2>JOUR 1-4 : Poudlard</h2>
+                 
+                <p class="description">Participez à des activités magiques,
+                    visitez le célèbre château de Poudlard ainsi que la maison de Hagrid et
+                    assistez à des cours</p>
+                    
+                
 
                 <div class="options-group">
-                <label for="hebergement">Choisissez votre hébergement:</label>
+                <label for="hebergement">Hébergement:</label>
                 <select id="hebergement" name="hebergement">
                     <option value="serpentard">Chambre Serpentard</option>
                     <option value="griffondor">Chambre Griffondor</option>
@@ -65,7 +66,7 @@ session_start();
                 </div>
 
                 <div class="options-group">
-                    <label for="activites-toggle" class="activites-label">Choisissez vos activités: 
+                    <label for="activites-toggle" class="activites-label">Activités: 
                         <span class="arrow">&#9660;</span>  
                     </label>
                     <input type="checkbox" id="activites-toggle" class="activites-toggle">
@@ -74,62 +75,118 @@ session_start();
                         <div>
                             <input type="checkbox" id="sorts" name="activites" value="sorts">
                             <label for="sorts">Cours de sortilèges</label>
+                            
+                            <select id="nb_personnes" name="nb_personnes">
+                                <option value="1">1 personne</option>
+                                <option value="2">2 personnes</option>
+                                <option value="3">3 personnes</option>
+                                <option value="4">4 personnes</option>
+                            </select>
+                            
                         </div>
                         <div>
-                            <input type="checkbox" id="chemin_traverse" name="activites" value="chemin_traverse">
-                            <label for="chemin_traverse">Chemin de Traverse</label>
+                            <input type="checkbox" id="quidditch" name="activites" value="quidditch">
+                            <label for="quidditch">Match de quidditch</label>
+                            
+                                
+                                <select id="nb_personnes" name="nb_personnes">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            
                         </div>
                         <div>
-                            <input type="checkbox" id="repas_magiques" name="activites" value="repas_magiques">
-                            <label for="repas_magiques">Repas Magiques</label>
+                            <input type="checkbox" id="hyppogriffe" name="activites" value="hyppogriffe">
+                            <label for="hyppogriffe">Dressage d'hyppogriffe</label>
+                                <select id="nb_personnes" name="nb_personnes" >
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
                         </div>
+                        
                     </div>
                 </div>
-
                 <div class="options-group">
-                    <label for="nb_personnes">Nombre de personnes:</label>
-                    <select id="nb_personnes" name="nb_personnes">
-                        <option value="1">1 personne</option>
-                        <option value="2">2 personnes</option>
-                        <option value="3">3 personnes</option>
-                        <option value="4">4 personnes</option>
+                     <label for="transport">Transport pour la prochaine étape:</label>
+                    <select id="transport" name="transport">
+                        <option value="balais">Balais</option>
+                        <option value="poudre">Poudre de cheminette</option>
+                        <option value="portoloin">Portoloin</option>
+                        <option value="sombral">Sombral</option>
                     </select>
                 </div>
 
             </div>
         
             <div id="chemin-traverse" class="section">
-                <h2>Le Chemin de Traverse</h2>
-                <p>Traversez le Chemin de Traverse et découvrez des merveilles magiques...</p>
+                <h2>JOUR 5-7 : Pré-au-lard</h2>
+                <p class="description">Plongez dans l'univers magique de Pré-au-Lard, un village charmant et plein de surprises !
+                Au programme :<br>
+                Visitez la célèbre boutique de Zonko et laissez-vous emporter par l’univers des farces magiques.
+                Détendez-vous au Troisième Chaudron avec une bièraubeurre bien méritée ou profitez d'une douceur sucrée chez Honeydukes.</p>
+
+                <div class="options-group">
+                <label for="hebergement-préaulard">Hébergement:</label>
+                <select id="hebergement-préaulard" name="hebergement-préaulard">
+                    <option value="sanglier">La Tête de Sanglier</option>
+                    <option value="cottage-sorcier">Le Cottage des Sorciers</option>
+                    <option value="cabane-hurlante">La cabane hurlante</option>
+                    <option value="pudifoot">Les Chambres de Madame Puddifoot</option>
+                </select>
+                </div>
+
+                <div class="options-group">
+                    <label for="activites-toggle-préaulard" class="activites-label">Activités: 
+                        <span class="arrow">&#9660;</span>  
+                    </label>
+                    <input type="checkbox" id="activites-toggle-préaulard" class="activites-toggle">
+                    
+                    <div class="activites-options">
+                        <div>
+                            <input type="checkbox" id="zonko" name="activites" value="zonko">
+                            <label for="zonko">Visite de la boutique de Zonko</label>
+                            
+                            <select id="nb_personnes_visite" name="nb_personnesvisite">
+                                <option value="1">1 personne</option>
+                                <option value="2">2 personnes</option>
+                                <option value="3">3 personnes</option>
+                                <option value="4">4 personnes</option>
+                            </select>
+                            
+                        </div>
+                        <div>
+                            <input type="checkbox" id="dégustation" name="activites" value="dégustation">
+                            <label for="dégustation">Dégustation de Bièraubeurre</label>
+                            
+                                
+                                <select id="nb_personnes_dégustation" name="nb_personnes_dégustation">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            
+                        </div>
+                        <div>
+                            <input type="checkbox" id="honeydukes" name="activites" value="honeydukes">
+                            <label for="honeydukes">Boutique de Glacés de Honeydukes</label>
+                                <select id="nb_personnes_honeydukes" name="nb_personnes_honeydukes" >
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
 
-            <div class="options-group">
-                <label for="hebergement">Choisissez votre hébergement:</label>
-                <select id="hebergement" name="hebergement">
-                    <option value="hotel">Hôtel</option>
-                    <option value="auberge">Auberge</option>
-                    <option value="residence">Résidence privée</option>
-                </select>
-            </div>
-
-            <div class="options-group">
-                <label for="activites">Choisissez vos activités:</label>
-                <select id="activites" name="activites">
-                    <option value="sorts">Cours de sortilèges</option>
-                    <option value="chemin_traverse">Chemin de Traverse</option>
-                    <option value="repas_magiques">Repas Magiques</option>
-                </select>
-            </div>
-
-            <div class="options-group">
-                <label for="nb_personnes">Nombre de personnes:</label>
-                <select id="nb_personnes" name="nb_personnes">
-                    <option value="1">1 personne</option>
-                    <option value="2">2 personnes</option>
-                    <option value="3">3 personnes</option>
-                    <option value="4">4 personnes</option>
-                </select>
-            </div>
+            
 
         </div>
         <footer>
