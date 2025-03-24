@@ -1,16 +1,10 @@
 [
     {
-        "nom": "MARMELAT",
+        "id": "67e1306025b5f4.22789385",
+        "nom": "Marmelat",
         "prenom": "Antoine",
         "email": "antoinemarmelat@gmail.com",
         "role": "admin",
-        "password": "$2y$10$zk1t7Pcri2HRjQXGWnMu6uK8rtxc7BDt4eOHOFcEfwruktPeZc32q"
-    },
-    {
-        "nom": "MARMELAT",
-        "prenom": "Paul",
-        "email": "pmarmelat@gmail.com",
-        "role": "admin",
-        "password": "$2y$10$vUBkddwGAjp5oOH9PzMLBe8yUTYEg8TKyMLoK4VrasSFOdwjJU9JS"
+        "password": "$2y$10$DO0\/VQwpRs2HVTLWkC9ag.YVGd7e2MLKpwKuoEdX0z2qSMrsIaaau"
     }
 ]

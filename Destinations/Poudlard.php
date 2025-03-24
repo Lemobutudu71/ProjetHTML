@@ -1,8 +1,89 @@
 <?php
 session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user'])) {
+    header("Location: PageSeconnecter.php"); // Rediriger si l'utilisateur n'est pas connecté
+    exit();
+}
+
+// Récupérer l'ID de l'utilisateur connecté
+$user_id = $_SESSION['user']['id'];
+
+// Fichier JSON pour stocker les options
+$file_path = '../options.json';
+
+// Vérifier si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupérer les données du formulaire avec isset() pour éviter les erreurs
+    $hebergement_poudlard = isset($_POST['hebergement-poudlard']) ? $_POST['hebergement-poudlard'] : null;
+    $hebergement_preau_lard = isset($_POST['hebergement-preaulard']) ? $_POST['hebergement-preaulard'] : null;
+    $activites_poudlard = isset($_POST['activites_poudlard']) ? $_POST['activites_poudlard'] : []; // Activités Poudlard
+    $activites_preau_lard = isset($_POST['activites_preaulard']) ? $_POST['activites_preaulard'] : []; // Activités Pré-au-Lard
+    $transport_préaulard = isset($_POST['transport_preaulard']) ? $_POST['transport_preaulard'] : null; // Transport
+
+    // Nombre de personnes pour chaque activité
+    $nb_personnes_sort = isset($_POST['nb_personnes_sort']) ? $_POST['nb_personnes_sort'] : null;
+    $nb_personnes_q = isset($_POST['nb_personnes_quid']) ? $_POST['nb_personnes_quid'] : null;
+    $nb_personnes_hy = isset($_POST['nb_personnes_hy']) ? $_POST['nb_personnes_hy'] : null;
+    $nb_personnes_zonko = isset($_POST['nb_personnes_visite']) ? $_POST['nb_personnes_visite'] : null;
+    $nb_personnes_degustation = isset($_POST['nb_personnes_degustation']) ? $_POST['nb_personnes_degustation'] : null;
+    $nb_personnes_honeydukes = isset($_POST['nb_personnes_honeydukes']) ? $_POST['nb_personnes_honeydukes'] : null;
+
+    // Structure des données à enregistrer
+    $user_choices = [
+        'user_id' => $user_id,
+        'hebergement_poudlard' => $hebergement_poudlard,
+        'hebergement_preau_lard' => $hebergement_preau_lard,
+        'activites_poudlard' => $activites_poudlard,
+        'activites_preau_lard' => $activites_preau_lard,
+        'transport_préaulard' => $transport_préaulard,
+        'nb_personnes' => [
+            'sorts' => $nb_personnes_sort,
+            'quidditch' => $nb_personnes_q,
+            'hyppogriffe' => $nb_personnes_hy,
+            'zonko' => $nb_personnes_zonko,
+            'degustation' => $nb_personnes_degustation,
+            'honeydukes' => $nb_personnes_honeydukes,
+        ]
+    ];
+
+    // Vérifier si le fichier existe et si des données existent déjà
+    if (file_exists($file_path)) {
+        // Lire les données existantes
+        $existing_data = json_decode(file_get_contents($file_path), true);
+
+        // Rechercher l'utilisateur avec l'ID et mettre à jour ses données
+        foreach ($existing_data as &$user_data) {
+            if ($user_data['user_id'] == $user_id) {
+                // Remplacer les anciennes données avec les nouvelles données
+                $user_data = $user_choices;
+                break;
+            }
+        }
+
+        // Si l'utilisateur n'existe pas, ajouter un nouveau
+        if (!isset($user_data)) {
+            $existing_data[] = $user_choices;
+        }
+
+    } else {
+        // Créer un tableau vide si le fichier n'existe pas encore
+        $existing_data = [$user_choices];
+    }
+
+    // Enregistrer les données mises à jour dans le fichier JSON
+    file_put_contents($file_path, json_encode($existing_data, JSON_PRETTY_PRINT));
+
+    // Rediriger vers la page du panier
+    header('Location: ../PagePanier.php');
+    exit();
+}
+
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> <!---->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +102,7 @@ session_start();
             <ul class="menu">
                 <li><a href="../PageAccueil.php">Accueil</a></li>
                 <li><a href="../PageAccueil2.php">Rechercher</a></li>
-                <li><a href="../PageInscription.php">Se connecter</a></li>
+                <li><a href="../PagePanier.php"></a></li>
                 <li><a href="../PageProfil.php">Profil</a></li>
             </ul>
         </header>
@@ -45,7 +126,8 @@ session_start();
                 <a href="#poudlard" class="Page-Accueil-button">JOUR 1-4 : Poudlard</a>
                 <a href="#chemin-traverse" class="Page-Accueil-button">JOUR 5-7 : Pré-au-lard</a>
             </div>
-
+        
+        <form action="Poudlard.php" method="POST">
             <div id="poudlard" class="section">
                 <h2>JOUR 1-4 : Poudlard</h2>
                  
@@ -56,8 +138,8 @@ session_start();
                 
 
                 <div class="options-group">
-                <label for="hebergement">Hébergement:</label>
-                <select id="hebergement" name="hebergement">
+                <label for="hebergement-poudlard">Hébergement:</label>
+                <select id="hebergement-poudlard" name="hebergement-poudlard">
                     <option value="serpentard">Chambre Serpentard</option>
                     <option value="griffondor">Chambre Griffondor</option>
                     <option value="serdaigle">Chambre Serdaigle</option>
@@ -73,10 +155,10 @@ session_start();
                     
                     <div class="activites-options">
                         <div>
-                            <input type="checkbox" id="sorts" name="activites" value="sorts">
+                            <input type="checkbox" id="sorts" name="activites_poudlard" value="sorts">
                             <label for="sorts">Cours de sortilèges</label>
                             
-                            <select id="nb_personnes" name="nb_personnes">
+                            <select id="nb_personnes_sort" name="nb_personnes_sort">
                                 <option value="1">1 personne</option>
                                 <option value="2">2 personnes</option>
                                 <option value="3">3 personnes</option>
@@ -85,11 +167,11 @@ session_start();
                             
                         </div>
                         <div>
-                            <input type="checkbox" id="quidditch" name="activites" value="quidditch">
+                            <input type="checkbox" id="quidditch" name="activites_poudlard" value="quidditch">
                             <label for="quidditch">Match de quidditch</label>
                             
                                 
-                                <select id="nb_personnes" name="nb_personnes">
+                                <select id="nb_personnes_quid" name="nb_personnes_quid">
                                     <option value="1">1 personne</option>
                                     <option value="2">2 personnes</option>
                                     <option value="3">3 personnes</option>
@@ -98,9 +180,9 @@ session_start();
                             
                         </div>
                         <div>
-                            <input type="checkbox" id="hyppogriffe" name="activites" value="hyppogriffe">
+                            <input type="checkbox" id="hyppogriffe" name="activites_poudlard" value="hyppogriffe">
                             <label for="hyppogriffe">Dressage d'hyppogriffe</label>
-                                <select id="nb_personnes" name="nb_personnes" >
+                                <select id="nb_personnes_hy" name="nb_personnes_hy" >
                                     <option value="1">1 personne</option>
                                     <option value="2">2 personnes</option>
                                     <option value="3">3 personnes</option>
@@ -111,8 +193,8 @@ session_start();
                     </div>
                 </div>
                 <div class="options-group">
-                     <label for="transport">Transport pour la prochaine étape:</label>
-                    <select id="transport" name="transport">
+                     <label for="transport_preaulard">Transport pour la prochaine étape:</label>
+                    <select id="transport_preaulard" name="transport_preaulard">
                         <option value="balais">Balais</option>
                         <option value="poudre">Poudre de cheminette</option>
                         <option value="portoloin">Portoloin</option>
@@ -130,8 +212,8 @@ session_start();
                 Détendez-vous au Troisième Chaudron avec une bièraubeurre bien méritée ou profitez d'une douceur sucrée chez Honeydukes.</p>
 
                 <div class="options-group">
-                <label for="hebergement-préaulard">Hébergement:</label>
-                <select id="hebergement-préaulard" name="hebergement-préaulard">
+                <label for="hebergement-preaulard">Hébergement:</label>
+                <select id="hebergement-preaulard" name="hebergement-preaulard">
                     <option value="sanglier">La Tête de Sanglier</option>
                     <option value="cottage-sorcier">Le Cottage des Sorciers</option>
                     <option value="cabane-hurlante">La cabane hurlante</option>
@@ -147,10 +229,10 @@ session_start();
                     
                     <div class="activites-options">
                         <div>
-                            <input type="checkbox" id="zonko" name="activites" value="zonko">
+                            <input type="checkbox" id="zonko" name="activites_preaulard" value="zonko">
                             <label for="zonko">Visite de la boutique de Zonko</label>
                             
-                            <select id="nb_personnes_visite" name="nb_personnesvisite">
+                            <select id="nb_personnes_visite" name="nb_personnes_visite">
                                 <option value="1">1 personne</option>
                                 <option value="2">2 personnes</option>
                                 <option value="3">3 personnes</option>
@@ -159,11 +241,11 @@ session_start();
                             
                         </div>
                         <div>
-                            <input type="checkbox" id="dégustation" name="activites" value="dégustation">
-                            <label for="dégustation">Dégustation de Bièraubeurre</label>
+                            <input type="checkbox" id="degustation" name="activites_preaulard" value="degustation">
+                            <label for="degustation">Dégustation de Bièraubeurre</label>
                             
                                 
-                                <select id="nb_personnes_dégustation" name="nb_personnes_dégustation">
+                                <select id="nb_personnes_degustation" name="nb_personnes_degustation">
                                     <option value="1">1 personne</option>
                                     <option value="2">2 personnes</option>
                                     <option value="3">3 personnes</option>
@@ -172,7 +254,7 @@ session_start();
                             
                         </div>
                         <div>
-                            <input type="checkbox" id="honeydukes" name="activites" value="honeydukes">
+                            <input type="checkbox" id="honeydukes" name="activites_preaulard" value="honeydukes">
                             <label for="honeydukes">Boutique de Glacés de Honeydukes</label>
                                 <select id="nb_personnes_honeydukes" name="nb_personnes_honeydukes" >
                                     <option value="1">1 personne</option>
@@ -185,7 +267,10 @@ session_start();
                     </div>
                 </div>
             </div>
-
+            <div class="buttons-container">
+                <button type="submit" class="Page-Accueil-button">Ajouter au panier</button>   
+            </div>
+        </form>    
             
 
         </div>

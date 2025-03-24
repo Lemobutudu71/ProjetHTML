@@ -34,8 +34,10 @@
             $users = [];
         }
         if (empty($error_message)){
+            $user_id = uniqid('', true); // Génère un ID unique basé sur le temps actuel
              // Création du nouvel utilisateur
             $newUser = [
+                "id" => $user_id,
                 "nom" => $nom,
                 "prenom" => $prenom,
                 "email" => $email,

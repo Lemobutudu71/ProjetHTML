@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (password_verify($password, $user['password'])) {
                     // Enregistrer l'utilisateur en session
                     $_SESSION['user'] = [
+                        "id" => $user['id'],
                         "nom" => $user['nom'],
                         "prenom" => $user['prenom'],
                         "email" => $user['email'],
