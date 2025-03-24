@@ -1,9 +1,104 @@
+<?php
+session_start();
+
+
+if (!isset($_SESSION['user'])) {
+    header("Location: PageSeconnecter.php"); 
+    exit();
+}
+
+$user_id = $_SESSION['user']['id'];
+
+$file_path = '../options.json';
+
+// Vérifier si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $hebergement_tatooine = isset($_POST['hebergement_tatooine']) ? $_POST['hebergement_tatooine'] : null;
+    $activites_tatooine = isset($_POST['activites_tatooine']) ? $_POST['activites_tatooine'] : []; 
+    $activites_etoile = isset($_POST['activites_etoile']) ? $_POST['activites_etoile'] : []; 
+    $hebergement_etoile = isset($_POST['hebergement_etoile']) ? $_POST['hebergement_etoile'] : []; 
+    $transport_etoile = isset($_POST['transport_etoile']) ? $_POST['transport_etoile'] : null; 
+
+    $nb_personnes_jedi = isset($_POST['nb_personnes_jedi']) ? $_POST['nb_personnes_jedi'] : null;
+    $nb_personnes_speeder = isset($_POST['nb_personnes_speeder']) ? $_POST['nb_personnes_speeder'] : null;
+    $nb_personnes_palais_jabba = isset($_POST['nb_personnes_palais_jabba']) ? $_POST['nb_personnes_palais_jabba'] : null;
+    $nb_personnes_tie = isset($_POST['nb_personnes_tie']) ? $_POST['nb_personnes_tie'] : null;
+    $nb_personnes_tir = isset($_POST['nb_personnes_tir']) ? $_POST['nb_personnes_tir'] : null;
+    $nb_personnes_sith = isset($_POST['nb_personnes_sith']) ? $_POST['nb_personnes_sith'] : null;
+    $nb_personnes = [];
+
+    // Vérifiez chaque activité et ajoutez le nombre de personnes uniquement si l'activité est sélectionnée
+    if (in_array('jedi', $activites_tatooine)) {
+        $nb_personnes['jedi'] = $nb_personnes_jedi;
+    }
+    if (in_array('speeder', $activites_tatooine)) {
+        $nb_personnes['speeder'] =  $nb_personnes_speeder;
+    }
+    if (in_array('palais_jabba', $activites_tatooine)) {
+        $nb_personnes['palais_jabba'] = $nb_personnes_palais_jabba;
+    }
+    if (in_array('tie_fighter', $activites_etoile)) {
+        $nb_personnes['tie_fighter'] = $nb_personnes_tie;
+    }
+    if (in_array('tir', $activites_etoile)) {
+        $nb_personnes['tir'] =  $nb_personnes_tir;
+    }
+    if (in_array('sith', $activites_etoile)) {
+        $nb_personnes['sith'] = $nb_personnes_psith;
+    }
+
+    // Structure des données à enregistrer
+    $user_choices = [
+        'user_id' => $user_id,
+        'hebergement_tatooine' => $hebergement_tatooine,
+        'activites_tatooine' => $activites_tatooine,
+        'hebergement_etoile' => $hebergement_etoile,
+        'activites_etoile' => $activites_etoile,
+        'transport_etoile' => $transport_etoile,
+        'nb_personnes' => $nb_personnes,
+    ];
+
+    // Vérifier si le fichier existe et si des données existent déjà
+    if (file_exists($file_path)) {
+        
+        $existing_data = json_decode(file_get_contents($file_path), true);
+
+        // Rechercher l'utilisateur avec l'ID et mettre à jour ses données
+        foreach ($existing_data as &$user_data) {
+            if ($user_data['user_id'] == $user_id) {
+                // Remplacer les anciennes données avec les nouvelles données
+                $user_data = $user_choices;
+                break;
+            }
+        }
+
+        // Si l'utilisateur n'existe pas, ajouter un nouveau
+        if (!isset($user_data)) {
+            $existing_data[] = $user_choices;
+        }
+
+    } else {
+        // Créer un tableau vide si le fichier n'existe pas encore
+        $existing_data = [$user_choices];
+    }
+
+
+    file_put_contents($file_path, json_encode($existing_data, JSON_PRETTY_PRINT));
+
+
+    header('Location: ../PagePanier.php');
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MovieTrip</title>
+    <title>MovieTrip - Tatooine</title>
     <link rel="stylesheet" href="../CSS.css">
 </head>
 <body>
@@ -18,26 +113,157 @@
             <ul class="menu">
                 <li><a href="../PageAccueil.php">Accueil</a></li>
                 <li><a href="../PageAccueil2.php">Rechercher</a></li>
-                <li><a href="../PageInscription.php">Se connecter</a></li>
+                <li><a href="../PagePanier.php">Mon panier</a></li>
                 <li><a href="../PageProfil.php">Profil</a></li>
             </ul>
         </header>
-        <div class="Page-Accueil-text">
-            <h2 class="Titre">Tatooine</h2>
-            <p>
-                Découvrez la planète désertique de Star Wars, où tout a commencé pour Luke Skywalker!
-                 Parcourez les dunes de sable, faites des courses de vaiseaux, et échappez aux stormtroopers. 
-                 Peut-être croiserez-vous un certain Mandalorien ou même Dark Vador…
-            </p>
         
-       
+        <div class="Page-Accueil2-text">
+    
+            <div class="gallerie-imgDestinations">
+                <div class="image-overlay"></div>
+                <img src="../images/Tatooine.jpg" alt="Tatooine">
+                <div class="Lieuxdestinations">Tatooine</div>
+            </div>
+                       
+            <p class="description">Bienvenue dans une galaxie lointaine, très lointaine...
+            Oubliez les petits voyages à la plage, car cette fois, vous allez voyager à travers des systèmes stellaires, rencontrer des créatures intergalactiques et, peut-être, croiser quelques Sith en chemin. Que vous soyez un Jedi en herbe, un fanatique des droids ou un simple passionné des sabres laser, cette aventure Star Wars va vous faire vivre des moments mémorables !</p>
+            
+            <div class="buttons-container">
+                <a href="#tatooine" class="Page-Accueil-button">JOUR 1-4 : Tatooine</a>
+                <a href="#etoile" class="Page-Accueil-button">JOUR 5-7 : L'étoile de la mort</a>
+            </div>
+
+            <form action="Tatooine.php" method="POST">
+                <div id="tatooine" class="section">
+                    <h2>JOUR 1-4 : Tatooine</h2>
+                    <p class="description">Bienvenue sur Tatooine, le désert intergalactique où tout peut arriver... et souvent, ça arrive !
+                    Si vous pensiez que la plage était le seul endroit avec du sable, détrompez-vous ! Sur Tatooine, le sable est partout... et il cache bien des secrets. Entre les attaques de Tusken Raiders et les courses de podracers endiablées, il n’y a jamais de moment de répit sous les deux soleils brûlants de la planète.</p>
+
+                    <div class="options-group">
+                        <label for="hebergement_tatooine">Hébergement:</label>
+                        <select id="hebergement_tatooine" name="hebergement_tatooine">
+                            <option value="palais_jabba">Palais de Jabba</option>
+                            <option value="cottage_sith">Cottage des Sith</option>
+                            <option value="maison_luke">Maison de Luke Skywalker</option>
+                        </select>
+                    </div>
+
+                    <div class="options-group">
+                        <label for="activites-toggle" class="activites-label">Activités: 
+                            <span class="arrow">&#9660;</span>  
+                        </label>
+                        <input type="checkbox" id="activites-toggle" class="activites-toggle">
+                        
+                        <div class="activites-options">
+                            <div>
+                                <input type="checkbox" id="jedi" name="activites_tatooine[]" value="jedi">
+                                <label for="jedi">Entraînement Jedi</label>
+                                
+                                <select id="nb_personnes_jedi" name="nb_personnes_jedi">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="speeder" name="activites_tatooine[]" value="speeder">
+                                <label for="speeder">Balade en speeder</label>
+                                
+                                <select id="nb_personnes_speeder" name="nb_personnes_speeder">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="palais_jabba" name="activites_tatooine[]" value="palais_jabba">
+                                <label for="palais_jabba">Visite du palais de Jabba</label>
+                                
+                                <select id="nb_personnes_palais_jabba" name="nb_personnes_palais_jabba">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="options-group">
+                        <label for="transport_etoile">Transport pour la prochaine étape:</label>
+                        <select id="transport_etoile" name="transport_etoile">
+                            <option value="faucon">Faucon Millenium</option>
+                            <option value="xwing">X-Wing</option>
+                            <option value="destroyer">Destroyer stellaire</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div id="etoile" class="section">
+                    <h2>JOUR 5-7 : L'Etoile de la mort</h2>
+                    <p class="description">Bienvenue à bord de l'Étoile Noire, où la galaxie tout entière est à vos pieds !
+                    Préparez-vous à vivre une aventure épique, loin de toute la tranquillité de Tatooine et de ses sables brûlants. Ici, c'est l'Empire qui commande, et pas de place pour les faibles !Alors, que la Force soit avec vous... ou du moins, que la gravité de l'Étoile Noire ne vous fasse pas perdre l'équilibre !</p>
+
+                    <div class="options-group">
+                        <label for="hebergement_etoile">Hébergement:</label>
+                        <select id="hebergement_etoile" name="hebergement_etoile">
+                            <option value="quartier_empereur">Qartier de l'Empereur</option>
+                            <option value="chambre_officier">Chambre des Officiers Impériaux</option>
+                            <option value="salle_commandement">Salle de Commandement</option>
+                        </select>
+                    </div>
+
+                    <div class="options-group">
+                        <label for="activites-toggle-etoile" class="activites-label">Activités: 
+                            <span class="arrow">&#9660;</span>  
+                        </label>
+                        <input type="checkbox" id="activites-toggle-etoile" class="activites-toggle">
+                        
+                        <div class="activites-options">
+                            <div>
+                                <input type="checkbox" id="tie_fighter" name="activites_etoile[]" value="tie_fighter">
+                                <label for="tie_fighter">Entraînement au pilotage de TIE Fighter</label>
+                                
+                                <select id="nb_personnes_tie" name="nb_personnes_tie">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="tir" name="activites_etoile[]" value="tir">
+                                <label for="tir">Tir de l'Etoile de la mort</label>
+                                
+                                <select id="nb_personnes_tir" name="nb_personnes_tir">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="sith" name="activites_etoile[]" value="sith">
+                                <label for="sith">Entrainement des Sith</label>
+                                
+                                <select id="nb_personnes_sith" name="nb_personnes_sith">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recherche">
+                        <button type="submit">Ajouter au panier</button>   
+                    </div>
+            </form>    
         </div>
-        
-    
-        
-    
-       
-    </div>
         <footer>
             <ul class="bas-de-page">
                 <li><a href="#">Mentions légales</a></li>
@@ -46,8 +272,6 @@
                 <li><a href="../pageAdministrateur.php">Administrateur</a></li>
             </ul>
         </footer>
-    </section>
-
-    
+    </section>    
 </body>
 </html>

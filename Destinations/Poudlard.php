@@ -1,21 +1,19 @@
 <?php
 session_start();
 
-// Vérifier si l'utilisateur est connecté
+
 if (!isset($_SESSION['user'])) {
-    header("Location: PageSeconnecter.php"); // Rediriger si l'utilisateur n'est pas connecté
+    header("Location: PageSeconnecter.php"); 
     exit();
 }
 
-// Récupérer l'ID de l'utilisateur connecté
 $user_id = $_SESSION['user']['id'];
 
-// Fichier JSON pour stocker les options
+
 $file_path = '../options.json';
 
-// Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupérer les données du formulaire avec isset() pour éviter les erreurs
+  
     $hebergement_poudlard = isset($_POST['hebergement-poudlard']) ? $_POST['hebergement-poudlard'] : null;
     $hebergement_preau_lard = isset($_POST['hebergement-preaulard']) ? $_POST['hebergement-preaulard'] : null;
     $activites_poudlard = isset($_POST['activites_poudlard']) ? $_POST['activites_poudlard'] : []; // Activités Poudlard
@@ -34,7 +32,7 @@ $nb_personnes_honeydukes = isset($_POST['nb_personnes_honeydukes']) ? $_POST['nb
 
     $nb_personnes = [];
 
-// Puis vérifiez chaque activité et ajoutez le nombre de personnes uniquement si l'activité est sélectionnée
+// vérifie chaque activité ajoute le nombre de personnes uniquement si l'activité est sélectionnée
 if (in_array('sorts', $activites_poudlard)) {
     $nb_personnes['sorts'] = $nb_personnes_sort;
 }
@@ -54,7 +52,7 @@ if (in_array('honeydukes', $activites_preau_lard)) {
     $nb_personnes['honeydukes'] = $nb_personnes_honeydukes;
 }
 
-    // Structure des données à enregistrer
+    // données à enregistrer
     $user_choices = [
         'user_id' => $user_id,
         'hebergement_poudlard' => $hebergement_poudlard,
@@ -89,10 +87,10 @@ if (in_array('honeydukes', $activites_preau_lard)) {
         $existing_data = [$user_choices];
     }
 
-    // Enregistrer les données mises à jour dans le fichier JSON
+   
     file_put_contents($file_path, json_encode($existing_data, JSON_PRETTY_PRINT));
 
-    // Rediriger vers la page du panier
+  
     header('Location: ../PagePanier.php');
     exit();
 }
@@ -100,7 +98,7 @@ if (in_array('honeydukes', $activites_preau_lard)) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en"> <!---->
+<html lang="en"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

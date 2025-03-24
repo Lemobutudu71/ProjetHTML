@@ -1,9 +1,127 @@
+<?php
+session_start();
+
+
+if (!isset($_SESSION['user'])) {
+    header("Location: PageSeconnecter.php"); 
+    exit();
+}
+
+// Récupérer l'ID de l'utilisateur connecté
+$user_id = $_SESSION['user']['id'];
+
+// Fichier JSON pour stocker les options
+$file_path = '../options.json';
+
+// Vérifier si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupérer les données du formulaire avec isset() pour éviter les erreurs
+    $hebergement_winterfell = isset($_POST['hebergement_winterfell']) ? $_POST['hebergement_winterfell'] : null;
+    $hebergement_portreal = isset($_POST['hebergement_portreal']) ? $_POST['hebergement_portreal'] : null;
+    $hebergement_meereen = isset($_POST['hebergement_meereen']) ? $_POST['hebergement_meereen'] : null;
+
+    $activites_winterfell = isset($_POST['activites_winterfell']) ? $_POST['activites_winterfell'] : [];
+    $activites_portreal = isset($_POST['activites_portreal']) ? $_POST['activites_portreal'] : [];
+    $activites_meereen = isset($_POST['activites_meereen']) ? $_POST['activites_meereen'] : [];
+
+    $transport_portreal = isset($_POST['transport_portreal']) ? $_POST['transport_portreal'] : [];
+    $transport_meereen = isset($_POST['transport_meereen']) ? $_POST['transport_meereen'] : [];
+
+    // Récupérer les valeurs des nombres de personnes pour chaque activité
+    $nb_personnes_combat = isset($_POST['nb_personnes_combat']) ? $_POST['nb_personnes_combat'] : null;
+    $nb_personnes_chasse= isset($_POST['nb_personnes_chasse']) ? $_POST['nb_personnes_chasse'] : null;
+    $nb_personnes_mur = isset($_POST['nb_personnes_mur']) ? $_POST['nb_personnes_mur'] : null;
+    $nb_personnes_tournoi = isset($_POST['nb_personnes_tournoi']) ? $_POST['nb_personnes_tournoi'] : null;
+    $nb_personnes_trone = isset($_POST['nb_personnes_trone']) ? $_POST['nb_personnes_trone'] : null;
+    $nb_personnes_fleuve = isset($_POST['nb_personnes_fleuve']) ? $_POST['nb_personnes_fleuve'] : null;
+    $nb_personnes_dragons = isset($_POST['nb_personnes_dragons']) ? $_POST['nb_personnes_dragons'] : null;
+    $nb_personnes_gladiateur = isset($_POST['nb_personnes_gladiateur']) ? $_POST['nb_personnes_gladiateur'] : null;
+    $nb_personnes_marche = isset($_POST['nb_personnes_marche']) ? $_POST['nb_personnes_marche'] : null;
+
+    $nb_personnes = [];
+
+    // Ajouter le nombre de personnes pour chaque activité
+    if (in_array('combat', $activites_winterfell)) {
+        $nb_personnes['combat'] = $nb_personnes_combat;
+    }
+    if (in_array('chasse', $activites_winterfell)) {
+        $nb_personnes['chasse'] = $nb_personnes_chasse;
+    }
+    if (in_array('mur', $activites_winterfell)) {
+        $nb_personnes['mur'] = $nb_personnes_mur;
+    }
+    if (in_array('tournoi', $activites_portreal)) {
+        $nb_personnes['tournoi'] = $nb_personnes_tournoi;
+    }
+    if (in_array('trone', $activites_portreal)) {
+        $nb_personnes['trone'] = $nb_personnes_trone;
+    }
+    if (in_array('fleuve', $activites_portreal)) {
+        $nb_personnes['fleuve'] = $nb_personnes_fleuve;
+    }
+    if (in_array('dragons', $activites_meereen)) {
+        $nb_personnes['dragons'] = $nb_personnes_dragons;
+    }
+    if (in_array('gladiateur', $activites_meereen)) {
+        $nb_personnes['gladiateur'] = $nb_personnes_gladiateur;
+    }
+    if (in_array('marche', $activites_meereen)) {
+        $nb_personnes['marche'] = $nb_personnes_marche;
+    }
+
+    // Structure des données à enregistrer
+    $user_choices = [
+        'user_id' => $user_id,
+        'hebergement_winterfell' => $hebergement_winterfell,
+        'hebergement_portreal' => $hebergement_portreal,
+        'hebergement_meereen' => $hebergement_meereen,
+        'activites_winterfell' => $activites_winterfell,
+        'activites_portreal' => $activites_portreal,
+        'activites_meereen' => $activites_meereen,
+        'transport_portreal' => $transport_portreal,
+        'transport_meereen' => $transport_meereen,
+        'nb_personnes' => $nb_personnes,
+    ];
+
+    // Vérifier si le fichier existe et si des données existent déjà
+    if (file_exists($file_path)) {
+        // Lire les données existantes
+        $existing_data = json_decode(file_get_contents($file_path), true);
+
+        // Rechercher l'utilisateur avec l'ID et mettre à jour ses données
+        foreach ($existing_data as &$user_data) {
+            if ($user_data['user_id'] == $user_id) {
+                // Remplacer les anciennes données avec les nouvelles données
+                $user_data = $user_choices;
+                break;
+            }
+        }
+
+        // Si l'utilisateur n'existe pas, ajouter un nouveau
+        if (!isset($user_data)) {
+            $existing_data[] = $user_choices;
+        }
+
+    } else {
+        // Créer un tableau vide si le fichier n'existe pas encore
+        $existing_data = [$user_choices];
+    }
+
+    // Enregistrer les données mises à jour dans le fichier JSON
+    file_put_contents($file_path, json_encode($existing_data, JSON_PRETTY_PRINT));
+
+    // Rediriger vers la page du panier
+    header('Location: ../PagePanier.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MovieTrip</title>
+    <title>Game of Thrones </title>
     <link rel="stylesheet" href="../CSS.css">
 </head>
 <body>
@@ -18,25 +136,226 @@
             <ul class="menu">
                 <li><a href="../PageAccueil.php">Accueil</a></li>
                 <li><a href="../PageAccueil2.php">Rechercher</a></li>
-                <li><a href="../PageInscription.php">Se connecter</a></li>
+                <li><a href="../PagePanier.php">Mon panier</a></li>
                 <li><a href="../PageProfil.php">Profil</a></li>
             </ul>
         </header>
         
-        <div class="Page-Accueil-text">
-            <h2 class="Titre">Westeros</h2>
-            <p>
-                Voyagez à travers l'univers de Game of Thrones en visitant Westeros, 
-                une terre de complots et de batailles épiques. 
-                Peut-être aurez-vous la chance de vous asseoir sur le Trône de Fer… ou de croiser un dragon!
-            </p>
-        
-       
+        <div class="Page-Accueil2-text">
+            <div class="gallerie-imgDestinations">
+                <div class="image-overlay"></div>
+                <img src="../images/GOT.webp" alt="Game of Thrones" >
+                <div class="Lieuxdestinations">Westeros</div>
+            </div>
+
+            <p class="description">Voyagez à travers les royaumes de Westeros : Explorez **Winterfell**, assistez à des combats au **Tournoi de Port-Réal**, et domptez des **dragons à Meereen** !</p>
+
+            <div class="buttons-container">
+                <a href="#winterfell" class="Page-Accueil-button">JOUR 1-4 : Winterfell</a>
+                <a href="#portreal" class="Page-Accueil-button">JOUR 5-7 : Port-Réal</a>
+                <a href="#meereen" class="Page-Accueil-button">JOUR 7-10 : Meereen</a>
+            </div>
+
+        <form action="Westeros.php" method="POST">
+          
+            <div id="winterfell" class="section">
+                <h2>JOUR 1-4 : Winterfell</h2>
+                <p class="description">Séjournez dans le château ancestral des Stark et participez à l’entraînement militaire de l’armée du Nord. Testez vos compétences dans un combat à l’épée et apprenez les secrets des Stark.</p>
+
+                <div class="options-group">
+                    <label for="hebergement_winterfell">Hébergement:</label>
+                    <select id="hebergement_winterfell" name="hebergement_winterfell">
+                        <option value="chateau_stark">Château Stark</option>
+                        <option value="chateaunoir">Chateaunoir</option>
+                        <option value="auberge">Auberge</option>
+                    </select>
+                </div>
+                <div class="options-group">
+                        <label for="activites-toggle" class="activites-label">Activités: 
+                            <span class="arrow">&#9660;</span>  
+                        </label>
+                        <input type="checkbox" id="activites-toggle" class="activites-toggle">
+                        
+                        <div class="activites-options">
+                            <div>
+                               
+                                <input type="checkbox" id="combat" name="activites_winterfell[]" value="combat">
+                                <label for="combat">Entraînement au combat</label>
+
+                                <select id="nb_personnes_combat" name="nb_personnes_combat">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="chasse" name="activites_winterfell[]" value="chasse">
+                                <label for="chasse">Chasse avec les loups</label>
+                                
+                                <select id="nb_personnes_chasse" name="nb_personnes_chasse">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="mur" name="activites_winterfell[]" value="mur">
+                                <label for="mur">Visite du Mur</label>
+                                
+                                <select id="nb_personnes_mur" name="nb_personnes_mur">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-group">
+                        <label for="transport_portreal">Transport pour la prochaine étape:</label>
+                        <select id="transport_portreal" name="transport_portreal">
+                            <option value="cheavaux">Chevaux</option>
+                            <option value="pieds">A pieds</option>
+                            <option value="caleche">Calèche</option>
+                        </select>
+                    </div>
+                            
+            </div>
+
+            <!-- Port-Réal -->
+            <div id="portreal" class="section">
+                <h2>JOUR 5-7 : Port-Réal</h2>
+                <p class="description">Explorez la capitale de Westeros, assistez à un tournoi dans l’arène et faites partie des intrigues royales.</p>
+
+                <div class="options-group">
+                    <label for="hebergement_portreal">Hébergement:</label>
+                    <select id="hebergement_portreal" name="hebergement_portreal">
+                        <option value="donjon_royal">Donjon Royal</option>
+                        <option value="auberge_marchands">Auberge des Marchands</option>
+                        <option value="septuaire">Septuaire de Baelor</option>
+                        <option value="bordel">Bordel</option>
+                    </select>
+                </div>
+
+                <div class="options-group">
+                        <label for="activites-toggle_port" class="activites-label">Activités: 
+                            <span class="arrow">&#9660;</span>  
+                        </label>
+                        <input type="checkbox" id="activites-toggle_port" class="activites-toggle">
+                        
+                        <div class="activites-options">
+                            <div>
+                                
+                                <input type="checkbox" id="tournoi" name="activites_portreal[]" value="tournoi">
+                                <label for="tournoi">Tournoi de combat</label>
+
+                                <select id="nb_personnes_tournoi" name="nb_personnes_tournoi">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="trone" name="activites_portreal[]" value="trone">
+                                <label for="trone">Photos sur le Trône de Fer</label>
+                                
+                                <select id="nb_personnes_trone" name="nb_personnes_trone">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="fleuve" name="activites_portreal[]" value="fleuve">
+                                <label for="fleuve">Balade en bateau sur le Fleuve Noir</label>
+                                
+                                <select id="nb_personnes_fleuve" name="nb_personnes_fleuve">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="options-group">
+                        <label for="transport_meereen">Transport pour la prochaine étape:</label>
+                        <select id="transport_meereen" name="transport_meereen">
+                            <option value="bateau">Bâteau</option>
+                            <option value="dos_dragon">Dragons</option>
+                        </select>
+                    </div>
+
+            </div>
+
+            <!-- Meereen -->
+            <div id="meereen" class="section">
+                <h2>JOUR 7-10 : Meereen</h2>
+                <p class="description">Visitez la cité des esclaves libérés, apprenez à dompter les dragons et explorez les ruines des anciennes citadelles.</p>
+
+                <div class="options-group">
+                    <label for="hebergement_meereen">Hébergement:</label>
+                    <select id="hebergement_meereen" name="hebergement_meereen">
+                        <option value="pyramide">Pyramide de Meereen</option>
+                        <option value="caverne_dragons">Caverne des Dragons</option>
+                        <option value="villa">Villa des nobles d'Essos</option>
+                    </select>
+                </div>
+                <div class="options-group">
+                        <label for="activites-toggle_meereen" class="activites-label">Activités: 
+                            <span class="arrow">&#9660;</span>  
+                        </label>
+                        <input type="checkbox" id="activites-toggle_meereen" class="activites-toggle">
+                        
+                        <div class="activites-options">
+                            <div>
+                                
+                                <input type="checkbox" id="dragons" name="activites_meereen[]" value="dragons">
+                                <label for="dragons">Dompter des dragons</label>
+
+                                <select id="nb_personnes_dragons" name="nb_personnes_dragons">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="gladiateur" name="activites_meereen[]" value="gladiateur">
+                                <label for="gladiateur">Assistez aux combats de gladiateurs</label>
+                                
+                                <select id="nb_personnes_gladiateur" name="nb_personnes_gladiateur">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="marche" name="activites_meereen[]" value="marche">
+                                <label for="marche">Marché d’Essos</label>
+                                <select id="nb_personnes_marche" name="nb_personnes_marche">
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+          
+            <div class="recherche">
+                <button type="submit">Ajouter au panier</button>   
+            </div>
+        </form>    
+
         </div>
-        
-    
-       
-    </div>
         <footer>
             <ul class="bas-de-page">
                 <li><a href="#">Mentions légales</a></li>
@@ -45,8 +364,6 @@
                 <li><a href="../pageAdministrateur.php">Administrateur</a></li>
             </ul>
         </footer>
-    </section>
-
-    
+    </section>    
 </body>
 </html>

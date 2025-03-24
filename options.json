@@ -1,18 +1,24 @@
 [
     {
         "user_id": "67e1306025b5f4.22789385",
-        "hebergement_poudlard": "serpentard",
-        "hebergement_preau_lard": "cottage-sorcier",
-        "activites_poudlard": [
-            "sorts"
+        "hebergement_winterfell": "chateaunoir",
+        "hebergement_portreal": "septuaire",
+        "hebergement_meereen": "villa",
+        "activites_winterfell": [
+            "combat"
         ],
-        "activites_preau_lard": [
-            "degustation"
+        "activites_portreal": [
+            "trone"
         ],
-        "transport_preaulard": "poudre",
+        "activites_meereen": [
+            "gladiateur"
+        ],
+        "transport_portreal": "caleche",
+        "transport_meereen": "dos_dragon",
         "nb_personnes": {
-            "sorts": "4",
-            "degustation": "3"
+            "combat": "3",
+            "trone": "3",
+            "gladiateur": "2"
         }
     }
 ]
