@@ -20,15 +20,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hebergement_preau_lard = isset($_POST['hebergement-preaulard']) ? $_POST['hebergement-preaulard'] : null;
     $activites_poudlard = isset($_POST['activites_poudlard']) ? $_POST['activites_poudlard'] : []; // Activités Poudlard
     $activites_preau_lard = isset($_POST['activites_preaulard']) ? $_POST['activites_preaulard'] : []; // Activités Pré-au-Lard
-    $transport_préaulard = isset($_POST['transport_preaulard']) ? $_POST['transport_preaulard'] : null; // Transport
+    $transport_preaulard = isset($_POST['transport_preaulard']) ? $_POST['transport_preaulard'] : null; // Transport
 
-    // Nombre de personnes pour chaque activité
-    $nb_personnes_sort = isset($_POST['nb_personnes_sort']) ? $_POST['nb_personnes_sort'] : null;
-    $nb_personnes_q = isset($_POST['nb_personnes_quid']) ? $_POST['nb_personnes_quid'] : null;
-    $nb_personnes_hy = isset($_POST['nb_personnes_hy']) ? $_POST['nb_personnes_hy'] : null;
-    $nb_personnes_zonko = isset($_POST['nb_personnes_visite']) ? $_POST['nb_personnes_visite'] : null;
-    $nb_personnes_degustation = isset($_POST['nb_personnes_degustation']) ? $_POST['nb_personnes_degustation'] : null;
-    $nb_personnes_honeydukes = isset($_POST['nb_personnes_honeydukes']) ? $_POST['nb_personnes_honeydukes'] : null;
+
+
+// Récupérer les valeurs des nombres de personnes pour chaque activité
+$nb_personnes_sort = isset($_POST['nb_personnes_sort']) ? $_POST['nb_personnes_sort'] : null;
+$nb_personnes_quid = isset($_POST['nb_personnes_quid']) ? $_POST['nb_personnes_quid'] : null;
+$nb_personnes_hy = isset($_POST['nb_personnes_hy']) ? $_POST['nb_personnes_hy'] : null;
+$nb_personnes_visite = isset($_POST['nb_personnes_visite']) ? $_POST['nb_personnes_visite'] : null;
+$nb_personnes_degustation = isset($_POST['nb_personnes_degustation']) ? $_POST['nb_personnes_degustation'] : null;
+$nb_personnes_honeydukes = isset($_POST['nb_personnes_honeydukes']) ? $_POST['nb_personnes_honeydukes'] : null;
+
+    $nb_personnes = [];
+
+// Puis vérifiez chaque activité et ajoutez le nombre de personnes uniquement si l'activité est sélectionnée
+if (in_array('sorts', $activites_poudlard)) {
+    $nb_personnes['sorts'] = $nb_personnes_sort;
+}
+if (in_array('quidditch', $activites_poudlard)) {
+    $nb_personnes['quidditch'] =  $nb_personnes_quid;
+}
+if (in_array('hyppogriffe', $activites_poudlard)) {
+    $nb_personnes['hyppogriffe'] = $nb_personnes_hy;
+}
+if (in_array('zonko', $activites_preau_lard)) {
+    $nb_personnes['zonko'] = $nb_personnes_visite;
+}
+if (in_array('degustation', $activites_preau_lard)) {
+    $nb_personnes['degustation'] = $nb_personnes_degustation;
+}
+if (in_array('honeydukes', $activites_preau_lard)) {
+    $nb_personnes['honeydukes'] = $nb_personnes_honeydukes;
+}
 
     // Structure des données à enregistrer
     $user_choices = [
@@ -37,15 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'hebergement_preau_lard' => $hebergement_preau_lard,
         'activites_poudlard' => $activites_poudlard,
         'activites_preau_lard' => $activites_preau_lard,
-        'transport_préaulard' => $transport_préaulard,
-        'nb_personnes' => [
-            'sorts' => $nb_personnes_sort,
-            'quidditch' => $nb_personnes_q,
-            'hyppogriffe' => $nb_personnes_hy,
-            'zonko' => $nb_personnes_zonko,
-            'degustation' => $nb_personnes_degustation,
-            'honeydukes' => $nb_personnes_honeydukes,
-        ]
+        'transport_preaulard' => $transport_preaulard,
+        'nb_personnes' => $nb_personnes,
     ];
 
     // Vérifier si le fichier existe et si des données existent déjà
@@ -155,7 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     
                     <div class="activites-options">
                         <div>
-                            <input type="checkbox" id="sorts" name="activites_poudlard" value="sorts">
+                            <input type="checkbox" id="sorts" name="activites_poudlard[]" value="sorts">
                             <label for="sorts">Cours de sortilèges</label>
                             
                             <select id="nb_personnes_sort" name="nb_personnes_sort">
@@ -167,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             
                         </div>
                         <div>
-                            <input type="checkbox" id="quidditch" name="activites_poudlard" value="quidditch">
+                            <input type="checkbox" id="quidditch" name="activites_poudlard[]" value="quidditch">
                             <label for="quidditch">Match de quidditch</label>
                             
                                 
@@ -180,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             
                         </div>
                         <div>
-                            <input type="checkbox" id="hyppogriffe" name="activites_poudlard" value="hyppogriffe">
+                            <input type="checkbox" id="hyppogriffe" name="activites_poudlard[]" value="hyppogriffe">
                             <label for="hyppogriffe">Dressage d'hyppogriffe</label>
                                 <select id="nb_personnes_hy" name="nb_personnes_hy" >
                                     <option value="1">1 personne</option>
@@ -229,7 +246,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     
                     <div class="activites-options">
                         <div>
-                            <input type="checkbox" id="zonko" name="activites_preaulard" value="zonko">
+                            <input type="checkbox" id="zonko" name="activites_preaulard[]" value="zonko">
                             <label for="zonko">Visite de la boutique de Zonko</label>
                             
                             <select id="nb_personnes_visite" name="nb_personnes_visite">
@@ -241,7 +258,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             
                         </div>
                         <div>
-                            <input type="checkbox" id="degustation" name="activites_preaulard" value="degustation">
+                            <input type="checkbox" id="degustation" name="activites_preaulard[]" value="degustation">
                             <label for="degustation">Dégustation de Bièraubeurre</label>
                             
                                 
@@ -254,7 +271,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             
                         </div>
                         <div>
-                            <input type="checkbox" id="honeydukes" name="activites_preaulard" value="honeydukes">
+                            <input type="checkbox" id="honeydukes" name="activites_preaulard[]" value="honeydukes">
                             <label for="honeydukes">Boutique de Glacés de Honeydukes</label>
                                 <select id="nb_personnes_honeydukes" name="nb_personnes_honeydukes" >
                                     <option value="1">1 personne</option>
@@ -267,8 +284,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
             </div>
-            <div class="buttons-container">
-                <button type="submit" class="Page-Accueil-button">Ajouter au panier</button>   
+            <div class="recherche">
+                <button type="submit">Ajouter au panier</button>   
             </div>
         </form>    
             

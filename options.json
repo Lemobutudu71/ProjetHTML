@@ -1,18 +1,18 @@
 [
     {
         "user_id": "67e1306025b5f4.22789385",
-        "hebergement_poudlard": "griffondor",
-        "hebergement_preau_lard": "pudifoot",
-        "activites_poudlard": [],
-        "activites_preau_lard": "degustation",
-        "transport_pr\u00e9aulard": "poudre",
+        "hebergement_poudlard": "serpentard",
+        "hebergement_preau_lard": "cottage-sorcier",
+        "activites_poudlard": [
+            "sorts"
+        ],
+        "activites_preau_lard": [
+            "degustation"
+        ],
+        "transport_preaulard": "poudre",
         "nb_personnes": {
-            "sorts": "1",
-            "quidditch": "1",
-            "hyppogriffe": "1",
-            "zonko": "1",
-            "degustation": "3",
-            "honeydukes": "1"
+            "sorts": "4",
+            "degustation": "3"
         }
     }
 ]
