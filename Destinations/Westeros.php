@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (in_array('marche', $activites_meereen)) {
         $nb_personnes['marche'] = $nb_personnes_marche;
     }
-
+$etapes = ["Winterfell", "Port-Real", "Meereen"];
     // Structure des données à enregistrer
     $user_choices = [
         'user_id' => $user_id,
@@ -89,7 +89,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'prix_total' => $prix_total,
         'nb_personnes_voyage' => $nb_personnes_voyage,
         'departure_date' => $departure_date,
-        'destination' => 'Westeros'
+        'destination' => 'Westeros',
+        "nb_etapes"=> 3,
+        "etapes"=> $etapes
     ];
 
     // Vérifier si le fichier existe et si des données existent déjà
@@ -157,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="Lieuxdestinations">Westeros</div>
             </div>
 
-            <p class="description">Voyagez à travers les royaumes de Westeros : Explorez **Winterfell**, assistez à des combats au **Tournoi de Port-Réal**, et domptez des **dragons à Meereen** !</p>
+            <p class="description">Préparez-vous à traverser des terres gelées, des châteaux de pierre, des marchés animés, et même à prendre place sur le Trône de Fer… si vous surviviez à l’aventure.  Enfilez vos bottes, préparez vos épées et rejoignez-nous pour un périple inoubliable dans les royaumes les plus sauvages et passionnants de l’histoire des séries télé !</p>
 
             <div class="buttons-container">
                 <a href="#winterfell" class="Page-Accueil-button">JOUR 1-4 : Winterfell</a>
@@ -180,7 +182,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           
             <div id="winterfell" class="section">
                 <h2>JOUR 1-4 : Winterfell</h2>
-                <p class="description">Séjournez dans le château ancestral des Stark et participez à l’entraînement militaire de l’armée du Nord. Testez vos compétences dans un combat à l’épée et apprenez les secrets des Stark.</p>
+                <p class="description">Bienvenue à Winterfell, là où le froid ne s’arrête jamais, mais l'hospitalité des Stark est toujours au rendez-vous ! Ici, vous allez apprendre à combattre comme un vrai guerrier du Nord, ou au moins à survivre à une session de « combat à l'épée ». Vous pensiez que les loups géants étaient mignons ? Détrompez-vous, ces bêtes ont de grandes dents et une envie de vengeance !</p>
 
                 <div class="options-group">
                     <label for="hebergement_winterfell">Hébergement:</label>
@@ -247,7 +249,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <!-- Port-Réal -->
             <div id="portreal" class="section">
                 <h2>JOUR 5-7 : Port-Réal</h2>
-                <p class="description">Explorez la capitale de Westeros, assistez à un tournoi dans l’arène et faites partie des intrigues royales.</p>
+                <p class="description">ienvenue à Port-Réal, la capitale de Westeros, où les intrigues royales et les complots sont aussi nombreux que les grains de sable sur la plage (mais beaucoup moins agréables). C’est aussi l’endroit idéal pour boire une bière (ou cinq) après une journée bien remplie d’intrigues et de jeux de pouvoir. Attention à ne pas trop vous attacher à vos alliés... tout peut changer en un clin d’œil !</p>
 
                 <div class="options-group">
                     <label for="hebergement_portreal">Hébergement:</label>
@@ -315,7 +317,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <!-- Meereen -->
             <div id="meereen" class="section">
                 <h2>JOUR 7-10 : Meereen</h2>
-                <p class="description">Visitez la cité des esclaves libérés, apprenez à dompter les dragons et explorez les ruines des anciennes citadelles.</p>
+                <p class="description">Bienvenue à Meereen, la cité des esclaves libérés. Si vous avez un peu de temps libre, ne manquez pas l'occasion de visiter la Caverne des Dragons pour quelques photos souvenir. Mais, attention, ne regardez pas trop les dragons de près, car même un selfie peut être risqué si vous êtes trop près d'un de ces géants volants ! Vous repartirez avec des souvenirs (et probablement quelques cicatrices aussi).</p>
 
                 <div class="options-group">
                     <label for="hebergement_meereen">Hébergement:</label>
