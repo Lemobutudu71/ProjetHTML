@@ -19,6 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $activites_etoile = isset($_POST['activites_etoile']) ? $_POST['activites_etoile'] : []; 
     $hebergement_etoile = isset($_POST['hebergement_etoile']) ? $_POST['hebergement_etoile'] : []; 
     $transport_etoile = isset($_POST['transport_etoile']) ? $_POST['transport_etoile'] : null; 
+    $departure_date = isset($_POST['departure_date']) ? $_POST['departure_date'] : null; 
+
 
     $nb_personnes_jedi = isset($_POST['nb_personnes_jedi']) ? $_POST['nb_personnes_jedi'] : null;
     $nb_personnes_speeder = isset($_POST['nb_personnes_speeder']) ? $_POST['nb_personnes_speeder'] : null;
@@ -26,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nb_personnes_tie = isset($_POST['nb_personnes_tie']) ? $_POST['nb_personnes_tie'] : null;
     $nb_personnes_tir = isset($_POST['nb_personnes_tir']) ? $_POST['nb_personnes_tir'] : null;
     $nb_personnes_sith = isset($_POST['nb_personnes_sith']) ? $_POST['nb_personnes_sith'] : null;
+    $nb_personnes_voyage = isset($_POST['nb_personnes_voyage']) ? $_POST['nb_personnes_voyage'] : null;
     $nb_personnes = [];
 
     // Vérifiez chaque activité et ajoutez le nombre de personnes uniquement si l'activité est sélectionnée
@@ -48,6 +51,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nb_personnes['sith'] = $nb_personnes_psith;
     }
 
+$prix =3578;
+$prix_total = $prix * $nb_personnes_voyage;
+
     // Structure des données à enregistrer
     $user_choices = [
         'user_id' => $user_id,
@@ -57,6 +63,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'activites_etoile' => $activites_etoile,
         'transport_etoile' => $transport_etoile,
         'nb_personnes' => $nb_personnes,
+        'prix_total' => $prix_total,
+        'nb_personnes_voyage' => $nb_personnes_voyage,
+        'departure_date' => $departure_date,
+        'destination' => 'Tatooine'
     ];
 
     // Vérifier si le fichier existe et si des données existent déjà
@@ -135,6 +145,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <form action="Tatooine.php" method="POST">
+                <div class="options-group">
+                    <label for="departure-date">Date de départ:</label>
+                    <input type="date" id="departure-date" name="departure_date" required>
+                    <label for="nb_voyage"><br>Nombre de personnes pour le voyage</label>
+                            <select id="nb_personnes_voyage" name="nb_personnes_voyage">
+                                <option value="1">1 personne</option>
+                                <option value="2">2 personnes</option>
+                                <option value="3">3 personnes</option>
+                                <option value="4">4 personnes</option>
+                            </select>
+                </div>
                 <div id="tatooine" class="section">
                     <h2>JOUR 1-4 : Tatooine</h2>
                     <p class="description">Bienvenue sur Tatooine, le désert intergalactique où tout peut arriver... et souvent, ça arrive !

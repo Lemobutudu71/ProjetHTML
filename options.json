@@ -1,24 +1,18 @@
 [
     {
         "user_id": "67e1306025b5f4.22789385",
-        "hebergement_winterfell": "chateaunoir",
-        "hebergement_portreal": "septuaire",
-        "hebergement_meereen": "villa",
-        "activites_winterfell": [
-            "combat"
-        ],
-        "activites_portreal": [
-            "trone"
-        ],
-        "activites_meereen": [
-            "gladiateur"
-        ],
-        "transport_portreal": "caleche",
-        "transport_meereen": "dos_dragon",
-        "nb_personnes": {
-            "combat": "3",
-            "trone": "3",
-            "gladiateur": "2"
-        }
+        "hebergement_winterfell": "chateau_stark",
+        "hebergement_portreal": "donjon_royal",
+        "hebergement_meereen": "pyramide",
+        "activites_winterfell": [],
+        "activites_portreal": [],
+        "activites_meereen": [],
+        "transport_portreal": "cheavaux",
+        "transport_meereen": "bateau",
+        "nb_personnes": [],
+        "prix_total": 15900,
+        "nb_personnes_voyage": "3",
+        "departure_date": "2025-03-28",
+        "destination": "Westeros"
     }
 ]

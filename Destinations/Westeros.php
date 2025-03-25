@@ -26,6 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $transport_portreal = isset($_POST['transport_portreal']) ? $_POST['transport_portreal'] : [];
     $transport_meereen = isset($_POST['transport_meereen']) ? $_POST['transport_meereen'] : [];
+    $departure_date = isset($_POST['departure_date']) ? $_POST['departure_date'] : null; 
+
 
     // Récupérer les valeurs des nombres de personnes pour chaque activité
     $nb_personnes_combat = isset($_POST['nb_personnes_combat']) ? $_POST['nb_personnes_combat'] : null;
@@ -37,8 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nb_personnes_dragons = isset($_POST['nb_personnes_dragons']) ? $_POST['nb_personnes_dragons'] : null;
     $nb_personnes_gladiateur = isset($_POST['nb_personnes_gladiateur']) ? $_POST['nb_personnes_gladiateur'] : null;
     $nb_personnes_marche = isset($_POST['nb_personnes_marche']) ? $_POST['nb_personnes_marche'] : null;
-
+    $nb_personnes_voyage = isset($_POST['nb_personnes_voyage']) ? $_POST['nb_personnes_voyage'] : null;
     $nb_personnes = [];
+
+    $prix =5300;
+    $prix_total = $prix * $nb_personnes_voyage;
 
     // Ajouter le nombre de personnes pour chaque activité
     if (in_array('combat', $activites_winterfell)) {
@@ -81,6 +86,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'transport_portreal' => $transport_portreal,
         'transport_meereen' => $transport_meereen,
         'nb_personnes' => $nb_personnes,
+        'prix_total' => $prix_total,
+        'nb_personnes_voyage' => $nb_personnes_voyage,
+        'departure_date' => $departure_date,
+        'destination' => 'Westeros'
     ];
 
     // Vérifier si le fichier existe et si des données existent déjà
@@ -157,6 +166,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
         <form action="Westeros.php" method="POST">
+            <div class="options-group">
+                <label for="departure-date">Date de départ:</label>
+                <input type="date" id="departure-date" name="departure_date" required>
+                <label for="nb_voyage"><br>Nombre de personnes pour le voyage</label>
+                    <select id="nb_personnes_voyage" name="nb_personnes_voyage">
+                        <option value="1">1 personne</option>
+                        <option value="2">2 personnes</option>
+                        <option value="3">3 personnes</option>
+                        <option value="4">4 personnes</option>
+                    </select>
+            </div>
           
             <div id="winterfell" class="section">
                 <h2>JOUR 1-4 : Winterfell</h2>

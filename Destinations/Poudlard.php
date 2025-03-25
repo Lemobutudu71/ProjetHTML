@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $activites_poudlard = isset($_POST['activites_poudlard']) ? $_POST['activites_poudlard'] : []; // Activités Poudlard
     $activites_preau_lard = isset($_POST['activites_preaulard']) ? $_POST['activites_preaulard'] : []; // Activités Pré-au-Lard
     $transport_preaulard = isset($_POST['transport_preaulard']) ? $_POST['transport_preaulard'] : null; // Transport
-
+    $departure_date = isset($_POST['departure_date']) ? $_POST['departure_date'] : null; 
 
 
 // Récupérer les valeurs des nombres de personnes pour chaque activité
@@ -29,7 +29,7 @@ $nb_personnes_hy = isset($_POST['nb_personnes_hy']) ? $_POST['nb_personnes_hy'] 
 $nb_personnes_visite = isset($_POST['nb_personnes_visite']) ? $_POST['nb_personnes_visite'] : null;
 $nb_personnes_degustation = isset($_POST['nb_personnes_degustation']) ? $_POST['nb_personnes_degustation'] : null;
 $nb_personnes_honeydukes = isset($_POST['nb_personnes_honeydukes']) ? $_POST['nb_personnes_honeydukes'] : null;
-
+$nb_personnes_voyage = isset($_POST['nb_personnes_voyage']) ? $_POST['nb_personnes_voyage'] : null;
     $nb_personnes = [];
 
 // vérifie chaque activité ajoute le nombre de personnes uniquement si l'activité est sélectionnée
@@ -52,6 +52,9 @@ if (in_array('honeydukes', $activites_preau_lard)) {
     $nb_personnes['honeydukes'] = $nb_personnes_honeydukes;
 }
 
+$prix = 3666;
+$prix_total = $prix * $nb_personnes_voyage; 
+
     // données à enregistrer
     $user_choices = [
         'user_id' => $user_id,
@@ -61,6 +64,10 @@ if (in_array('honeydukes', $activites_preau_lard)) {
         'activites_preau_lard' => $activites_preau_lard,
         'transport_preaulard' => $transport_preaulard,
         'nb_personnes' => $nb_personnes,
+        'nb_personnes_voyage' => $nb_personnes_voyage,
+        'destination' => 'Poudlard',
+        'departure_date' => $departure_date,
+        'prix_total' => $prix_total
     ];
 
     // Vérifier si le fichier existe et si des données existent déjà
@@ -117,7 +124,7 @@ if (in_array('honeydukes', $activites_preau_lard)) {
             <ul class="menu">
                 <li><a href="../PageAccueil.php">Accueil</a></li>
                 <li><a href="../PageAccueil2.php">Rechercher</a></li>
-                <li><a href="../PagePanier.php"></a></li>
+                <li><a href="../PagePanier.php">Mon panier</a></li>
                 <li><a href="../PageProfil.php">Profil</a></li>
             </ul>
         </header>
@@ -143,6 +150,18 @@ if (in_array('honeydukes', $activites_preau_lard)) {
             </div>
         
         <form action="Poudlard.php" method="POST">
+
+            <div class="options-group">
+                <label for="departure-date">Date de départ:</label>
+                <input type="date" id="departure-date" name="departure_date" required>
+                <label for="nb_voyage"><br>Nombre de personnes pour le voyage</label>
+                        <select id="nb_personnes_voyage" name="nb_personnes_voyage">
+                            <option value="1">1 personne</option>
+                            <option value="2">2 personnes</option>
+                            <option value="3">3 personnes</option>
+                            <option value="4">4 personnes</option>
+                        </select>
+            </div>
             <div id="poudlard" class="section">
                 <h2>JOUR 1-4 : Poudlard</h2>
                  
