@@ -65,15 +65,16 @@
         ]
       }
     },
+
     "Poudlard": {
       "Poudlard": {
-        "hebergement": {
+        "hebergements": {
           "serpentard": "Chambre Serpentard",
           "griffondor": "Chambre Griffondor",
           "serdaigle": "Chambre Serdaigle",
           "poufsoufle": "Chambre Poufsoufle"
         },
-        "transport": {
+        "transports": {
           "poudre": "Poudre de cheminette",
           "balais": "Balai Volant",
           "portoloin": "Portoloin",
@@ -92,7 +93,7 @@
         ]
       },
       "PreauLard": {
-        "hebergement": {
+        "hebergements": {
           "sanglier": "La Tête de Sanglier",
           "cottage-sorcier": "Le Cottage des Sorciers",
           "cabane-hurlante": "La Cabane Hurlante",
@@ -111,6 +112,7 @@
         ]
       }
     },
+
     "Tatooine": {
       "Tatooine": {
         "hebergements": {
