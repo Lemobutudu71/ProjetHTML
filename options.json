@@ -1,27 +1,35 @@
 [
     {
         "user_id": "67e1306025b5f4.22789385",
-        "hebergement_poudlard": "serdaigle",
-        "hebergement_preau_lard": "cottage-sorcier",
+        "hebergement_poudlard": "griffondor",
+        "hebergement_preaulard": "cabane-hurlante",
         "activites_poudlard": [
-            "quidditch"
+            "sorts",
+            "quidditch",
+            "hyppogriffe"
         ],
-        "activites_preau_lard": [
-            "degustation"
+        "activites_preaulard": [
+            "zonko",
+            "degustation",
+            "honeydukes"
         ],
-        "transport_preaulard": null,
+        "transport_poudlard": "portoloin",
         "nb_personnes": {
-            "quidditch": "3",
-            "degustation": "4"
+            "sorts": "1",
+            "quidditch": "1",
+            "hyppogriffe": "1",
+            "zonko": "1",
+            "degustation": "1",
+            "honeydukes": "1"
         },
-        "nb_personnes_voyage": "3",
+        "nb_personnes_voyage": "1",
         "destination": "Poudlard",
         "departure_date": "2025-03-28",
-        "prix_total": 10998,
+        "prix_total": 3666,
         "nb_etapes": 2,
         "etapes": [
             "Poudlard",
-            "Pre-au-Lard"
+            "PreauLard"
         ]
     }
 ]

@@ -1,7 +1,6 @@
 <?php
 session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user'])) {
@@ -38,6 +37,8 @@ if (file_exists($options_file)) {
 if (file_exists($etapes_file)) {
     $etapes_data = json_decode(file_get_contents($etapes_file), true);
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -164,6 +165,11 @@ if (file_exists($etapes_file)) {
                     
                     <div class="actions-panier">
                         <button class="button">Procéder au paiement</button>
+                    </div>
+                    <div class="actions-panier">
+                        <form>
+                            <input type="button" class='button' value="revenir à la page précédente" onclick="history.go(-1)">
+                        </form>
                     </div>
                 </div>
             <?php else: ?>
