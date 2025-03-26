@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 if (!isset($_SESSION['user'])) {
     header("Location: PageSeconnecter.php"); 
     exit();
@@ -9,99 +8,94 @@ if (!isset($_SESSION['user'])) {
 
 $user_id = $_SESSION['user']['id'];
 
-
 $file_path = '../options.json';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  
-    $hebergement_poudlard = isset($_POST['hebergement-poudlard']) ? $_POST['hebergement-poudlard'] : null;
-    $hebergement_preau_lard = isset($_POST['hebergement-preaulard']) ? $_POST['hebergement-preaulard'] : null;
-    $activites_poudlard = isset($_POST['activites_poudlard']) ? $_POST['activites_poudlard'] : []; // Activités Poudlard
-    $activites_preau_lard = isset($_POST['activites_preaulard']) ? $_POST['activites_preaulard'] : []; // Activités Pré-au-Lard
-    $transport_preaulard = isset($_POST['transport_preaulard']) ? $_POST['transport_preaulard'] : null; // Transport
+    // Ensure all form fields are captured
+    $hebergement_poudlard = isset($_POST['hebergement_poudlard']) ? $_POST['hebergement_poudlard'] : null;
+    $hebergement_preaulard = isset($_POST['hebergement_preaulard']) ? $_POST['hebergement_preaulard'] : null;
+    $activites_poudlard = isset($_POST['activites_poudlard']) ? $_POST['activites_poudlard'] : []; 
+    $activites_preaulard = isset($_POST['activites_preaulard']) ? $_POST['activites_preaulard'] : []; 
+    $transport_poudlard = isset($_POST['transport_poudlard']) ? $_POST['transport_poudlard'] : null; 
     $departure_date = isset($_POST['departure_date']) ? $_POST['departure_date'] : null; 
 
-
-// Récupérer les valeurs des nombres de personnes pour chaque activité
-$nb_personnes_sort = isset($_POST['nb_personnes_sort']) ? $_POST['nb_personnes_sort'] : null;
-$nb_personnes_quid = isset($_POST['nb_personnes_quid']) ? $_POST['nb_personnes_quid'] : null;
-$nb_personnes_hy = isset($_POST['nb_personnes_hy']) ? $_POST['nb_personnes_hy'] : null;
-$nb_personnes_visite = isset($_POST['nb_personnes_visite']) ? $_POST['nb_personnes_visite'] : null;
-$nb_personnes_degustation = isset($_POST['nb_personnes_degustation']) ? $_POST['nb_personnes_degustation'] : null;
-$nb_personnes_honeydukes = isset($_POST['nb_personnes_honeydukes']) ? $_POST['nb_personnes_honeydukes'] : null;
-$nb_personnes_voyage = isset($_POST['nb_personnes_voyage']) ? $_POST['nb_personnes_voyage'] : null;
+    // Capture number of people for each activity
     $nb_personnes = [];
 
-// vérifie chaque activité ajoute le nombre de personnes uniquement si l'activité est sélectionnée
-if (in_array('sorts', $activites_poudlard)) {
-    $nb_personnes['sorts'] = $nb_personnes_sort;
-}
-if (in_array('quidditch', $activites_poudlard)) {
-    $nb_personnes['quidditch'] =  $nb_personnes_quid;
-}
-if (in_array('hyppogriffe', $activites_poudlard)) {
-    $nb_personnes['hyppogriffe'] = $nb_personnes_hy;
-}
-if (in_array('zonko', $activites_preau_lard)) {
-    $nb_personnes['zonko'] = $nb_personnes_visite;
-}
-if (in_array('degustation', $activites_preau_lard)) {
-    $nb_personnes['degustation'] = $nb_personnes_degustation;
-}
-if (in_array('honeydukes', $activites_preau_lard)) {
-    $nb_personnes['honeydukes'] = $nb_personnes_honeydukes;
-}
+    // Populate number of people for Poudlard activities
+    if (in_array('sorts', $activites_poudlard)) {
+        $nb_personnes['sorts'] = isset($_POST['nb_personnes_sort']) ? $_POST['nb_personnes_sort'] : null;
+    }
+    if (in_array('quidditch', $activites_poudlard)) {
+        $nb_personnes['quidditch'] = isset($_POST['nb_personnes_quid']) ? $_POST['nb_personnes_quid'] : null;
+    }
+    if (in_array('hyppogriffe', $activites_poudlard)) {
+        $nb_personnes['hyppogriffe'] = isset($_POST['nb_personnes_hy']) ? $_POST['nb_personnes_hy'] : null;
+    }
 
-$prix = 3666;
-$prix_total = $prix * $nb_personnes_voyage; 
+    // Populate number of people for Pré-au-Lard activities
+    if (in_array('zonko', $activites_preaulard)) {
+        $nb_personnes['zonko'] = isset($_POST['nb_personnes_visite']) ? $_POST['nb_personnes_visite'] : null;
+    }
+    if (in_array('degustation', $activites_preaulard)) {
+        $nb_personnes['degustation'] = isset($_POST['nb_personnes_degustation']) ? $_POST['nb_personnes_degustation'] : null;
+    }
+    if (in_array('honeydukes', $activites_preaulard)) {
+        $nb_personnes['honeydukes'] = isset($_POST['nb_personnes_honeydukes']) ? $_POST['nb_personnes_honeydukes'] : null;
+    }
 
-    // données à enregistrer
+    $prix = 3666;
+    $nb_personnes_voyage = isset($_POST['nb_personnes_voyage']) ? $_POST['nb_personnes_voyage'] : 1;
+    $prix_total = $prix * $nb_personnes_voyage; 
+    $etapes = ['Poudlard', 'PreauLard'];
+
+    // Data to be saved
     $user_choices = [
         'user_id' => $user_id,
         'hebergement_poudlard' => $hebergement_poudlard,
-        'hebergement_preau_lard' => $hebergement_preau_lard,
+        'hebergement_preaulard' => $hebergement_preaulard,
         'activites_poudlard' => $activites_poudlard,
-        'activites_preau_lard' => $activites_preau_lard,
-        'transport_preaulard' => $transport_preaulard,
+        'activites_preaulard' => $activites_preaulard,
+        'transport_poudlard' => $transport_poudlard,
         'nb_personnes' => $nb_personnes,
         'nb_personnes_voyage' => $nb_personnes_voyage,
         'destination' => 'Poudlard',
         'departure_date' => $departure_date,
-        'prix_total' => $prix_total
+        'prix_total' => $prix_total,
+        'nb_etapes' => 2,
+        'etapes' => $etapes
     ];
 
-    // Vérifier si le fichier existe et si des données existent déjà
+    // Check if file exists and has existing data
     if (file_exists($file_path)) {
-        // Lire les données existantes
         $existing_data = json_decode(file_get_contents($file_path), true);
 
-        // Rechercher l'utilisateur avec l'ID et mettre à jour ses données
+        // Find and update user data or add new entry
+        $user_found = false;
         foreach ($existing_data as &$user_data) {
             if ($user_data['user_id'] == $user_id) {
-                // Remplacer les anciennes données avec les nouvelles données
                 $user_data = $user_choices;
+                $user_found = true;
                 break;
             }
         }
 
-        // Si l'utilisateur n'existe pas, ajouter un nouveau
-        if (!isset($user_data)) {
+        // If user not found, add new entry
+        if (!$user_found) {
             $existing_data[] = $user_choices;
         }
-
     } else {
-        // Créer un tableau vide si le fichier n'existe pas encore
+        // Create new array if file doesn't exist
         $existing_data = [$user_choices];
     }
 
-   
+    // Save updated data
     file_put_contents($file_path, json_encode($existing_data, JSON_PRETTY_PRINT));
 
-  
+    // Redirect to cart page
     header('Location: ../PagePanier.php');
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -172,8 +166,8 @@ $prix_total = $prix * $nb_personnes_voyage;
                 
 
                 <div class="options-group">
-                <label for="hebergement-poudlard">Hébergement:</label>
-                <select id="hebergement-poudlard" name="hebergement-poudlard">
+                <label for="hebergement_poudlard">Hébergement:</label>
+                <select id="hebergement_poudlard" name="hebergement_poudlard">
                     <option value="serpentard">Chambre Serpentard</option>
                     <option value="griffondor">Chambre Griffondor</option>
                     <option value="serdaigle">Chambre Serdaigle</option>
@@ -227,8 +221,8 @@ $prix_total = $prix * $nb_personnes_voyage;
                     </div>
                 </div>
                 <div class="options-group">
-                     <label for="transport_preaulard">Transport pour la prochaine étape:</label>
-                    <select id="transport_preaulard" name="transport_preaulard">
+                     <label for="transport_poudlard">Transport pour la prochaine étape:</label>
+                    <select id="transport_poudlard" name="transport_poudlard">
                         <option value="balais">Balais</option>
                         <option value="poudre">Poudre de cheminette</option>
                         <option value="portoloin">Portoloin</option>
@@ -246,8 +240,8 @@ $prix_total = $prix * $nb_personnes_voyage;
                 Détendez-vous au Troisième Chaudron avec une bièraubeurre bien méritée ou profitez d'une douceur sucrée chez Honeydukes.</p>
 
                 <div class="options-group">
-                <label for="hebergement-preaulard">Hébergement:</label>
-                <select id="hebergement-preaulard" name="hebergement-preaulard">
+                <label for="hebergement_preaulard">Hébergement:</label>
+                <select id="hebergement_preaulard" name="hebergement_preaulard">
                     <option value="sanglier">La Tête de Sanglier</option>
                     <option value="cottage-sorcier">Le Cottage des Sorciers</option>
                     <option value="cabane-hurlante">La cabane hurlante</option>

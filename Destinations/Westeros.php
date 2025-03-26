@@ -24,8 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $activites_portreal = isset($_POST['activites_portreal']) ? $_POST['activites_portreal'] : [];
     $activites_meereen = isset($_POST['activites_meereen']) ? $_POST['activites_meereen'] : [];
 
+    $transport_winterfell = isset($_POST['transport_winterfell']) ? $_POST['transport_winterfell'] : [];
     $transport_portreal = isset($_POST['transport_portreal']) ? $_POST['transport_portreal'] : [];
-    $transport_meereen = isset($_POST['transport_meereen']) ? $_POST['transport_meereen'] : [];
     $departure_date = isset($_POST['departure_date']) ? $_POST['departure_date'] : null; 
 
 
@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (in_array('marche', $activites_meereen)) {
         $nb_personnes['marche'] = $nb_personnes_marche;
     }
-$etapes = ["Winterfell", "Port-Real", "Meereen"];
+$etapes = ["Winterfell", "PortReal", "Meereen"];
     // Structure des données à enregistrer
     $user_choices = [
         'user_id' => $user_id,
@@ -83,8 +83,8 @@ $etapes = ["Winterfell", "Port-Real", "Meereen"];
         'activites_winterfell' => $activites_winterfell,
         'activites_portreal' => $activites_portreal,
         'activites_meereen' => $activites_meereen,
+        'transport_winterfell' => $transport_winterfell,
         'transport_portreal' => $transport_portreal,
-        'transport_meereen' => $transport_meereen,
         'nb_personnes' => $nb_personnes,
         'prix_total' => $prix_total,
         'nb_personnes_voyage' => $nb_personnes_voyage,
@@ -236,9 +236,9 @@ $etapes = ["Winterfell", "Port-Real", "Meereen"];
                         </div>
                     </div>
                     <div class="options-group">
-                        <label for="transport_portreal">Transport pour la prochaine étape:</label>
-                        <select id="transport_portreal" name="transport_portreal">
-                            <option value="cheavaux">Chevaux</option>
+                        <label for="transport_winterfell">Transport pour la prochaine étape:</label>
+                        <select id="transport_winterfell" name="transport_winterfell">
+                            <option value="chevaux">Chevaux</option>
                             <option value="pieds">A pieds</option>
                             <option value="caleche">Calèche</option>
                         </select>
@@ -249,7 +249,7 @@ $etapes = ["Winterfell", "Port-Real", "Meereen"];
             <!-- Port-Réal -->
             <div id="portreal" class="section">
                 <h2>JOUR 5-7 : Port-Réal</h2>
-                <p class="description">ienvenue à Port-Réal, la capitale de Westeros, où les intrigues royales et les complots sont aussi nombreux que les grains de sable sur la plage (mais beaucoup moins agréables). C’est aussi l’endroit idéal pour boire une bière (ou cinq) après une journée bien remplie d’intrigues et de jeux de pouvoir. Attention à ne pas trop vous attacher à vos alliés... tout peut changer en un clin d’œil !</p>
+                <p class="description">Bienvenue à Port-Réal, la capitale de Westeros, où les intrigues royales et les complots sont aussi nombreux que les grains de sable sur la plage (mais beaucoup moins agréables). C’est aussi l’endroit idéal pour boire une bière (ou cinq) après une journée bien remplie d’intrigues et de jeux de pouvoir. Attention à ne pas trop vous attacher à vos alliés... tout peut changer en un clin d’œil !</p>
 
                 <div class="options-group">
                     <label for="hebergement_portreal">Hébergement:</label>
@@ -305,8 +305,8 @@ $etapes = ["Winterfell", "Port-Real", "Meereen"];
                         </div>
                     </div>
                     <div class="options-group">
-                        <label for="transport_meereen">Transport pour la prochaine étape:</label>
-                        <select id="transport_meereen" name="transport_meereen">
+                        <label for="transport_portreal">Transport pour la prochaine étape:</label>
+                        <select id="transport_portreal" name="transport_portreal">
                             <option value="bateau">Bâteau</option>
                             <option value="dos_dragon">Dragons</option>
                         </select>

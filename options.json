@@ -1,15 +1,27 @@
 [
     {
         "user_id": "67e1306025b5f4.22789385",
-        "hebergement_poudlard": "serpentard",
-        "hebergement_preau_lard": "sanglier",
-        "activites_poudlard": [],
-        "activites_preau_lard": [],
-        "transport_preaulard": "balais",
-        "nb_personnes": [],
-        "nb_personnes_voyage": "1",
+        "hebergement_poudlard": "serdaigle",
+        "hebergement_preau_lard": "cottage-sorcier",
+        "activites_poudlard": [
+            "quidditch"
+        ],
+        "activites_preau_lard": [
+            "degustation"
+        ],
+        "transport_preaulard": null,
+        "nb_personnes": {
+            "quidditch": "3",
+            "degustation": "4"
+        },
+        "nb_personnes_voyage": "3",
         "destination": "Poudlard",
-        "departure_date": "2025-03-27",
-        "prix_total": 3666
+        "departure_date": "2025-03-28",
+        "prix_total": 10998,
+        "nb_etapes": 2,
+        "etapes": [
+            "Poudlard",
+            "Pre-au-Lard"
+        ]
     }
 ]

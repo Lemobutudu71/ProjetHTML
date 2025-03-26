@@ -18,13 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $activites_tatooine = isset($_POST['activites_tatooine']) ? $_POST['activites_tatooine'] : []; 
     $activites_etoile = isset($_POST['activites_etoile']) ? $_POST['activites_etoile'] : []; 
     $hebergement_etoile = isset($_POST['hebergement_etoile']) ? $_POST['hebergement_etoile'] : []; 
-    $transport_etoile = isset($_POST['transport_etoile']) ? $_POST['transport_etoile'] : null; 
+    $transport_tatooine = isset($_POST['transport_tatooine']) ? $_POST['transport_tatooine'] : null; 
     $departure_date = isset($_POST['departure_date']) ? $_POST['departure_date'] : null; 
 
 
     $nb_personnes_jedi = isset($_POST['nb_personnes_jedi']) ? $_POST['nb_personnes_jedi'] : null;
     $nb_personnes_speeder = isset($_POST['nb_personnes_speeder']) ? $_POST['nb_personnes_speeder'] : null;
-    $nb_personnes_palais_jabba = isset($_POST['nb_personnes_palais_jabba']) ? $_POST['nb_personnes_palais_jabba'] : null;
+    $nb_personnes_palaisjabba = isset($_POST['nb_personnes_palaisjabba']) ? $_POST['nb_personnes_palaisjabba'] : null;
     $nb_personnes_tie = isset($_POST['nb_personnes_tie']) ? $_POST['nb_personnes_tie'] : null;
     $nb_personnes_tir = isset($_POST['nb_personnes_tir']) ? $_POST['nb_personnes_tir'] : null;
     $nb_personnes_sith = isset($_POST['nb_personnes_sith']) ? $_POST['nb_personnes_sith'] : null;
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nb_personnes['speeder'] =  $nb_personnes_speeder;
     }
     if (in_array('palais_jabba', $activites_tatooine)) {
-        $nb_personnes['palais_jabba'] = $nb_personnes_palais_jabba;
+        $nb_personnes['palais_jabba'] = $nb_personnes_palaisjabba;
     }
     if (in_array('tie_fighter', $activites_etoile)) {
         $nb_personnes['tie_fighter'] = $nb_personnes_tie;
@@ -48,12 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nb_personnes['tir'] =  $nb_personnes_tir;
     }
     if (in_array('sith', $activites_etoile)) {
-        $nb_personnes['sith'] = $nb_personnes_psith;
+        $nb_personnes['sith'] = $nb_personnes_sith;
     }
 
 $prix =3578;
 $prix_total = $prix * $nb_personnes_voyage;
-
+$etapes = ['Tatooine', 'Etoile'];
     // Structure des données à enregistrer
     $user_choices = [
         'user_id' => $user_id,
@@ -61,12 +61,14 @@ $prix_total = $prix * $nb_personnes_voyage;
         'activites_tatooine' => $activites_tatooine,
         'hebergement_etoile' => $hebergement_etoile,
         'activites_etoile' => $activites_etoile,
-        'transport_etoile' => $transport_etoile,
+        'transport_tatooine' => $transport_tatooine,
         'nb_personnes' => $nb_personnes,
         'prix_total' => $prix_total,
         'nb_personnes_voyage' => $nb_personnes_voyage,
         'departure_date' => $departure_date,
-        'destination' => 'Tatooine'
+        'destination' => 'Tatooine',
+        "nb_etapes"=> 2,
+        "etapes"=> $etapes
     ];
 
     // Vérifier si le fichier existe et si des données existent déjà
@@ -203,7 +205,7 @@ $prix_total = $prix * $nb_personnes_voyage;
                                 <input type="checkbox" id="palais_jabba" name="activites_tatooine[]" value="palais_jabba">
                                 <label for="palais_jabba">Visite du palais de Jabba</label>
                                 
-                                <select id="nb_personnes_palais_jabba" name="nb_personnes_palais_jabba">
+                                <select id="nb_personnes_palaisjabba" name="nb_personnes_palaisjabba">
                                     <option value="1">1 personne</option>
                                     <option value="2">2 personnes</option>
                                     <option value="3">3 personnes</option>
@@ -214,8 +216,8 @@ $prix_total = $prix * $nb_personnes_voyage;
                     </div>
 
                     <div class="options-group">
-                        <label for="transport_etoile">Transport pour la prochaine étape:</label>
-                        <select id="transport_etoile" name="transport_etoile">
+                        <label for="transport_tatooine">Transport pour la prochaine étape:</label>
+                        <select id="transport_tatooine" name="transport_tatooine">
                             <option value="faucon">Faucon Millenium</option>
                             <option value="xwing">X-Wing</option>
                             <option value="destroyer">Destroyer stellaire</option>

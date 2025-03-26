@@ -933,3 +933,79 @@ ul li {
     margin-top: 10px;
 }
 
+/*Page panier*/
+
+.panier-container {
+    color: gold;
+    margin: 30px auto;
+    max-width: 1200px;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.panier-details h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: gold;
+    margin-bottom: 30px;
+}
+
+/* Voyage Details */
+.voyage-details {
+    color: gold;
+    margin-bottom: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.voyage-details h2 {
+    color: gold;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.voyage-details ul{
+    color: gold;
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.voyage-details ul li{
+    color: gold;
+    font-size: 1rem;
+    margin-bottom: 10px
+}
+
+.voyage-resume {
+    color: gold;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+
+}
+
+.panier-vide {
+    text-align: center;
+    color: gold;
+}
+
+.panier-vide a {
+    text-decoration: none;
+    color: #FFD700;
+    font-size: 18px;
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 30px;
+    border: 2px solid #FFD700;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.panier-vide a:hover {
+    background-color: #FFD700;
+
+}

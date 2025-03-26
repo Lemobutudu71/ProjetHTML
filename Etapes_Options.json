@@ -1,158 +1,158 @@
-[{ 
-    "Tatooine" : {
-        "Tatooine": {
-            "hebergements": {
-                "palais_jabba": "Palais de Jabba",
-                "cottage_sith": "Cottage des Sith",
-                "maison_luke": "Maison de Luke Skywalker"
-            },
-            "transports": {
-                "faucon": "Faucon Millenium",
-                "xwing": "X-Wing",
-                "destroyer": "Destroyer Stellaire"
-            },
-            "activites": {
-                "jedi": "Entraînement Jedi",
-                "speeder": "Balade en speeder",
-                "palais_jabba": "Visite du Palais de Jabba"
-            },
-            "etapes": [
-                {
-                    "numero": "1-4",
-                    "nom": "Tatooine"
-                }
-            ]
+{
+    "Westeros": {
+      "Winterfell": {
+        "hebergements": {
+          "chateau_stark": "Château Stark",
+          "chateaunoir": "Chateaunoir",
+          "auberge": "Auberge"
         },
-        "L'Étoile de la Mort": {
-            "hebergements": {
-                "quartier_empereur": "Qartier de l'Empereur",
-                "chambre_officier": "Chambre des Officiers Impériaux",
-                "salle_commandement": "Salle de Commandement"
-            },
-            "activites": {
-                "tie_fighter": "Entraînement au pilotage de TIE Fighter",
-                "tir": "Tir de l'Étoile de la Mort",
-                "sith": "Entraînement des Sith"
-            },
-            "etapes": [
-                {
-                    "numero": "5-7",
-                    "nom": "L'Étoile de la Mort"
-                }
-            ]
-
-        }
-    
+        "transports": {
+          "chevaux": "Chevaux",
+          "pieds": "À pieds",
+          "caleche": "Calèche"
+        },
+        "activites": {
+          "combat": "Entraînement au combat",
+          "chasse": "Chasse avec les loups",
+          "mur": "Visite du Mur"
+        },
+        "etapes": [
+          {
+            "numero": "1-4",
+            "nom": "Winterfell"
+          }
+        ]
+      },
+      "PortReal": {
+        "hebergements": {
+          "donjon_royal": "Donjon Royal",
+          "auberge_marchands": "Auberge des Marchands",
+          "septuaire": "Septuaire de Baelor",
+          "bordel": "Bordel"
+        },
+        "transports": {
+          "bateau": "Bateau",
+          "dos_dragon": "Dos de dragon"
+        },
+        "activites": {
+          "tournoi": "Tournoi de combat",
+          "trone": "Photos sur le Trône de Fer",
+          "fleuve": "Balade en bateau sur le Fleuve Noir"
+        },
+        "etapes": [
+          {
+            "numero": "5-7",
+            "nom": "Port-Réal"
+          }
+        ]
+      },
+      "Meereen": {
+        "hebergements": {
+          "pyramide": "Pyramide de Meereen",
+          "caverne_dragons": "Caverne des Dragons",
+          "villa": "Villa des nobles d'Essos"
+        },
+        "activites": {
+          "dragons": "Dompter des dragons",
+          "gladiateur": "Assistez aux combats de gladiateurs",
+          "marche": "Marché d’Essos"
+        },
+        "etapes": [
+          {
+            "numero": "7-10",
+            "nom": "Meereen"
+          }
+        ]
+      }
     },
     "Poudlard": {
-        "Poudlard": {
-            "hebergements": {
-                "serpentard": "Chambre Serpentard",
-                "griffondor": "Chambre Griffondor",
-                "serdaigle": "Chambre Serdaigle",
-                "poufsoufle": "Chambre Poufsoufle"
-            },
-            "transports": {
-                "poudre": "Poudre de cheminette",
-                "balais": "Balai Volant",
-                "portoloin": "Portoloin",
-                "sombral": "sombral"
-            },
-            "activites": {
-                "sorts": "Cours de Sortilèges",
-                "quidditch": "Match de Quidditch",
-                "hyppogriffe": "Dressage d'Hippogriffes"
-            },
-            "etapes": [
-                {
-                    "numero": "1-4",
-                    "nom": "Poudlard"
-                }
-            ]
+      "Poudlard": {
+        "hebergement": {
+          "serpentard": "Chambre Serpentard",
+          "griffondor": "Chambre Griffondor",
+          "serdaigle": "Chambre Serdaigle",
+          "poufsoufle": "Chambre Poufsoufle"
         },
-        "Pre-au-Lard": {
-            "hebergements": {
-                "sanglier": "La Tête de Sanglier",
-                "cottage-sorcier": "Le Cottage des Sorciers",
-                "cabane-hurlante": "La Cabane Hurlante",
-                "pudifoot": "Les Chambres de Madame Puddifoot"
-            },
-            "activites": {
-                "zonko": "Visite de la boutique de Zonko",
-                "degustation": "Dégustation de Bièraubeurre",
-                "honeydukes": "Visite de la boutique Honeydukes"
-            },
-            "etapes": [
-                {
-                    "numero": "5-7",
-                    "nom": "Pré-au-Lard"
-                }
-            ]
-        }
+        "transport": {
+          "poudre": "Poudre de cheminette",
+          "balais": "Balai Volant",
+          "portoloin": "Portoloin",
+          "sombral": "Sombral"
+        },
+        "activites": {
+          "sorts": "Cours de Sortilèges",
+          "quidditch": "Match de Quidditch",
+          "hyppogriffe": "Dressage d'Hippogriffes"
+        },
+        "etapes": [
+          {
+            "numero": "1-4",
+            "nom": "Poudlard"
+          }
+        ]
+      },
+      "PreauLard": {
+        "hebergement": {
+          "sanglier": "La Tête de Sanglier",
+          "cottage-sorcier": "Le Cottage des Sorciers",
+          "cabane-hurlante": "La Cabane Hurlante",
+          "pudifoot": "Les Chambres de Madame Puddifoot"
+        },
+        "activites": {
+          "zonko": "Visite de la boutique de Zonko",
+          "degustation": "Dégustation de Bièraubeurre",
+          "honeydukes": "Visite de la boutique Honeydukes"
+        },
+        "etapes": [
+          {
+            "numero": "5-7",
+            "nom": "Pré-au-Lard"
+          }
+        ]
+      }
     },
-    "Westeros": {
-        "Winterfell": {
-            "hebergements": {
-                "chateau_stark": "Château Stark",
-                "chateaunoir": "Chateaunoir",
-                "auberge": "Auberge"
-            },
-            "transports": {
-                "chevaux": "Chevaux",
-                "pieds": "À pieds",
-                "caleche": "Calèche"
-            },
-            "activites": {
-                "combat": "Entraînement au combat",
-                "chasse": "Chasse avec les loups",
-                "mur": "Visite du Mur"
-            },
-            "etapes": [
-                {
-                    "numero": "1-4",
-                    "nom": "Winterfell"
-                }
-            ]
+    "Tatooine": {
+      "Tatooine": {
+        "hebergements": {
+          "palais_jabba": "Palais de Jabba",
+          "cottage_sith": "Cottage des Sith",
+          "maison_luke": "Maison de Luke Skywalker"
         },
-        "Port-Real": {
-            "hebergements": {
-                "donjon_royal": "Donjon Royal",
-                "auberge_marchands": "Auberge des Marchands",
-                "septuaire": "Septuaire de Baelor",
-                "bordel": "Bordel"
-            },
-            "activites": {
-                "tournoi": "Tournoi de combat",
-                "trone": "Photos sur le Trône de Fer",
-                "fleuve": "Balade en bateau sur le Fleuve Noir"
-            },
-            "etapes": [
-                {
-                    "numero": "5-7",
-                    "nom": "Port-Réal"
-                }
-            ]
+        "transports": {
+          "faucon": "Faucon Millenium",
+          "xwing": "X-Wing",
+          "destroyer": "Destroyer Stellaire"
         },
-        "Meereen": {
-            "hebergements": {
-                "pyramide": "Pyramide de Meereen",
-                "caverne_dragons": "Caverne des Dragons",
-                "villa": "Villa des nobles d'Essos"
-            },
-            "activites": {
-                "dragons": "Dompter des dragons",
-                "gladiateur": "Assistez aux combats de gladiateurs",
-                "marche": "Marché d’Essos"
-            },
-            "etapes": [
-                {
-                    "numero": "7-10",
-                    "nom": "Meereen"
-                }
-            ]
-        }
+        "activites": {
+          "jedi": "Entraînement Jedi",
+          "speeder": "Balade en speeder",
+          "palais_jabba": "Visite du Palais de Jabba"
+        },
+        "etapes": [
+          {
+            "numero": "1-4",
+            "nom": "Tatooine"
+          }
+        ]
+      },
+      "Etoile": {
+        "hebergements": {
+          "quartier_empereur": "Qartier de l'Empereur",
+          "chambre_officier": "Chambre des Officiers Impériaux",
+          "salle_commandement": "Salle de Commandement"
+        },
+        "activites": {
+          "tie_fighter": "Entraînement au pilotage de TIE Fighter",
+          "tir": "Tir de l'Étoile de la Mort",
+          "sith": "Entraînement des Sith"
+        },
+        "etapes": [
+          {
+            "numero": "5-7",
+            "nom": "L'Étoile de la Mort"
+          }
+        ]
+      }
     }
-}
-
-]
-
+  }
+  
