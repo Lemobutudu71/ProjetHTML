@@ -159,18 +159,19 @@ if (file_exists($etapes_file)) {
                     
                     <div class="voyage-resume">
                         <p><strong>Date de départ :</strong> <?php echo htmlspecialchars($user_choices['departure_date']); ?></p>
+                        <p><strong>Date de retour :</strong> <?php echo htmlspecialchars($user_choices['return_date']); ?></p>
                         <p><strong>Nombre total de personnes :</strong> <?php echo htmlspecialchars($user_choices['nb_personnes_voyage']); ?></p>
                         <p><strong>Prix total :</strong> <?php echo number_format($user_choices['prix_total'], 2, ',', ' '); ?> €</p>
                     </div>
                     
-                    <div class="actions-panier">
-                        <button class="button">Procéder au paiement</button>
-                    </div>
-                    <div class="actions-panier">
+                    
+                        <a href="pagePayer.php" class="btn-rechercher">Procéder au paiement</a>
+                    
+                    
                         <form>
                             <input type="button" class='button' value="revenir à la page précédente" onclick="history.go(-1)">
                         </form>
-                    </div>
+                
                 </div>
             <?php else: ?>
                 <div class="panier-vide">

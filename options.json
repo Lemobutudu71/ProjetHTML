@@ -9,6 +9,7 @@
         "nb_personnes": [],
         "nb_personnes_voyage": "1",
         "destination": "Poudlard",
+        "return_date": "2025-04-05",
         "departure_date": "2025-03-29",
         "prix_total": 3666,
         "nb_etapes": 2,

@@ -54,6 +54,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $prix =3578;
 $prix_total = $prix * $nb_personnes_voyage;
 $etapes = ['Tatooine', 'Etoile'];
+$return_date = null;
+    if ($departure_date) {
+        $departure_timestamp = strtotime($departure_date);
+        
+        $return_timestamp = strtotime("+7 days", $departure_timestamp);
+        
+        $return_date = date("Y-m-d", $return_timestamp);
+    }
     // Structure des données à enregistrer
     $user_choices = [
         'user_id' => $user_id,
@@ -66,6 +74,7 @@ $etapes = ['Tatooine', 'Etoile'];
         'prix_total' => $prix_total,
         'nb_personnes_voyage' => $nb_personnes_voyage,
         'departure_date' => $departure_date,
+        'return_date' => $return_date,
         'destination' => 'Tatooine',
         "nb_etapes"=> 2,
         "etapes"=> $etapes

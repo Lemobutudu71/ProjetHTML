@@ -880,32 +880,20 @@ th, td {
 }
 
 .section {
-    padding: 30px;  /* Espacement interne de la section */
-    margin-top: 20px;  /* Espacement au-dessus de la section */
-    border-radius: 10px;  /* Coins arrondis */
-    margin-bottom: 40px;  /* Espacement en bas de la section */
+    padding: 30px;  
+    margin-top: 20px;  
+    border-radius: 10px;  
+    margin-bottom: 40px;  
 }
 
-/* Titre de la section */
+
 .section h2 {
     font-size: 2rem;
-    color: gold;  /* Couleur du texte */
+    color: gold;  
     font-weight: bold;
-    margin-bottom: 20px;  /* Espacement sous le titre */
+    margin-bottom: 20px;  
 }
 
-/* Liste des activités */
-ul {
-    list-style-type: disc;  /* Style de puce par défaut */
-    padding-left: 20px;  /* Espacement à gauche pour la liste */
-    margin-bottom: 20px;  /* Espacement en bas de la liste */
-}
-
-ul li {
-    font-size: 1.2rem;  /* Taille de la police des éléments de la liste */
-    color: gold;  /* Couleur de texte des éléments de liste */
-    margin-bottom: 10px;  /* Espacement entre les éléments de la liste */
-}
 
 .options-group .activites-options select {
     width: 22%; /* Largeur du select */
@@ -919,6 +907,13 @@ ul li {
 .options-group .activites-options label{
     margin-right: 10px;
     font-size: 1rem;
+    color: gold;
+    font-weight: normal;
+}
+
+.options-group  label{
+    margin-right: 10px;
+    font-size: 1.3rem;
     color: gold;
     font-weight: normal;
 }
@@ -950,7 +945,6 @@ ul li {
     margin-bottom: 30px;
 }
 
-/* Voyage Details */
 .voyage-details {
     color: gold;
     margin-bottom: 30px;

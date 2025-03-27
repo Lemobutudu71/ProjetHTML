@@ -13,6 +13,7 @@ $user_id = $_SESSION['user']['id'];
 // Fichier JSON pour stocker les options
 $file_path = '../options.json';
 
+
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupérer les données du formulaire avec isset() pour éviter les erreurs
@@ -74,6 +75,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nb_personnes['marche'] = $nb_personnes_marche;
     }
 $etapes = ["Winterfell", "PortReal", "Meereen"];
+$return_date = null;
+    if ($departure_date) {
+        $departure_timestamp = strtotime($departure_date);
+        
+        $return_timestamp = strtotime("+7 days", $departure_timestamp);
+        
+        $return_date = date("Y-m-d", $return_timestamp);
+    }
+
+    
     // Structure des données à enregistrer
     $user_choices = [
         'user_id' => $user_id,
@@ -89,6 +100,8 @@ $etapes = ["Winterfell", "PortReal", "Meereen"];
         'prix_total' => $prix_total,
         'nb_personnes_voyage' => $nb_personnes_voyage,
         'departure_date' => $departure_date,
+        'return_date' => $return_date,
+        
         'destination' => 'Westeros',
         "nb_etapes"=> 3,
         "etapes"=> $etapes
@@ -117,7 +130,6 @@ $etapes = ["Winterfell", "PortReal", "Meereen"];
         // Créer un tableau vide si le fichier n'existe pas encore
         $existing_data = [$user_choices];
     }
-
     // Enregistrer les données mises à jour dans le fichier JSON
     file_put_contents($file_path, json_encode($existing_data, JSON_PRETTY_PRINT));
 

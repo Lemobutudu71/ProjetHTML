@@ -48,7 +48,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nb_personnes_voyage = isset($_POST['nb_personnes_voyage']) ? $_POST['nb_personnes_voyage'] : 1;
     $prix_total = $prix * $nb_personnes_voyage; 
     $etapes = ['Poudlard', 'PreauLard'];
-
+    $return_date = null;
+    if ($departure_date) {
+        $departure_timestamp = strtotime($departure_date);
+        
+        $return_timestamp = strtotime("+7 days", $departure_timestamp);
+        
+        $return_date = date("Y-m-d", $return_timestamp);
+    }
     // Data to be saved
     $user_choices = [
         'user_id' => $user_id,
@@ -60,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'nb_personnes' => $nb_personnes,
         'nb_personnes_voyage' => $nb_personnes_voyage,
         'destination' => 'Poudlard',
+        'return_date' => $return_date,
         'departure_date' => $departure_date,
         'prix_total' => $prix_total,
         'nb_etapes' => 2,
