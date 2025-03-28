@@ -39,11 +39,11 @@ if (file_exists($options_file)) {
 
 // Vérifier la sécurité de la transaction
 $api_key = getAPIKey($vendeur);
+$retour_session = $_SESSION['retour'] ?? '';
 
-/
+
 // Calculer le contrôle
-$control_calcule = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour . "#");
-
+$control_calcule = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour_session . "#");
 // Vérifier la validité du contrôle
 $transaction_valide = ($control_recu === $control_calcule);
 
@@ -93,7 +93,7 @@ file_put_contents($commandes_file, json_encode($commandes, JSON_PRETTY_PRINT));
             </ul>
         </header>
 
-        <div class="information">
+        <div class="description">
             <?php if ($status === 'accepted' && $transaction_valide): ?>
                 <h1 class="titre">Paiement Réussi</h1>
                 <p><strong>Destination :</strong> <?php echo htmlspecialchars($destination); ?></p>

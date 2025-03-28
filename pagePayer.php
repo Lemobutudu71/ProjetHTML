@@ -76,8 +76,9 @@ $control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur .
             </ul>
         </header>
 
-        <h1 class="titre">Récapitulatif de la commande</h1>
-        <div class="information">
+        
+        <div class="description">
+            <h2 class='h2'>Récapitulatif de la commande</h2>
             <p><strong>Destination :</strong> <?php echo htmlspecialchars($destination); ?></p>
             <p><strong>Date de départ :</strong> <?php echo htmlspecialchars($user_choices['departure_date']); ?></p>
             <p><strong>Date de retour :</strong> <?php echo htmlspecialchars($user_choices['return_date']); ?></p>
@@ -91,28 +92,9 @@ $control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur .
             <input type="hidden" name="vendeur" value="<?php echo $vendeur; ?>">
             <input type="hidden" name="retour" value="<?php echo $retour; ?>">
             <input type="hidden" name="control" value="<?php echo $control; ?>">
-
-            <div>
-                <label for="numero_card">Numéro de carte (16 chiffres) :</label>
-                <input type="text" name="numero_card" id="numero_card" maxlength="19" required pattern="\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}" placeholder="XXXX XXXX XXXX XXXX">
+            <div class='recherche'>
+                <button type="submit" class="Page-Accueil-button">Valider et Payer</button>
             </div>
-
-            <div>
-                <label for="nom_prenom">Nom et Prénom du titulaire :</label>
-                <input type="text" name="nom_prenom" id="nom_prenom" required>
-            </div>
-
-            <div>
-                <label for="expiration">Date d'expiration (MM/AA) :</label>
-                <input type="text" name="expiration" id="expiration" required pattern="\d{2}/\d{2}">
-            </div>
-
-            <div>
-                <label for="cvv">Cryptogramme (3 chiffres) :</label>
-                <input type="text" name="cvv" id="cvv" required pattern="\d{3}">
-            </div>
-
-            <button type="submit" class="button">Valider et Payer</button>
         </form>
 
         <footer>

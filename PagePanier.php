@@ -164,14 +164,16 @@ if (file_exists($etapes_file)) {
                         <p><strong>Prix total :</strong> <?php echo number_format($user_choices['prix_total'], 2, ',', ' '); ?> €</p>
                     </div>
                     
-                    
-                        <a href="pagePayer.php" class="btn-rechercher">Procéder au paiement</a>
-                    
-                    
+                    <div class='recherche'>
+                        <a href="pagePayer.php" class="Page-Accueil-button">Procéder au paiement</a>
+                    </div>
+                    <div class='recherche'>
                         <form>
-                            <input type="button" class='button' value="revenir à la page précédente" onclick="history.go(-1)">
+                            <input type="button" class='Page-Accueil-button' value="revenir à la page précédente" onclick="history.go(-1)">
                         </form>
-                
+                    </div>
+                    
+                        
                 </div>
             <?php else: ?>
                 <div class="panier-vide">
