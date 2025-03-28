@@ -29,6 +29,7 @@ if (file_exists($options_file)) {
 // Calculer le montant total
 $montant = $user_choices['prix_total'];
 $transaction = uniqid();
+$_SESSION['transaction'] = $transaction;
 $vendeur = 'MEF-1_B';
 
 $script_name = $_SERVER['SCRIPT_NAME'];
@@ -45,10 +46,12 @@ $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
 $host = $_SERVER['HTTP_HOST'];
 $base_url = $protocol . "://" . $host . $script_dir;
 $retour = "{$base_url}/retour_paiement.php?transaction={$transaction}";
-
+$_SESSION['retour'] = $retour;
 // Générer le contrôle pour la sécurité
 $api_key = getAPIKey($vendeur); 
 $control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour . "#");
+$_SESSION['control'] = $control;
+
 ?>
 
 <!DOCTYPE html>

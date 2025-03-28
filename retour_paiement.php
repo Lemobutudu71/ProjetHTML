@@ -13,11 +13,15 @@ if (!isset($_GET['transaction']) || !isset($_GET['status']) || !isset($_GET['mon
     die("Paramètres de retour de paiement incomplets.");
 }
 
-$transaction = $_GET['transaction'];
+$transaction = $_GET['transaction'] ?? $_SESSION['transaction'] ?? null;
+
+if (!$transaction) {
+    die("Transaction manquante.");
+}
 $status = $_GET['status'];
 $montant = $_GET['montant'];
 $vendeur = $_GET['vendeur'];
-$control_recu = $_GET['control'];
+$control_recu = $_SESSION['control'];
 
 // Récupérer les informations de l'utilisateur
 $user_id = $_SESSION['user']['id'];
@@ -39,11 +43,11 @@ if (file_exists($options_file)) {
 
 // Vérifier la sécurité de la transaction
 $api_key = getAPIKey($vendeur);
-$retour_session = $_SESSION['retour'] ?? '';
+$retour = $_SESSION['retour'] ?? '';
 
 
 // Calculer le contrôle
-$control_calcule = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour_session . "#");
+$control_calcule = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour . "#");
 // Vérifier la validité du contrôle
 $transaction_valide = ($control_recu === $control_calcule);
 
@@ -97,7 +101,7 @@ file_put_contents($commandes_file, json_encode($commandes, JSON_PRETTY_PRINT));
             <?php if ($status === 'accepted' && $transaction_valide): ?>
                 <h1 class="titre">Paiement Réussi</h1>
                 <p><strong>Destination :</strong> <?php echo htmlspecialchars($destination); ?></p>
-                <p><strong>Montant payé :</strong> <?php echo number_format($montant / 100, 2, ',', ' '); ?> €</p>
+                <p><strong>Montant payé :</strong> <?php echo htmlspecialchars($montant); ?> €</p>
                 <p><strong>Numéro de transaction :</strong> <?php echo htmlspecialchars($transaction); ?></p>
                 <p class="success">Votre réservation a été confirmée avec succès !</p>
                 <a href="PageAccueil.php" class="button">Retour à l'accueil</a>
