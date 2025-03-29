@@ -36,7 +36,6 @@ if (file_exists($options_file)) {
         if (isset($data['user_id']) && $data['user_id'] == $user_id) {
             $user_choices = $data;
             $destination = $user_choices['destination'];
-            break;
         }
     }
 }
@@ -51,15 +50,14 @@ $control_calcule = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $v
 // Vérifier la validité du contrôle
 $transaction_valide = ($control_recu === $control_calcule);
 
+$options_data = file_exists($options_file) ? json_decode(file_get_contents($options_file), true) : [];
 // Enregistrer la transaction
 $transaction_data = [
     'transaction_id' => $transaction,
-    'user_id' => $user_id,
-    'destination' => $destination,
-    'montant' => $montant,
     'status' => $status,
     'date' => date('Y-m-d H:i:s'),
-    'validation_securite' => $transaction_valide ? 'Validée' : 'Échouée'
+    'validation_securite' => $transaction_valide ? 'Validée' : 'Échouée',
+    'options' => $options_data,
 ];
 
 // Enregistrer dans le fichier de commandes
@@ -99,20 +97,24 @@ file_put_contents($commandes_file, json_encode($commandes, JSON_PRETTY_PRINT));
 
         <div class="description">
             <?php if ($status === 'accepted' && $transaction_valide): ?>
-                <h1 class="titre">Paiement Réussi</h1>
+                <h1 class="Titre">Paiement Réussi</h1>
                 <p><strong>Destination :</strong> <?php echo htmlspecialchars($destination); ?></p>
                 <p><strong>Montant payé :</strong> <?php echo htmlspecialchars($montant); ?> €</p>
                 <p><strong>Numéro de transaction :</strong> <?php echo htmlspecialchars($transaction); ?></p>
-                <p class="success">Votre réservation a été confirmée avec succès !</p>
-                <a href="PageAccueil.php" class="button">Retour à l'accueil</a>
+                <p>Votre réservation a été confirmée avec succès !</p>
+                <div class='recherche'>
+                    <a href="PageAccueil.php" class="Page-Accueil-button">Retour à l'accueil</a>
+                </div>
             <?php else: ?>
                 <h1 class="titre">Échec du Paiement</h1>
-                <p class="error">Un problème est survenu lors du paiement.</p>
+                <p>Un problème est survenu lors du paiement.</p>
                 <p><strong>Statut :</strong> <?php echo htmlspecialchars($status); ?></p>
                 <?php if (!$transaction_valide): ?>
-                    <p class="error">Erreur de validation de sécurité</p>
+                    <p>Erreur de validation de sécurité</p>
                 <?php endif; ?>
-                <a href="PagePanier.php" class="button">Réessayer le paiement</a>
+                <div class='recherche'>
+                    <a href="PagePanier.php" class="Page-Accueil-button">Réessayer le paiement</a>
+                </div>
             <?php endif; ?>
         </div>
 

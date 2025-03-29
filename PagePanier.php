@@ -28,7 +28,6 @@ if (file_exists($options_file)) {
         if (isset($data['user_id']) && $data['user_id'] == $user_id) {
             $user_choices = $data;
             $destination = $user_choices['destination'];
-            break;
         }
     }
 }
@@ -171,7 +170,7 @@ if (file_exists($etapes_file)) {
                         <form>
                             <input type="button" class='Page-Accueil-button' value="revenir à la page précédente" onclick="history.go(-1)">
                         </form>
-                    </div>
+                    
                     
                         
                 </div>

@@ -3,10 +3,17 @@
         "user_id": "67e1306025b5f4.22789385",
         "hebergement_poudlard": "serpentard",
         "hebergement_preaulard": "sanglier",
-        "activites_poudlard": [],
-        "activites_preaulard": [],
+        "activites_poudlard": [
+            "quidditch"
+        ],
+        "activites_preaulard": [
+            "degustation"
+        ],
         "transport_poudlard": "balais",
-        "nb_personnes": [],
+        "nb_personnes": {
+            "quidditch": "1",
+            "degustation": "1"
+        },
         "nb_personnes_voyage": "1",
         "destination": "Poudlard",
         "return_date": "2025-04-06",
@@ -16,6 +23,32 @@
         "etapes": [
             "Poudlard",
             "PreauLard"
+        ]
+    },
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_tatooine": "palais_jabba",
+        "activites_tatooine": [
+            "speeder"
+        ],
+        "hebergement_etoile": "quartier_empereur",
+        "activites_etoile": [
+            "tir"
+        ],
+        "transport_tatooine": "faucon",
+        "nb_personnes": {
+            "speeder": "1",
+            "tir": "1"
+        },
+        "prix_total": 3578,
+        "nb_personnes_voyage": "1",
+        "departure_date": "2025-03-29",
+        "return_date": "2025-04-05",
+        "destination": "Tatooine",
+        "nb_etapes": 2,
+        "etapes": [
+            "Tatooine",
+            "Etoile"
         ]
     }
 ]

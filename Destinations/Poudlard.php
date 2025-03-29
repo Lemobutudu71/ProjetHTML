@@ -74,28 +74,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'etapes' => $etapes
     ];
 
-    // Check if file exists and has existing data
     if (file_exists($file_path)) {
+        // Lire les données existantes
         $existing_data = json_decode(file_get_contents($file_path), true);
+        $existing_data[] = $user_choices;
 
-        // Find and update user data or add new entry
-        $user_found = false;
-        foreach ($existing_data as &$user_data) {
-            if ($user_data['user_id'] == $user_id) {
-                $user_data = $user_choices;
-                $user_found = true;
-                break;
-            }
-        }
-
-        // If user not found, add new entry
-        if (!$user_found) {
-            $existing_data[] = $user_choices;
-        }
-    } else {
-        // Create new array if file doesn't exist
-        $existing_data = [$user_choices];
-    }
+    } 
 
     // Save updated data
     file_put_contents($file_path, json_encode($existing_data, JSON_PRETTY_PRINT));

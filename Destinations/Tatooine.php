@@ -80,29 +80,13 @@ $return_date = null;
         "etapes"=> $etapes
     ];
 
-    // Vérifier si le fichier existe et si des données existent déjà
-    if (file_exists($file_path)) {
+  
+     if (file_exists($file_path)) {
         
         $existing_data = json_decode(file_get_contents($file_path), true);
-
-        // Rechercher l'utilisateur avec l'ID et mettre à jour ses données
-        foreach ($existing_data as &$user_data) {
-            if ($user_data['user_id'] == $user_id) {
-                // Remplacer les anciennes données avec les nouvelles données
-                $user_data = $user_choices;
-                break;
-            }
-        }
-
-        // Si l'utilisateur n'existe pas, ajouter un nouveau
-        if (!isset($user_data)) {
-            $existing_data[] = $user_choices;
-        }
-
-    } else {
-        // Créer un tableau vide si le fichier n'existe pas encore
-        $existing_data = [$user_choices];
-    }
+        $existing_data[] = $user_choices;
+    
+     } 
 
 
     file_put_contents($file_path, json_encode($existing_data, JSON_PRETTY_PRINT));

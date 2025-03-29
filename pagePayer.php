@@ -21,7 +21,7 @@ if (file_exists($options_file)) {
         if (isset($data['user_id']) && $data['user_id'] == $user_id) {
             $user_choices = $data;
             $destination = $user_choices['destination'];
-            break;
+            
         }
     }
 }

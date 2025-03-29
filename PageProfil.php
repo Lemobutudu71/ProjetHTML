@@ -69,10 +69,16 @@ $user = $_SESSION['user'];
                     <button type="submit" class="button">Modifier</button>
                 </form>
 
-                <!-- Formulaire de déconnexion -->
                 <form action="PageProfil.php" method="post">
                     <button type="submit" name="deconnecter" class="button">Se déconnecter</button>
-                </form>
+                </form>           
+            </div>
+            
+        </div>
+        <div class="container">
+            <div class="Compte">
+                <h2 class="h2">Mes voyages</h2>
+                
             </div>
         </div>
         <footer>
