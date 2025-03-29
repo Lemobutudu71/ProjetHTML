@@ -25,8 +25,8 @@ $control_recu = $_SESSION['control'];
 
 // Récupérer les informations de l'utilisateur
 $user_id = $_SESSION['user']['id'];
-$options_file = 'options.json';
-$commandes_file = 'Commande.json';
+$options_file = 'json/options.json';
+$commandes_file = 'json/Commande.json';
 
 // Charger les données de l'utilisateur
 $last_choice = null;

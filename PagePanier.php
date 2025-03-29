@@ -12,8 +12,8 @@ if (!isset($_SESSION['user'])) {
 $user_id = $_SESSION['user']['id'];
 
 // Charger les fichiers JSON
-$options_file = 'options.json';
-$etapes_file = 'Etapes_Options.json';
+$options_file = 'json/options.json';
+$etapes_file = 'json/Etapes_Options.json';
 
 // Initialiser les variables
 $user_choices = null;

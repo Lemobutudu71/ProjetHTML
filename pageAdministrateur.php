@@ -8,7 +8,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
 }
 
 // Charger les utilisateurs depuis le fichier JSON
-$file = 'utilisateur.json';
+$file = 'json/utilisateur.json';
 $users = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
 
 // Pagination

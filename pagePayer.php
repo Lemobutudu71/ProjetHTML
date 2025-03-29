@@ -11,8 +11,8 @@ if (!isset($_SESSION['user'])) {
 // Récupérer les informations de l'utilisateur et du voyage
 $user_id = $_SESSION['user']['id'];
 $user_choices = null;
-$options_file = 'options.json';
-$commandes_file = 'Commande.json';
+$options_file = 'json/options.json';
+$commandes_file = 'json/Commande.json';
 
 // Charger les données de l'utilisateur
 if (file_exists($options_file)) {

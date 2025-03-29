@@ -7,8 +7,8 @@ if (!isset($_SESSION['user'])) {
 }
 
 // Charger les fichiers JSON
-$commandes_file = 'Commande.json';
-$etapes_file = 'Etapes_Options.json';
+$commandes_file = 'json/Commande.json';
+$etapes_file = 'json/Etapes_Options.json';
 
 // Récupérer l'ID de la transaction depuis l'URL
 $transaction_id = $_GET['id'] ?? null;

@@ -7,7 +7,7 @@
     }
 
     // Fichier JSON pour stocker les utilisateurs
-    $file = 'utilisateur.json';
+    $file = 'json/utilisateur.json';
 
         
     if ($_SERVER["REQUEST_METHOD"] == "POST") {// Vérifier si le formulaire a été soumis

@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 // Charger les données des voyages à partir du fichier JSON
-$voyagesJson = file_get_contents("voyages.json");
+$voyagesJson = file_get_contents("json/voyages.json");
 $voyages = json_decode($voyagesJson, true);
 
 // Vérifier si la lecture du JSON a réussi

@@ -19,7 +19,7 @@ $user = $_SESSION['user'];
 
 
 // Récupérer les commandes depuis le fichier JSON
-$commandesJson = file_get_contents('Commande.json');
+$commandesJson = file_get_contents('json/Commande.json');
 $commandes = json_decode($commandesJson, true);
 
 // Filtrer les commandes de l'utilisateur connecté

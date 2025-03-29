@@ -3,7 +3,7 @@
 session_start();
 
 
-$voyagesJson = file_get_contents("voyages.json");
+$voyagesJson = file_get_contents("json/voyages.json");
 $voyages = json_decode($voyagesJson, true);
 
 if ($voyages === null) {
@@ -30,7 +30,7 @@ $voyagesFiltres = array_filter($voyages, function ($voyage) use ($motCle) {
     return false; // Exclure le voyage si aucun mot-clé ne correspond
 });
 
-$voyagesTendances = file_get_contents("voyagestendances.json");
+$voyagesTendances = file_get_contents("json/voyagestendances.json");
 $voyagesT = json_decode($voyagesTendances, true);
 
 ?>

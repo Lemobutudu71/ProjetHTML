@@ -14,5 +14,13 @@
         "email": "pmarmelat@gmail.com",
         "role": "admin",
         "password": "$2y$10$uSaklbz.IWbmkPYzSnvjUeM6nODzT6pTWKMudfaHh\/XcnIAN1cJa2"
+    },
+    {
+        "id": "67e84252008cd7.11035529",
+        "nom": "Sparrow",
+        "prenom": "Jack",
+        "email": "JackSparrow@gmail.com",
+        "role": "user",
+        "password": "$2y$10$fCoOLC.uwrXtIlFb7qTaweLfG8LelS6kc7cMs7CR.8eqyT3zIH9aO"
     }
 ]

@@ -3,13 +3,13 @@ session_start();
 
 
 if (!isset($_SESSION['user'])) {
-    header("Location: PageSeconnecter.php"); 
+    header("Location: ../PageSeconnecter.php"); 
     exit();
 }
 
 $user_id = $_SESSION['user']['id'];
 
-$file_path = '../options.json';
+$file_path = '../json/options.json';
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

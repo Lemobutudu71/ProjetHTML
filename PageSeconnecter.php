@@ -7,7 +7,7 @@ if (isset($_SESSION['user'])) {
     exit;
 }
 
-$file = 'utilisateur.json';
+$file = 'json/utilisateur.json';
 
 // Gestion de la connexion
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
