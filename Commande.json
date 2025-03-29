@@ -107,5 +107,39 @@
                 ]
             }
         ]
+    },
+    {
+        "transaction_id": "67e83d77ae9cf",
+        "status": "accepted",
+        "date": "2025-03-29 18:35:42",
+        "validation_securite": "Valid\u00e9e",
+        "options": [
+            {
+                "user_id": "67e83d5f39f743.65669778",
+                "hebergement_poudlard": "serpentard",
+                "hebergement_preaulard": "sanglier",
+                "activites_poudlard": [
+                    "quidditch"
+                ],
+                "activites_preaulard": [
+                    "degustation"
+                ],
+                "transport_poudlard": "balais",
+                "nb_personnes": {
+                    "quidditch": "1",
+                    "degustation": "1"
+                },
+                "nb_personnes_voyage": "1",
+                "destination": "Poudlard",
+                "return_date": "2025-04-09",
+                "departure_date": "2025-04-02",
+                "prix_total": 3666,
+                "nb_etapes": 2,
+                "etapes": [
+                    "Poudlard",
+                    "PreauLard"
+                ]
+            }
+        ]
     }
 ]

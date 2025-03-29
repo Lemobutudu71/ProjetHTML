@@ -12,7 +12,7 @@ $file = 'utilisateur.json';
 $users = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
 
 // Pagination
-$usersPerPage = 1; // Nombre d'utilisateurs par page
+$usersPerPage = 2; // Nombre d'utilisateurs par page
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; // Récupérer la page actuelle
 $totalUsers = count($users);
 $totalPages = ceil($totalUsers / $usersPerPage);

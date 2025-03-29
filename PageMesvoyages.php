@@ -8,6 +8,7 @@ if (!isset($_SESSION['user'])) {
 
 // Charger les fichiers JSON
 $commandes_file = 'Commande.json';
+$etapes_file = 'Etapes_Options.json';
 
 // Récupérer l'ID de la transaction depuis l'URL
 $transaction_id = $_GET['id'] ?? null;
@@ -16,10 +17,16 @@ if (!$transaction_id) {
     die("Transaction manquante.");
 }
 
-// Charger les commandes
+// Charger les commandes et les étapes disponibles
 $commandes = [];
+$etapes_data = [];
+
 if (file_exists($commandes_file)) {
     $commandes = json_decode(file_get_contents($commandes_file), true);
+}
+
+if (file_exists($etapes_file)) {
+    $etapes_data = json_decode(file_get_contents($etapes_file), true);
 }
 
 // Trouver la commande correspondant à la transaction
@@ -43,6 +50,11 @@ foreach ($commandes as $cmd) {
 if (!$commande || !$option_voyage) {
     die("Voyage introuvable ou vous n'avez pas accès à cette commande.");
 }
+
+// Préparer les données pour l'affichage
+$destination = $option_voyage['destination'];
+$etapes = is_array($option_voyage['etapes']) ? $option_voyage['etapes'] : explode(',', $option_voyage['etapes']);
+$total_etapes = $option_voyage['nb_etapes'];
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +67,9 @@ if (!$commande || !$option_voyage) {
 </head>
 <body>
     <section class="Page-Accueil">
+        <video autoplay loop muted id="bg-video">
+            <source src="images/Vidéo5.mp4" type="video/mp4">
+        </video>
         <header>
             <div class="ProfilPicture">
                 <img src="images/LOGO.jpg" alt="logo" width="200" class="logo">
@@ -67,89 +82,97 @@ if (!$commande || !$option_voyage) {
             </ul>
         </header>
 
-        <div class="voyage-detail-container">
-            <h1>Détails de votre voyage</h1>
-            
-            <div class="detail-section">
-                <div class="detail-label">Destination:</div>
-                <div class="detail-value"><?php echo htmlspecialchars($option_voyage['destination']); ?></div>
-            </div>
-            
-            <div class="detail-section">
-                <div class="detail-label">Dates du voyage:</div>
-                <div class="detail-value">
-                    Du <?php echo date('d/m/Y', strtotime($option_voyage['departure_date'])); ?> 
-                    au <?php echo date('d/m/Y', strtotime($option_voyage['return_date'])); ?>
+        <div class="panier-container">
+            <div class="panier-details">
+                <h1>Détails de votre voyage - Destination : <?php echo htmlspecialchars($destination); ?></h1>
+                
+                <div class="voyage-resume">
+                    <p><strong>Date de départ :</strong> <?php echo htmlspecialchars($option_voyage['departure_date']); ?></p>
+                    <p><strong>Date de retour :</strong> <?php echo htmlspecialchars($option_voyage['return_date']); ?></p>
+                    <p><strong>Nombre total de personnes :</strong> <?php echo htmlspecialchars($option_voyage['nb_personnes_voyage']); ?></p>
+                    <p><strong>Prix total payé :</strong> <?php echo number_format($option_voyage['prix_total'], 2, ',', ' '); ?> €</p>
+                    <p><strong>Statut de la commande :</strong> <?php echo htmlspecialchars($commande['status']); ?></p>
+                    <p><strong>Date de la commande :</strong> <?php echo date('d/m/Y H:i', strtotime($commande['date'])); ?></p>
+                </div>
+                
+                <?php for ($i = 0; $i < $total_etapes; $i++): 
+                    $current_step = $etapes[$i];
+                    $clean_step = strtolower(str_replace(' ', '_', $current_step));
+                    
+                    // Déterminer les clés dynamiquement
+                    $hebergement_key = 'hebergement_' . $clean_step;
+                    $activites_key = 'activites_' . $clean_step;
+                    $transport_key = 'transport_' . $clean_step;
+                    
+                    // Récupérer les données de destination dynamiquement
+                    $step_destination_data = $etapes_data[$destination][$current_step] ?? [];
+                ?>
+                    <div class="voyage-details">
+                        <h2><?php echo htmlspecialchars($current_step); ?></h2>
+                        
+                        <p><strong>Hébergement :</strong>
+                            <?php
+                                if (isset($option_voyage[$hebergement_key])) {
+                                    $hebergements = $step_destination_data['hebergements'] ?? [];
+                                    echo htmlspecialchars(
+                                        $hebergements[$option_voyage[$hebergement_key]] ?? 
+                                        $option_voyage[$hebergement_key]
+                                    );
+                                } else {
+                                    echo "Aucun hébergement sélectionné";
+                                }
+                            ?>
+                        </p>
+
+                        <?php if (isset($option_voyage[$activites_key]) && !empty($option_voyage[$activites_key])): ?>
+                        <p><strong>Activités :</strong></p>
+                        <ul>
+                            <?php
+                                $activites_disponibles = $step_destination_data['activites'] ?? [];
+                                
+                                foreach ($option_voyage[$activites_key] as $activite) {
+                                    $activite_libelle = $activites_disponibles[$activite] ?? $activite;
+                                    
+                                    $nb_personnes = isset($option_voyage['nb_personnes'][$activite]) 
+                                        ? " (". $option_voyage['nb_personnes'][$activite] ." personnes)" 
+                                        : "";
+                                    
+                                    echo "<li>" . htmlspecialchars($activite_libelle . $nb_personnes) . "</li>";
+                                }
+                            ?>
+                        </ul>
+                        <?php else: ?>
+                            <p><strong>Activités :</strong> Aucune activité sélectionnée</p>
+                        <?php endif; ?>
+
+                        <?php if ($i < $total_etapes - 1 && isset($option_voyage[$transport_key])): ?>
+                        <p><strong>Transport pour la prochaine étape :</strong> 
+                            <?php
+                                $transports = $step_destination_data['transports'] ?? [];
+                                echo htmlspecialchars(
+                                    $transports[$option_voyage[$transport_key]] ?? 
+                                    $option_voyage[$transport_key]
+                                );
+                            ?>
+                        </p>
+                        <?php endif; ?>
+                    </div>
+                <?php endfor; ?>
+                
+                <div class='recherche'>
+                    <a href="PageProfil.php" class="Page-Accueil-button">Retour à mon profil</a>
                 </div>
             </div>
-            
-            <div class="detail-section">
-                <div class="detail-label">Nombre de voyageurs:</div>
-                <div class="detail-value"><?php echo htmlspecialchars($option_voyage['nb_personnes_voyage']); ?> personne(s)</div>
-            </div>
-            
-            <div class="detail-section">
-                <div class="detail-label">Prix total payé:</div>
-                <div class="detail-value"><?php echo number_format($option_voyage['prix_total'], 2, ',', ' '); ?> €</div>
-            </div>
-            
-            <div class="detail-section">
-                <div class="detail-label">Étapes du voyage:</div>
-                <div class="etape-list">
-                    <?php foreach ($option_voyage['etapes'] as $etape): ?>
-                        <div class="etape-item"><?php echo htmlspecialchars($etape); ?></div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            
-            <?php if (!empty($hebergements)): ?>
-            <div class="detail-section">
-                <div class="detail-label">Hébergements:</div>
-                <div class="detail-value">
-                    <?php foreach ($hebergements as $hebergement): ?>
-                        <div><?php echo htmlspecialchars($hebergement); ?></div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            <?php endif; ?>
-            
-            <?php if (!empty($activites)): ?>
-            <div class="detail-section">
-                <div class="detail-label">Activités réservées:</div>
-                <div class="activity-list">
-                    <?php foreach ($activites as $activite): ?>
-                        <div class="activity-item"><?php echo htmlspecialchars($activite); ?></div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-            <?php endif; ?>
-            
-            <?php if (isset($option_voyage['transport_poudlard']) || isset($option_voyage['transport_tatooine'])): ?>
-            <div class="detail-section">
-                <div class="detail-label">Transport:</div>
-                <div class="detail-value">
-                    <?php if (isset($option_voyage['transport_poudlard'])): ?>
-                        <div>Vers Poudlard: <?php echo htmlspecialchars($option_voyage['transport_poudlard']); ?></div>
-                    <?php endif; ?>
-                    <?php if (isset($option_voyage['transport_tatooine'])): ?>
-                        <div>Vers Tatooine: <?php echo htmlspecialchars($option_voyage['transport_tatooine']); ?></div>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <?php endif; ?>
-            
-            <div class="detail-section">
-                <div class="detail-label">Statut de la commande:</div>
-                <div class="detail-value"><?php echo htmlspecialchars($commande['status']); ?></div>
-            </div>
-            
-            <div class="detail-section">
-                <div class="detail-label">Date de la commande:</div>
-                <div class="detail-value"><?php echo date('d/m/Y H:i', strtotime($commande['date'])); ?></div>
-            </div>
-            
-            <a href="PageProfil.php" class="back-button">Retour à mon profil</a>
         </div>
+
+        <footer>
+            <ul class="bas-de-page">
+                <li><a href="#">Mentions légales</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">À propos</a></li>
+                <li><a href="pageAdministrateur.php">Administrateur</a></li>
+            </ul>
+        </footer>
     </section>
 </body>
 </html>

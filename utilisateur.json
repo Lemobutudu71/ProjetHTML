@@ -6,5 +6,13 @@
         "email": "antoinemarmelat@gmail.com",
         "role": "admin",
         "password": "$2y$10$DO0\/VQwpRs2HVTLWkC9ag.YVGd7e2MLKpwKuoEdX0z2qSMrsIaaau"
+    },
+    {
+        "id": "67e83d5f39f743.65669778",
+        "nom": "Marmelat",
+        "prenom": "Paul",
+        "email": "pmarmelat@gmail.com",
+        "role": "admin",
+        "password": "$2y$10$uSaklbz.IWbmkPYzSnvjUeM6nODzT6pTWKMudfaHh\/XcnIAN1cJa2"
     }
 ]
