@@ -16,8 +16,8 @@
         },
         "nb_personnes_voyage": "1",
         "destination": "Poudlard",
-        "return_date": "2025-04-06",
-        "departure_date": "2025-03-30",
+        "return_date": "2025-04-13",
+        "departure_date": "2025-04-06",
         "prix_total": 3666,
         "nb_etapes": 2,
         "etapes": [
@@ -42,13 +42,46 @@
         },
         "prix_total": 3578,
         "nb_personnes_voyage": "1",
-        "departure_date": "2025-03-29",
-        "return_date": "2025-04-05",
+        "departure_date": "2025-04-04",
+        "return_date": "2025-04-11",
         "destination": "Tatooine",
         "nb_etapes": 2,
         "etapes": [
             "Tatooine",
             "Etoile"
+        ]
+    },
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_winterfell": "chateau_stark",
+        "hebergement_portreal": "donjon_royal",
+        "hebergement_meereen": "pyramide",
+        "activites_winterfell": [
+            "chasse"
+        ],
+        "activites_portreal": [
+            "trone"
+        ],
+        "activites_meereen": [
+            "gladiateur"
+        ],
+        "transport_winterfell": "chevaux",
+        "transport_portreal": "bateau",
+        "nb_personnes": {
+            "chasse": "1",
+            "trone": "1",
+            "gladiateur": "1"
+        },
+        "prix_total": 15900,
+        "nb_personnes_voyage": "3",
+        "departure_date": "2025-04-01",
+        "return_date": "2025-04-08",
+        "destination": "Westeros",
+        "nb_etapes": 3,
+        "etapes": [
+            "Winterfell",
+            "PortReal",
+            "Meereen"
         ]
     }
 ]

@@ -16,6 +16,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['deconnecter'])) {
 
 // Si l'utilisateur est connecté, récupérer ses informations de session
 $user = $_SESSION['user']; 
+
+
+// Récupérer les commandes depuis le fichier JSON
+$commandesJson = file_get_contents('Commande.json');
+$commandes = json_decode($commandesJson, true);
+
+// Filtrer les commandes de l'utilisateur connecté
+$mesVoyages = [];
+foreach ($commandes as $commande) {
+    if ($commande['status'] === 'accepted') {
+        foreach ($commande['options'] as $option) {
+            if ($option['user_id'] === $user['id']) {
+                $voyage = [
+                    'transaction_id' => $commande['transaction_id'],
+                    'date' => $commande['date'],
+                    'destination' => $option['destination'],
+                    'departure_date' => $option['departure_date'],
+                    'return_date' => $option['return_date'],
+                    'prix_total' => $option['prix_total']
+                ];
+                $mesVoyages[] = $voyage;
+            }
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -73,14 +98,30 @@ $user = $_SESSION['user'];
                     <button type="submit" name="deconnecter" class="button">Se déconnecter</button>
                 </form>           
             </div>
+            <div class="container">
+                <div class="Compte">
+                    <h2 class="h2">Mes voyages</h2>
+                    <div class="voyage-list">
+                        <?php if (empty($mesVoyages)): ?>
+                            <p class="no-voyages">Vous n'avez pas encore de voyages réservés.</p>
+                        <?php else: ?>
+                            <?php foreach ($mesVoyages as $voyage): ?>
+                                <a href="PageMesvoyages.php?id=<?php echo urlencode($voyage['transaction_id']); ?>" class="voyage-item">
+                                    <div class="voyage-destination"><?php echo htmlspecialchars($voyage['destination']); ?></div>
+                                    <div class="voyage-dates">
+                                        Du <?php echo date('d/m/Y', strtotime($voyage['departure_date'])); ?> 
+                                        au <?php echo date('d/m/Y', strtotime($voyage['return_date'])); ?>
+                                    </div>
+                                </a>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
+                    
+                </div>
+            </div>
             
         </div>
-        <div class="container">
-            <div class="Compte">
-                <h2 class="h2">Mes voyages</h2>
-                
-            </div>
-        </div>
+        
         <footer>
             <ul class="bas-de-page">
                 <li><a href="#">Mentions légales</a></li>

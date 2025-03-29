@@ -29,16 +29,19 @@ $options_file = 'options.json';
 $commandes_file = 'Commande.json';
 
 // Charger les données de l'utilisateur
-$user_choices = null;
+$last_choice = null;
 if (file_exists($options_file)) {
     $user_data = json_decode(file_get_contents($options_file), true);
-    foreach ($user_data as $data) {
+    // Trouver le dernier enregistrement pour cet utilisateur
+    foreach (array_reverse($user_data) as $data) {
         if (isset($data['user_id']) && $data['user_id'] == $user_id) {
-            $user_choices = $data;
-            $destination = $user_choices['destination'];
+            $last_choice = $data;
+            $destination = $last_choice['destination'];
+            break; 
         }
     }
 }
+
 
 // Vérifier la sécurité de la transaction
 $api_key = getAPIKey($vendeur);
@@ -57,7 +60,7 @@ $transaction_data = [
     'status' => $status,
     'date' => date('Y-m-d H:i:s'),
     'validation_securite' => $transaction_valide ? 'Validée' : 'Échouée',
-    'options' => $options_data,
+    'options' => $last_choice ? [$last_choice] : [], // On enregistre seulement le dernier choix
 ];
 
 // Enregistrer dans le fichier de commandes

@@ -1003,3 +1003,34 @@ th, td {
     background-color: #FFD700;
 
 }
+
+.voyage-list {
+    width: 100%;
+    margin-top: 20px;
+}
+.voyage-item {
+    display: block;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    text-decoration: none;
+    color: gold;
+    transition: background-color 0.3s;
+}
+.voyage-item:hover {
+    background: rgba(255, 255, 255, 0);
+}
+.voyage-destination {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.voyage-dates {
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+.no-voyages {
+    text-align: center;
+    padding: 20px;
+    color: gold;
+}
