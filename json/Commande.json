@@ -1,8 +1,8 @@
 [
     {
-        "transaction_id": "67e833932ec39",
+        "transaction_id": "67e962a68a846",
         "status": "accepted",
-        "date": "2025-03-29 17:53:29",
+        "date": "2025-03-30 15:28:11",
         "validation_securite": "Valid\u00e9e",
         "options": [
             {
@@ -17,26 +17,34 @@
                 ],
                 "transport_poudlard": "balais",
                 "nb_personnes": {
-                    "quidditch": "1",
-                    "degustation": "1"
+                    "quidditch": "2",
+                    "degustation": "2"
                 },
-                "nb_personnes_voyage": "1",
+                "nb_personnes_voyage": "2",
                 "destination": "Poudlard",
-                "return_date": "2025-04-13",
-                "departure_date": "2025-04-06",
-                "prix_total": 3666,
+                "return_date": "2025-04-08",
+                "departure_date": "2025-04-01",
+                "prix_total": 7442,
                 "nb_etapes": 2,
                 "etapes": [
                     "Poudlard",
                     "PreauLard"
-                ]
+                ],
+                "activite_prix": {
+                    "sorts": 25,
+                    "quidditch": 35,
+                    "hyppogriffe": 40,
+                    "zonko": 15,
+                    "degustation": 20,
+                    "honeydukes": 18
+                }
             }
         ]
     },
     {
-        "transaction_id": "67e833b09d41d",
+        "transaction_id": "67e966523e558",
         "status": "accepted",
-        "date": "2025-03-29 17:53:58",
+        "date": "2025-03-30 15:42:19",
         "validation_securite": "Valid\u00e9e",
         "options": [
             {
@@ -47,14 +55,16 @@
                 ],
                 "hebergement_etoile": "quartier_empereur",
                 "activites_etoile": [
+                    "tie_fighter",
                     "tir"
                 ],
                 "transport_tatooine": "faucon",
                 "nb_personnes": {
-                    "speeder": "1",
+                    "speeder": "3",
+                    "tie_fighter": "4",
                     "tir": "1"
                 },
-                "prix_total": 3578,
+                "prix_total": 4043,
                 "nb_personnes_voyage": "1",
                 "departure_date": "2025-04-04",
                 "return_date": "2025-04-11",
@@ -63,14 +73,22 @@
                 "etapes": [
                     "Tatooine",
                     "Etoile"
-                ]
+                ],
+                "activite_prix": {
+                    "jedi": 45,
+                    "speeder": 55,
+                    "palais_jabba": 20,
+                    "tie_fighter": 70,
+                    "tir": 20,
+                    "sith": 18
+                }
             }
         ]
     },
     {
-        "transaction_id": "67e839cc651e3",
+        "transaction_id": "67e969a89c500",
         "status": "accepted",
-        "date": "2025-03-29 18:20:04",
+        "date": "2025-03-30 15:56:32",
         "validation_securite": "Valid\u00e9e",
         "options": [
             {
@@ -92,9 +110,9 @@
                 "nb_personnes": {
                     "chasse": "1",
                     "trone": "1",
-                    "gladiateur": "1"
+                    "gladiateur": "3"
                 },
-                "prix_total": 15900,
+                "prix_total": 16196,
                 "nb_personnes_voyage": "3",
                 "departure_date": "2025-04-01",
                 "return_date": "2025-04-08",
@@ -104,82 +122,18 @@
                     "Winterfell",
                     "PortReal",
                     "Meereen"
-                ]
-            }
-        ]
-    },
-    {
-        "transaction_id": "67e83d77ae9cf",
-        "status": "accepted",
-        "date": "2025-03-29 18:35:42",
-        "validation_securite": "Valid\u00e9e",
-        "options": [
-            {
-                "user_id": "67e83d5f39f743.65669778",
-                "hebergement_poudlard": "serpentard",
-                "hebergement_preaulard": "sanglier",
-                "activites_poudlard": [
-                    "quidditch"
                 ],
-                "activites_preaulard": [
-                    "degustation"
-                ],
-                "transport_poudlard": "balais",
-                "nb_personnes": {
-                    "quidditch": "1",
-                    "degustation": "1"
-                },
-                "nb_personnes_voyage": "1",
-                "destination": "Poudlard",
-                "return_date": "2025-04-09",
-                "departure_date": "2025-04-02",
-                "prix_total": 3666,
-                "nb_etapes": 2,
-                "etapes": [
-                    "Poudlard",
-                    "PreauLard"
-                ]
-            }
-        ]
-    },
-    {
-        "transaction_id": "67e842869318f",
-        "status": "accepted",
-        "date": "2025-03-29 18:57:16",
-        "validation_securite": "Valid\u00e9e",
-        "options": [
-            {
-                "user_id": "67e84252008cd7.11035529",
-                "hebergement_winterfell": "chateau_stark",
-                "hebergement_portreal": "donjon_royal",
-                "hebergement_meereen": "pyramide",
-                "activites_winterfell": [
-                    "chasse"
-                ],
-                "activites_portreal": [
-                    "trone"
-                ],
-                "activites_meereen": [
-                    "gladiateur"
-                ],
-                "transport_winterfell": "chevaux",
-                "transport_portreal": "bateau",
-                "nb_personnes": {
-                    "chasse": "1",
-                    "trone": "1",
-                    "gladiateur": "1"
-                },
-                "prix_total": 5300,
-                "nb_personnes_voyage": "1",
-                "departure_date": "2025-04-04",
-                "return_date": "2025-04-11",
-                "destination": "Westeros",
-                "nb_etapes": 3,
-                "etapes": [
-                    "Winterfell",
-                    "PortReal",
-                    "Meereen"
-                ]
+                "activite_prix": {
+                    "combat": 20,
+                    "chasse": 35,
+                    "mur": 30,
+                    "tournoi": 12,
+                    "trone": 30,
+                    "fleuve": 50,
+                    "dragons": 100,
+                    "gladiateur": 77,
+                    "marche": 10
+                }
             }
         ]
     }

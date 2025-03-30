@@ -134,11 +134,19 @@ $total_etapes = $option_voyage['nb_etapes'];
                                     $activite_libelle = $activites_disponibles[$activite] ?? $activite;
                                     
                                     $nb_personnes = isset($option_voyage['nb_personnes'][$activite]) 
-                                        ? " (". $option_voyage['nb_personnes'][$activite] ." personnes)" 
-                                        : "";
+                                    ? intval($option_voyage['nb_personnes'][$activite]) 
+                                    : 0;
+
+                                    // Convertir le prix de l'activité en entier (si nécessaire)
+                                    $prix_activite = isset($option_voyage['activite_prix'][$activite]) 
+                                        ? intval($option_voyage['activite_prix'][$activite])
+                                        : 0;
+
+                                    // Calculer le prix total de l'activité
+                                    $prix_total_activite = $prix_activite * $nb_personnes;
                                     
-                                    echo "<li>" . htmlspecialchars($activite_libelle . $nb_personnes) . "</li>";
-                                }
+                                    echo "<li>" . htmlspecialchars($activite_libelle . " - " . $nb_personnes . " personne" . ($nb_personnes > 1 ? "s" : "")) . " - " . number_format($prix_total_activite, 2, ',', ' ') . " € </li>";
+                                 }
                             ?>
                         </ul>
                         <?php else: ?>

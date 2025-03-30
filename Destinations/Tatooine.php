@@ -11,6 +11,17 @@ $user_id = $_SESSION['user']['id'];
 
 $file_path = '../json/options.json';
 
+$activite_prix = [
+    
+    'jedi' => 45, 
+    'speeder' => 55, 
+    'palais_jabba' => 20, 
+
+    'tie_fighter' => 70, 
+    'tir' => 20,
+    'sith' => 18  
+];
+
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -31,28 +42,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nb_personnes_voyage = isset($_POST['nb_personnes_voyage']) ? $_POST['nb_personnes_voyage'] : null;
     $nb_personnes = [];
 
+    $activite_total_prix = 0;
+
     // Vérifiez chaque activité et ajoutez le nombre de personnes uniquement si l'activité est sélectionnée
     if (in_array('jedi', $activites_tatooine)) {
         $nb_personnes['jedi'] = $nb_personnes_jedi;
+        $personnes = $nb_personnes['jedi'];
+        $activite_total_prix += $personnes * $activite_prix['jedi'];
     }
     if (in_array('speeder', $activites_tatooine)) {
         $nb_personnes['speeder'] =  $nb_personnes_speeder;
+        $personnes = $nb_personnes['speeder'];
+        $activite_total_prix += $personnes * $activite_prix['speeder'];
     }
     if (in_array('palais_jabba', $activites_tatooine)) {
         $nb_personnes['palais_jabba'] = $nb_personnes_palaisjabba;
+        $personnes = $nb_personnes['palais_jabba'];
+        $activite_total_prix += $personnes * $activite_prix['palais_jabba'];
     }
     if (in_array('tie_fighter', $activites_etoile)) {
         $nb_personnes['tie_fighter'] = $nb_personnes_tie;
+        $personnes = $nb_personnes['tie_fighter'];
+        $activite_total_prix += $personnes * $activite_prix['tie_fighter'];
     }
     if (in_array('tir', $activites_etoile)) {
         $nb_personnes['tir'] =  $nb_personnes_tir;
+        $personnes = $nb_personnes['tir'];
+        $activite_total_prix += $personnes * $activite_prix['tir'];
     }
     if (in_array('sith', $activites_etoile)) {
         $nb_personnes['sith'] = $nb_personnes_sith;
+        $personnes = $nb_personnes['sith'];
+        $activite_total_prix += $personnes * $activite_prix['sith'];
     }
 
 $prix =3578;
-$prix_total = $prix * $nb_personnes_voyage;
+$prix_total = $prix * $nb_personnes_voyage + $activite_total_prix;
 $etapes = ['Tatooine', 'Etoile'];
 $return_date = null;
     if ($departure_date) {
@@ -77,7 +102,8 @@ $return_date = null;
         'return_date' => $return_date,
         'destination' => 'Tatooine',
         "nb_etapes"=> 2,
-        "etapes"=> $etapes
+        "etapes"=> $etapes,
+        'activite_prix' => $activite_prix 
     ];
 
   
@@ -174,7 +200,7 @@ $return_date = null;
                         <div class="activites-options">
                             <div>
                                 <input type="checkbox" id="jedi" name="activites_tatooine[]" value="jedi">
-                                <label for="jedi">Entraînement Jedi</label>
+                                <label for="jedi">Entraînement Jedi (<?php echo $activite_prix['jedi']; ?>€/personne)</label>
                                 
                                 <select id="nb_personnes_jedi" name="nb_personnes_jedi">
                                     <option value="1">1 personne</option>
@@ -185,7 +211,7 @@ $return_date = null;
                             </div>
                             <div>
                                 <input type="checkbox" id="speeder" name="activites_tatooine[]" value="speeder">
-                                <label for="speeder">Balade en speeder</label>
+                                <label for="speeder">Balade en speeder (<?php echo $activite_prix['speeder']; ?>€/personne)</label>
                                 
                                 <select id="nb_personnes_speeder" name="nb_personnes_speeder">
                                     <option value="1">1 personne</option>
@@ -196,7 +222,7 @@ $return_date = null;
                             </div>
                             <div>
                                 <input type="checkbox" id="palais_jabba" name="activites_tatooine[]" value="palais_jabba">
-                                <label for="palais_jabba">Visite du palais de Jabba</label>
+                                <label for="palais_jabba">Visite du palais de Jabba (<?php echo $activite_prix['palais_jabba']; ?>€/personne)</label>
                                 
                                 <select id="nb_personnes_palaisjabba" name="nb_personnes_palaisjabba">
                                     <option value="1">1 personne</option>
@@ -242,7 +268,7 @@ $return_date = null;
                         <div class="activites-options">
                             <div>
                                 <input type="checkbox" id="tie_fighter" name="activites_etoile[]" value="tie_fighter">
-                                <label for="tie_fighter">Entraînement au pilotage de TIE Fighter</label>
+                                <label for="tie_fighter">Entraînement au pilotage de TIE Fighter (<?php echo $activite_prix['tie_fighter']; ?>€/personne)</label>
                                 
                                 <select id="nb_personnes_tie" name="nb_personnes_tie">
                                     <option value="1">1 personne</option>
@@ -253,7 +279,7 @@ $return_date = null;
                             </div>
                             <div>
                                 <input type="checkbox" id="tir" name="activites_etoile[]" value="tir">
-                                <label for="tir">Tir de l'Etoile de la mort</label>
+                                <label for="tir">Tir de l'Etoile de la mort (<?php echo $activite_prix['tir']; ?>€/personne)</label>
                                 
                                 <select id="nb_personnes_tir" name="nb_personnes_tir">
                                     <option value="1">1 personne</option>
@@ -264,7 +290,7 @@ $return_date = null;
                             </div>
                             <div>
                                 <input type="checkbox" id="sith" name="activites_etoile[]" value="sith">
-                                <label for="sith">Entrainement des Sith</label>
+                                <label for="sith">Entrainement des Sith (<?php echo $activite_prix['sith']; ?>€/personne)</label>
                                 
                                 <select id="nb_personnes_sith" name="nb_personnes_sith">
                                     <option value="1">1 personne</option>

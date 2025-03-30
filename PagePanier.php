@@ -122,10 +122,18 @@ if (file_exists($etapes_file)) {
                                             
                                             // Afficher le nombre de personnes si disponible
                                             $nb_personnes = isset($user_choices['nb_personnes'][$activite]) 
-                                                ? " (". $user_choices['nb_personnes'][$activite] ." personnes)" 
-                                                : "";
-                                            
-                                            echo "<li>" . htmlspecialchars($activite_libelle . $nb_personnes) . "</li>";
+                                                ? intval($user_choices['nb_personnes'][$activite]) 
+                                                : 0;
+
+                                            // Convertir le prix de l'activité en entier (si nécessaire)
+                                            $prix_activite = isset($user_choices['activite_prix'][$activite]) 
+                                                ? intval($user_choices['activite_prix'][$activite])
+                                                : 0;
+
+                                            // Calculer le prix total de l'activité
+                                            $prix_total_activite = $prix_activite * $nb_personnes;
+                                             echo "<li>"  . htmlspecialchars($activite_libelle . "-" . $nb_personnes . " personne" . ($nb_personnes > 1 ? "s" : "")) . " - " . number_format($prix_total_activite, 2, ',', ' ') . " € " ."</li>";
+
                                         }
                                     } else {
                                         echo "<li>Aucune activité sélectionnée</li>";

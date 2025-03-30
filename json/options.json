@@ -11,19 +11,27 @@
         ],
         "transport_poudlard": "balais",
         "nb_personnes": {
-            "quidditch": "1",
-            "degustation": "1"
+            "quidditch": "2",
+            "degustation": "2"
         },
-        "nb_personnes_voyage": "1",
+        "nb_personnes_voyage": "2",
         "destination": "Poudlard",
-        "return_date": "2025-04-13",
-        "departure_date": "2025-04-06",
-        "prix_total": 3666,
+        "return_date": "2025-04-08",
+        "departure_date": "2025-04-01",
+        "prix_total": 7442,
         "nb_etapes": 2,
         "etapes": [
             "Poudlard",
             "PreauLard"
-        ]
+        ],
+        "activite_prix": {
+            "sorts": 25,
+            "quidditch": 35,
+            "hyppogriffe": 40,
+            "zonko": 15,
+            "degustation": 20,
+            "honeydukes": 18
+        }
     },
     {
         "user_id": "67e1306025b5f4.22789385",
@@ -33,14 +41,16 @@
         ],
         "hebergement_etoile": "quartier_empereur",
         "activites_etoile": [
+            "tie_fighter",
             "tir"
         ],
         "transport_tatooine": "faucon",
         "nb_personnes": {
-            "speeder": "1",
+            "speeder": "3",
+            "tie_fighter": "4",
             "tir": "1"
         },
-        "prix_total": 3578,
+        "prix_total": 4043,
         "nb_personnes_voyage": "1",
         "departure_date": "2025-04-04",
         "return_date": "2025-04-11",
@@ -49,7 +59,15 @@
         "etapes": [
             "Tatooine",
             "Etoile"
-        ]
+        ],
+        "activite_prix": {
+            "jedi": 45,
+            "speeder": 55,
+            "palais_jabba": 20,
+            "tie_fighter": 70,
+            "tir": 20,
+            "sith": 18
+        }
     },
     {
         "user_id": "67e1306025b5f4.22789385",
@@ -70,9 +88,9 @@
         "nb_personnes": {
             "chasse": "1",
             "trone": "1",
-            "gladiateur": "1"
+            "gladiateur": "3"
         },
-        "prix_total": 15900,
+        "prix_total": 16196,
         "nb_personnes_voyage": "3",
         "departure_date": "2025-04-01",
         "return_date": "2025-04-08",
@@ -82,65 +100,17 @@
             "Winterfell",
             "PortReal",
             "Meereen"
-        ]
-    },
-    {
-        "user_id": "67e83d5f39f743.65669778",
-        "hebergement_poudlard": "serpentard",
-        "hebergement_preaulard": "sanglier",
-        "activites_poudlard": [
-            "quidditch"
         ],
-        "activites_preaulard": [
-            "degustation"
-        ],
-        "transport_poudlard": "balais",
-        "nb_personnes": {
-            "quidditch": "1",
-            "degustation": "1"
-        },
-        "nb_personnes_voyage": "1",
-        "destination": "Poudlard",
-        "return_date": "2025-04-09",
-        "departure_date": "2025-04-02",
-        "prix_total": 3666,
-        "nb_etapes": 2,
-        "etapes": [
-            "Poudlard",
-            "PreauLard"
-        ]
-    },
-    {
-        "user_id": "67e84252008cd7.11035529",
-        "hebergement_winterfell": "chateau_stark",
-        "hebergement_portreal": "donjon_royal",
-        "hebergement_meereen": "pyramide",
-        "activites_winterfell": [
-            "chasse"
-        ],
-        "activites_portreal": [
-            "trone"
-        ],
-        "activites_meereen": [
-            "gladiateur"
-        ],
-        "transport_winterfell": "chevaux",
-        "transport_portreal": "bateau",
-        "nb_personnes": {
-            "chasse": "1",
-            "trone": "1",
-            "gladiateur": "1"
-        },
-        "prix_total": 5300,
-        "nb_personnes_voyage": "1",
-        "departure_date": "2025-04-04",
-        "return_date": "2025-04-11",
-        "destination": "Westeros",
-        "nb_etapes": 3,
-        "etapes": [
-            "Winterfell",
-            "PortReal",
-            "Meereen"
-        ]
+        "activite_prix": {
+            "combat": 20,
+            "chasse": 35,
+            "mur": 30,
+            "tournoi": 12,
+            "trone": 30,
+            "fleuve": 50,
+            "dragons": 100,
+            "gladiateur": 77,
+            "marche": 10
+        }
     }
 ]

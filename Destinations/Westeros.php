@@ -10,13 +10,26 @@ if (!isset($_SESSION['user'])) {
 // Récupérer l'ID de l'utilisateur connecté
 $user_id = $_SESSION['user']['id'];
 
-// Fichier JSON pour stocker les options
+
 $file_path = '../json/options.json';
+
+$activite_prix = [
+    
+    'combat' => 20, 
+    'chasse' => 35, 
+    'mur' => 30, 
+    'tournoi' => 12,
+    'trone' => 30, 
+    'fleuve' => 50,
+    'dragons' => 100,
+    'gladiateur' => 77,
+    'marche' => 10  
+];
 
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupérer les données du formulaire avec isset() pour éviter les erreurs
+    
     $hebergement_winterfell = isset($_POST['hebergement_winterfell']) ? $_POST['hebergement_winterfell'] : null;
     $hebergement_portreal = isset($_POST['hebergement_portreal']) ? $_POST['hebergement_portreal'] : null;
     $hebergement_meereen = isset($_POST['hebergement_meereen']) ? $_POST['hebergement_meereen'] : null;
@@ -29,51 +42,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $transport_portreal = isset($_POST['transport_portreal']) ? $_POST['transport_portreal'] : [];
     $departure_date = isset($_POST['departure_date']) ? $_POST['departure_date'] : null; 
 
-
-    // Récupérer les valeurs des nombres de personnes pour chaque activité
-    $nb_personnes_combat = isset($_POST['nb_personnes_combat']) ? $_POST['nb_personnes_combat'] : null;
-    $nb_personnes_chasse= isset($_POST['nb_personnes_chasse']) ? $_POST['nb_personnes_chasse'] : null;
-    $nb_personnes_mur = isset($_POST['nb_personnes_mur']) ? $_POST['nb_personnes_mur'] : null;
-    $nb_personnes_tournoi = isset($_POST['nb_personnes_tournoi']) ? $_POST['nb_personnes_tournoi'] : null;
-    $nb_personnes_trone = isset($_POST['nb_personnes_trone']) ? $_POST['nb_personnes_trone'] : null;
-    $nb_personnes_fleuve = isset($_POST['nb_personnes_fleuve']) ? $_POST['nb_personnes_fleuve'] : null;
-    $nb_personnes_dragons = isset($_POST['nb_personnes_dragons']) ? $_POST['nb_personnes_dragons'] : null;
-    $nb_personnes_gladiateur = isset($_POST['nb_personnes_gladiateur']) ? $_POST['nb_personnes_gladiateur'] : null;
-    $nb_personnes_marche = isset($_POST['nb_personnes_marche']) ? $_POST['nb_personnes_marche'] : null;
     $nb_personnes_voyage = isset($_POST['nb_personnes_voyage']) ? $_POST['nb_personnes_voyage'] : null;
     $nb_personnes = [];
 
-    $prix =5300;
-    $prix_total = $prix * $nb_personnes_voyage;
+    $activite_total_prix = 0;
+
 
     // Ajouter le nombre de personnes pour chaque activité
     if (in_array('combat', $activites_winterfell)) {
-        $nb_personnes['combat'] = $nb_personnes_combat;
+        $nb_personnes['combat'] = isset($_POST['nb_personnes_combat']) ? $_POST['nb_personnes_combat'] : null;
+        $personnes = $nb_personnes['combat'];
+        $activite_total_prix += $personnes * $activite_prix['combat'];
     }
     if (in_array('chasse', $activites_winterfell)) {
-        $nb_personnes['chasse'] = $nb_personnes_chasse;
+        $nb_personnes['chasse'] = isset($_POST['nb_personnes_chasse']) ? $_POST['nb_personnes_chasse'] : null;
+        $personnes = $nb_personnes['chasse'];
+        $activite_total_prix += $personnes * $activite_prix['chasse'];
     }
     if (in_array('mur', $activites_winterfell)) {
-        $nb_personnes['mur'] = $nb_personnes_mur;
+        $nb_personnes['mur'] = isset($_POST['nb_personnes_mur']) ? $_POST['nb_personnes_mur'] : null;
+        $personnes = $nb_personnes['mur'];
+        $activite_total_prix += $personnes * $activite_prix['mur'];
     }
     if (in_array('tournoi', $activites_portreal)) {
-        $nb_personnes['tournoi'] = $nb_personnes_tournoi;
+        $nb_personnes['tournoi'] = isset($_POST['nb_personnes_tournoi']) ? $_POST['nb_personnes_tournoi'] : null;
+        $personnes = $nb_personnes['tournoi'];
+        $activite_total_prix += $personnes * $activite_prix['tournoi'];
     }
     if (in_array('trone', $activites_portreal)) {
-        $nb_personnes['trone'] = $nb_personnes_trone;
+        $nb_personnes['trone'] = isset($_POST['nb_personnes_trone']) ? $_POST['nb_personnes_trone'] : null;
+        $personnes = $nb_personnes['trone'];
+        $activite_total_prix += $personnes * $activite_prix['trone'];
     }
     if (in_array('fleuve', $activites_portreal)) {
-        $nb_personnes['fleuve'] = $nb_personnes_fleuve;
+        $nb_personnes['fleuve'] =  isset($_POST['nb_personnes_fleuve']) ? $_POST['nb_personnes_fleuve'] : null;
+        $personnes = $nb_personnes['fleuve'];
+        $activite_total_prix += $personnes * $activite_prix['fleuve'];
     }
     if (in_array('dragons', $activites_meereen)) {
-        $nb_personnes['dragons'] = $nb_personnes_dragons;
+        $nb_personnes['dragons'] = isset($_POST['nb_personnes_dragons']) ? $_POST['nb_personnes_dragons'] : null;
+        $personnes = $nb_personnes['dragons'];
+        $activite_total_prix += $personnes * $activite_prix['dragons'];
     }
     if (in_array('gladiateur', $activites_meereen)) {
-        $nb_personnes['gladiateur'] = $nb_personnes_gladiateur;
+        $nb_personnes['gladiateur'] = isset($_POST['nb_personnes_gladiateur']) ? $_POST['nb_personnes_gladiateur'] : null;
+        $personnes = $nb_personnes['gladiateur'];
+        $activite_total_prix += $personnes * $activite_prix['gladiateur'];
     }
     if (in_array('marche', $activites_meereen)) {
-        $nb_personnes['marche'] = $nb_personnes_marche;
+        $nb_personnes['marche'] = $nb_personnes_marche = isset($_POST['nb_personnes_marche']) ? $_POST['nb_personnes_marche'] : null;
+        $personnes = $nb_personnes['marche'];
+        $activite_total_prix += $personnes * $activite_prix['marche'];
     }
+
+    $prix =5300;
+    $prix_total = $prix * $nb_personnes_voyage + $activite_total_prix ;
 $etapes = ["Winterfell", "PortReal", "Meereen"];
 $return_date = null;
     if ($departure_date) {
@@ -84,8 +107,6 @@ $return_date = null;
         $return_date = date("Y-m-d", $return_timestamp);
     }
 
-    
-    // Structure des données à enregistrer
     $user_choices = [
         'user_id' => $user_id,
         'hebergement_winterfell' => $hebergement_winterfell,
@@ -100,25 +121,21 @@ $return_date = null;
         'prix_total' => $prix_total,
         'nb_personnes_voyage' => $nb_personnes_voyage,
         'departure_date' => $departure_date,
-        'return_date' => $return_date,
-        
+        'return_date' => $return_date, 
         'destination' => 'Westeros',
         "nb_etapes"=> 3,
-        "etapes"=> $etapes
+        "etapes"=> $etapes,
+        'activite_prix' => $activite_prix
     ];
 
-    // Vérifier si le fichier existe et si des données existent déjà
     if (file_exists($file_path)) {
-        // Lire les données existantes
         $existing_data = json_decode(file_get_contents($file_path), true);
         $existing_data[] = $user_choices;
         
 
     } 
-    // Enregistrer les données mises à jour dans le fichier JSON
     file_put_contents($file_path, json_encode($existing_data, JSON_PRETTY_PRINT));
 
-    // Rediriger vers la page du panier
     header('Location: ../PagePanier.php');
     exit();
 }
@@ -199,7 +216,7 @@ $return_date = null;
                             <div>
                                
                                 <input type="checkbox" id="combat" name="activites_winterfell[]" value="combat">
-                                <label for="combat">Entraînement au combat</label>
+                                <label for="combat">Entraînement au combat  (<?php echo $activite_prix['combat']; ?>€/personne)</label>
 
                                 <select id="nb_personnes_combat" name="nb_personnes_combat">
                                     <option value="1">1 personne</option>
@@ -210,7 +227,7 @@ $return_date = null;
                             </div>
                             <div>
                                 <input type="checkbox" id="chasse" name="activites_winterfell[]" value="chasse">
-                                <label for="chasse">Chasse avec les loups</label>
+                                <label for="chasse">Chasse avec les loups  (<?php echo $activite_prix['chasse']; ?>€/personne)</label>
                                 
                                 <select id="nb_personnes_chasse" name="nb_personnes_chasse">
                                     <option value="1">1 personne</option>
@@ -221,7 +238,7 @@ $return_date = null;
                             </div>
                             <div>
                                 <input type="checkbox" id="mur" name="activites_winterfell[]" value="mur">
-                                <label for="mur">Visite du Mur</label>
+                                <label for="mur">Visite du Mur  (<?php echo $activite_prix['mur']; ?>€/personne)</label>
                                 
                                 <select id="nb_personnes_mur" name="nb_personnes_mur">
                                     <option value="1">1 personne</option>
@@ -268,7 +285,7 @@ $return_date = null;
                             <div>
                                 
                                 <input type="checkbox" id="tournoi" name="activites_portreal[]" value="tournoi">
-                                <label for="tournoi">Tournoi de combat</label>
+                                <label for="tournoi">Tournoi de combat  (<?php echo $activite_prix['tournoi']; ?>€/personne)</label>
 
                                 <select id="nb_personnes_tournoi" name="nb_personnes_tournoi">
                                     <option value="1">1 personne</option>
@@ -279,7 +296,7 @@ $return_date = null;
                             </div>
                             <div>
                                 <input type="checkbox" id="trone" name="activites_portreal[]" value="trone">
-                                <label for="trone">Photos sur le Trône de Fer</label>
+                                <label for="trone">Photos sur le Trône de Fer  (<?php echo $activite_prix['trone']; ?>€/personne)</label>
                                 
                                 <select id="nb_personnes_trone" name="nb_personnes_trone">
                                     <option value="1">1 personne</option>
@@ -290,7 +307,7 @@ $return_date = null;
                             </div>
                             <div>
                                 <input type="checkbox" id="fleuve" name="activites_portreal[]" value="fleuve">
-                                <label for="fleuve">Balade en bateau sur le Fleuve Noir</label>
+                                <label for="fleuve">Balade en bateau sur le Fleuve Noir  (<?php echo $activite_prix['fleuve']; ?>€/personne)</label>
                                 
                                 <select id="nb_personnes_fleuve" name="nb_personnes_fleuve">
                                     <option value="1">1 personne</option>
@@ -334,7 +351,7 @@ $return_date = null;
                             <div>
                                 
                                 <input type="checkbox" id="dragons" name="activites_meereen[]" value="dragons">
-                                <label for="dragons">Dompter des dragons</label>
+                                <label for="dragons">Dompter des dragons  (<?php echo $activite_prix['dragons']; ?>€/personne)</label>
 
                                 <select id="nb_personnes_dragons" name="nb_personnes_dragons">
                                     <option value="1">1 personne</option>
@@ -345,7 +362,7 @@ $return_date = null;
                             </div>
                             <div>
                                 <input type="checkbox" id="gladiateur" name="activites_meereen[]" value="gladiateur">
-                                <label for="gladiateur">Assistez aux combats de gladiateurs</label>
+                                <label for="gladiateur">Assistez aux combats de gladiateurs  (<?php echo $activite_prix['gladiateur']; ?>€/personne)</label>
                                 
                                 <select id="nb_personnes_gladiateur" name="nb_personnes_gladiateur">
                                     <option value="1">1 personne</option>
@@ -356,7 +373,7 @@ $return_date = null;
                             </div>
                             <div>
                                 <input type="checkbox" id="marche" name="activites_meereen[]" value="marche">
-                                <label for="marche">Marché d’Essos</label>
+                                <label for="marche">Marché d’Essos  (<?php echo $activite_prix['marche']; ?>€/personne)</label>
                                 <select id="nb_personnes_marche" name="nb_personnes_marche">
                                     <option value="1">1 personne</option>
                                     <option value="2">2 personnes</option>
