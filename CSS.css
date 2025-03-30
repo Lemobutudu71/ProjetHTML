@@ -139,11 +139,17 @@ header .menu li a:hover {
     font-weight: bold;
     transition: all 0.3s ease-in-out;
     margin-top: 50px;
-    
     border: 2px solid #FFD700;
     transition: 0.85s;
     text-transform: uppercase;
 }
+
+.buttons-container {
+    display: flex; 
+    justify-content: space-around; 
+    gap: 10px; 
+}
+
 
 .Page-Accueil-button:hover {
     background: gold; 

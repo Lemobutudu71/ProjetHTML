@@ -155,8 +155,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 Traversez le Chemin de Traverse, goûtez aux chocogrenouilles et vivez une aventure digne des plus grands sorciers !</p>
             
             <div class="buttons-container">
-                <a href="#poudlard" class="Page-Accueil-button">JOUR 1-4 : Poudlard</a>
-                <a href="#chemin-traverse" class="Page-Accueil-button">JOUR 5-7 : Pré-au-lard</a>
+                <span><a href="#poudlard" class="Page-Accueil-button">JOUR 1-4 : Poudlard</a></span>
+                <span><a href="#chemin-traverse" class="Page-Accueil-button">JOUR 5-7 : Pré-au-lard</a></span>
             </div>
         
         <form action="Poudlard.php" method="POST">

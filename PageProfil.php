@@ -98,7 +98,7 @@ foreach ($commandes as $commande) {
                     <button type="submit" name="deconnecter" class="button">Se déconnecter</button>
                 </form>           
             </div>
-            <div class="container">
+        
                 <div class="Compte">
                     <h2 class="h2">Mes voyages</h2>
                     <div class="voyage-list">
@@ -118,7 +118,7 @@ foreach ($commandes as $commande) {
                     </div>
                     
                 </div>
-            </div>
+            
             
         </div>
         
