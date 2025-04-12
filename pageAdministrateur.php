@@ -11,7 +11,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
 $file = 'json/utilisateur.json';
 $users = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
 
-// Pagination
+
 $usersPerPage = 2; // Nombre d'utilisateurs par page
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; // Récupérer la page actuelle
 $totalUsers = count($users);
