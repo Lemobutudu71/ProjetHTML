@@ -1,3 +1,136 @@
 [
-    
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_poudlard": "serpentard",
+        "hebergement_preaulard": "cabane-hurlante",
+        "activites_poudlard": [
+            "sorts",
+            "quidditch"
+        ],
+        "activites_preaulard": [
+            "honeydukes"
+        ],
+        "transport_poudlard": "balais",
+        "nb_personnes": {
+            "sorts": "1",
+            "quidditch": "3",
+            "honeydukes": "2"
+        },
+        "nb_personnes_voyage": "1",
+        "destination": "Poudlard",
+        "return_date": "2025-04-10",
+        "departure_date": "2025-04-03",
+        "prix_total": 3832,
+        "nb_etapes": 2,
+        "etapes": [
+            "Poudlard",
+            "PreauLard"
+        ],
+        "activite_prix": {
+            "sorts": 25,
+            "quidditch": 35,
+            "hyppogriffe": 40,
+            "zonko": 15,
+            "degustation": 20,
+            "honeydukes": 18
+        }
+    },
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_tatooine": "palais_jabba",
+        "activites_tatooine": [],
+        "hebergement_etoile": "quartier_empereur",
+        "activites_etoile": [],
+        "transport_tatooine": "faucon",
+        "nb_personnes": [],
+        "prix_total": 3578,
+        "nb_personnes_voyage": "1",
+        "departure_date": "2025-03-27",
+        "return_date": "2025-04-03",
+        "destination": "Tatooine",
+        "nb_etapes": 2,
+        "etapes": [
+            "Tatooine",
+            "Etoile"
+        ],
+        "activite_prix": {
+            "jedi": 45,
+            "speeder": 55,
+            "palais_jabba": 20,
+            "tie_fighter": 70,
+            "tir": 20,
+            "sith": 18
+        }
+    },
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_poudlard": "poufsoufle",
+        "hebergement_preaulard": "sanglier",
+        "activites_poudlard": [
+            "sorts",
+            "quidditch"
+        ],
+        "activites_preaulard": [
+            "degustation"
+        ],
+        "transport_poudlard": "portoloin",
+        "nb_personnes": {
+            "sorts": "3",
+            "quidditch": "1",
+            "degustation": "1"
+        },
+        "nb_personnes_voyage": "3",
+        "destination": "Poudlard",
+        "return_date": "2025-04-10",
+        "departure_date": "2025-04-03",
+        "prix_total": 11128,
+        "nb_etapes": 2,
+        "etapes": [
+            "Poudlard",
+            "PreauLard"
+        ],
+        "activite_prix": {
+            "sorts": 25,
+            "quidditch": 35,
+            "hyppogriffe": 40,
+            "zonko": 15,
+            "degustation": 20,
+            "honeydukes": 18
+        }
+    },
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_poudlard": "serpentard",
+        "hebergement_preaulard": "sanglier",
+        "activites_poudlard": [],
+        "activites_preaulard": [
+            "zonko",
+            "degustation",
+            "honeydukes"
+        ],
+        "transport_poudlard": "balais",
+        "nb_personnes": {
+            "zonko": "1",
+            "degustation": "1",
+            "honeydukes": "1"
+        },
+        "nb_personnes_voyage": "1",
+        "destination": "Poudlard",
+        "return_date": "2025-05-05",
+        "departure_date": "2025-04-28",
+        "prix_total": 3719,
+        "nb_etapes": 2,
+        "etapes": [
+            "Poudlard",
+            "PreauLard"
+        ],
+        "activite_prix": {
+            "sorts": 25,
+            "quidditch": 35,
+            "hyppogriffe": 40,
+            "zonko": 15,
+            "degustation": 20,
+            "honeydukes": 18
+        }
+    }
 ]
