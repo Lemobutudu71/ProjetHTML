@@ -121,5 +121,61 @@
                 }
             }
         ]
+    },
+    {
+        "transaction_id": "67fb8419e06c4",
+        "status": "accepted",
+        "date": "2025-04-13 09:30:40",
+        "validation_securite": "Valid\u00e9e",
+        "options": [
+            {
+                "user_id": "67e1306025b5f4.22789385",
+                "hebergement_winterfell": "auberge",
+                "hebergement_portreal": "donjon_royal",
+                "hebergement_meereen": "caverne_dragons",
+                "activites_winterfell": [
+                    "combat",
+                    "chasse"
+                ],
+                "activites_portreal": [
+                    "tournoi",
+                    "trone"
+                ],
+                "activites_meereen": [
+                    "dragons"
+                ],
+                "transport_winterfell": "pieds",
+                "transport_portreal": "dos_dragon",
+                "nb_personnes": {
+                    "combat": "2",
+                    "chasse": "3",
+                    "tournoi": "1",
+                    "trone": "4",
+                    "dragons": "3"
+                },
+                "prix_total": 16477,
+                "nb_personnes_voyage": "3",
+                "departure_date": "2025-05-06",
+                "return_date": "2025-05-13",
+                "destination": "Westeros",
+                "nb_etapes": 3,
+                "etapes": [
+                    "Winterfell",
+                    "PortReal",
+                    "Meereen"
+                ],
+                "activite_prix": {
+                    "combat": 20,
+                    "chasse": 35,
+                    "mur": 30,
+                    "tournoi": 12,
+                    "trone": 30,
+                    "fleuve": 50,
+                    "dragons": 100,
+                    "gladiateur": 77,
+                    "marche": 10
+                }
+            }
+        ]
     }
 ]

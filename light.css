@@ -1,5 +1,5 @@
 :root {
-    --color-gold: gold;
+    --color-gold: rgb(250, 250, 249);
     --color-black: black;
     --color-white: white;
 
@@ -108,7 +108,7 @@ header .menu li a:hover {
     }
 
     header .logo {
-        height: 60px; 
+        height: 70px; 
     }
 
     header .menu {
@@ -120,7 +120,6 @@ header .menu li a:hover {
     header .menu li {
         margin: 5px 0;
     }
-    
 }
 
 .Page-Accueil-text {
@@ -212,7 +211,7 @@ footer .bas-de-page li a:hover {
     text-decoration: underline;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
     footer .bas-de-page {
         flex-direction: column; 
         align-items: center;
@@ -1095,9 +1094,9 @@ th, td {
   }
 
   .fa-sun {
-    color: #f5e102; /* Par exemple, orange */
+    color: #f5e102; 
   }
   
   .fa-moon {
-    color: #f9f9f9; /* Par exemple, bleu */
+    color: #f9f9f9; 
   }

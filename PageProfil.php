@@ -49,7 +49,11 @@ foreach ($commandes as $commande) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieTrip</title>
-    <link rel="stylesheet" href="CSS.css">
+    <link id="theme" rel="stylesheet" href="CSS.css">
+    <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    >
 </head>
 <body>
     <section class="Page-Accueil">
@@ -65,6 +69,14 @@ foreach ($commandes as $commande) {
                 <li><a href="PageAccueil2.php">Rechercher</a></li>
                 <li><a href="PagePanier.php">Mon panier</a></li>
                 <li><a href="PageProfil.php">Profil</a></li>
+                <div class="toggle-container">                        
+                    <i class="fas fa-moon"></i>
+                    <label class="switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                    </label>
+                    <i class="fas fa-sun"></i>        
+                </div>
             </ul>
         </header>
         <div class="container">
@@ -131,5 +143,6 @@ foreach ($commandes as $commande) {
             </ul>
         </footer> 
     </section>
+    <script src="Javascript/Theme.js"></script>
 </body>
 </html>

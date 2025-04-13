@@ -14,7 +14,11 @@ if (!isset($_SESSION['user'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieTrip</title>
-    <link rel="stylesheet" href="../CSS.css">
+    <link id="theme" rel="stylesheet" href="../CSS.css">
+    <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    >
 </head>
 <body>
     <section class="Page-Accueil">
@@ -30,6 +34,16 @@ if (!isset($_SESSION['user'])) {
                 <li><a href="../PageAccueil2.php">Rechercher</a></li>
                 <li><a href="../PageInscription.php">Se connecter</a></li>
                 <li><a href="../PageProfil.php">Profil</a></li>
+                <div class="toggle-container">                        
+                        <i class="fas fa-moon"></i>
+                        <!-- Interrupteur personnalisé -->
+                        <label class="switch">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
+                        </label>
+                        <i class="fas fa-sun"></i>
+                        
+                </div>
             </ul>
         </header>
         
@@ -55,6 +69,7 @@ if (!isset($_SESSION['user'])) {
             </ul>
         </footer>
     </section>
+    <script src="../Javascript/Theme.js"></script>
 
     
 </body>
