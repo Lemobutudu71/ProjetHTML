@@ -31,6 +31,7 @@ $usersToShow = array_slice($users, $startIndex, $usersPerPage);
     <link 
     rel="stylesheet" 
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <script src="/test/Projet/Javascript/Theme.js" defer></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -46,7 +47,7 @@ $usersToShow = array_slice($users, $startIndex, $usersPerPage);
             }
         });
     </script>
-    >
+    
 </head>
 <body>
     <section class="Page-Accueil">
