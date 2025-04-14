@@ -19,6 +19,21 @@ if (!isset($_SESSION['user'])) {
     rel="stylesheet" 
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     >
+    <script src="/test/Projet/Javascript/Theme.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const savedTheme = getCookie("theme");
+            if (savedTheme === "light") {
+                applyTheme("light");
+            } else {
+                applyTheme("default");
+            }
+            const toggle = document.getElementById("theme-toggle");
+            if (toggle) {
+                toggle.checked = (savedTheme === "light");
+            }
+        });
+    </script>
 </head>
 <body>
     <section class="Page-Accueil">
@@ -66,7 +81,7 @@ if (!isset($_SESSION['user'])) {
             </ul>
         </footer>
     </section>
-    <script src="../Javascript/Theme.js"></script>
+   
 
 
     

@@ -64,6 +64,21 @@ $_SESSION['control'] = $control;
     rel="stylesheet" 
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     >
+    <script src="/test/Projet/Javascript/Theme.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const savedTheme = getCookie("theme");
+            if (savedTheme === "light") {
+                applyTheme("light");
+            } else {
+                applyTheme("default");
+            }
+            const toggle = document.getElementById("theme-toggle");
+            if (toggle) {
+                toggle.checked = (savedTheme === "light");
+            }
+        });
+    </script>
     <title>Page de Paiement</title>
 </head>
 <body>
@@ -122,6 +137,6 @@ $_SESSION['control'] = $control;
             </ul>
         </footer>
     </section>
-    <script src="Javascript/Theme.js"></script>
+    
 </body>
 </html>

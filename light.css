@@ -54,8 +54,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background:  linear-gradient(var(--color-background), var(--color-background2));
-    z-index: -1; 
+   
+    
 }
 
 /* Header */
@@ -1038,11 +1038,10 @@ th, td {
 .toggle-container {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem; /* Espace entre les éléments */
-    font-size: 1.2rem; /* Agrandir légèrement les icônes */
+    gap: 0.5rem; 
+    font-size: 1.2rem; 
   }
 
-  /* Styles de l'interrupteur */
   .switch {
     position: relative;
     display: inline-block;
@@ -1050,7 +1049,7 @@ th, td {
     height: 25px;
   }
 
-  /* Masquer la case à cocher d'origine */
+
   .switch input {
     opacity: 0;
     width: 0;
@@ -1059,7 +1058,6 @@ th, td {
     padding: 0;
   }
 
-  /* Slider qui va représenter le fond de l'interrupteur */
   .slider {
     position: absolute;
     cursor: pointer;
@@ -1067,12 +1065,12 @@ th, td {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #222528; /* Couleur du fond quand c'est éteint */
+    background-color: #222528; 
     transition: .4s;
-    border-radius: 25px; /* Coins arrondis */
+    border-radius: 25px; 
   }
 
-  /* Le petit rond qui se déplace sur le slider */
+
   .slider:before {
     position: absolute;
     content: "";
@@ -1085,7 +1083,7 @@ th, td {
     border-radius: 50%;
   }
 
-  /* Quand la case est cochée, changer la couleur du fond et déplacer le rond */
+ 
   input:checked + .slider {
     background-color:#ccc; 
   }
