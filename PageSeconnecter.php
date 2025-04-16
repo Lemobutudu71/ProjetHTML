@@ -111,9 +111,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php if (isset($error_message) && $error_message != ''): ?>
                     <p style="color: red;"><?php echo $error_message; ?></p>
                 <?php endif; ?>
-                <form action="PageSeconnecter.php" method="post">
+                <div class="form-error" id="registerError"></div>
+                <form id="loginForm" action="PageSeconnecter.php" method="post">
                     <input class="champs" name="email" type="email" placeholder="Email" required>
-                    <input class="champs" name="password" type="password" placeholder="Mot de passe" required>
+                    <div class="password-container">
+                        <input class="champs" name="password" type="password" id="loginPassword" placeholder="Mot de passe" required>
+                        <i class="fas fa-eye toggle-password" data-for="loginPassword" onclick="togglePassword('loginPassword')"></i>
+                    </div>
                     <button class="button" type="submit">Se connecter</button>
                 </form>
                 <p class="redirection"><a href="#">Mot de passe oublié ?</a></p>
@@ -129,6 +133,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </ul>
         </footer>
     </section>
-   
+    <script src="Javascript/Icone.js"></script>
+    <script src="Javascript/Connexion.js"></script>
+
 </body>
 </html>

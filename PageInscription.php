@@ -117,7 +117,8 @@
                 <?php if (isset($error_message) && $error_message != ""): ?>
                     <p style="color: red;"><?php echo $error_message; ?></p>
                 <?php endif; ?>
-                <form action="PageInscription.php" method="post">
+                <div class="form-error" id="registerError"></div>
+                <form id="registerForm" action="PageInscription.php" method="post">
                     <input class="champs" name="nom" type="text" placeholder="Nom" required>
                     <input class="champs" name="prenom" type="text" placeholder="Prénom" required>
                     <input class="champs" name="email" type="email" placeholder="Email" required>
@@ -125,7 +126,10 @@
                         <option value="user">Utilisateur</option>
                         <option value="admin">Administrateur</option>
                     </select>
-                    <input class="champs" name="password" type="password" placeholder="Mot de passe" required>
+                    <div class="password-container">
+                        <input class="champs" name="password" type="password" id="registerPassword" placeholder="Mot de passe" required>
+                        <i class="fas fa-eye toggle-password" data-for="registerPassword" onclick="togglePassword('registerPassword')"></i>
+                    </div>
                     <button class="button" type="submit">S'inscrire</button>
                 </form>
                 <p class="redirection"><a href="PageSeconnecter.php">Déjà un compte ?</a></p>
@@ -142,7 +146,8 @@
             </ul>
         </footer>
     </section>
-    
+    <script src="Javascript/Icone.js"></script>
+    <script src="Javascript/FormVerif.js"></script>
     
 </body>
 </html>

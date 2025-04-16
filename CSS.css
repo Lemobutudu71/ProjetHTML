@@ -1100,3 +1100,23 @@ th, td {
   .fa-moon {
     color: #f5e102; 
   }
+
+  .password-container {
+    position: relative;
+    width: 100%;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--color-gold);
+}
+
+.form-error {
+    margin-bottom: 10px;
+    font-size: 14px;
+    
+}
