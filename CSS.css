@@ -18,6 +18,7 @@
     --color-button-non: #aa711c;
     --color-button-non-hover:#6b4813;
     --color-rgba-51: rgba(51, 50, 50, 0.5);
+    --color-champs-profil: #666;
 }
 * {
     margin: 0;
@@ -1067,7 +1068,7 @@ th, td {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #222528; 
+    background-color: var(--color-rgba-51); 
     transition: .4s;
     border-radius: 25px; 
   }
@@ -1080,25 +1081,25 @@ th, td {
     width: 19px;
     left: 3px;
     bottom: 3px;
-    background-color: white;
+    background-color: var(--color-white);
     transition: .4s;
     border-radius: 50%;
   }
 
 
   input:checked + .slider {
-    background-color:#ccc; 
+    background-color: var(--color-champs-profil); 
   }
   input:checked + .slider:before {
     transform: translateX(24px);
   }
 
   .fa-sun {
-    color: #f5e102; 
+    color: var(--color-gold); 
   }
   
   .fa-moon {
-    color: #f5e102; 
+    color: var(--color-gold); 
   }
 
   .password-container {
@@ -1120,3 +1121,41 @@ th, td {
     font-size: 14px;
     
 }
+
+
+input[disabled] {
+    background-color: var(--color-rgba-51);
+    color: var(--color-champs-profi);
+  }
+  
+  .field-wrapper {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-gold);
+  }
+  
+  .field-wrapper i {
+    cursor: pointer;
+    margin-left: 8px;
+    font-size: 1rem;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  .edit-btn{
+    cursor: pointer;
+    color: var(--color-gold);
+
+  }
+
+  .save-btn{
+    cursor: pointer;
+    color: var(--color-gold);
+  }
+
+  .cancel-btn {
+    cursor: pointer;
+    color: var(--color-gold);
+  }

@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-// Vérifier si l'utilisateur est connecté
+
+
 if (!isset($_SESSION['user'])) {
     header("Location: PageInscription.php"); 
     exit;
@@ -14,11 +15,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['deconnecter'])) {
     exit;
 }
 
-// Si l'utilisateur est connecté, récupérer ses informations de session
 $user = $_SESSION['user']; 
 
 
-// Récupérer les commandes depuis le fichier JSON
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_changes'])) {
+    $nom    = isset($_POST['nom']) ? trim($_POST['nom']) : "";
+    $prenom = isset($_POST['prenom']) ? trim($_POST['prenom']) : "";
+    $email  = isset($_POST['email']) ? trim($_POST['email']) : "";
+  
+    if ($nom != "" && $prenom != "" && $email != "") {
+        $file = 'json/utilisateur.json';
+        if (file_exists($file)) {
+            $users = json_decode(file_get_contents($file), true);
+            $userId = $_SESSION['user']['id'];
+            $found = false;
+            foreach ($users as &$user) {
+                if ($user['id'] === $userId) {
+                    $user['nom'] = $nom;
+                    $user['prenom'] = $prenom;
+                    $user['email'] = $email;
+                    $found = true;
+                    break;
+                }
+            }
+            if ($found) {
+               
+                if (file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT))) {
+                    // Mise à jour de la session
+                    $_SESSION['user']['nom'] = $nom;
+                    $_SESSION['user']['prenom'] = $prenom;
+                    $_SESSION['user']['email'] = $email;
+                } else {
+                    $error_message = "Erreur lors de la mise à jour du fichier.";
+                }
+            } 
+            else {
+                $error_message = "Utilisateur non trouvé.";
+            }            
+        } 
+        else {
+            $error_message = "Fichier utilisateur introuvable.";
+        }
+    } 
+    else {
+        $error_message = "Tous les champs sont obligatoires.";
+    }
+}
+
 $commandesJson = file_get_contents('json/Commande.json');
 $commandes = json_decode($commandesJson, true);
 
@@ -97,28 +140,50 @@ foreach ($commandes as $commande) {
         <div class="container">
             <div class="Compte">
                 <h2 class="h2">Mon Profil</h2>
-                <form action="PageProfil.php" method="post">
+               
+                <form id="profile-form" action="PageProfil.php" method="post">
                     <div class="profil">
                         <label for="nom">Nom :</label>
-                        <input type="text" name="nom" value="<?php echo htmlspecialchars($user['nom']); ?>" disabled>
+                        <div class="field-wrapper">
+                        <input id="nom" name="nom" type="text"
+                        value="<?php echo htmlspecialchars($_SESSION['user']['nom']); ?>"
+                                disabled
+                                data-original="<?php echo htmlspecialchars($_SESSION['user']['nom']); ?>">
+                        <i class="fas fa-pen edit-btn"></i>
+                        <i class="fas fa-check save-btn hidden"></i>
+                        <i class="fas fa-times cancel-btn hidden"></i>
+                        </div>
                     </div>
                     <div class="profil">
                         <label for="prenom">Prénom :</label>
-                        <input type="text" name="prenom" value="<?php echo htmlspecialchars($user['prenom']); ?>" disabled>
+                        <div class="field-wrapper">
+                        <input id="prenom" name="prenom" type="text"
+                                value="<?php echo htmlspecialchars($_SESSION['user']['prenom']); ?>"
+                                disabled
+                                data-original="<?php echo htmlspecialchars($_SESSION['user']['prenom']); ?>">
+                        <i class="fas fa-pen edit-btn"></i>
+                        <i class="fas fa-check save-btn hidden"></i>
+                        <i class="fas fa-times cancel-btn hidden"></i>
+                        </div>
                     </div>
                     <div class="profil">
                         <label for="email">Email :</label>
-                        <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" disabled>
+                        <div class="field-wrapper">
+                        <input id="email" name="email" type="text"
+                                value="<?php echo htmlspecialchars($_SESSION['user']['email']); ?>"
+                                disabled
+                                data-original="<?php echo htmlspecialchars($_SESSION['user']['email']); ?>">
+                        <i class="fas fa-pen edit-btn"></i>
+                        <i class="fas fa-check save-btn hidden"></i>
+                        <i class="fas fa-times cancel-btn hidden"></i>
+                        </div>
                     </div>
-                    <div class="profil">
-                        <label for="role">Role :</label>
-                        <input type="text" name="role" value="<?php echo htmlspecialchars($user['role']); ?>" disabled>
-                    </div>
-                    <div class="profil">
-                        <label for="password">Mot de passe :</label>
-                        <input type="password" name="password" value="********" disabled>
-                    </div>
-                    <button type="submit" class="button">Modifier</button>
+                    
+                    <button id="submit-changes" class="button" type="submit"   name="submit_changes" style="display:none">
+                        Modifier
+                    </button>    
+                    
+                   
                 </form>
 
                 <form action="PageProfil.php" method="post">
@@ -158,6 +223,7 @@ foreach ($commandes as $commande) {
             </ul>
         </footer> 
     </section>
-    
+   
+    <script src="Javascript/ModifProfil.js"></script>
 </body>
 </html>

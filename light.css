@@ -1109,5 +1109,41 @@ th, td {
 .form-error {
     margin-bottom: 10px;
     font-size: 14px;
-    text-align: center;
 }
+
+input[disabled] {
+    background-color: var(--color-rgba-51);
+    color: var(--color-champs-profil);
+}
+  
+.field-wrapper {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-white);
+  }
+  
+  .field-wrapper i {
+    cursor: pointer;
+    margin-left: 8px;
+    font-size: 1rem;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  .edit-btn{
+    cursor: pointer;
+    color: var(--color-white);
+
+  }
+
+  .save-btn{
+    cursor: pointer;
+    color: var(--color-white);
+  }
+
+  .cancel-btn {
+    cursor: pointer;
+    color: var(--color-white);
+  }
