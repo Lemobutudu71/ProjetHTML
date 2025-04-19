@@ -1,18 +1,18 @@
 <?php
 session_start();
 
-// Vérifier si l'utilisateur est connecté et s'il est admin
+
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header("Location: PageAccueil.php"); // Redirection si non admin
     exit();
 }
 
-// Charger les utilisateurs depuis le fichier JSON
+
 $file = 'json/utilisateur.json';
 $users = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
 
 
-$usersPerPage = 2; // Nombre d'utilisateurs par page
+$usersPerPage = 2; 
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; // Récupérer la page actuelle
 $totalUsers = count($users);
 $totalPages = ceil($totalUsers / $usersPerPage);
@@ -129,6 +129,8 @@ $usersToShow = array_slice($users, $startIndex, $usersPerPage);
             </ul>
         </footer>
     </section>
+    
+    <script src="Javascript/Admin.js"></script>
   
 </body>
 </html>
