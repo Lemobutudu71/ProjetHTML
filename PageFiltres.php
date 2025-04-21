@@ -1,52 +1,26 @@
 <?php
 session_start();
 
-// Vérifie si l'utilisateur est déjà connecté, sinon redirige vers la page d'inscription
 if (!isset($_SESSION['user'])) {
     header("Location: PageInscription.php");
     exit;
 }
 
-// Charger les données des voyages à partir du fichier JSON
 $voyagesJson = file_get_contents("json/voyages.json");
 $voyages = json_decode($voyagesJson, true);
 
-// Vérifier si la lecture du JSON a réussi
 if ($voyages === null) {
     die("Erreur lors du chargement des voyages.");
 }
 
-// Définir le nombre de voyages par page
+
 $voyagesParPage = 4;
 
-// Variables pour filtrer les voyages
-$filtrageActif = isset($_GET['filtrer']);
-$transport = $filtrageActif && isset($_GET['transport']) ? $_GET['transport'] : ''; 
-$logement = $filtrageActif && isset($_GET['logement']) ? $_GET['logement'] : ''; 
-$monde = $filtrageActif && isset($_GET['monde']) ? $_GET['monde'] : ''; 
-
-// Appliquer les filtres
-$voyagesFiltres = array_filter($voyages, function ($voyage) use ($transport, $logement, $monde) {
-    if ($transport === '' && $logement === '' && $monde === '') {
-        return true;
-    }
-
-    return 
-        ($transport === '' || in_array($transport, $voyage['transport'])) &&
-        ($logement === '' || in_array($logement, $voyage['logement'])) &&
-        ($monde === '' || in_array($monde, $voyage['monde']));
-});
-
-// Si aucun filtrage, afficher tous les voyages
-$voyagesAffiches = $filtrageActif ? $voyagesFiltres : $voyages;
-
-// Pagination
-$totalVoyages = count($voyagesAffiches);
+$totalVoyages = count($voyages);
 $totalPages = ceil($totalVoyages / $voyagesParPage);
 $pageActuelle = isset($_GET['page']) ? max(1, min($totalPages, (int)$_GET['page'])) : 1;
 $depart = ($pageActuelle - 1) * $voyagesParPage;
-$voyagesPage = array_slice($voyagesAffiches, $depart, $voyagesParPage);
-
+$voyagesPage = array_slice($voyages, $depart, $voyagesParPage);
 ?>
 
 <!DOCTYPE html>
@@ -61,20 +35,6 @@ $voyagesPage = array_slice($voyagesAffiches, $depart, $voyagesParPage);
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     >
     <script src="/test/Projet/Javascript/Theme.js" defer></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const savedTheme = getCookie("theme");
-            if (savedTheme === "light") {
-                applyTheme("light");
-            } else {
-                applyTheme("default");
-            }
-            const toggle = document.getElementById("theme-toggle");
-            if (toggle) {
-                toggle.checked = (savedTheme === "light");
-            }
-        });
-    </script>
 </head>
 
 <body>
@@ -91,17 +51,17 @@ $voyagesPage = array_slice($voyagesAffiches, $depart, $voyagesParPage);
                 <li><a href="PageAccueil2.php">Rechercher</a></li>
                 <li><a href="PagePanier.php">Mon panier</a></li>
                 <li><a href="PageProfil.php">Profil</a></li>
-                <div class="toggle-container">                        
+                <div class="toggle-container">                         
                     <i class="fas fa-moon"></i>
                     <label class="switch">
-                    <input type="checkbox" id="theme-toggle">
-                    <span class="slider"></span>
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
                     </label>
                     <i class="fas fa-sun"></i>
-                        
                 </div>
             </ul>
         </header>
+        
         <div class="Page-Accueil-text">
             <h1>Rechercher un voyage</h1>
             
@@ -111,12 +71,12 @@ $voyagesPage = array_slice($voyagesAffiches, $depart, $voyagesParPage);
                         <label for="transport">Moyen d'accès:</label>
                         <select id="transport" name="transport">
                             <option value="">-</option>
-                            <option value="Vaisseau" <?= ($transport === "Vaisseau") ? "selected" : "" ?>>Vaisseau spatial</option>
-                            <option value="Bateau" <?= ($transport === "Bateau") ? "selected" : "" ?>>Bateau</option>
-                            <option value="Poudre-cheminette" <?= ($transport === "Poudre-cheminette") ? "selected" : "" ?>>Poudre de cheminette</option>
-                            <option value="Cheval" <?= ($transport === "Cheval") ? "selected" : "" ?>>Cheval</option>
-                            <option value="Avion" <?= ($transport === "Avion") ? "selected" : "" ?>>Avion</option>
-                            <option value="Voiture" <?= ($transport === "Voiture") ? "selected" : "" ?>>Voiture</option>
+                            <option value="Vaisseau">Vaisseau spatial</option>
+                            <option value="Bateau">Bateau</option>
+                            <option value="Poudre-cheminette">Poudre de cheminette</option>
+                            <option value="Cheval">Cheval</option>
+                            <option value="Avion">Avion</option>
+                            <option value="Voiture">Voiture</option>
                         </select>
                     </div>
 
@@ -124,12 +84,12 @@ $voyagesPage = array_slice($voyagesAffiches, $depart, $voyagesParPage);
                         <label for="logement">Logement:</label>
                         <select id="logement" name="logement">
                             <option value="">-</option>
-                            <option value="Château" <?= ($logement === "Château") ? "selected" : "" ?>>Château</option>
-                            <option value="Chez-habitant" <?= ($logement === "Chez-habitant") ? "selected" : "" ?>>Chez l'habitant</option>
-                            <option value="Camping" <?= ($logement === "Camping") ? "selected" : "" ?>>Camping</option>
-                            <option value="Maison" <?= ($logement === "Maison") ? "selected" : "" ?>>Maison</option>
-                            <option value="Hôtel" <?= ($logement === "Hôtel") ? "selected" : "" ?>>Hôtel</option>
-                            <option value="Cabine" <?= ($logement === "Cabine") ? "selected" : "" ?>>Cabine</option>
+                            <option value="Château">Château</option>
+                            <option value="Chez-habitant">Chez l'habitant</option>
+                            <option value="Camping">Camping</option>
+                            <option value="Maison">Maison</option>
+                            <option value="Hôtel">Hôtel</option>
+                            <option value="Cabine">Cabine</option>
                         </select>
                     </div>
 
@@ -137,45 +97,32 @@ $voyagesPage = array_slice($voyagesAffiches, $depart, $voyagesParPage);
                         <label for="monde">Monde:</label>
                         <select id="monde" name="monde">
                             <option value="">-</option>
-                            <option value="Médiéval" <?= ($monde === "Médiéval") ? "selected" : "" ?>>Médiéval</option>
-                            <option value="Magique" <?= ($monde === "Magique") ? "selected" : "" ?>>Magique</option>
-                            <option value="Préhistorique" <?= ($monde === "Préhistorique") ? "selected" : "" ?>>Préhistorique</option>
-                            <option value="Futuriste" <?= ($monde === "Futuriste") ? "selected" : "" ?>>Futuriste</option>
-                            <option value="Éxotique" <?= ($monde === "Éxotique") ? "selected" : "" ?>>Éxotique</option>
-                            <option value="Surnaturel" <?= ($monde === "Surnaturel") ? "selected" : "" ?>>Surnaturel</option>
+                            <option value="Médiéval">Médiéval</option>
+                            <option value="Magique">Magique</option>
+                            <option value="Préhistorique">Préhistorique</option>
+                            <option value="Futuriste">Futuriste</option>
+                            <option value="Éxotique">Éxotique</option>
+                            <option value="Surnaturel">Surnaturel</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="recherche">
-                    <button type="submit" name="filtrer">Appliquer les filtres</button>
-                </div>
+                
             </form>
-
+            <div class="filter-input">
+                    <label for="prix-filtre">Trier par prix :</label>
+                    <select id="prix-filtre">
+                        <option value="">-- Sélectionnez --</option>
+                        <option value="asc">Croissant</option>
+                        <option value="desc">Décroissant</option>
+                    </select>
+                </div>
             <div class="ListePhotos">
-                <?php foreach ($voyagesPage as $voyage): ?>
-                    <div class="gallerie-img">
-                        <a href="<?= htmlspecialchars($voyage['lien']) ?>">
-                            <img src="<?= htmlspecialchars($voyage['image']) ?>" alt="<?= htmlspecialchars($voyage['nom']) ?>">
-                            <div class="Lieux"><p><?= htmlspecialchars($voyage['nom']) ?></p></div>
-                            <div class="Prix"><p>À partir de <?= number_format($voyage['prix'], 2, ',', ' ') ?>€</p></div>
-                        </a>
-                    </div>
-                <?php endforeach; ?>
+                
             </div>
 
             <div class="pagination">
-                <?php if ($pageActuelle > 1): ?>
-                    <a href="?page=<?= $pageActuelle - 1 ?>&transport=<?= urlencode($transport) ?>&logement=<?= urlencode($logement) ?>&monde=<?= urlencode($monde) ?><?= $filtrageActif ? '&filtrer=1' : '' ?>">Précédent</a>
-                <?php endif; ?>
                 
-                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <a href="?page=<?= $i ?>&transport=<?= urlencode($transport) ?>&logement=<?= urlencode($logement) ?>&monde=<?= urlencode($monde) ?><?= $filtrageActif ? '&filtrer=1' : '' ?>" <?= ($i == $pageActuelle) ? 'class="active"' : '' ?>><?= $i ?></a>
-                <?php endfor; ?>
-
-                <?php if ($pageActuelle < $totalPages): ?>
-                    <a href="?page=<?= $pageActuelle + 1 ?>&transport=<?= urlencode($transport) ?>&logement=<?= urlencode($logement) ?>&monde=<?= urlencode($monde) ?><?= $filtrageActif ? '&filtrer=1' : '' ?>">Suivant</a>
-                <?php endif; ?>
             </div>
         </div>
 
@@ -187,8 +134,11 @@ $voyagesPage = array_slice($voyagesAffiches, $depart, $voyagesParPage);
                 <li><a href="pageAdministrateur.php">Administrateur</a></li>
             </ul>
         </footer>
-    
-    </section> 
-   
+    </section>
+    <script>
+        const allVoyages = <?php echo json_encode($voyages); ?>;
+    </script>
+
+    <script src="Javascript/Filtre.js"></script>
 </body>
 </html>

@@ -50,7 +50,6 @@
                     <li><a href="PageProfil.php">Profil</a></li>
                     <div class="toggle-container">                        
                         <i class="fas fa-moon"></i>
-                        <!-- Interrupteur personnalisé -->
                         <label class="switch">
                         <input type="checkbox" id="theme-toggle">
                         <span class="slider"></span>

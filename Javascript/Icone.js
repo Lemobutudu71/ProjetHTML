@@ -1,4 +1,4 @@
-// Fonction pour afficher/masquer le mot de passe
+
 function togglePassword(inputId) {
     const input = document.getElementById(inputId);
     const icon = document.querySelector(`[data-for="${inputId}"]`);
