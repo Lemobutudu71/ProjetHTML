@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if (in_array('hyppogriffe', $activites_poudlard)) {
         $nb_personnes['hyppogriffe'] = isset($_POST['nb_personnes_hy']) ? $_POST['nb_personnes_hy'] : null;
-        $nb_personnes['hyppogriffe'] = $personnes;
+        $personnes = $nb_personnes['hyppogriffe'];
         $activite_total_prix += $personnes * $activite_prix['hyppogriffe'];
     }
 
@@ -339,6 +339,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
             </div>
+            <div id="prix-total-dynamique"></div>
             <div class="recherche">
                 <button type="submit">Ajouter au panier</button>   
             </div>
@@ -355,6 +356,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </ul>
         </footer>
     </section>  
+    <script src="../Javascript/Poudlard.js"></script>
      
 </body>
 </html>
