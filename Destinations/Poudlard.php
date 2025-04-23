@@ -97,7 +97,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'etapes' => $etapes,
         'activite_prix' => $activite_prix 
     ];
-
+   
+    $user_choices['transaction_id'] = uniqid('tx_', true);
+    
     if (file_exists($file_path)) {
         // Lire les données existantes
         $existing_data = json_decode(file_get_contents($file_path), true);

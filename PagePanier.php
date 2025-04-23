@@ -1,42 +1,24 @@
 <?php
+
 session_start();
-
-
-// Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user'])) {
-    header("Location: PageSeconnecter.php"); 
+    header("Location: PageInscription.php");
     exit();
 }
 
-// Récupérer l'ID de l'utilisateur connecté
-$user_id = $_SESSION['user']['id'];
+$user = $_SESSION['user'];
+$optionsFile = 'json/options.json';
+$mesVoyages = [];
 
-// Charger les fichiers JSON
-$options_file = 'json/options.json';
-$etapes_file = 'json/Etapes_Options.json';
-
-// Initialiser les variables
-$user_choices = null;
-$destination_data = null;
-
-// Charger les données de l'utilisateur
-if (file_exists($options_file)) {
-    $user_data = json_decode(file_get_contents($options_file), true);
-    
-    // Recherche des données utilisateur dans le tableau plat
-    foreach ($user_data as $data) {
-        if (isset($data['user_id']) && $data['user_id'] == $user_id) {
-            $user_choices = $data;
-            $destination = $user_choices['destination'];
+if (file_exists($optionsFile)) {
+    $orders = json_decode(file_get_contents($optionsFile), true);
+    // Filtrer les commandes de l'utilisateur connecté
+    foreach ($orders as $order) {
+        if (isset($order['user_id']) && $order['user_id'] === $user['id']) {
+            $mesVoyages[] = $order;
         }
     }
 }
-
-// Charger les étapes disponibles en fonction de la destination
-if (file_exists($etapes_file)) {
-    $etapes_data = json_decode(file_get_contents($etapes_file), true);
-}
-
 
 ?>
 
@@ -92,133 +74,26 @@ if (file_exists($etapes_file)) {
                 </div>
             </ul>
         </header>
+        <div class="description">
 
-        <div class="panier-container">
-            <?php if ($user_choices): ?>
-                <div class="panier-details">
-                    <h1>Récapitulatif de votre voyage - Destination : <?php echo htmlspecialchars($destination); ?></h1>
-                    
-                    <?php 
-                    // Convertir les étapes en tableau si ce n'est pas déjà le cas
-                    $etapes = is_array($user_choices['etapes']) ? $user_choices['etapes'] : explode(',', $user_choices['etapes']);
-                    
-                    // Calculer le nombre total d'étapes
-                    $total_etapes = $user_choices['nb_etapes'];
-                    
-                    for ($i = 0; $i < $total_etapes; $i++): 
-                        $current_step = $etapes[$i];
-                        $clean_step = strtolower(str_replace(' ', '_', $current_step));
-                        
-                        // Déterminer les clés dynamiquement
-                        $hebergement_key = 'hebergement_' . $clean_step;
-                        $activites_key = 'activites_' . $clean_step;
-                        $transport_key = 'transport_' . $clean_step;
-                        
-                        // Récupérer les données de destination dynamiquement
-                        $step_destination_data = $etapes_data[$destination][$current_step];
-                    ?>
-                        <div class="voyage-details">
-                            <h2><?php echo htmlspecialchars($current_step); ?></h2>
-                            
-                            <p><strong>Hébergement :</strong>
-                                <?php
-                                    // Vérifier si l'hébergement existe
-                                    if (isset($user_choices[$hebergement_key])) {
-                                        // Utiliser les hébergements de la destination
-                                        $hebergements = $step_destination_data['hebergements'] ?? [];
-                                        
-                                        echo htmlspecialchars(
-                                            $hebergements[$user_choices[$hebergement_key]] ?? 
-                                            $user_choices[$hebergement_key]
-                                        );
-                                    } else {
-                                        echo "Aucun hébergement sélectionné";
-                                    }
-                                ?>
-                            </p>
-
-                            <p><strong>Activités :</strong></p>
-                            <ul>
-                                <?php
-                                    // Vérifier si des activités sont sélectionnées
-                                    if (!empty($user_choices[$activites_key])) {
-                                        // Utiliser les activités de la destination
-                                        $activites_disponibles = $step_destination_data['activites'] ?? [];
-                                        
-                                        foreach ($user_choices[$activites_key] as $activite) {
-                                            $activite_libelle = $activites_disponibles[$activite] ?? $activite;
-                                            
-                                            // Afficher le nombre de personnes si disponible
-                                            $nb_personnes = isset($user_choices['nb_personnes'][$activite]) 
-                                                ? intval($user_choices['nb_personnes'][$activite]) 
-                                                : 0;
-
-                                            // Convertir le prix de l'activité en entier (si nécessaire)
-                                            $prix_activite = isset($user_choices['activite_prix'][$activite]) 
-                                                ? intval($user_choices['activite_prix'][$activite])
-                                                : 0;
-
-                                            // Calculer le prix total de l'activité
-                                            $prix_total_activite = $prix_activite * $nb_personnes;
-                                             echo "<li>"  . htmlspecialchars($activite_libelle . "-" . $nb_personnes . " personne" . ($nb_personnes > 1 ? "s" : "")) . " - " . number_format($prix_total_activite, 2, ',', ' ') . " € " ."</li>";
-
-                                        }
-                                    } else {
-                                        echo "<li>Aucune activité sélectionnée</li>";
-                                    }
-                                ?>
-                            </ul>
-
-                            <?php 
-                            // N'afficher le transport que si ce n'est pas la dernière étape
-                            if ($i < $total_etapes - 1): ?>
-                            <p><strong>Transport pour la prochaine étape :</strong> 
-                                <?php
-                                    // Vérifier si le transport existe
-                                    if (isset($user_choices[$transport_key])) {
-                                        // Utiliser les transports de la destination
-                                        $transports = $step_destination_data['transports'] ?? [];
-                                        
-                                        echo htmlspecialchars(
-                                            $transports[$user_choices[$transport_key]] ?? 
-                                            $user_choices[$transport_key]
-                                        );
-                                    } else {
-                                        echo "Aucun transport sélectionné";
-                                    }
-                                ?>
-                            </p>
-                            <?php endif; ?>
-                        </div>
-                    <?php endfor; ?>
-                    
-                    <div class="voyage-resume">
-                        <p><strong>Date de départ :</strong> <?php echo htmlspecialchars($user_choices['departure_date']); ?></p>
-                        <p><strong>Date de retour :</strong> <?php echo htmlspecialchars($user_choices['return_date']); ?></p>
-                        <p><strong>Nombre total de personnes :</strong> <?php echo htmlspecialchars($user_choices['nb_personnes_voyage']); ?></p>
-                        <p><strong>Prix total :</strong> <?php echo number_format($user_choices['prix_total'], 2, ',', ' '); ?> €</p>
-                    </div>
-                    
-                    <div class='recherche'>
-                        <a href="pagePayer.php" class="Page-Accueil-button">Procéder au paiement</a>
-                    </div>
-                    <div class='recherche'>
-                        <form>
-                            <input type="button" class='Page-Accueil-button' value="revenir à la page précédente" onclick="history.go(-1)">
-                        </form>
-                    
-                    
-                        
-                </div>
-            <?php else: ?>
-                <div class="panier-vide">
-                    <h1>Votre panier est vide</h1>
-                    <p>Vous n'avez pas encore ajouté de voyage à votre panier.</p>
-                    <a href="PageAccueil2.php" class="btn-rechercher">Rechercher un voyage</a>
-                </div>
-            <?php endif; ?>
+            <h2 class="h2">Mes voyages</h2>
+            <div class="voyage-list">
+                <?php if (empty($mesVoyages)): ?>
+                    <p class="no-voyages">Vous n'avez pas encore ajouté de voyage à votre panier.</p>
+                <?php else: ?>
+                    <?php foreach ($mesVoyages as $voyage): ?>
+                        <a href="PageRecap.php?transaction_id=<?php echo urlencode($voyage['transaction_id']); ?>" class="voyage-item">
+                            <div class="voyage-destination"><?php echo htmlspecialchars($voyage['destination']); ?></div>
+                            <div class="voyage-dates">
+                                Du <?php echo date('d/m/Y', strtotime($voyage['departure_date'])); ?> 
+                                au <?php echo date('d/m/Y', strtotime($voyage['return_date'])); ?>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
         </div>
-
+       
         <footer>
             <ul class="bas-de-page">
                 <li><a href="#">Mentions légales</a></li>
