@@ -339,7 +339,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
             </div>
-            <div id="prix-total-dynamique"></div>
+            <div id="prix-total-dynamique" ></div>
             <div class="recherche">
                 <button type="submit">Ajouter au panier</button>   
             </div>

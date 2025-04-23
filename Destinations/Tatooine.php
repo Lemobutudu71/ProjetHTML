@@ -330,6 +330,7 @@ $return_date = null;
                             </div>
                         </div>
                     </div>
+                    <div id="prix-total-dynamique"></div>
                     <div class="recherche">
                         <button type="submit">Ajouter au panier</button>   
                     </div>
@@ -344,6 +345,7 @@ $return_date = null;
             </ul>
         </footer>
     </section>    
+    <script src="../Javascript/Tatooine.js"></script>
     
 </body>
 </html>

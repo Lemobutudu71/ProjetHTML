@@ -413,7 +413,7 @@ $return_date = null;
                     </div>
             </div>
 
-          
+            <div id="prix-total-dynamique"></div>
             <div class="recherche">
                 <button type="submit">Ajouter au panier</button>   
             </div>
@@ -429,6 +429,7 @@ $return_date = null;
             </ul>
         </footer>
     </section>  
+    <script src="../Javascript/Westeros.js"></script>
     
 </body>
 </html>
