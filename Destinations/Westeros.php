@@ -127,7 +127,8 @@ $return_date = null;
         "etapes"=> $etapes,
         'activite_prix' => $activite_prix
     ];
-    $user_choices['transaction_id'] = uniqid('tx_', true);
+    $user_choices['transaction_id'] = uniqid();
+
     if (file_exists($file_path)) {
         $existing_data = json_decode(file_get_contents($file_path), true);
         $existing_data[] = $user_choices;

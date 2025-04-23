@@ -28,7 +28,7 @@ if (file_exists($options_file)) {
 
 // Calculer le montant total
 $montant = $user_choices['prix_total'];
-$transaction = uniqid();
+$transaction = $user_choices['transaction_id'];
 $_SESSION['transaction'] = $transaction;
 $vendeur = 'MEF-1_B';
 

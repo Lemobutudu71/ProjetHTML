@@ -6,21 +6,21 @@
         exit();
     }
 
-    // Fichier JSON pour stocker les utilisateurs
+
     $file = 'json/utilisateur.json';
 
         
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {// Vérifier si le formulaire a été soumis
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $nom = trim($_POST['nom']);
         $prenom = trim($_POST['prenom']);
         $email = trim($_POST['email']);
         $role = trim($_POST['role']);
-        $password = trim($_POST['password']); // Hachage du mot de passe chercher hashage avec bcrypt mdp = Antoine
+        $password = trim($_POST['password']); 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT); 
 
         
-        if (file_exists($file)) { // Vérifie si l'email existe déjà
+        if (file_exists($file)) { 
             $users = json_decode(file_get_contents($file), true);
             foreach ($users as $user) {
                 if ($user['email'] === $email) {
@@ -34,8 +34,8 @@
             $users = [];
         }
         if (empty($error_message)){
-            $user_id = uniqid('', true); // Génère un ID unique basé sur le temps actuel
-             // Création du nouvel utilisateur
+            $user_id = uniqid('', true); 
+            
             $newUser = [
                 "id" => $user_id,
                 "nom" => $nom,
@@ -45,9 +45,9 @@
                 "password" =>  $hashedPassword,
             ];
 
-        $users[] = $newUser;// Ajouter le nouvel utilisateur
-        file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT));  // Enregistrement dans le fichier JSON
-        header("Location: PageSeconnecter.php"); // Rediriger vers la page de connexion après l'inscription
+        $users[] = $newUser;
+        file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT));  
+        header("Location: PageSeconnecter.php"); 
         } 
     }
       

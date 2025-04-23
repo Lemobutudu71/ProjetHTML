@@ -1,30 +1,25 @@
 <?php
 session_start();
 
-
-// Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user'])) {
     header("Location: PageSeconnecter.php"); 
     exit();
 }
 
-// Récupérer l'ID de l'utilisateur connecté
+
 $user_id = $_SESSION['user']['id'];
 $transaction_id = isset($_GET['transaction_id']) ? $_GET['transaction_id'] : null;
 
-// Charger les fichiers JSON
 $options_file = 'json/options.json';
 $etapes_file = 'json/Etapes_Options.json';
 
-// Initialiser les variables
 $user_choices = null;
 $destination_data = null;
 
-// Charger les données de l'utilisateur
+
 if (file_exists($options_file)) {
     $user_data = json_decode(file_get_contents($options_file), true);
     
-    // Recherche des données utilisateur dans le tableau plat
     foreach ($user_data as $data) {
         if (isset($data['user_id']) && $data['user_id'] == $user_id) {
             $user_choices = $data;
@@ -139,18 +134,18 @@ if (file_exists($etapes_file)) {
                                 <?php
                                     
                                     if (!empty($user_choices[$activites_key])) {
-                                        // Utiliser les activités de la destination
+                                        
                                         $activites_disponibles = $step_destination_data['activites'] ?? [];
                                         
                                         foreach ($user_choices[$activites_key] as $activite) {
                                             $activite_libelle = $activites_disponibles[$activite] ?? $activite;
                                             
-                                            // Afficher le nombre de personnes si disponible
+                                            
                                             $nb_personnes = isset($user_choices['nb_personnes'][$activite]) 
                                                 ? intval($user_choices['nb_personnes'][$activite]) 
                                                 : 0;
 
-                                            // Convertir le prix de l'activité en entier (si nécessaire)
+                                            
                                             $prix_activite = isset($user_choices['activite_prix'][$activite]) 
                                                 ? intval($user_choices['activite_prix'][$activite])
                                                 : 0;

@@ -13,7 +13,7 @@ $users = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
 
 
 $usersPerPage = 2; 
-$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; // Récupérer la page actuelle
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; 
 $totalUsers = count($users);
 $totalPages = ceil($totalUsers / $usersPerPage);
 $startIndex = ($page - 1) * $usersPerPage;

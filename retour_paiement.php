@@ -23,47 +23,44 @@ $montant = $_GET['montant'];
 $vendeur = $_GET['vendeur'];
 $control_recu = $_SESSION['control'];
 
-// Récupérer les informations de l'utilisateur
 $user_id = $_SESSION['user']['id'];
 $options_file = 'json/options.json';
 $commandes_file = 'json/Commande.json';
 
-// Charger les données de l'utilisateur
+
 $last_choice = null;
 if (file_exists($options_file)) {
-    $user_data = json_decode(file_get_contents($options_file), true);
-    // Trouver le dernier enregistrement pour cet utilisateur
-    foreach (array_reverse($user_data) as $data) {
-        if (isset($data['user_id']) && $data['user_id'] == $user_id) {
-            $last_choice = $data;
-            $destination = $last_choice['destination'];
-            break; 
+    $orders = json_decode(file_get_contents($options_file), true);
+    foreach ($orders as &$order) {
+        if (isset($order['transaction_id']) && $order['transaction_id'] === $transaction) {
+            
+            $order['status'] = $status;
+            $last_choice = $order;
+            $destination = $order['destination'];
+            break;
         }
     }
+    
+    file_put_contents($options_file, json_encode($orders, JSON_PRETTY_PRINT));
 }
 
-
-// Vérifier la sécurité de la transaction
 $api_key = getAPIKey($vendeur);
 $retour = $_SESSION['retour'] ?? '';
 
-
-// Calculer le contrôle
 $control_calcule = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour . "#");
-// Vérifier la validité du contrôle
+
 $transaction_valide = ($control_recu === $control_calcule);
 
 $options_data = file_exists($options_file) ? json_decode(file_get_contents($options_file), true) : [];
-// Enregistrer la transaction
+
 $transaction_data = [
     'transaction_id' => $transaction,
     'status' => $status,
     'date' => date('Y-m-d H:i:s'),
     'validation_securite' => $transaction_valide ? 'Validée' : 'Échouée',
-    'options' => $last_choice ? [$last_choice] : [], // On enregistre seulement le dernier choix
+    'options' => $last_choice ? [$last_choice] : [], 
 ];
 
-// Enregistrer dans le fichier de commandes
 $commandes = [];
 if (file_exists($commandes_file)) {
     $commandes = json_decode(file_get_contents($commandes_file), true);

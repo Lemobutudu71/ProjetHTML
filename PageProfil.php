@@ -65,7 +65,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_changes'])) {
 $commandesJson = file_get_contents('json/Commande.json');
 $commandes = json_decode($commandesJson, true);
 
-// Filtrer les commandes de l'utilisateur connecté
 $mesVoyages = [];
 foreach ($commandes as $commande) {
     if ($commande['status'] === 'accepted') {

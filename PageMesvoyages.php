@@ -6,18 +6,18 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-// Charger les fichiers JSON
+
 $commandes_file = 'json/Commande.json';
 $etapes_file = 'json/Etapes_Options.json';
 
-// Récupérer l'ID de la transaction depuis l'URL
+
 $transaction_id = $_GET['id'] ?? null;
 
 if (!$transaction_id) {
     die("Transaction manquante.");
 }
 
-// Charger les commandes et les étapes disponibles
+
 $commandes = [];
 $etapes_data = [];
 
@@ -29,14 +29,13 @@ if (file_exists($etapes_file)) {
     $etapes_data = json_decode(file_get_contents($etapes_file), true);
 }
 
-// Trouver la commande correspondant à la transaction
 $commande = null;
 $option_voyage = null;
 
 foreach ($commandes as $cmd) {
     if ($cmd['transaction_id'] === $transaction_id) {
         $commande = $cmd;
-        // Trouver l'option correspondant à l'utilisateur connecté
+       
         foreach ($cmd['options'] as $option) {
             if ($option['user_id'] === $_SESSION['user']['id']) {
                 $option_voyage = $option;
@@ -51,7 +50,6 @@ if (!$commande || !$option_voyage) {
     die("Voyage introuvable ou vous n'avez pas accès à cette commande.");
 }
 
-// Préparer les données pour l'affichage
 $destination = $option_voyage['destination'];
 $etapes = is_array($option_voyage['etapes']) ? $option_voyage['etapes'] : explode(',', $option_voyage['etapes']);
 $total_etapes = $option_voyage['nb_etapes'];
@@ -127,12 +125,10 @@ $total_etapes = $option_voyage['nb_etapes'];
                     $current_step = $etapes[$i];
                     $clean_step = strtolower(str_replace(' ', '_', $current_step));
                     
-                    // Déterminer les clés dynamiquement
                     $hebergement_key = 'hebergement_' . $clean_step;
                     $activites_key = 'activites_' . $clean_step;
                     $transport_key = 'transport_' . $clean_step;
-                    
-                    // Récupérer les données de destination dynamiquement
+                
                     $step_destination_data = $etapes_data[$destination][$current_step] ?? [];
                 ?>
                     <div class="voyage-details">
@@ -165,12 +161,11 @@ $total_etapes = $option_voyage['nb_etapes'];
                                     ? intval($option_voyage['nb_personnes'][$activite]) 
                                     : 0;
 
-                                    // Convertir le prix de l'activité en entier (si nécessaire)
                                     $prix_activite = isset($option_voyage['activite_prix'][$activite]) 
                                         ? intval($option_voyage['activite_prix'][$activite])
                                         : 0;
 
-                                    // Calculer le prix total de l'activité
+                                    
                                     $prix_total_activite = $prix_activite * $nb_personnes;
                                     
                                     echo "<li>" . htmlspecialchars($activite_libelle . " - " . $nb_personnes . " personne" . ($nb_personnes > 1 ? "s" : "")) . " - " . number_format($prix_total_activite, 2, ',', ' ') . " € </li>";

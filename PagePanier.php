@@ -12,9 +12,10 @@ $mesVoyages = [];
 
 if (file_exists($optionsFile)) {
     $orders = json_decode(file_get_contents($optionsFile), true);
-    // Filtrer les commandes de l'utilisateur connecté
+    // Filtrer les commandes non payées de l'utilisateur connecté
     foreach ($orders as $order) {
-        if (isset($order['user_id']) && $order['user_id'] === $user['id']) {
+        if (isset($order['user_id']) && $order['user_id'] === $user['id'] 
+            && (!isset($order['status']) || $order['status'] !== 'accepted')) {
             $mesVoyages[] = $order;
         }
     }

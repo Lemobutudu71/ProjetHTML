@@ -12,13 +12,12 @@ if ($voyages === null) {
 
 $motCle = isset($_GET['search']) ? strtolower(trim($_GET['search'])) : '';
 
-// Filtrer les voyages si un mot-clé est entré
 $voyagesFiltres = array_filter($voyages, function ($voyage) use ($motCle) {
     if (empty($motCle)) {
-        return true; // Si pas de recherche, afficher tous les voyages
+        return true; 
     }
 
-    // Vérifier uniquement dans les mots-clés
+    
     if (isset($voyage['mot-clés']) && is_array($voyage['mot-clés'])) {
         foreach ($voyage['mot-clés'] as $mot) {
             if (stripos($mot, $motCle) !== false) {
@@ -27,7 +26,7 @@ $voyagesFiltres = array_filter($voyages, function ($voyage) use ($motCle) {
         }
     }
 
-    return false; // Exclure le voyage si aucun mot-clé ne correspond
+    return false; 
 });
 
 $voyagesTendances = file_get_contents("json/voyagestendances.json");

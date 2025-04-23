@@ -1,3 +1,95 @@
 [
-    
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_poudlard": "serpentard",
+        "hebergement_preaulard": "sanglier",
+        "activites_poudlard": [],
+        "activites_preaulard": [],
+        "transport_poudlard": "balais",
+        "nb_personnes": [],
+        "nb_personnes_voyage": "1",
+        "destination": "Poudlard",
+        "return_date": "2025-05-13",
+        "departure_date": "2025-05-06",
+        "prix_total": 3666,
+        "nb_etapes": 2,
+        "etapes": [
+            "Poudlard",
+            "PreauLard"
+        ],
+        "activite_prix": {
+            "sorts": 25,
+            "quidditch": 35,
+            "hyppogriffe": 40,
+            "zonko": 15,
+            "degustation": 20,
+            "honeydukes": 18
+        },
+        "transaction_id": "68091b2bcee1a",
+        "status": "accepted"
+    },
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_winterfell": "chateau_stark",
+        "hebergement_portreal": "donjon_royal",
+        "hebergement_meereen": "pyramide",
+        "activites_winterfell": [],
+        "activites_portreal": [],
+        "activites_meereen": [],
+        "transport_winterfell": "chevaux",
+        "transport_portreal": "bateau",
+        "nb_personnes": [],
+        "prix_total": 5300,
+        "nb_personnes_voyage": "1",
+        "departure_date": "2025-05-07",
+        "return_date": "2025-05-14",
+        "destination": "Westeros",
+        "nb_etapes": 3,
+        "etapes": [
+            "Winterfell",
+            "PortReal",
+            "Meereen"
+        ],
+        "activite_prix": {
+            "combat": 20,
+            "chasse": 35,
+            "mur": 30,
+            "tournoi": 12,
+            "trone": 30,
+            "fleuve": 50,
+            "dragons": 100,
+            "gladiateur": 77,
+            "marche": 10
+        },
+        "transaction_id": "68091bafb7832"
+    },
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_tatooine": "palais_jabba",
+        "activites_tatooine": [],
+        "hebergement_etoile": "quartier_empereur",
+        "activites_etoile": [],
+        "transport_tatooine": "faucon",
+        "nb_personnes": [],
+        "prix_total": 3578,
+        "nb_personnes_voyage": "1",
+        "departure_date": "2025-05-08",
+        "return_date": "2025-05-15",
+        "destination": "Tatooine",
+        "nb_etapes": 2,
+        "etapes": [
+            "Tatooine",
+            "Etoile"
+        ],
+        "activite_prix": {
+            "jedi": 45,
+            "speeder": 55,
+            "palais_jabba": 20,
+            "tie_fighter": 70,
+            "tir": 20,
+            "sith": 18
+        },
+        "transaction_id": "68091bece18bc",
+        "status": "accepted"
+    }
 ]
