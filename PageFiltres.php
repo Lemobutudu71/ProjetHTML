@@ -23,45 +23,8 @@ $depart = ($pageActuelle - 1) * $voyagesParPage;
 $voyagesPage = array_slice($voyages, $depart, $voyagesParPage);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MovieTrip</title>
-    <link id="theme" rel="stylesheet" href="CSS.css">
-    <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    >
-    <script src="/test/Projet/Javascript/Theme.js" defer></script>
-</head>
+<?php require_once('header.php'); ?>
 
-<body>
-    <section class="Page-Accueil">
-        <video autoplay loop muted id="bg-video">
-            <source src="images/Vidéo5.mp4" type="video/mp4">
-        </video>
-        <header>
-            <div class="ProfilPicture">
-                <img src="images/LOGO.jpg" alt="logo" width="200" class="logo">
-            </div>
-            <ul class="menu">
-                <li><a href="PageAccueil.php">Accueil</a></li>
-                <li><a href="PageAccueil2.php">Rechercher</a></li>
-                <li><a href="PagePanier.php">Mon panier</a></li>
-                <li><a href="PageProfil.php">Profil</a></li>
-                <div class="toggle-container">                         
-                    <i class="fas fa-moon"></i>
-                    <label class="switch">
-                        <input type="checkbox" id="theme-toggle">
-                        <span class="slider"></span>
-                    </label>
-                    <i class="fas fa-sun"></i>
-                </div>
-            </ul>
-        </header>
-        
         <div class="Page-Accueil-text">
             <h1>Rechercher un voyage</h1>
             
@@ -142,3 +105,4 @@ $voyagesPage = array_slice($voyages, $depart, $voyagesParPage);
     <script src="Javascript/Filtre.js"></script>
 </body>
 </html>
+
