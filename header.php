@@ -26,7 +26,7 @@
 <body>
     <section class="Page-Accueil">
         <video autoplay loop muted id="bg-video">
-            <source src="images/Vidéo5.mp4" type="video/mp4">
+            <source src="/test/Projet/images/Vidéo5.mp4" type="video/mp4">
         </video> 
         <header>
             <div class="ProfilPicture">

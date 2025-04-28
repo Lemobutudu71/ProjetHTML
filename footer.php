@@ -3,7 +3,7 @@
                 <li><a href="#">Mentions légales</a></li>
                 <li><a href="#">Politique de confidentialité</a></li>
                 <li><a href="#">&Agrave; propos</a></li>
-                <li><a href="pageAdministrateur.php">Administrateur</a></li>
+                <li><a href="/test/Projet/pageAdministrateur.php">Administrateur</a></li>
             </ul>
         </footer>
     </section>
@@ -13,6 +13,5 @@
     }
     ?>
     
-
 </body>
 </html>
