@@ -832,7 +832,7 @@ th, td {
 
 .options-group input[type="date"] {
     margin-top: 20px;
-    background-color: var(--color-rgba-51); 
+    background-color: var(--color-white); 
     color: var(--color-white);
     border-radius: 10px;
 
