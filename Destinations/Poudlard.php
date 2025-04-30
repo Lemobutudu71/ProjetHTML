@@ -142,7 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="options-group">
                 <label for="departure-date">Date de départ:</label>
-                <input type="date" id="departure-date" name="departure_date" required>
+                <input type="date" id="departure-date" name="departure_date" required min="<?php echo date('Y-m-d'); ?>">
                 <label for="nb_voyage"><br>Nombre de personnes pour le voyage</label>
                         <select id="nb_personnes_voyage" name="nb_personnes_voyage">
                             <option value="1">1 personne</option>

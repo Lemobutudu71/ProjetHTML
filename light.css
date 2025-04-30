@@ -475,11 +475,9 @@ footer .bas-de-page li a:hover {
 
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-    
-    filter: invert(70%) sepia(100%) saturate(500%) hue-rotate(10deg) brightness(100%) contrast(90%);
+    filter: invert(100%) brightness(100%);
     cursor: pointer;
 }
-
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     background: url("https://e7.pngegg.com/pngimages/904/526/png-clipart-computer-icons-online-calendar-information-agenda-miscellaneous-calendar.png") no-repeat center;
@@ -832,7 +830,7 @@ th, td {
 
 .options-group input[type="date"] {
     margin-top: 20px;
-    background-color: var(--color-white); 
+    background-color: var(--color-black); 
     color: var(--color-white);
     border-radius: 10px;
 

@@ -55,3 +55,15 @@ function setCookie(name, value, days) {
     setCookie("theme", newTheme, 30);
   });
   
+  document.addEventListener("DOMContentLoaded", function () {
+    const departureDateInput = document.getElementById("departure-date");
+    const today = new Date().toISOString().split("T")[0]; 
+    departureDateInput.setAttribute("min", today);
+
+    departureDateInput.addEventListener("change", function () {
+        if (departureDateInput.value < today) {
+            alert("Vous ne pouvez pas choisir une date antérieure à aujourd'hui.");
+            departureDateInput.value = today; 
+        }
+    });
+});
