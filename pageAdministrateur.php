@@ -20,8 +20,7 @@ $startIndex = ($page - 1) * $usersPerPage;
 $usersToShow = array_slice($users, $startIndex, $usersPerPage);
 ?>
 
-<?php require_once('header.php'); ?>
-          
+<?php require_once('header.php'); ?>   
             <h2 class="table-titre">Panneau Administrateur</h2>
             <table>
                 <thead>
