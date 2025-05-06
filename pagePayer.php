@@ -14,22 +14,31 @@ $user_choices = null;
 $options_file = 'json/options.json';
 $commandes_file = 'json/Commande.json';
 
-// Charger les données de l'utilisateur
-if (file_exists($options_file)) {
-    $user_data = json_decode(file_get_contents($options_file), true);
-    foreach ($user_data as $data) {
-        if (isset($data['user_id']) && $data['user_id'] == $user_id) {
-            $user_choices = $data;
-            $destination = $user_choices['destination'];
-            
+$transaction_id = $_GET['transaction_id'] ?? null;
+$montant = $_GET['montant'] ?? null;
+
+if ($transaction_id && $montant) {
+    $transaction = $transaction_id;
+    $_SESSION['transaction'] = $transaction;
+} else {
+   
+    if (file_exists($options_file)) {
+        $user_data = json_decode(file_get_contents($options_file), true);
+        foreach ($user_data as $data) {
+            if (isset($data['user_id']) && $data['user_id'] == $user_id) {
+                $user_choices = $data;
+                $destination = $user_choices['destination'];
+            }
         }
     }
+
+    // Calculer le montant total
+    $montant = $user_choices['prix_total'];
+    $transaction = $user_choices['transaction_id'];
+    $_SESSION['transaction'] = $transaction;
 }
 
-// Calculer le montant total
-$montant = $user_choices['prix_total'];
-$transaction = $user_choices['transaction_id'];
-$_SESSION['transaction'] = $transaction;
+
 $vendeur = 'MEF-1_B';
 
 $script_name = $_SERVER['SCRIPT_NAME'];
@@ -58,11 +67,16 @@ $_SESSION['control'] = $control;
         
         <div class="description">
             <h2 class='h2'>Récapitulatif de la commande</h2>
+            <?php if ($transaction_id && $montant): ?>
+                <p><strong>Type de paiement :</strong> Options supplémentaires</p>
+                <p><strong>Montant à payer :</strong> <?php echo number_format($montant, 2, ',', ' '); ?> €</p>
+            <?php else: ?>
             <p><strong>Destination :</strong> <?php echo htmlspecialchars($destination); ?></p>
             <p><strong>Date de départ :</strong> <?php echo htmlspecialchars($user_choices['departure_date']); ?></p>
             <p><strong>Date de retour :</strong> <?php echo htmlspecialchars($user_choices['return_date']); ?></p>
             <p><strong>Nombre de personnes :</strong> <?php echo htmlspecialchars($user_choices['nb_personnes_voyage']); ?></p>
             <p><strong>Montant total :</strong> <?php echo number_format($montant, 2, ',', ' '); ?> €</p>
+            <?php endif; ?>
         </div>
 
         <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST" class="carte">
@@ -77,8 +91,6 @@ $_SESSION['control'] = $control;
         </form>
 
 <?php 
-$scripts = '
-
-';
+$scripts = '';
 require_once('footer.php'); 
 ?>      

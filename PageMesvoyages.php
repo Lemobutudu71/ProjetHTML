@@ -140,14 +140,19 @@ $total_etapes = $option_voyage['nb_etapes'];
                 <?php endfor; ?>
                 
                 <div class='recherche'>
-                    <a href="PageProfil.php" class="Page-Accueil-button">Retour à mon profil</a>
+                    <?php if ($commande['status'] === 'accepted'): ?>
+                    <div class="form-actions">
+                        <a href="PageAjoutOptions.php?id=<?php echo urlencode($transaction_id); ?>" class="Page-Accueil-button">Ajouter des options supplémentaires</a>
+                    </div>
+                    <?php endif; ?>
+                    <div class="form-actions">
+                        <a href="PageProfil.php" class="Page-Accueil-button">Retour à mon profil</a>
+                    </div>
                 </div>
             </div>
         </div>
 
         <?php 
-$scripts = '
-   
-';
+$scripts = '';
 require_once('footer.php'); 
 ?>
