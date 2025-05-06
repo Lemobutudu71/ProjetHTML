@@ -1,3 +1,57 @@
 [
-   
+    {
+        "transaction_id": "681a3dc0a7aa2",
+        "status": "accepted",
+        "date": "2025-05-06 16:50:34",
+        "validation_securite": "Valid\u00e9e",
+        "options": [
+            {
+                "user_id": "67e1306025b5f4.22789385",
+                "hebergement_poudlard": "serpentard",
+                "hebergement_preaulard": "sanglier",
+                "activites_poudlard": [
+                    "sorts",
+                    "quidditch",
+                    "hyppogriffe"
+                ],
+                "activites_preaulard": [
+                    "degustation"
+                ],
+                "transport_poudlard": "portoloin",
+                "nb_personnes": {
+                    "sorts": "3",
+                    "degustation": "3",
+                    "quidditch": 3,
+                    "hyppogriffe": 3
+                },
+                "nb_personnes_voyage": "3",
+                "destination": "Poudlard",
+                "return_date": "2025-05-29",
+                "departure_date": "2025-05-22",
+                "prix_total": 11358,
+                "nb_etapes": 2,
+                "etapes": [
+                    "Poudlard",
+                    "PreauLard"
+                ],
+                "activite_prix": {
+                    "sorts": 25,
+                    "quidditch": 35,
+                    "hyppogriffe": 40,
+                    "zonko": 15,
+                    "degustation": 20,
+                    "honeydukes": 18
+                },
+                "transaction_id": "681a3dc0a7aa2",
+                "status": "accepted"
+            }
+        ]
+    },
+    {
+        "transaction_id": "681a3f0c37c25",
+        "status": "accepted",
+        "date": "2025-05-06 16:55:51",
+        "validation_securite": "Valid\u00e9e",
+        "options": []
+    }
 ]

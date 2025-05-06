@@ -34,6 +34,44 @@ document.addEventListener('DOMContentLoaded', function(){
     const checkboxSith = document.getElementById('sith');
     const nb_personnes_sith = document.getElementById('nb_personnes_sith');
   
+    const activityInputs = [
+      nb_personnes_jedi,
+      nb_personnes_speeder,
+      nb_personnes_palaisjabba,
+      nb_personnes_tie,
+      nb_personnes_tir,
+      nb_personnes_sith
+  ];
+
+  function updateMaxPersonnes() {
+      const maxPersonnes = parseInt(nb_pers_Voyage.value);
+      
+      activityInputs.forEach(input => {
+          if (input) {
+              input.max = maxPersonnes;
+              if (parseInt(input.value) > maxPersonnes) {
+                  input.value = maxPersonnes;
+              }
+          }
+      });
+  }
+
+  if (nb_pers_Voyage) {
+      nb_pers_Voyage.addEventListener('input', updateMaxPersonnes);
+      updateMaxPersonnes(); 
+  }
+  activityInputs.forEach(input => {
+      if (input) {
+          input.addEventListener('input', function() {
+              const maxPersonnes = parseInt(nb_pers_Voyage.value);
+              if (parseInt(this.value) > maxPersonnes) {
+                  this.value = maxPersonnes;
+              }
+              updatePrice();
+          });
+      }
+  });
+  
     function updatePrice() {
       
       let nbVoyage = nb_pers_Voyage ? parseInt(nb_pers_Voyage.value) : 1;

@@ -147,12 +147,8 @@ $return_date = null;
                     <label for="departure-date">Date de départ:</label>
                     <input type="date" id="departure-date" name="departure_date" required min="<?php echo date('Y-m-d'); ?>">
                     <label for="nb_voyage"><br>Nombre de personnes pour le voyage</label>
-                            <select id="nb_personnes_voyage" name="nb_personnes_voyage">
-                                <option value="1">1 personne</option>
-                                <option value="2">2 personnes</option>
-                                <option value="3">3 personnes</option>
-                                <option value="4">4 personnes</option>
-                            </select>
+                    <input type="number" id="nb_personnes_voyage" name="nb_personnes_voyage" min="1" value="1">
+                            
                 </div>
                 <div id="tatooine" class="section">
                     <h2>JOUR 1-4 : Tatooine</h2>
@@ -178,35 +174,20 @@ $return_date = null;
                             <div>
                                 <input type="checkbox" id="jedi" name="activites_tatooine[]" value="jedi">
                                 <label for="jedi">Entraînement Jedi (<?php echo $activite_prix['jedi']; ?>€/personne)</label>
-                                
-                                <select id="nb_personnes_jedi" name="nb_personnes_jedi">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_jedi" name="nb_personnes_jedi" min="1" value="1">
+
                             </div>
                             <div>
                                 <input type="checkbox" id="speeder" name="activites_tatooine[]" value="speeder">
                                 <label for="speeder">Balade en speeder (<?php echo $activite_prix['speeder']; ?>€/personne)</label>
-                                
-                                <select id="nb_personnes_speeder" name="nb_personnes_speeder">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_speeder" name="nb_personnes_speeder" min="1" value="1">
+                               
                             </div>
                             <div>
                                 <input type="checkbox" id="palais_jabba" name="activites_tatooine[]" value="palais_jabba">
                                 <label for="palais_jabba">Visite du palais de Jabba (<?php echo $activite_prix['palais_jabba']; ?>€/personne)</label>
-                                
-                                <select id="nb_personnes_palaisjabba" name="nb_personnes_palaisjabba">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_palaisjabba" name="nb_personnes_palaisjabba" min="1" value="1">
+                               
                             </div>
                         </div>
                     </div>
@@ -246,35 +227,20 @@ $return_date = null;
                             <div>
                                 <input type="checkbox" id="tie_fighter" name="activites_etoile[]" value="tie_fighter">
                                 <label for="tie_fighter">Entraînement au pilotage de TIE Fighter (<?php echo $activite_prix['tie_fighter']; ?>€/personne)</label>
-                                
-                                <select id="nb_personnes_tie" name="nb_personnes_tie">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_tie" name="nb_personnes_tie" min="1" value="1">
+                    
                             </div>
                             <div>
                                 <input type="checkbox" id="tir" name="activites_etoile[]" value="tir">
                                 <label for="tir">Tir de l'Etoile de la mort (<?php echo $activite_prix['tir']; ?>€/personne)</label>
-                                
-                                <select id="nb_personnes_tir" name="nb_personnes_tir">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_tir" name="nb_personnes_tir" min="1" value="1">
+                               
                             </div>
                             <div>
                                 <input type="checkbox" id="sith" name="activites_etoile[]" value="sith">
                                 <label for="sith">Entrainement des Sith (<?php echo $activite_prix['sith']; ?>€/personne)</label>
+                                <input type="number" id="nb_personnes_sith" name="nb_personnes_sith" min="1" value="1">
                                 
-                                <select id="nb_personnes_sith" name="nb_personnes_sith">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
                             </div>
                         </div>
                     </div>

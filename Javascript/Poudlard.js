@@ -26,7 +26,45 @@ document.addEventListener('DOMContentLoaded', function(){
     const nb_personnes_honeydukes = document.getElementById('nb_personnes_honeydukes');
   
     const priceDynamicElement = document.getElementById('prix-total-dynamique');
-  
+
+    const activityInputs = [
+      nb_personnes_sort,
+      nb_personnes_quid,
+      nb_personnes_hy,
+      nb_personnes_visite,
+      nb_personnes_degustation,
+      nb_personnes_honeydukes,
+      
+  ];
+
+  function updateMaxPersonnes() {
+      const maxPersonnes = parseInt(nb_pers_Voyage.value);
+      
+      activityInputs.forEach(input => {
+          if (input) {
+              input.max = maxPersonnes;
+              if (parseInt(input.value) > maxPersonnes) {
+                  input.value = maxPersonnes;
+              }
+          }
+      });
+  }
+
+  if (nb_pers_Voyage) {
+      nb_pers_Voyage.addEventListener('input', updateMaxPersonnes);
+      updateMaxPersonnes(); 
+  }
+  activityInputs.forEach(input => {
+      if (input) {
+          input.addEventListener('input', function() {
+              const maxPersonnes = parseInt(nb_pers_Voyage.value);
+              if (parseInt(this.value) > maxPersonnes) {
+                  this.value = maxPersonnes;
+              }
+              updatePrice();
+          });
+      }
+  });
 
     function updatePrice() {
 

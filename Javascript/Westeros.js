@@ -45,6 +45,47 @@ document.addEventListener('DOMContentLoaded', function(){
     
     const checkboxMarche = document.getElementById('marche');
     const nb_personnes_marche = document.getElementById('nb_personnes_marche');
+
+    const activityInputs = [
+        nb_personnes_combat,
+        nb_personnes_chasse,
+        nb_personnes_mur,
+        nb_personnes_tournoi,
+        nb_personnes_trone,
+        nb_personnes_fleuve,
+        nb_personnes_dragons,
+        nb_personnes_gladiateur,
+        nb_personnes_marche
+    ];
+
+    function updateMaxPersonnes() {
+        const maxPersonnes = parseInt(nb_pers_Voyage.value);
+        
+        activityInputs.forEach(input => {
+            if (input) {
+                input.max = maxPersonnes;
+                if (parseInt(input.value) > maxPersonnes) {
+                    input.value = maxPersonnes;
+                }
+            }
+        });
+    }
+
+    if (nb_pers_Voyage) {
+        nb_pers_Voyage.addEventListener('input', updateMaxPersonnes);
+        updateMaxPersonnes(); 
+    }
+    activityInputs.forEach(input => {
+        if (input) {
+            input.addEventListener('input', function() {
+                const maxPersonnes = parseInt(nb_pers_Voyage.value);
+                if (parseInt(this.value) > maxPersonnes) {
+                    this.value = maxPersonnes;
+                }
+                updatePrice();
+            });
+        }
+    });
   
     function updatePrice() {
       let nbVoyage = nb_pers_Voyage ? parseInt(nb_pers_Voyage.value) : 1;
@@ -94,9 +135,8 @@ document.addEventListener('DOMContentLoaded', function(){
       priceDynamicElement.textContent = "Prix estimé : " + new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(totalPrice) + "€";
     }
     
-    if (nb_pers_Voyage) nb_pers_Voyage.addEventListener('change', updatePrice);
+    if (nb_pers_Voyage) nb_pers_Voyage.addEventListener('input', updatePrice);
     
-
     if (checkboxCombat) checkboxCombat.addEventListener('change', updatePrice);
     if (nb_personnes_combat) nb_personnes_combat.addEventListener('change', updatePrice);
     

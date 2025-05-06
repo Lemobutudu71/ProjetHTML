@@ -144,12 +144,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="departure-date">Date de départ:</label>
                 <input type="date" id="departure-date" name="departure_date" required min="<?php echo date('Y-m-d'); ?>">
                 <label for="nb_voyage"><br>Nombre de personnes pour le voyage</label>
-                        <select id="nb_personnes_voyage" name="nb_personnes_voyage">
-                            <option value="1">1 personne</option>
-                            <option value="2">2 personnes</option>
-                            <option value="3">3 personnes</option>
-                            <option value="4">4 personnes</option>
-                        </select>
+                <input type="number" id="nb_personnes_voyage" name="nb_personnes_voyage" min="1" value="1">
+                        
             </div>
             <div id="poudlard" class="section">
                 <h2>JOUR 1-4 : Poudlard</h2>
@@ -180,37 +176,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div>
                             <input type="checkbox" id="sorts" name="activites_poudlard[]" value="sorts">
                             <label for="sorts">Cours de sortilèges (<?php echo $activite_prix['sorts']; ?>€/personne)</label>
-                            
-                            <select id="nb_personnes_sort" name="nb_personnes_sort">
-                                <option value="1">1 personne</option>
-                                <option value="2">2 personnes</option>
-                                <option value="3">3 personnes</option>
-                                <option value="4">4 personnes</option>
-                            </select>
+                            <input type="number" id="nb_personnes_sort" name="nb_personnes_sort" min="1" value="1">
                             
                         </div>
                         <div>
                             <input type="checkbox" id="quidditch" name="activites_poudlard[]" value="quidditch">
                             <label for="quidditch">Match de quidditch (<?php echo $activite_prix['quidditch']; ?>€/personne)</label>
-                            
-                                
-                                <select id="nb_personnes_quid" name="nb_personnes_quid">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                            <input type="number" id="nb_personnes_quid" name="nb_personnes_quid" min="1" value="1">
                             
                         </div>
                         <div>
                             <input type="checkbox" id="hyppogriffe" name="activites_poudlard[]" value="hyppogriffe">
                             <label for="hyppogriffe">Dressage d'hyppogriffe (<?php echo $activite_prix['hyppogriffe']; ?>€/personne)</label>
-                                <select id="nb_personnes_hy" name="nb_personnes_hy" >
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                            <input type="number" id="nb_personnes_hy" name="nb_personnes_hy" min="1" value="1">
                         </div>
                         
                     </div>
@@ -254,37 +232,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div>
                             <input type="checkbox" id="zonko" name="activites_preaulard[]" value="zonko">
                             <label for="zonko">Visite de la boutique de Zonko (<?php echo $activite_prix['zonko']; ?>€/personne)</label>
-                            
-                            <select id="nb_personnes_visite" name="nb_personnes_visite">
-                                <option value="1">1 personne</option>
-                                <option value="2">2 personnes</option>
-                                <option value="3">3 personnes</option>
-                                <option value="4">4 personnes</option>
-                            </select>
-                            
+                            <input type="number" id="nb_personnes_visite" name="nb_personnes_visite" min="1" value="1">
+                         
                         </div>
                         <div>
                             <input type="checkbox" id="degustation" name="activites_preaulard[]" value="degustation">
                             <label for="degustation">Dégustation de Bièraubeurre (<?php echo $activite_prix['degustation']; ?>€/personne)</label>
-                            
+                            <input type="number" id="nb_personnes_degustation" name="nb_personnes_degustation" min="1" value="1">
                                 
-                                <select id="nb_personnes_degustation" name="nb_personnes_degustation">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
-                            
                         </div>
                         <div>
                             <input type="checkbox" id="honeydukes" name="activites_preaulard[]" value="honeydukes">
                             <label for="honeydukes">Boutique de Glacés de Honeydukes (<?php echo $activite_prix['honeydukes']; ?>€/personne)</label>
-                                <select id="nb_personnes_honeydukes" name="nb_personnes_honeydukes" >
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                            <input type="number" id="nb_personnes_honeydukes" name="nb_personnes_honeydukes" min="1" value="1">
+                                
                         </div>
                         
                     </div>

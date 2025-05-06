@@ -151,7 +151,7 @@ $return_date = null;
                 <div class="Lieuxdestinations">Westeros</div>
             </div>
 
-            <p class="description">Préparez-vous à traverser des terres gelées, des châteaux de pierre, des marchés animés, et même à prendre place sur le Trône de Fer… si vous surviviez à l’aventure.  Enfilez vos bottes, préparez vos épées et rejoignez-nous pour un périple inoubliable dans les royaumes les plus sauvages et passionnants de l’histoire des séries télé !</p>
+            <p class="description">Préparez-vous à traverser des terres gelées, des châteaux de pierre, des marchés animés, et même à prendre place sur le Trône de Fer… si vous surviviez à l'aventure.  Enfilez vos bottes, préparez vos épées et rejoignez-nous pour un périple inoubliable dans les royaumes les plus sauvages et passionnants de l'histoire des séries télé !</p>
 
             <div class="buttons-container">
                 <a href="#winterfell" class="Page-Accueil-button">JOUR 1-4 : Winterfell</a>
@@ -164,17 +164,12 @@ $return_date = null;
                 <label for="departure-date">Date de départ:</label>
                 <input type="date" id="departure-date" name="departure_date" required min="<?php echo date('Y-m-d'); ?>">
                 <label for="nb_voyage"><br>Nombre de personnes pour le voyage</label>
-                    <select id="nb_personnes_voyage" name="nb_personnes_voyage">
-                        <option value="1">1 personne</option>
-                        <option value="2">2 personnes</option>
-                        <option value="3">3 personnes</option>
-                        <option value="4">4 personnes</option>
-                    </select>
+                <input type="number" id="nb_personnes_voyage" name="nb_personnes_voyage" min="1" value="1">
             </div>
           
             <div id="winterfell" class="section">
                 <h2>JOUR 1-4 : Winterfell</h2>
-                <p class="description">Bienvenue à Winterfell, là où le froid ne s’arrête jamais, mais l'hospitalité des Stark est toujours au rendez-vous ! Ici, vous allez apprendre à combattre comme un vrai guerrier du Nord, ou au moins à survivre à une session de « combat à l'épée ». Vous pensiez que les loups géants étaient mignons ? Détrompez-vous, ces bêtes ont de grandes dents et une envie de vengeance !</p>
+                <p class="description">Bienvenue à Winterfell, là où le froid ne s'arrête jamais, mais l'hospitalité des Stark est toujours au rendez-vous ! Ici, vous allez apprendre à combattre comme un vrai guerrier du Nord, ou au moins à survivre à une session de « combat à l'épée ». Vous pensiez que les loups géants étaient mignons ? Détrompez-vous, ces bêtes ont de grandes dents et une envie de vengeance !</p>
 
                 <div class="options-group">
                     <label for="hebergement_winterfell">Hébergement:</label>
@@ -195,35 +190,18 @@ $return_date = null;
                                
                                 <input type="checkbox" id="combat" name="activites_winterfell[]" value="combat">
                                 <label for="combat">Entraînement au combat  (<?php echo $activite_prix['combat']; ?>€/personne)</label>
-
-                                <select id="nb_personnes_combat" name="nb_personnes_combat">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_combat" name="nb_personnes_combat" min="1" value="1">
                             </div>
                             <div>
                                 <input type="checkbox" id="chasse" name="activites_winterfell[]" value="chasse">
                                 <label for="chasse">Chasse avec les loups  (<?php echo $activite_prix['chasse']; ?>€/personne)</label>
-                                
-                                <select id="nb_personnes_chasse" name="nb_personnes_chasse">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_chasse" name="nb_personnes_chasse" min="1" value="1">
                             </div>
                             <div>
                                 <input type="checkbox" id="mur" name="activites_winterfell[]" value="mur">
                                 <label for="mur">Visite du Mur  (<?php echo $activite_prix['mur']; ?>€/personne)</label>
-                                
-                                <select id="nb_personnes_mur" name="nb_personnes_mur">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_mur" name="nb_personnes_mur" min="1" value="1">
+                               
                             </div>
                         </div>
                     </div>
@@ -241,7 +219,7 @@ $return_date = null;
             <!-- Port-Réal -->
             <div id="portreal" class="section">
                 <h2>JOUR 5-7 : Port-Réal</h2>
-                <p class="description">Bienvenue à Port-Réal, la capitale de Westeros, où les intrigues royales et les complots sont aussi nombreux que les grains de sable sur la plage (mais beaucoup moins agréables). C’est aussi l’endroit idéal pour boire une bière (ou cinq) après une journée bien remplie d’intrigues et de jeux de pouvoir. Attention à ne pas trop vous attacher à vos alliés... tout peut changer en un clin d’œil !</p>
+                <p class="description">Bienvenue à Port-Réal, la capitale de Westeros, où les intrigues royales et les complots sont aussi nombreux que les grains de sable sur la plage (mais beaucoup moins agréables). C'est aussi l'endroit idéal pour boire une bière (ou cinq) après une journée bien remplie d'intrigues et de jeux de pouvoir. Attention à ne pas trop vous attacher à vos alliés... tout peut changer en un clin d'œil !</p>
 
                 <div class="options-group">
                     <label for="hebergement_portreal">Hébergement:</label>
@@ -264,35 +242,19 @@ $return_date = null;
                                 
                                 <input type="checkbox" id="tournoi" name="activites_portreal[]" value="tournoi">
                                 <label for="tournoi">Tournoi de combat  (<?php echo $activite_prix['tournoi']; ?>€/personne)</label>
-
-                                <select id="nb_personnes_tournoi" name="nb_personnes_tournoi">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_tournoi" name="nb_personnes_tournoi" min="1" value="1">
                             </div>
                             <div>
                                 <input type="checkbox" id="trone" name="activites_portreal[]" value="trone">
                                 <label for="trone">Photos sur le Trône de Fer  (<?php echo $activite_prix['trone']; ?>€/personne)</label>
-                                
-                                <select id="nb_personnes_trone" name="nb_personnes_trone">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_trone" name="nb_personnes_trone" min="1" value="1">
+
                             </div>
                             <div>
                                 <input type="checkbox" id="fleuve" name="activites_portreal[]" value="fleuve">
                                 <label for="fleuve">Balade en bateau sur le Fleuve Noir  (<?php echo $activite_prix['fleuve']; ?>€/personne)</label>
-                                
-                                <select id="nb_personnes_fleuve" name="nb_personnes_fleuve">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_fleuve" name="nb_personnes_fleuve" min="1" value="1">
+                               
                             </div>
                         </div>
                     </div>
@@ -330,34 +292,20 @@ $return_date = null;
                                 
                                 <input type="checkbox" id="dragons" name="activites_meereen[]" value="dragons">
                                 <label for="dragons">Dompter des dragons  (<?php echo $activite_prix['dragons']; ?>€/personne)</label>
-
-                                <select id="nb_personnes_dragons" name="nb_personnes_dragons">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_dragons" name="nb_personnes_dragons" min="1" value="1">
+                               
                             </div>
                             <div>
                                 <input type="checkbox" id="gladiateur" name="activites_meereen[]" value="gladiateur">
                                 <label for="gladiateur">Assistez aux combats de gladiateurs  (<?php echo $activite_prix['gladiateur']; ?>€/personne)</label>
-                                
-                                <select id="nb_personnes_gladiateur" name="nb_personnes_gladiateur">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <input type="number" id="nb_personnes_gladiateur" name="nb_personnes_gladiateur" min="1" value="1">
+                               
                             </div>
                             <div>
                                 <input type="checkbox" id="marche" name="activites_meereen[]" value="marche">
-                                <label for="marche">Marché d’Essos  (<?php echo $activite_prix['marche']; ?>€/personne)</label>
-                                <select id="nb_personnes_marche" name="nb_personnes_marche">
-                                    <option value="1">1 personne</option>
-                                    <option value="2">2 personnes</option>
-                                    <option value="3">3 personnes</option>
-                                    <option value="4">4 personnes</option>
-                                </select>
+                                <label for="marche">Marché d'Essos  (<?php echo $activite_prix['marche']; ?>€/personne)</label>
+                                <input type="number" id="nb_personnes_marche" name="nb_personnes_marche" min="1" value="1">
+                               
                             </div>
                         </div>
                     </div>
