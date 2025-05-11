@@ -32,17 +32,6 @@ function setCookie(name, value, days) {
     }
   }
  
-  window.onload = function() {
-    const savedTheme = getCookie("theme");
-    if (savedTheme === "light" || savedTheme === "default") {
-        applyTheme(savedTheme);
-        document.getElementById("theme-toggle").checked = (savedTheme === "light");
-    } else {
-        applyTheme("default");
-        document.getElementById("theme-toggle").checked = false;
-    }
-};
-
   document.getElementById("theme-toggle").addEventListener("click", function() {
     let currentTheme = getCookie("theme");
     if (currentTheme !== "light") {
