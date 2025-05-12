@@ -35,7 +35,7 @@
         }
         if (empty($error_message)){
             $user_id = uniqid('', true); 
-            $status ="Pas vip";
+            $Vip ="Non";
             $Bloquer = "Non";
 
             $newUser = [
@@ -45,7 +45,7 @@
                 "email" => $email,
                 "role" => $role,
                 "password" =>  $hashedPassword,
-                "status" => $status,
+                "Vip" => $Vip,
                 "Bloquer" => $Bloquer,
             ];
 

@@ -6,7 +6,7 @@
         "email": "antoinemarmelat@gmail.com",
         "role": "admin",
         "password": "$2y$10$DO0\/VQwpRs2HVTLWkC9ag.YVGd7e2MLKpwKuoEdX0z2qSMrsIaaau",
-        "status": "Pas vip",
+        "Vip": "Non",
         "Bloquer": "Non"
     },
     {
@@ -16,7 +16,7 @@
         "email": "pmarmelat@gmail.com",
         "role": "admin",
         "password": "$2y$10$uSaklbz.IWbmkPYzSnvjUeM6nODzT6pTWKMudfaHh\/XcnIAN1cJa2",
-        "status": "Pas vip",
+        "Vip": "Non",
         "Bloquer": "Non"
     },
     {
@@ -26,7 +26,7 @@
         "email": "JackSparrow@gmail.com",
         "role": "user",
         "password": "$2y$10$fCoOLC.uwrXtIlFb7qTaweLfG8LelS6kc7cMs7CR.8eqyT3zIH9aO",
-        "status": "Pas vip",
+        "Vip": "Non",
         "Bloquer": "Non"
     },
     {
@@ -36,7 +36,7 @@
         "email": "DonaldTrump@gmail.com",
         "role": "user",
         "password": "$2y$10$w1hAtjzzRLnyAtZ3\/DiDzeQmQw5Z3trdVJ\/H2UoUgcB2i4cJs4Z42",
-        "status": "Pas vip",
+        "Vip": "Non",
         "Bloquer": "Non"
     },
     {
@@ -46,7 +46,7 @@
         "email": "DarkVader@gmail.com",
         "role": "user",
         "password": "$2y$10$ulw.EYRYj1xRLipnVIFNTeieii7Rwg1LhOSW1BfxDY2BJMlhITrl6",
-        "status": "Pas vip",
+        "Vip": "Non",
         "Bloquer": "Non"
     }
     

@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         "prenom" => $user['prenom'],
                         "email" => $user['email'],
                         "role" => $user['role'],
-                        "status" => $user['status'],
+                        "Vip" => $user['Vip'],
                         "Bloquer" => $user['Bloquer'],
                     ];
                     header("Location: PageProfil.php");
