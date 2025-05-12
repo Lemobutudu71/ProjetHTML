@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); // faire un fichier session.php pour mutualiser la gestion de la session 
 
 
 if (isset($_SESSION['user'])) {
@@ -25,7 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         "nom" => $user['nom'],
                         "prenom" => $user['prenom'],
                         "email" => $user['email'],
-                        "role" => $user['role']
+                        "role" => $user['role'],
+                        "status" => $user['status'],
+                        "Bloquer" => $user['Bloquer'],
                     ];
                     header("Location: PageProfil.php");
                     exit;
@@ -58,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input class="champs" name="password" type="password" id="loginPassword" placeholder="Mot de passe" required>
                         <i class="fas fa-eye toggle-password" data-for="loginPassword" onclick="togglePassword('loginPassword')"></i>
                     </div>
+                    <p class="Page-Accueil-text" id="Compteur">0 / 30</p>
                     <button class="button" type="submit">Se connecter</button>
                 </form>
                 <p class="redirection"><a href="#">Mot de passe oublié ?</a></p>
@@ -68,6 +71,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $scripts = '
     <script src="Javascript/Icone.js"></script>
     <script src="Javascript/Connexion.js"></script>
+     <script>
+        document.getElementById("loginPassword").addEventListener("input", function() {
+        const maxLength = 30;
+        let value = this.value;
+        if (value.length > maxLength) {
+            this.value = value.slice(0, maxLength);
+        }
+        document.getElementById("Compteur").textContent = this.value.length + " / " + maxLength;
+    });
+    </script>
 ';
 require_once('footer.php'); 
 ?>

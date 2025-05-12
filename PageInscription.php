@@ -35,7 +35,9 @@
         }
         if (empty($error_message)){
             $user_id = uniqid('', true); 
-            
+            $status ="Pas vip";
+            $Bloquer = "Non";
+
             $newUser = [
                 "id" => $user_id,
                 "nom" => $nom,
@@ -43,6 +45,8 @@
                 "email" => $email,
                 "role" => $role,
                 "password" =>  $hashedPassword,
+                "status" => $status,
+                "Bloquer" => $Bloquer,
             ];
 
         $users[] = $newUser;
@@ -73,7 +77,9 @@
                     <div class="password-container">
                         <input class="champs" name="password" type="password" id="registerPassword" placeholder="Mot de passe" required>
                         <i class="fas fa-eye toggle-password" data-for="registerPassword" onclick="togglePassword('registerPassword')"></i>
+                       
                     </div>
+                    <p class="Page-Accueil-text" id="Compteur">0 / 30</p>
                     <button class="button" type="submit">S'inscrire</button>
                 </form>
                 <p class="redirection"><a href="PageSeconnecter.php">Déjà un compte ?</a></p>
@@ -84,6 +90,16 @@
 $scripts = '
     <script src="Javascript/Icone.js"></script>
     <script src="Javascript/FormVerif.js"></script>
+    <script>
+        document.getElementById("registerPassword").addEventListener("input", function() {
+        const maxLength = 30;
+        let value = this.value;
+        if (value.length > maxLength) {
+            this.value = value.slice(0, maxLength);
+        }
+        document.getElementById("Compteur").textContent = this.value.length + " / " + maxLength;
+    });
+    </script>
 ';
 require_once('footer.php'); 
 ?>
