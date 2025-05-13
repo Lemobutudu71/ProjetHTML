@@ -15,20 +15,22 @@
                     "hyppogriffe"
                 ],
                 "activites_preaulard": [
-                    "degustation"
+                    "degustation",
+                    "zonko"
                 ],
                 "transport_poudlard": "portoloin",
                 "nb_personnes": {
                     "sorts": "3",
                     "degustation": "3",
                     "quidditch": 3,
-                    "hyppogriffe": 3
+                    "hyppogriffe": 3,
+                    "zonko": 1
                 },
                 "nb_personnes_voyage": "3",
                 "destination": "Poudlard",
                 "return_date": "2025-05-29",
                 "departure_date": "2025-05-22",
-                "prix_total": 11358,
+                "prix_total": 11373,
                 "nb_etapes": 2,
                 "etapes": [
                     "Poudlard",
@@ -53,5 +55,46 @@
         "date": "2025-05-06 16:55:51",
         "validation_securite": "Valid\u00e9e",
         "options": []
+    },
+    {
+        "transaction_id": "6823057b1c328",
+        "status": "accepted",
+        "date": "2025-05-13 08:40:39",
+        "validation_securite": "Valid\u00e9e",
+        "options": [
+            {
+                "user_id": "67e1306025b5f4.22789385",
+                "hebergement_poudlard": "serpentard",
+                "hebergement_preaulard": "sanglier",
+                "activites_poudlard": [],
+                "activites_preaulard": [
+                    "degustation"
+                ],
+                "transport_poudlard": "balais",
+                "nb_personnes": {
+                    "degustation": "1"
+                },
+                "nb_personnes_voyage": "1",
+                "destination": "Poudlard",
+                "return_date": "2025-05-28",
+                "departure_date": "2025-05-21",
+                "prix_total": 3686,
+                "nb_etapes": 2,
+                "etapes": [
+                    "Poudlard",
+                    "PreauLard"
+                ],
+                "activite_prix": {
+                    "sorts": 25,
+                    "quidditch": 35,
+                    "hyppogriffe": 40,
+                    "zonko": 15,
+                    "degustation": 20,
+                    "honeydukes": 18
+                },
+                "transaction_id": "6823057b1c328",
+                "status": "accepted"
+            }
+        ]
     }
 ]
