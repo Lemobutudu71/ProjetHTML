@@ -1,5 +1,11 @@
 <?php
-require_once('session.php');
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: PageSeconnecter.php");
+    exit();
+}
+
 
 $commandes_file = 'json/Commande.json';
 $etapes_file = 'json/Etapes_Options.json';

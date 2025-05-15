@@ -1,5 +1,10 @@
 <?php
-require_once('session.php');
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: PageInscription.php");
+    exit;
+}
 
 $voyagesJson = file_get_contents("json/voyages.json");
 $voyages = json_decode($voyagesJson, true);

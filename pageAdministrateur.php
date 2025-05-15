@@ -1,14 +1,16 @@
 <?php
-require_once('session.php');
+session_start();
 
 
-if (!isAdmin()) {
-    header("Location: PageAccueil.php");
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+    header("Location: PageAccueil.php"); // Redirection si non admin
     exit();
 }
 
+
 $file = 'json/utilisateur.json';
 $users = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
+
 
 $usersPerPage = 2; 
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1; 
