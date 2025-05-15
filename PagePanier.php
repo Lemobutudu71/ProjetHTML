@@ -33,11 +33,11 @@ if (file_exists($optionsFile)) {
                     <p class="no-voyages">Vous n'avez pas encore ajouté de voyage à votre panier.</p>
                 <?php else: ?>
                     <?php foreach ($mesVoyages as $voyage): ?>
-                        <a href="PageRecap.php?transaction_id=<?php echo urlencode($voyage['transaction_id']); ?>" class="voyage-item">
-                            <div class="voyage-destination"><?php echo htmlspecialchars($voyage['destination']); ?></div>
+                        <a href="PageRecap.php?transaction_id=<?php echo urlencode($voyage['transaction_id'] ?? 'N/A'); ?>" class="voyage-item">
+                            <div class="voyage-destination"><?php echo htmlspecialchars($voyage['destination'] ?? 'Destination inconnue'); ?></div>
                             <div class="voyage-dates">
-                                Du <?php echo date('d/m/Y', strtotime($voyage['departure_date'])); ?> 
-                                au <?php echo date('d/m/Y', strtotime($voyage['return_date'])); ?>
+                                Du <?php echo date('d/m/Y', strtotime($voyage['departure_date'] ?? 'now')); ?> 
+                                au <?php echo date('d/m/Y', strtotime($voyage['return_date'] ?? 'now')); ?>
                             </div>
                         </a>
                     <?php endforeach; ?>

@@ -48,6 +48,15 @@
         "password": "$2y$10$ulw.EYRYj1xRLipnVIFNTeieii7Rwg1LhOSW1BfxDY2BJMlhITrl6",
         "Vip": "Non",
         "Bloquer": "Non"
+    },
+    {
+        "id": "67f0a1b2c3d4e5.12345678",
+        "nom": "Test",
+        "prenom": "Usertok",
+        "email": "test@mail.co",
+        "role": "user",
+        "password": "$2y$10$L5MJQBg3KPIyU8XNHAZpBuVqXTCwcz0xqn0gC6q\/83cho7qF52Hfu",
+        "Vip": "Non",
+        "Bloquer": "Non"
     }
-    
 ]

@@ -1,13 +1,16 @@
-
+<?php require_once __DIR__ . '/load_env.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieTrip</title>
-    <link id="theme" rel="stylesheet" href="/test/Projet/CSS.css">
+    <script>
+        const basePath = "<?php echo rtrim($_ENV['PATH'], '/'); ?>";
+    </script>
+    <link id="theme" rel="stylesheet" href="<?php echo $_ENV['PATH']; ?>/CSS.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="/test/Projet/Javascript/Theme.js" defer></script>
+    <script src="<?php echo $_ENV['PATH']; ?>/Javascript/Theme.js" defer></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const savedTheme = getCookie("theme");
@@ -26,22 +29,22 @@
 <body>
     <section class="Page-Accueil">
         <video autoplay loop muted id="bg-video">
-            <source src="/test/Projet/images/Vidéo5.mp4" type="video/mp4">
+            <source src="<?php echo $_ENV['PATH']; ?>/images/Vidéo5.mp4" type="video/mp4">
         </video> 
         <header>
             <div class="ProfilPicture">
-                <img src="/test/Projet/images/LOGO.jpg" alt="logo" width="200" class="logo">
+                <img src="<?php echo $_ENV['PATH']; ?>/images/LOGO.jpg" alt="logo" width="200" class="logo">
             </div>
             <nav>
                 <ul class="menu">
-                    <li><a href="/test/Projet/PageAccueil.php">Accueil</a></li>
-                    <li><a href="/test/Projet/PageAccueil2.php">Rechercher</a></li>
+                    <li><a href="<?php echo $_ENV['PATH']; ?>/PageAccueil.php">Accueil</a></li>
+                    <li><a href="<?php echo $_ENV['PATH']; ?>/PageAccueil2.php">Rechercher</a></li>
                     <?php if (isset($_SESSION['user'])): ?>
-                        <li><a href="/test/Projet/PagePanier.php">Mon panier</a></li>
+                        <li><a href="<?php echo $_ENV['PATH']; ?>/PagePanier.php">Mon panier</a></li>
                     <?php else: ?>
-                        <li><a href="/test/Projet/PageInscription.php">Se connecter</a></li>
+                        <li><a href="<?php echo $_ENV['PATH']; ?>/PageInscription.php">Se connecter</a></li>
                     <?php endif; ?>
-                    <li><a href="/test/Projet/PageProfil.php">Profil</a></li>
+                    <li><a href="<?php echo $_ENV['PATH']; ?>/PageProfil.php">Profil</a></li>
                     <div class="toggle-container">
                         <i class="fas fa-moon"></i>
                         <label class="switch">

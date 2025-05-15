@@ -10,32 +10,134 @@ if (!isset($_SESSION['user'])) {
 
 // Récupérer les informations de l'utilisateur et du voyage
 $user_id = $_SESSION['user']['id'];
-$user_choices = null;
+$display_details = []; // Array to hold details for display
 $options_file = 'json/options.json';
 $commandes_file = 'json/Commande.json';
 
-$transaction_id = $_GET['transaction_id'] ?? null;
-$montant = $_GET['montant'] ?? null;
+$transaction_id_get = $_GET['transaction_id'] ?? null;
+$montant_get = $_GET['montant'] ?? null;
+$payment_type = $_GET['type'] ?? 'reservation'; // Default to reservation
 
-if ($transaction_id && $montant) {
-    $transaction = $transaction_id;
-    $_SESSION['transaction'] = $transaction;
-} else {
-   
+$transaction_for_platform = null;
+$montant_for_platform = null;
+
+if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
+    // This is a payment for additional options.
+    $montant_for_platform = $montant_get;
+    error_log("[pagePayer.php DEBUG INSIDE OPTIONS BLOCK] $montant_for_platform set to: " . print_r($montant_for_platform, true));
+
+    // We need to find the original_transaction_id from options.json
+    // to send to the payment platform as the main 'transaction'.
+    $options_entry_for_payment = null;
     if (file_exists($options_file)) {
-        $user_data = json_decode(file_get_contents($options_file), true);
-        foreach ($user_data as $data) {
-            if (isset($data['user_id']) && $data['user_id'] == $user_id) {
-                $user_choices = $data;
-                $destination = $user_choices['destination'];
+        $all_options_entries = json_decode(file_get_contents($options_file), true);
+        if (is_array($all_options_entries)) {
+            foreach ($all_options_entries as $entry) {
+                if (isset($entry['payment_transaction_id']) && $entry['payment_transaction_id'] === $transaction_id_get && 
+                    isset($entry['user_id']) && $entry['user_id'] == $user_id) {
+                    $options_entry_for_payment = $entry;
+                    break;
+                }
             }
         }
     }
 
-    // Calculer le montant total
-    $montant = $user_choices['prix_total'];
-    $transaction = $user_choices['transaction_id'];
-    $_SESSION['transaction'] = $transaction;
+    if ($options_entry_for_payment && isset($options_entry_for_payment['original_transaction_id'])) {
+        $transaction_for_platform = $options_entry_for_payment['original_transaction_id'];
+    } else {
+        error_log("[pagePayer.php ERROR] Could not find original_transaction_id for options payment: " . $transaction_id_get);
+        $transaction_for_platform = $transaction_id_get; 
+    }
+    $_SESSION['transaction'] = $transaction_id_get;
+    error_log("[pagePayer.php DEBUG INSIDE OPTIONS BLOCK] $transaction_for_platform set to: " . print_r($transaction_for_platform, true));
+
+    // For options, we might not need to load full original trip details for payer page display beyond the transaction ID and amount.
+    // However, $transaction_for_platform is the original trip ID here.
+    // We can load the original trip's destination for better display context if desired.
+    if (file_exists($commandes_file) && isset($transaction_for_platform)) {
+        $all_commandes = json_decode(file_get_contents($commandes_file), true);
+        if (is_array($all_commandes)) {
+            foreach ($all_commandes as $commande) {
+                if (isset($commande['transaction_id']) && $commande['transaction_id'] === $transaction_for_platform) {
+                    if (isset($commande['options']) && is_array($commande['options'])) {
+                        foreach ($commande['options'] as $opt) {
+                            if (isset($opt['user_id']) && $opt['user_id'] === $user_id) {
+                                $display_details['destination'] = $opt['destination'] ?? 'N/A';
+                                // Add other details if necessary for options payment display
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+} elseif ($transaction_id_get && $montant_get) {
+    // This is likely an initial payment being retried, or type not specified as options
+    $transaction_for_platform = $transaction_id_get;
+    $montant_for_platform = $montant_get;
+    $_SESSION['transaction'] = $transaction_for_platform;
+
+    // Fetch details from Commande.json for display
+    if (file_exists($commandes_file)) {
+        $all_commandes = json_decode(file_get_contents($commandes_file), true);
+        if (is_array($all_commandes)) {
+            foreach ($all_commandes as $commande) {
+                if (isset($commande['transaction_id']) && $commande['transaction_id'] === $transaction_for_platform) {
+                    if (isset($commande['options']) && is_array($commande['options'])) {
+                        foreach ($commande['options'] as $opt) {
+                            if (isset($opt['user_id']) && $opt['user_id'] === $user_id) {
+                                $display_details = $opt; // Load all details
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
+    // Fallback to options.json if Commande.json didn't yield details (less likely for reservations)
+    if (empty($display_details) && file_exists($options_file)) {
+        $options_data = json_decode(file_get_contents($options_file), true);
+        if (is_array($options_data)) {
+            foreach ($options_data as $option_item) {
+                if (isset($option_item['transaction_id']) && $option_item['transaction_id'] === $transaction_for_platform &&
+                    isset($option_item['user_id']) && $option_item['user_id'] === $user_id) {
+                    $display_details = $option_item;
+                    break;
+                }
+            }
+        }
+    }
+} else {
+    // Fallback: transaction_id and montant not in GET (original logic)
+    // This part is less ideal and should ideally be avoided by always passing details via GET.
+    $user_choices_fallback = null; // Renaming to avoid confusion with $user_choices in outer scope if any
+    if (file_exists($options_file)) {
+        $user_data = json_decode(file_get_contents($options_file), true);
+        if(is_array($user_data)) {
+            foreach ($user_data as $data) {
+                if (isset($data['user_id']) && $data['user_id'] == $user_id && (!isset($data['status']) || $data['status'] !== 'accepted')) {
+                    $user_choices_fallback = $data; 
+                }
+            }
+        }
+    }
+    if ($user_choices_fallback) {
+        $montant_for_platform = $user_choices_fallback['prix_total'] ?? null;
+        $transaction_for_platform = $user_choices_fallback['transaction_id'] ?? null;
+        $_SESSION['transaction'] = $transaction_for_platform;
+        $display_details = $user_choices_fallback; // Populate $display_details
+    } else {
+        die("Erreur: Impossible de récupérer les détails de la transaction pour le paiement.");
+    }
+}
+
+if ($transaction_for_platform === null || $montant_for_platform === null) {
+    die("Erreur: Données de transaction ou montant manquantes pour initier le paiement.");
 }
 
 
@@ -54,12 +156,33 @@ if (strpos($project_root, $document_root) === 0) {
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
 $host = $_SERVER['HTTP_HOST'];
 $base_url = $protocol . "://" . $host . $script_dir;
-$retour = "{$base_url}/retour_paiement.php?transaction={$transaction}";
-$_SESSION['retour'] = $retour;
+
+// Use $transaction_for_platform in the retour URL query string for consistency if platform expects it
+// However, the session $_SESSION['retour'] is what retour_paiement.php uses for its hash.
+// The key is that what goes into pagePayer's control hash for 'retour' must match what retour_paiement.php uses from session.
+
+// Let's make the ?transaction= in the retour URL consistently the ID that was sent to the platform
+$retour_url_query_transaction = $transaction_for_platform; 
+$retour = "{$base_url}/retour_paiement.php?transaction={$retour_url_query_transaction}";
+$_SESSION['retour'] = $retour; // This is what retour_paiement.php will use
+
+// Log values before generating control hash
+error_log("[pagePayer.php DEBUG] Payment Type: " . $payment_type);
+error_log("[pagePayer.php DEBUG] Transaction ID from GET: " . print_r($transaction_id_get, true));
+error_log("[pagePayer.php DEBUG] Montant from GET: " . print_r($montant_get, true));
+error_log("[pagePayer.php DEBUG] Transaction FOR PLATFORM (before hash): " . print_r($transaction_for_platform, true));
+error_log("[pagePayer.php DEBUG] Montant FOR PLATFORM (before hash): " . print_r($montant_for_platform, true)); // Log it again right before use
+error_log("[pagePayer.php DEBUG] Vendeur: " . print_r($vendeur, true));
+error_log("[pagePayer.php DEBUG] Retour URL for session (and used in hash): " . $retour);
+
 // Générer le contrôle pour la sécurité
 $api_key = getAPIKey($vendeur); 
-$control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour . "#");
+// Use $transaction_for_platform and $montant_for_platform for control hash generation
+$control = md5($api_key . "#" . $transaction_for_platform . "#" . $montant_for_platform . "#" . $vendeur . "#" . $retour . "#");
 $_SESSION['control'] = $control;
+
+error_log("[pagePayer.php DEBUG] API Key used: " . $api_key);
+error_log("[pagePayer.php DEBUG] Control hash generated (based on _for_platform vars): " . $control);
 
 ?>
 
@@ -67,24 +190,37 @@ $_SESSION['control'] = $control;
         
         <div class="description">
             <h2 class='h2'>Récapitulatif de la commande</h2>
-            <?php if ($transaction_id && $montant): ?>
+            <?php 
+                // Display based on what was actually processed for the platform
+                $display_montant = $montant_for_platform;
+                $display_transaction = $transaction_for_platform; // Or $transaction_id_get if more appropriate for display
+            ?>
+            <?php if ($payment_type === 'options'): ?>
                 <p><strong>Type de paiement :</strong> Options supplémentaires</p>
-                <p><strong>Montant à payer :</strong> <?php echo number_format($montant, 2, ',', ' '); ?> €</p>
+                <p><strong>Montant à payer :</strong> <?php echo number_format($display_montant, 2, ',', ' '); ?> €</p>
+                <p><em>(Pour la réservation: <?php echo htmlspecialchars($display_transaction); ?>)</em></p>
             <?php else: ?>
-            <p><strong>Destination :</strong> <?php echo htmlspecialchars($destination); ?></p>
-            <p><strong>Date de départ :</strong> <?php echo htmlspecialchars($user_choices['departure_date']); ?></p>
-            <p><strong>Date de retour :</strong> <?php echo htmlspecialchars($user_choices['return_date']); ?></p>
-            <p><strong>Nombre de personnes :</strong> <?php echo htmlspecialchars($user_choices['nb_personnes_voyage']); ?></p>
-            <p><strong>Montant total :</strong> <?php echo number_format($montant, 2, ',', ' '); ?> €</p>
+                <?php 
+                    $disp_destination = $display_details['destination'] ?? 'N/A';
+                    $disp_departure_date = $display_details['departure_date'] ?? 'N/A';
+                    $disp_return_date = $display_details['return_date'] ?? 'N/A';
+                    $disp_nb_personnes = $display_details['nb_personnes_voyage'] ?? 'N/A';
+                ?>
+                <p><strong>Transaction ID :</strong> <?php echo htmlspecialchars($transaction_for_platform); ?></p>
+                <p><strong>Destination :</strong> <?php echo htmlspecialchars($disp_destination); ?></p>
+                <p><strong>Date de départ :</strong> <?php echo htmlspecialchars($disp_departure_date); ?></p>
+                <p><strong>Date de retour :</strong> <?php echo htmlspecialchars($disp_return_date); ?></p>
+                <p><strong>Nombre de personnes :</strong> <?php echo htmlspecialchars($disp_nb_personnes); ?></p>
+                <p><strong>Montant total :</strong> <?php echo number_format($montant_for_platform, 2, ',', ' '); ?> €</p>
             <?php endif; ?>
         </div>
 
         <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST" class="carte">
-            <input type="hidden" name="transaction" value="<?php echo $transaction; ?>">
-            <input type="hidden" name="montant" value="<?php echo $montant; ?>">
-            <input type="hidden" name="vendeur" value="<?php echo $vendeur; ?>">
-            <input type="hidden" name="retour" value="<?php echo $retour; ?>">
-            <input type="hidden" name="control" value="<?php echo $control; ?>">
+            <input type="hidden" name="transaction" value="<?php echo htmlspecialchars($transaction_for_platform); ?>">
+            <input type="hidden" name="montant" value="<?php echo htmlspecialchars(strval($montant_for_platform)); ?>">
+            <input type="hidden" name="vendeur" value="<?php echo htmlspecialchars($vendeur); ?>">
+            <input type="hidden" name="retour" value="<?php echo htmlspecialchars($retour); ?>">
+            <input type="hidden" name="control" value="<?php echo htmlspecialchars($control); ?>">
             <div class='recherche'>
                 <button type="submit" class="Page-Accueil-button">Valider et Payer</button>
             </div>

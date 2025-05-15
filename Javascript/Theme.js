@@ -1,5 +1,3 @@
-
-
 function setCookie(name, value, days) {
     let expires = "";
     if (days) {
@@ -25,10 +23,11 @@ function setCookie(name, value, days) {
     const themeLink = document.getElementById("theme");
   
     if (theme === "light") {
-      themeLink.href = "/test/Projet/light.css";
+      themeLink.href = basePath + "/light.css";
+      localStorage.setItem("theme", "light");
     } else {
-
-      themeLink.href = "/test/Projet/CSS.css";
+      themeLink.href = basePath + "/CSS.css";
+      localStorage.setItem("theme", "default");
     }
   }
  
@@ -46,13 +45,15 @@ function setCookie(name, value, days) {
   
   document.addEventListener("DOMContentLoaded", function () {
     const departureDateInput = document.getElementById("departure-date");
-    const today = new Date().toISOString().split("T")[0]; 
-    departureDateInput.setAttribute("min", today);
+    if (departureDateInput) {
+        const today = new Date().toISOString().split("T")[0]; 
+        departureDateInput.setAttribute("min", today);
 
-    departureDateInput.addEventListener("change", function () {
-        if (departureDateInput.value < today) {
-            alert("Vous ne pouvez pas choisir une date antérieure à aujourd'hui.");
-            departureDateInput.value = today; 
-        }
-    });
+        departureDateInput.addEventListener("change", function () {
+            if (departureDateInput.value < today) {
+                alert("Vous ne pouvez pas choisir une date antérieure à aujourd'hui.");
+                departureDateInput.value = today; 
+            }
+        });
+    }
 });

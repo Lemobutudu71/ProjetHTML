@@ -1,4 +1,5 @@
 <?php
+error_log("TEST LOG FROM TOP OF RETOUR_PAIEMENT - " . date('Y-m-d H:i:s')); // TEST LOG
 session_start();
 require('getapikey.php');
 
@@ -51,6 +52,21 @@ $retour = $_SESSION['retour'] ?? '';
 $control_calcule = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour . "#");
 
 $transaction_valide = ($control_recu === $control_calcule);
+
+// --- DEBUGGING BLOCK ---
+if (!$transaction_valide) {
+    error_log("DEBUG RETOUR PAIEMENT: Validation échouée.");
+    error_log("  SESSION Control (attendu de pagePayer): " . print_r($control_recu, true));
+    error_log("  CALCULATED Control (par retour_paiement): " . print_r($control_calcule, true));
+    error_log("  Composants pour CALCULATED Control:");
+    error_log("    API Key: " . $api_key);
+    error_log("    Transaction (GET): " . $transaction);
+    error_log("    Montant (GET): " . $montant);
+    error_log("    Vendeur (GET): " . $vendeur);
+    error_log("    Retour URL (SESSION): " . $retour);
+    error_log("  Valeur de _SESSION['transaction'] (utilisée si GET transaction absente): " . ($_SESSION['transaction'] ?? 'Non définie'));
+}
+// --- FIN DEBUGGING BLOCK ---
 
 $options_data = file_exists($options_file) ? json_decode(file_get_contents($options_file), true) : [];
 
@@ -112,7 +128,12 @@ file_put_contents($commandes_file, json_encode($commandes, JSON_PRETTY_PRINT));
                 <p>Un problème est survenu lors du paiement.</p>
                 <p><strong>Statut :</strong> <?php echo htmlspecialchars($status); ?></p>
                 <?php if (!$transaction_valide): ?>
-                    <p>Erreur de validation de sécurité</p>
+                    <p style="color: red; font-weight: bold;">Erreur de validation de sécurité (valeur de contrôle).</p>
+                    <p style="font-size: 0.8em; color: grey;">
+                        Contrôle attendu (session): <?php echo htmlspecialchars($control_recu); ?><br>
+                        Contrôle calculé (retour): <?php echo htmlspecialchars($control_calcule); ?><br>
+                        <em>(Détails supplémentaires loggés côté serveur si le debug est activé)</em>
+                    </p>
                 <?php endif; ?>
                 <div class='recherche'>
                 <?php if ($is_supplemental_payment): ?>

@@ -1,97 +1,179 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 
+// First, check if this is an AJAX request
+$is_ajax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 
-
+// AJAX-ONLY LOGIC - Separate from the normal page rendering
+if ($is_ajax) {
+    // No HTML output before this point - Only JSON responses
+    header('Content-Type: application/json');
+    $ajax_general_debug = []; // General debug for all AJAX requests to this script
+    $ajax_general_debug[] = "AJAX request detected by PageProfil.php.";
+    $ajax_general_debug[] = "Request Method: " . $_SERVER["REQUEST_METHOD"];
+    $ajax_general_debug[] = "Raw POST data: " . json_encode($_POST);
+    
+    // Early check for session
 if (!isset($_SESSION['user'])) {
-    header("Location: PageInscription.php"); 
+        echo json_encode(['success' => false, 'message' => 'Session expirée ou non connecté.', 'debug' => $ajax_general_debug]);
     exit;
 }
 
+    // Handle profile update via AJAX
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_changes'])) {
+        // This is the specific profile update operation
+        $operation_response = ['success' => false, 'message' => 'Erreur initiale dans la logique de mise à jour du profil.']; // Default for this operation
+        $operation_specific_debug = []; // Debug messages specific to this operation
+        
+        $operation_specific_debug[] = "'submit_changes' POST condition met.";
+
+        $nom = isset($_POST['nom']) ? trim($_POST['nom']) : "";
+    $prenom = isset($_POST['prenom']) ? trim($_POST['prenom']) : "";
+        $email = isset($_POST['email']) ? trim($_POST['email']) : "";
+  
+        $operation_specific_debug[] = "Processed Input: nom='$nom', prenom='$prenom', email='$email'";
+        
+        if (empty($nom) || empty($prenom) || empty($email)) {
+            $operation_response = ['success' => false, 'message' => 'Tous les champs sont obligatoires.'];
+            $operation_specific_debug[] = "Validation failed: Fields empty.";
+        } else {
+            $operation_specific_debug[] = "Validation passed.";
+            $file_path = 'json/utilisateur.json';
+            $operation_specific_debug[] = "User file path: $file_path";
+
+            if (file_exists($file_path)) {
+                $operation_specific_debug[] = "User file exists.";
+                $users_json = file_get_contents($file_path);
+                if ($users_json === false) {
+                    $operation_response = ['success' => false, 'message' => 'Erreur: Impossible de lire le fichier utilisateur.'];
+                    $operation_specific_debug[] = "Error: Cannot read user file.";
+                } else {
+                    $users = json_decode($users_json, true);
+                    if ($users === null && json_last_error() !== JSON_ERROR_NONE) {
+                        $operation_response = ['success' => false, 'message' => 'Erreur de décodage JSON: ' . json_last_error_msg()];
+                        $operation_specific_debug[] = "Error: JSON decode failed - " . json_last_error_msg();
+                    } else {
+                        $current_user_id = $_SESSION['user']['id'];
+                        $operation_specific_debug[] = "Current user ID: $current_user_id";
+                        $user_found = false;
+                        
+            foreach ($users as &$user_record) {
+                            if (isset($user_record['id']) && $user_record['id'] === $current_user_id) {
+                                $operation_specific_debug[] = "Matching user found. Updating record.";
+                    $user_record['nom'] = $nom;
+                    $user_record['prenom'] = $prenom;
+                    $user_record['email'] = $email;
+                                $user_found = true;
+                    break;
+                }
+            }
+                        
+                        if ($user_found) {
+                            if (file_put_contents($file_path, json_encode($users, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
+                                $operation_specific_debug[] = "User file updated successfully.";
+                    $_SESSION['user']['nom'] = $nom;
+                    $_SESSION['user']['prenom'] = $prenom;
+                    $_SESSION['user']['email'] = $email;
+                                $operation_specific_debug[] = "Session updated.";
+                                $operation_response = ['success' => true, 'newData' => ['nom' => $nom, 'prenom' => $prenom, 'email' => $email]];
+                } else {
+                                $operation_response = ['success' => false, 'message' => 'Erreur lors de l\'écriture des données.'];
+                                $operation_specific_debug[] = "Error: file_put_contents failed.";
+                }
+                        } else {
+                            $operation_response = ['success' => false, 'message' => 'Utilisateur non trouvé pour la mise à jour.'];
+                            $operation_specific_debug[] = "Error: User ID not found in JSON file.";
+            }            
+        } 
+                }
+            } else {
+                $operation_response = ['success' => false, 'message' => 'Fichier utilisateur introuvable.'];
+                $operation_specific_debug[] = "Error: User file does not exist.";
+    }
+        }
+        
+        // Combine general AJAX debug with operation-specific debug for the final response
+        $operation_response['debug'] = array_merge($ajax_general_debug, $operation_specific_debug);
+        echo json_encode($operation_response);
+        exit; // EXIT HERE - Don't continue to the HTML part
+    }
+    
+    // If the code reaches here, it's an AJAX request but not the 'submit_changes' POST operation
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Opération AJAX non reconnue ou conditions non remplies (ex: submit_changes non présent dans POST).',
+        'debug'   => $ajax_general_debug // Send the general AJAX debug info we collected so far
+    ]);
+    exit;
+}
+
+// REGULAR PAGE RENDERING - Only for non-AJAX requests
+// Redirect if not logged in
+if (!isset($_SESSION['user'])) {
+    header("Location: PageInscription.php"); 
+        exit;
+    }
+
+// Regular logout handling
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['deconnecter'])) {
-    session_unset();// Détruire toutes les variables de session
-    session_destroy();// Détruire la session
+    session_unset();
+    session_destroy();
     header("Location: PageAccueil.php"); 
     exit;
 }
 
-$user = $_SESSION['user']; 
+// Rest of your code for page rendering
+$user = $_SESSION['user'];
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_changes'])) {
-    $nom    = isset($_POST['nom']) ? trim($_POST['nom']) : "";
-    $prenom = isset($_POST['prenom']) ? trim($_POST['prenom']) : "";
-    $email  = isset($_POST['email']) ? trim($_POST['email']) : "";
-  
-    if ($nom != "" && $prenom != "" && $email != "") {
-        $file = 'json/utilisateur.json';
-        if (file_exists($file)) {
-            $users = json_decode(file_get_contents($file), true);
-            $userId = $_SESSION['user']['id'];
-            $found = false;
-            foreach ($users as &$user) {
-                if ($user['id'] === $userId) {
-                    $user['nom'] = $nom;
-                    $user['prenom'] = $prenom;
-                    $user['email'] = $email;
-                    $found = true;
-                    break;
-                }
-            }
-            if ($found) {
-               
-                if (file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT))) {
-                    // Mise à jour de la session
-                    $_SESSION['user']['nom'] = $nom;
-                    $_SESSION['user']['prenom'] = $prenom;
-                    $_SESSION['user']['email'] = $email;
-                } else {
-                    $error_message = "Erreur lors de la mise à jour du fichier.";
-                }
-            } 
-            else {
-                $error_message = "Utilisateur non trouvé.";
-            }            
-        } 
-        else {
-            $error_message = "Fichier utilisateur introuvable.";
-        }
-    } 
-    else {
-        $error_message = "Tous les champs sont obligatoires.";
-    }
-}
-
-$commandesJson = file_get_contents('json/Commande.json');
-$commandes = json_decode($commandesJson, true);
-
+// Load commands data for displaying voyages
+// This part should only run if the script hasn't exited due to AJAX handling or redirection.
+$commandesJson = @file_get_contents('json/Commande.json'); // Use @ to suppress warnings if file not found, handle below
+$commandes = [];
 $mesVoyages = [];
+
+if ($commandesJson === false) {
+    // Optionally log an error or set a message for the user if Commande.json is critical
+    // For now, $mesVoyages will remain empty, and the page will show "Vous n'avez pas encore de voyages réservés."
+} else {
+    $commandes = json_decode($commandesJson, true);
+    if ($commandes === null && json_last_error() !== JSON_ERROR_NONE) {
+        // Optionally log JSON decoding error for Commande.json
+        // $mesVoyages will remain empty
+    } else if (is_array($commandes)) {
 foreach ($commandes as $commande) {
-    if ($commande['status'] === 'accepted') {
+            if (isset($commande['status']) && $commande['status'] === 'accepted' && isset($commande['options']) && is_array($commande['options'])) {
         foreach ($commande['options'] as $option) {
-            if ($option['user_id'] === $user['id']) {
+                    if (isset($option['user_id']) && $option['user_id'] === $user['id']) {
                 $voyage = [
-                    'transaction_id' => $commande['transaction_id'],
-                    'date' => $commande['date'],
-                    'destination' => $option['destination'],
-                    'departure_date' => $option['departure_date'],
-                    'return_date' => $option['return_date'],
-                    'prix_total' => $option['prix_total']
+                            'transaction_id' => $commande['transaction_id'] ?? 'N/A',
+                            'date' => $commande['date'] ?? 'N/A',
+                            'destination' => $option['destination'] ?? 'N/A',
+                            'departure_date' => $option['departure_date'] ?? 'N/A',
+                            'return_date' => $option['return_date'] ?? 'N/A',
+                            'prix_total' => $option['prix_total'] ?? '0'
                 ];
                 $mesVoyages[] = $voyage;
             }
         }
     }
 }
-?>
+    }
+}
 
-<?php require_once('header.php'); ?>
+// Only include header.php when rendering a complete page, not for AJAX
+require_once('header.php');
+
+?>
 
         <div class="container">
             <div class="Compte">
                 <h2 class="h2">Mon Profil</h2>
                
-                <form id="profile-form" action="PageProfil.php" method="post">
+                <form id="profile-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                     <div class="profil">
                         <label for="nom">Nom :</label>
                         <div class="field-wrapper">
