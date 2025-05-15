@@ -1,14 +1,8 @@
 <?php
-session_start();
+require_once('session.php');
+
 require('getapikey.php');
 
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['user'])) {
-    header("Location: PageSeconnecter.php");
-    exit();
-}
-
-// Récupérer les informations de l'utilisateur et du voyage
 $user_id = $_SESSION['user']['id'];
 $display_details = []; // Array to hold details for display
 $options_file = 'json/options.json';
@@ -175,7 +169,7 @@ error_log("[pagePayer.php DEBUG] Montant FOR PLATFORM (before hash): " . print_r
 error_log("[pagePayer.php DEBUG] Vendeur: " . print_r($vendeur, true));
 error_log("[pagePayer.php DEBUG] Retour URL for session (and used in hash): " . $retour);
 
-// Générer le contrôle pour la sécurité
+
 $api_key = getAPIKey($vendeur); 
 // Use $transaction_for_platform and $montant_for_platform for control hash generation
 $control = md5($api_key . "#" . $transaction_for_platform . "#" . $montant_for_platform . "#" . $vendeur . "#" . $retour . "#");

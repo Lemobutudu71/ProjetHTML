@@ -1,10 +1,5 @@
 <?php
-
-session_start();
-if (!isset($_SESSION['user'])) {
-    header("Location: PageInscription.php");
-    exit();
-}
+require_once('session.php');  
 
 $user = $_SESSION['user'];
 $optionsFile = 'json/options.json';
@@ -12,7 +7,7 @@ $mesVoyages = [];
 
 if (file_exists($optionsFile)) {
     $orders = json_decode(file_get_contents($optionsFile), true);
-    // Filtrer les commandes non payées de l'utilisateur connecté
+    
     foreach ($orders as $order) {
         if (isset($order['user_id']) && $order['user_id'] === $user['id'] 
             && (!isset($order['status']) || $order['status'] !== 'accepted')) {

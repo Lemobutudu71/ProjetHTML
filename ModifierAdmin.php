@@ -2,6 +2,7 @@
 session_start();
 
 
+
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     http_response_code(403);
     echo json_encode(['error' => 'Accès non autorisé']);
@@ -34,6 +35,7 @@ if (!file_exists($file) || !is_readable($file)) {
     exit();
 }
 
+
 $jsonContent = file_get_contents($file);
 if ($jsonContent === false) {
     http_response_code(500);
@@ -49,12 +51,14 @@ if ($users === null) {
 }
 
 
+
 $updated = false;
 foreach ($users as &$user) {
     if ($user['id'] === $userId) {
         $user[$field] = $value;
         $updated = true;
         
+        // Si l'utilisateur modifié est l'utilisateur actuellement connecté
         if ($user['id'] === $_SESSION['user']['id']) {
             $_SESSION['user'][$field] = $value;
         }
@@ -65,16 +69,15 @@ foreach ($users as &$user) {
 if ($updated) {
     $writeResult = file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT));
     if ($writeResult === false) {
+
         http_response_code(500);
         echo json_encode(['error' => 'Erreur lors de l\'écriture du fichier']);
     } else {
         echo json_encode(['success' => true]);
     }
-} 
-
-else {
+} else {
     http_response_code(404);
     echo json_encode(['error' => 'Utilisateur non trouvé']);
 }
-exit(); 
+exit(); // Assurez-vous que rien d'autre n'est exécuté après
 ?>

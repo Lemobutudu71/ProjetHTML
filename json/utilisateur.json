@@ -6,7 +6,7 @@
         "email": "antoinemarmelat@gmail.com",
         "role": "admin",
         "password": "$2y$10$DO0\/VQwpRs2HVTLWkC9ag.YVGd7e2MLKpwKuoEdX0z2qSMrsIaaau",
-        "Vip": "Non",
+        "Vip": "Oui",
         "Bloquer": "Non"
     },
     {
@@ -16,7 +16,7 @@
         "email": "pmarmelat@gmail.com",
         "role": "admin",
         "password": "$2y$10$uSaklbz.IWbmkPYzSnvjUeM6nODzT6pTWKMudfaHh\/XcnIAN1cJa2",
-        "Vip": "Non",
+        "Vip": "Oui",
         "Bloquer": "Non"
     },
     {

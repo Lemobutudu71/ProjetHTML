@@ -1,10 +1,6 @@
 <?php
-session_start();
+require_once('../session.php');
 
-if (!isset($_SESSION['user'])) {
-    header("Location: ../PageInscription.php"); 
-    exit();
-}
 ?>
 
 <?php require_once('../header.php'); ?>  
