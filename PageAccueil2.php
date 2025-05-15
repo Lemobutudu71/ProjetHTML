@@ -76,7 +76,7 @@ $voyagesT = json_decode($voyagesTendances, true);
 
             <div class="ListePhotos">
                 <?php if (empty($motCle)): ?>
-                    <!-- Affichage des voyages tendances par défaut -->
+                    
                     <?php foreach ($voyagesT as $voyage): ?>
                         <div class="gallerie-img">
                             <a href="<?= htmlspecialchars($voyage['lien']) ?>">
@@ -86,7 +86,7 @@ $voyagesT = json_decode($voyagesTendances, true);
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <!-- Affichage des résultats de recherche -->
+                    
                     <?php if (empty($voyagesFiltres)): ?>
                         <p>Aucun voyage trouvé pour "<?= htmlspecialchars($motCle) ?>"</p>
                     <?php else: ?>

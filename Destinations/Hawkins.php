@@ -1,6 +1,6 @@
 <?php
-require_once('../session.php'); exit();
-}
+require_once('../session.php');
+
 ?>
 
 <?php require_once('../header.php'); ?>    

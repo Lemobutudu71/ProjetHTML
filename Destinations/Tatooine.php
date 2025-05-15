@@ -1,5 +1,6 @@
 <?php
 require_once('../session.php');
+
 $user_id = $_SESSION['user']['id'];
 
 $file_path = '../json/options.json';
