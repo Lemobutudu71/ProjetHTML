@@ -41,8 +41,18 @@ $usersToShow = array_slice($users, $startIndex, $usersPerPage);
                             <td><?php echo htmlspecialchars($user['nom']); ?></td>
                             <td><?php echo htmlspecialchars($user['prenom']); ?></td>
                             <td><?php echo htmlspecialchars($user['email']); ?></td>
-                            <td><button class="Oui-btn">Oui</button></td>
-                            <td><button class="Non-btn">Non</button></td>
+                            <td> <button class="<?php echo $user['Vip'] === 'Oui' ? 'Oui-btn' : 'Non-btn'; ?>" 
+                                    data-user-id="<?php echo htmlspecialchars($user['id']); ?>" 
+                                    data-field="Vip">
+                                    <?php echo $user['Vip']; ?>
+                                </button>
+                            </td>
+                            <td><button class="<?php echo $user['Bloquer'] === 'Oui' ? 'Oui-btn' : 'Non-btn'; ?>" 
+                                        data-user-id="<?php echo htmlspecialchars($user['id']); ?>" 
+                                        data-field="Bloquer">
+                                    <?php echo $user['Bloquer']; ?>
+                                </button>
+                            </td>
                             <td><button class="profil-btn">Voir</button></td>
                         </tr>
                     <?php endforeach; ?>
