@@ -4,7 +4,7 @@ require_once 'load_env.php';
 
 
 if (!isset($_SESSION['user'])) {
-    header("Location: PageInscription.php");
+    header("Location: " . WEB_PATH . "/PageInscription.php");
     exit();
 }
 

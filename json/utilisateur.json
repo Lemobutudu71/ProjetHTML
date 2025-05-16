@@ -1,7 +1,7 @@
 [
     {
         "id": "67e1306025b5f4.22789385",
-        "nom": "Marmelat",
+        "nom": "Marmela",
         "prenom": "Antoine",
         "email": "antoinemarmelat@gmail.com",
         "role": "admin",
@@ -17,7 +17,7 @@
         "role": "admin",
         "password": "$2y$10$uSaklbz.IWbmkPYzSnvjUeM6nODzT6pTWKMudfaHh\/XcnIAN1cJa2",
         "Vip": "Oui",
-        "Bloquer": "Oui"
+        "Bloquer": "Non"
     },
     {
         "id": "67e84252008cd7.11035529",

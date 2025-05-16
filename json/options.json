@@ -1,66 +1,53 @@
 [
     {
         "user_id": "67e1306025b5f4.22789385",
-        "hebergement_winterfell": "chateau_stark",
-        "hebergement_portreal": "donjon_royal",
-        "hebergement_meereen": "pyramide",
-        "activites_winterfell": [
-            "combat",
-            "chasse"
-        ],
-        "activites_portreal": [
-            "trone"
-        ],
-        "activites_meereen": [
-            "dragons"
-        ],
-        "transport_winterfell": "chevaux",
-        "transport_portreal": "bateau",
-        "nb_personnes": {
-            "combat": "2",
-            "chasse": "3",
-            "trone": "3",
-            "dragons": "3"
-        },
-        "prix_total": 16435,
-        "nb_personnes_voyage": "3",
-        "departure_date": "2025-05-27",
-        "return_date": "2025-06-03",
-        "destination": "Westeros",
-        "nb_etapes": 3,
+        "hebergement_poudlard": "serpentard",
+        "hebergement_preaulard": "sanglier",
+        "activites_poudlard": [],
+        "activites_preaulard": [],
+        "transport_poudlard": "balais",
+        "nb_personnes": [],
+        "nb_personnes_voyage": "2",
+        "destination": "Poudlard",
+        "return_date": "2025-06-04",
+        "departure_date": "2025-05-28",
+        "prix_total": 7332,
+        "nb_etapes": 2,
         "etapes": [
-            "Winterfell",
-            "PortReal",
-            "Meereen"
+            "Poudlard",
+            "PreauLard"
         ],
         "activite_prix": {
-            "combat": 20,
-            "chasse": 35,
-            "mur": 30,
-            "tournoi": 12,
-            "trone": 30,
-            "fleuve": 50,
-            "dragons": 100,
-            "gladiateur": 77,
-            "marche": 10
+            "sorts": 25,
+            "quidditch": 35,
+            "hyppogriffe": 40,
+            "zonko": 15,
+            "degustation": 20,
+            "honeydukes": 18
         },
-        "transaction_id": "6826fd2f07925",
+        "transaction_id": "68278c9a1b3ee",
         "status": "accepted"
     },
     {
-        "payment_transaction_id": "pay_6826fd54bbf14",
-        "original_transaction_id": "6826fd2f07925",
+        "payment_transaction_id": "pay_68278cbe6450d",
+        "original_transaction_id": "68278c9a1b3ee",
         "user_id": "67e1306025b5f4.22789385",
         "added_options": {
-            "activites_meereen": [
-                "gladiateur"
+            "activites_poudlard": [
+                "sorts",
+                "hyppogriffe"
+            ],
+            "activites_preaulard": [
+                "degustation"
             ]
         },
         "nb_personnes_for_added": {
-            "gladiateur": 3
+            "sorts": 1,
+            "hyppogriffe": 1,
+            "degustation": 1
         },
-        "added_price": 231,
-        "date_added": "2025-05-16 08:54:44",
+        "added_price": 85,
+        "date_added": "2025-05-16 19:06:38",
         "status": "pending_payment"
     }
 ]

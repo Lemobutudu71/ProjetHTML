@@ -1,10 +1,13 @@
 <?php
 if (!defined('ENV_LOADED')) {
     define('ENV_LOADED', true);
+
     if (!defined('BASE_PATH')) {
         define('BASE_PATH', __DIR__);
     }
-
+ if (!defined('WEB_PATH')) {
+        define('WEB_PATH', '/test/Projet');
+    }
     $envPath = __DIR__ . '/.env'; // Assumes .env is in the same directory as this script
 
     if (is_readable($envPath)) {

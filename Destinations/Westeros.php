@@ -1,7 +1,7 @@
 <?php
+
 require_once('../session.php');
 
-// Récupérer l'ID de l'utilisateur connecté
 $user_id = $_SESSION['user']['id'];
 
 

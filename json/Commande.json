@@ -1,58 +1,46 @@
 [
     {
-        "transaction_id": "6826fd2f07925",
+        "transaction_id": "68278c9a1b3ee",
         "status": "accepted",
-        "date": "2025-05-16 08:54:25",
+        "date": "2025-05-16 19:06:21",
         "validation_securite": "Valid\u00e9e",
         "options": [
             {
                 "user_id": "67e1306025b5f4.22789385",
-                "hebergement_winterfell": "chateau_stark",
-                "hebergement_portreal": "donjon_royal",
-                "hebergement_meereen": "pyramide",
-                "activites_winterfell": [
-                    "combat",
-                    "chasse"
+                "hebergement_poudlard": "serpentard",
+                "hebergement_preaulard": "sanglier",
+                "activites_poudlard": [
+                    "sorts",
+                    "hyppogriffe"
                 ],
-                "activites_portreal": [
-                    "trone"
+                "activites_preaulard": [
+                    "degustation"
                 ],
-                "activites_meereen": [
-                    "dragons",
-                    "gladiateur"
-                ],
-                "transport_winterfell": "chevaux",
-                "transport_portreal": "bateau",
+                "transport_poudlard": "balais",
                 "nb_personnes": {
-                    "combat": "2",
-                    "chasse": "3",
-                    "trone": "3",
-                    "dragons": "3",
-                    "gladiateur": 3
+                    "sorts": 1,
+                    "hyppogriffe": 1,
+                    "degustation": 1
                 },
-                "prix_total": 16666,
-                "nb_personnes_voyage": "3",
-                "departure_date": "2025-05-27",
-                "return_date": "2025-06-03",
-                "destination": "Westeros",
-                "nb_etapes": 3,
+                "nb_personnes_voyage": "2",
+                "destination": "Poudlard",
+                "return_date": "2025-06-04",
+                "departure_date": "2025-05-28",
+                "prix_total": 7417,
+                "nb_etapes": 2,
                 "etapes": [
-                    "Winterfell",
-                    "PortReal",
-                    "Meereen"
+                    "Poudlard",
+                    "PreauLard"
                 ],
                 "activite_prix": {
-                    "combat": 20,
-                    "chasse": 35,
-                    "mur": 30,
-                    "tournoi": 12,
-                    "trone": 30,
-                    "fleuve": 50,
-                    "dragons": 100,
-                    "gladiateur": 77,
-                    "marche": 10
+                    "sorts": 25,
+                    "quidditch": 35,
+                    "hyppogriffe": 40,
+                    "zonko": 15,
+                    "degustation": 20,
+                    "honeydukes": 18
                 },
-                "transaction_id": "6826fd2f07925",
+                "transaction_id": "68278c9a1b3ee",
                 "status": "accepted"
             }
         ]
