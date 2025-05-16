@@ -1,5 +1,7 @@
 <?php
-    session_start();
+session_start();
+require_once 'load_env.php';
+
 ?>
 
 <?php require_once('header.php'); ?>
@@ -8,7 +10,7 @@
             <h1>Qui sommes nous</h1>
             <p >
                 <strong>Movietrip - Voyagez au cœur de vos films préférés ! </strong><br>
-                Envie de traverser l’écran et de vivre une aventure inoubliable ? 
+                Envie de traverser l'écran et de vivre une aventure inoubliable ? 
                 Avec Movietrip, explorez des destinations mythiques au coeur de vos films préférés ! 
             </p>
             <ul>
@@ -18,7 +20,7 @@
             </ul>
             <p >
                 Marchez dans les pas de vos héros, découvrez des lieux iconiques et plongez dans des expériences uniques.
-                Que vous soyez fan de fantasy, de science-fiction ou d’aventure,
+                Que vous soyez fan de fantasy, de science-fiction ou d'aventure,
                 Movietrip réalise vos rêves de cinéma. 
                 Préparez-vous à une immersion totale et réservez votre voyage dès maintenant !</p>
             </p>

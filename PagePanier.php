@@ -1,11 +1,7 @@
 <?php
 
-session_start();
-if (!isset($_SESSION['user'])) {
-    header("Location: PageInscription.php");
-    exit();
-}
-
+require_once 'load_env.php';  
+require_once 'session.php'; 
 $user = $_SESSION['user'];
 $optionsFile = 'json/options.json';
 $mesVoyages = [];

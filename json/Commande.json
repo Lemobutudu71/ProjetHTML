@@ -1,143 +1,8 @@
 [
     {
-        "transaction_id": "681a3dc0a7aa2",
+        "transaction_id": "6826fd2f07925",
         "status": "accepted",
-        "date": "2025-05-06 16:50:34",
-        "validation_securite": "Valid\u00e9e",
-        "options": [
-            {
-                "user_id": "67e1306025b5f4.22789385",
-                "hebergement_poudlard": "serpentard",
-                "hebergement_preaulard": "sanglier",
-                "activites_poudlard": [
-                    "sorts",
-                    "quidditch",
-                    "hyppogriffe"
-                ],
-                "activites_preaulard": [
-                    "degustation",
-                    "zonko"
-                ],
-                "transport_poudlard": "portoloin",
-                "nb_personnes": {
-                    "sorts": "3",
-                    "degustation": "3",
-                    "quidditch": 3,
-                    "hyppogriffe": 3,
-                    "zonko": 1
-                },
-                "nb_personnes_voyage": "3",
-                "destination": "Poudlard",
-                "return_date": "2025-05-29",
-                "departure_date": "2025-05-22",
-                "prix_total": 11373,
-                "nb_etapes": 2,
-                "etapes": [
-                    "Poudlard",
-                    "PreauLard"
-                ],
-                "activite_prix": {
-                    "sorts": 25,
-                    "quidditch": 35,
-                    "hyppogriffe": 40,
-                    "zonko": 15,
-                    "degustation": 20,
-                    "honeydukes": 18
-                },
-                "transaction_id": "681a3dc0a7aa2",
-                "status": "accepted"
-            }
-        ]
-    },
-    {
-        "transaction_id": "681a3f0c37c25",
-        "status": "accepted",
-        "date": "2025-05-06 16:55:51",
-        "validation_securite": "Valid\u00e9e",
-        "options": []
-    },
-    {
-        "transaction_id": "6823057b1c328",
-        "status": "accepted",
-        "date": "2025-05-13 08:40:39",
-        "validation_securite": "Valid\u00e9e",
-        "options": [
-            {
-                "user_id": "67e1306025b5f4.22789385",
-                "hebergement_poudlard": "serpentard",
-                "hebergement_preaulard": "sanglier",
-                "activites_poudlard": [],
-                "activites_preaulard": [
-                    "degustation"
-                ],
-                "transport_poudlard": "balais",
-                "nb_personnes": {
-                    "degustation": "1"
-                },
-                "nb_personnes_voyage": "1",
-                "destination": "Poudlard",
-                "return_date": "2025-05-28",
-                "departure_date": "2025-05-21",
-                "prix_total": 3686,
-                "nb_etapes": 2,
-                "etapes": [
-                    "Poudlard",
-                    "PreauLard"
-                ],
-                "activite_prix": {
-                    "sorts": 25,
-                    "quidditch": 35,
-                    "hyppogriffe": 40,
-                    "zonko": 15,
-                    "degustation": 20,
-                    "honeydukes": 18
-                },
-                "transaction_id": "6823057b1c328",
-                "status": "accepted"
-            }
-        ]
-    },
-    {
-        "transaction_id": "6825b348ae190",
-        "status": "accepted",
-        "date": "2025-05-15 09:27:21",
-        "validation_securite": "Valid\u00e9e",
-        "options": [
-            {
-                "user_id": "67e1306025b5f4.22789385",
-                "hebergement_poudlard": "serpentard",
-                "hebergement_preaulard": "sanglier",
-                "activites_poudlard": [],
-                "activites_preaulard": [],
-                "transport_poudlard": "balais",
-                "nb_personnes": [],
-                "nb_personnes_voyage": "1",
-                "destination": "Poudlard",
-                "return_date": "2025-05-28",
-                "departure_date": "2025-05-21",
-                "prix_total": 3666,
-                "nb_etapes": 2,
-                "etapes": [
-                    "Poudlard",
-                    "PreauLard"
-                ],
-                "activite_prix": {
-                    "sorts": 25,
-                    "quidditch": 35,
-                    "hyppogriffe": 40,
-                    "zonko": 15,
-                    "degustation": 20,
-                    "honeydukes": 18
-                },
-                "transaction_id": "6825b348ae190",
-                "status": "accepted"
-            }
-        ]
-    },
-    {
-        "transaction_id": "6825b6e99001b",
-        "status": "accepted",
-        "date": "2025-05-15 09:42:22",
+        "date": "2025-05-16 08:54:25",
         "validation_securite": "Valid\u00e9e",
         "options": [
             {
@@ -145,16 +10,30 @@
                 "hebergement_winterfell": "chateau_stark",
                 "hebergement_portreal": "donjon_royal",
                 "hebergement_meereen": "pyramide",
-                "activites_winterfell": [],
-                "activites_portreal": [],
-                "activites_meereen": [],
+                "activites_winterfell": [
+                    "combat",
+                    "chasse"
+                ],
+                "activites_portreal": [
+                    "trone"
+                ],
+                "activites_meereen": [
+                    "dragons",
+                    "gladiateur"
+                ],
                 "transport_winterfell": "chevaux",
                 "transport_portreal": "bateau",
-                "nb_personnes": [],
-                "prix_total": 5300,
-                "nb_personnes_voyage": "1",
-                "departure_date": "2025-05-30",
-                "return_date": "2025-06-06",
+                "nb_personnes": {
+                    "combat": "2",
+                    "chasse": "3",
+                    "trone": "3",
+                    "dragons": "3",
+                    "gladiateur": 3
+                },
+                "prix_total": 16666,
+                "nb_personnes_voyage": "3",
+                "departure_date": "2025-05-27",
+                "return_date": "2025-06-03",
                 "destination": "Westeros",
                 "nb_etapes": 3,
                 "etapes": [
@@ -173,7 +52,7 @@
                     "gladiateur": 77,
                     "marche": 10
                 },
-                "transaction_id": "6825b6e99001b",
+                "transaction_id": "6826fd2f07925",
                 "status": "accepted"
             }
         ]

@@ -1,5 +1,6 @@
 <?php
 error_log("TEST LOG FROM TOP OF RETOUR_PAIEMENT - " . date('Y-m-d H:i:s')); // TEST LOG
+require_once 'load_env.php';  
 require_once('session.php');
 require('getapikey.php');
 

@@ -1,10 +1,6 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['user'])) {
-    header("Location: PageSeconnecter.php");
-    exit();
-}
+require_once 'load_env.php';  
+require_once 'session.php'; 
 
 $user_id = $_SESSION['user']['id'];
 $transaction_id = $_GET['id'] ?? null;

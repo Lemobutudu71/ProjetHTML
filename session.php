@@ -1,20 +1,19 @@
 <?php
 session_start();
+require_once 'load_env.php';  
 
 
 if (!isset($_SESSION['user'])) {
-    header("Location: /test/Projet/PageInscription.php");
+    header("Location: PageInscription.php");
     exit();
 }
 
-
 function verifierStatutUtilisateur($userId) {
-    $file = '/test/Projet/json/utilisateur.json';
+    $file = BASE_PATH . '/json/utilisateur.json';
     if (file_exists($file)) {
         $users = json_decode(file_get_contents($file), true);
         foreach ($users as $user) {
             if ($user['id'] === $userId) {
-                
                 $_SESSION['user']['Vip'] = $user['Vip'];
                 $_SESSION['user']['Bloquer'] = $user['Bloquer'];
                 return $user;
@@ -26,13 +25,11 @@ function verifierStatutUtilisateur($userId) {
 
 $userStatus = verifierStatutUtilisateur($_SESSION['user']['id']);
 
-
 if ($userStatus && $userStatus['Bloquer'] === 'Oui') {
     session_destroy();
-    header("Location: /test/Projet/bloquer.php");
+    header("Location: bloquer.php");
     exit();
 }
-
 
 function isVip() {
     return isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === 'Oui';
@@ -42,7 +39,6 @@ function isAdmin() {
     return isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'admin';
 }
 
-
 function calculerPrixAvecReduction($prixTotal) {
     if (isVip()) {
         $reduction = $prixTotal * 0.10; 
@@ -50,7 +46,6 @@ function calculerPrixAvecReduction($prixTotal) {
     }
     return $prixTotal;
 }
-
 
 function ReductionVIP() {
     return isVip() ? 10 : 0;

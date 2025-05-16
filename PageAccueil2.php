@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-
+require_once 'load_env.php';
 
 $voyagesJson = file_get_contents("json/voyages.json");
 $voyages = json_decode($voyagesJson, true);

@@ -1,12 +1,8 @@
 <?php
-session_start();
+require_once 'load_env.php';  
+require_once 'session.php'; 
 require('getapikey.php');
 
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['user'])) {
-    header("Location: PageSeconnecter.php");
-    exit();
-}
 
 // Récupérer les informations de l'utilisateur et du voyage
 $user_id = $_SESSION['user']['id'];

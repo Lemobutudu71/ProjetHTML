@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once 'load_env.php';
+require_once('session.php'); 
 
 
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
