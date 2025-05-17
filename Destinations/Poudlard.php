@@ -16,6 +16,15 @@ $activite_prix = [
     'honeydukes' => 18  
 ];
 
+ $prix =3666;
+  if (isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === "Oui") {
+        $prix = $prix * 0.9; // Réduction de 10%
+         foreach ($activite_prix as $key => $price) {
+        $activite_prix[$key] = $price * 0.9;
+        }
+    }
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ensure all form fields are captured
     $hebergement_poudlard = isset($_POST['hebergement_poudlard']) ? $_POST['hebergement_poudlard'] : null;
@@ -67,10 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nb_personnes_voyage = isset($_POST['nb_personnes_voyage']) ? $_POST['nb_personnes_voyage'] : 1;
     $prix_total = $prix * $nb_personnes_voyage + $activite_total_prix;
 
-    // Vérifier si l'utilisateur est VIP et appliquer la réduction
-    if (isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === "Oui") {
-        $prix_total = $prix_total * 0.9; // Réduction de 10%
-    }
 
     $etapes = ['Poudlard', 'PreauLard'];
     $return_date = null;

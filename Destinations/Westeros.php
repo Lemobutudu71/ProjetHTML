@@ -20,6 +20,13 @@ $activite_prix = [
     'marche' => 10  
 ];
 
+ $prix =5300;
+  if (isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === "Oui") {
+        $prix = $prix * 0.9; // Réduction de 10%
+         foreach ($activite_prix as $key => $price) {
+        $activite_prix[$key] = $price * 0.9;
+        }
+    }
 
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -89,13 +96,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $activite_total_prix += $personnes * $activite_prix['marche'];
     }
 
-    $prix =5300;
+   
     $prix_total = $prix * $nb_personnes_voyage + $activite_total_prix;
 
     // Vérifier si l'utilisateur est VIP et appliquer la réduction
-    if (isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === "Oui") {
-        $prix_total = $prix_total * 0.9; // Réduction de 10%
-    }
+  
 
     $etapes = ["Winterfell", "PortReal", "Meereen"];
     $return_date = null;
