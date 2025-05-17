@@ -72,6 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $prix =3578;
 $prix_total = $prix * $nb_personnes_voyage + $activite_total_prix;
+
+// Vérifier si l'utilisateur est VIP et appliquer la réduction
+if (isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === "Oui") {
+    $prix_total = $prix_total * 0.9; // Réduction de 10%
+}
+
 $etapes = ['Tatooine', 'Etoile'];
 $return_date = null;
     if ($departure_date) {
@@ -120,7 +126,7 @@ $return_date = null;
 
 <?php require_once('../header.php'); ?>  
         
-        <div class="Page-Accueil2-text">
+        <div class="Page-Accueil2-text" data-vip="<?php echo (isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === "Oui") ? 'true' : 'false'; ?>">
     
             <div class="gallerie-imgDestinations">
                 <div class="image-overlay"></div>
@@ -147,7 +153,7 @@ $return_date = null;
                 <div id="tatooine" class="section">
                     <h2>JOUR 1-4 : Tatooine</h2>
                     <p class="description">Bienvenue sur Tatooine, le désert intergalactique où tout peut arriver... et souvent, ça arrive !
-                    Si vous pensiez que la plage était le seul endroit avec du sable, détrompez-vous ! Sur Tatooine, le sable est partout... et il cache bien des secrets. Entre les attaques de Tusken Raiders et les courses de podracers endiablées, il n’y a jamais de moment de répit sous les deux soleils brûlants de la planète.</p>
+                    Si vous pensiez que la plage était le seul endroit avec du sable, détrompez-vous ! Sur Tatooine, le sable est partout... et il cache bien des secrets. Entre les attaques de Tusken Raiders et les courses de podracers endiablées, il n'y a jamais de moment de répit sous les deux soleils brûlants de la planète.</p>
 
                     <div class="options-group">
                         <label for="hebergement_tatooine">Hébergement:</label>
@@ -239,6 +245,11 @@ $return_date = null;
                         </div>
                     </div>
                     <div id="prix-total-dynamique"></div>
+                    <?php if (isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === "Oui"): ?>
+                        <div class="vip-reduction">
+                            <p>🎉 Réduction VIP de 10% appliquée !</p>
+                        </div>
+                    <?php endif; ?>
                     <div class="recherche">
                         <button type="submit">Ajouter au panier</button>   
                     </div>

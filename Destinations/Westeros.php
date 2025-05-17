@@ -90,9 +90,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $prix =5300;
-    $prix_total = $prix * $nb_personnes_voyage + $activite_total_prix ;
-$etapes = ["Winterfell", "PortReal", "Meereen"];
-$return_date = null;
+    $prix_total = $prix * $nb_personnes_voyage + $activite_total_prix;
+
+    // Vérifier si l'utilisateur est VIP et appliquer la réduction
+    if (isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === "Oui") {
+        $prix_total = $prix_total * 0.9; // Réduction de 10%
+    }
+
+    $etapes = ["Winterfell", "PortReal", "Meereen"];
+    $return_date = null;
     if ($departure_date) {
         $departure_timestamp = strtotime($departure_date);
         
@@ -138,7 +144,7 @@ $return_date = null;
 
 <?php require_once('../header.php'); ?>
         
-        <div class="Page-Accueil2-text">
+        <div class="Page-Accueil2-text" data-vip="<?php echo (isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === "Oui") ? 'true' : 'false'; ?>">
             <div class="gallerie-imgDestinations">
                 <div class="image-overlay"></div>
                 <img src="../images/GOT.webp" alt="Game of Thrones" >
@@ -306,6 +312,11 @@ $return_date = null;
             </div>
 
             <div id="prix-total-dynamique"></div>
+            <?php if (isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === "Oui"): ?>
+                <div class="vip-reduction">
+                    <p>🎉 Réduction VIP de 10% appliquée !</p>
+                </div>
+            <?php endif; ?>
             <div class="recherche">
                 <button type="submit">Ajouter au panier</button>   
             </div>

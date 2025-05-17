@@ -1,3 +1,128 @@
 [
-   
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_poudlard": "serpentard",
+        "hebergement_preaulard": "sanglier",
+        "activites_poudlard": [],
+        "activites_preaulard": [],
+        "transport_poudlard": "balais",
+        "nb_personnes": [],
+        "nb_personnes_voyage": "1",
+        "destination": "Poudlard",
+        "return_date": "2025-06-04",
+        "departure_date": "2025-05-28",
+        "prix_total": 3666,
+        "nb_etapes": 2,
+        "etapes": [
+            "Poudlard",
+            "PreauLard"
+        ],
+        "activite_prix": {
+            "sorts": 25,
+            "quidditch": 35,
+            "hyppogriffe": 40,
+            "zonko": 15,
+            "degustation": 20,
+            "honeydukes": 18
+        },
+        "transaction_id": "6828fab413f83"
+    },
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_poudlard": "serpentard",
+        "hebergement_preaulard": "sanglier",
+        "activites_poudlard": [],
+        "activites_preaulard": [],
+        "transport_poudlard": "balais",
+        "nb_personnes": [],
+        "nb_personnes_voyage": "1",
+        "destination": "Poudlard",
+        "return_date": "2025-06-03",
+        "departure_date": "2025-05-27",
+        "prix_total": 3299.4,
+        "nb_etapes": 2,
+        "etapes": [
+            "Poudlard",
+            "PreauLard"
+        ],
+        "activite_prix": {
+            "sorts": 25,
+            "quidditch": 35,
+            "hyppogriffe": 40,
+            "zonko": 15,
+            "degustation": 20,
+            "honeydukes": 18
+        },
+        "transaction_id": "6828faf11f9c8"
+    },
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_winterfell": "chateau_stark",
+        "hebergement_portreal": "donjon_royal",
+        "hebergement_meereen": "pyramide",
+        "activites_winterfell": [],
+        "activites_portreal": [],
+        "activites_meereen": [],
+        "transport_winterfell": "chevaux",
+        "transport_portreal": "bateau",
+        "nb_personnes": [],
+        "prix_total": 9540,
+        "nb_personnes_voyage": "2",
+        "departure_date": "2025-05-21",
+        "return_date": "2025-05-28",
+        "destination": "Westeros",
+        "nb_etapes": 3,
+        "etapes": [
+            "Winterfell",
+            "PortReal",
+            "Meereen"
+        ],
+        "activite_prix": {
+            "combat": 20,
+            "chasse": 35,
+            "mur": 30,
+            "tournoi": 12,
+            "trone": 30,
+            "fleuve": 50,
+            "dragons": 100,
+            "gladiateur": 77,
+            "marche": 10
+        },
+        "transaction_id": "6828fc9bec8a4"
+    },
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_winterfell": "chateau_stark",
+        "hebergement_portreal": "donjon_royal",
+        "hebergement_meereen": "pyramide",
+        "activites_winterfell": [],
+        "activites_portreal": [],
+        "activites_meereen": [],
+        "transport_winterfell": "chevaux",
+        "transport_portreal": "bateau",
+        "nb_personnes": [],
+        "prix_total": 4770,
+        "nb_personnes_voyage": "1",
+        "departure_date": "2025-05-21",
+        "return_date": "2025-05-28",
+        "destination": "Westeros",
+        "nb_etapes": 3,
+        "etapes": [
+            "Winterfell",
+            "PortReal",
+            "Meereen"
+        ],
+        "activite_prix": {
+            "combat": 20,
+            "chasse": 35,
+            "mur": 30,
+            "tournoi": 12,
+            "trone": 30,
+            "fleuve": 50,
+            "dragons": 100,
+            "gladiateur": 77,
+            "marche": 10
+        },
+        "transaction_id": "6828fd9bbca5b"
+    }
 ]

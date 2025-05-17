@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function(){
   
     const basePrice = 5300;
     
-   
     const activitePrix = {
       combat: 20,
       chasse: 35,
@@ -15,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function(){
       marche: 10
     };
   
+    const isVip = document.querySelector('.Page-Accueil2-text').getAttribute('data-vip') === 'true';
+    const vipReduction = isVip ? 0.9 : 1;
     
     const nb_pers_Voyage = document.getElementById('nb_personnes_voyage');
     const priceDynamicElement = document.getElementById('prix-total-dynamique');
@@ -88,51 +89,54 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   
     function updatePrice() {
-      let nbVoyage = nb_pers_Voyage ? parseInt(nb_pers_Voyage.value) : 1;
-      let travelCost = basePrice * nbVoyage;
-      
-      let totalActivityCost = 0;
-      if (checkboxCombat && checkboxCombat.checked) {
-        let nbCombat = nb_personnes_combat ? parseInt(nb_personnes_combat.value) : 0;
-        totalActivityCost += nbCombat * activitePrix.combat;
-      }
-      if (checkboxChasse && checkboxChasse.checked) {
-        let nbChasse = nb_personnes_chasse ? parseInt(nb_personnes_chasse.value) : 0;
-        totalActivityCost += nbChasse * activitePrix.chasse;
-      }
-      if (checkboxMur && checkboxMur.checked) {
-        let nbMur = nb_personnes_mur ? parseInt(nb_personnes_mur.value) : 0;
-        totalActivityCost += nbMur * activitePrix.mur;
-      }
-      
-      if (checkboxTournoi && checkboxTournoi.checked) {
-        let nbTournoi = nb_personnes_tournoi ? parseInt(nb_personnes_tournoi.value) : 0;
-        totalActivityCost += nbTournoi * activitePrix.tournoi;
-      }
-      if (checkboxTrone && checkboxTrone.checked) {
-        let nbTrone = nb_personnes_trone ? parseInt(nb_personnes_trone.value) : 0;
-        totalActivityCost += nbTrone * activitePrix.trone;
-      }
-      if (checkboxFleuve && checkboxFleuve.checked) {
-        let nbFleuve = nb_personnes_fleuve ? parseInt(nb_personnes_fleuve.value) : 0;
-        totalActivityCost += nbFleuve * activitePrix.fleuve;
-      }
-      
-      if (checkboxDragons && checkboxDragons.checked) {
-        let nbDragons = nb_personnes_dragons ? parseInt(nb_personnes_dragons.value) : 0;
-        totalActivityCost += nbDragons * activitePrix.dragons;
-      }
-      if (checkboxGladiateur && checkboxGladiateur.checked) {
-        let nbGladiateur = nb_personnes_gladiateur ? parseInt(nb_personnes_gladiateur.value) : 0;
-        totalActivityCost += nbGladiateur * activitePrix.gladiateur;
-      }
-      if (checkboxMarche && checkboxMarche.checked) {
-        let nbMarche = nb_personnes_marche ? parseInt(nb_personnes_marche.value) : 0;
-        totalActivityCost += nbMarche * activitePrix.marche;
-      }
-      
-      let totalPrice = travelCost + totalActivityCost;
-      priceDynamicElement.textContent = "Prix estimé : " + new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(totalPrice) + "€";
+        let nbVoyage = nb_pers_Voyage ? parseInt(nb_pers_Voyage.value) : 1;
+        let travelCost = basePrice * nbVoyage;
+        
+        let totalActivityCost = 0;
+        if (checkboxCombat && checkboxCombat.checked) {
+            let nbCombat = nb_personnes_combat ? parseInt(nb_personnes_combat.value) : 0;
+            totalActivityCost += nbCombat * activitePrix.combat;
+        }
+        if (checkboxChasse && checkboxChasse.checked) {
+            let nbChasse = nb_personnes_chasse ? parseInt(nb_personnes_chasse.value) : 0;
+            totalActivityCost += nbChasse * activitePrix.chasse;
+        }
+        if (checkboxMur && checkboxMur.checked) {
+            let nbMur = nb_personnes_mur ? parseInt(nb_personnes_mur.value) : 0;
+            totalActivityCost += nbMur * activitePrix.mur;
+        }
+        
+        if (checkboxTournoi && checkboxTournoi.checked) {
+            let nbTournoi = nb_personnes_tournoi ? parseInt(nb_personnes_tournoi.value) : 0;
+            totalActivityCost += nbTournoi * activitePrix.tournoi;
+        }
+        if (checkboxTrone && checkboxTrone.checked) {
+            let nbTrone = nb_personnes_trone ? parseInt(nb_personnes_trone.value) : 0;
+            totalActivityCost += nbTrone * activitePrix.trone;
+        }
+        if (checkboxFleuve && checkboxFleuve.checked) {
+            let nbFleuve = nb_personnes_fleuve ? parseInt(nb_personnes_fleuve.value) : 0;
+            totalActivityCost += nbFleuve * activitePrix.fleuve;
+        }
+        
+        if (checkboxDragons && checkboxDragons.checked) {
+            let nbDragons = nb_personnes_dragons ? parseInt(nb_personnes_dragons.value) : 0;
+            totalActivityCost += nbDragons * activitePrix.dragons;
+        }
+        if (checkboxGladiateur && checkboxGladiateur.checked) {
+            let nbGladiateur = nb_personnes_gladiateur ? parseInt(nb_personnes_gladiateur.value) : 0;
+            totalActivityCost += nbGladiateur * activitePrix.gladiateur;
+        }
+        if (checkboxMarche && checkboxMarche.checked) {
+            let nbMarche = nb_personnes_marche ? parseInt(nb_personnes_marche.value) : 0;
+            totalActivityCost += nbMarche * activitePrix.marche;
+        }
+        
+        let totalPrice = (travelCost + totalActivityCost) * vipReduction;
+        
+        let priceText = "Prix estimé : " + new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(totalPrice) + "€";
+        
+        priceDynamicElement.textContent = priceText;
     }
     
     if (nb_pers_Voyage) nb_pers_Voyage.addEventListener('input', updatePrice);
@@ -165,4 +169,4 @@ document.addEventListener('DOMContentLoaded', function(){
     if (nb_personnes_marche) nb_personnes_marche.addEventListener('change', updatePrice);
     
     updatePrice();
-  });
+});

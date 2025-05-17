@@ -11,11 +11,12 @@ document.addEventListener('DOMContentLoaded', function(){
       sith: 18
     };
   
+    const isVip = document.querySelector('.Page-Accueil2-text').getAttribute('data-vip') === 'true';
+    const vipReduction = isVip ? 0.9 : 1;
   
     const nb_pers_Voyage = document.getElementById('nb_personnes_voyage');
     const priceDynamicElement = document.getElementById('prix-total-dynamique');
   
-   
     const checkboxJedi = document.getElementById('jedi');
     const nb_personnes_jedi = document.getElementById('nb_personnes_jedi');
     
@@ -41,71 +42,73 @@ document.addEventListener('DOMContentLoaded', function(){
       nb_personnes_tie,
       nb_personnes_tir,
       nb_personnes_sith
-  ];
+    ];
 
-  function updateMaxPersonnes() {
-      const maxPersonnes = parseInt(nb_pers_Voyage.value);
-      
-      activityInputs.forEach(input => {
-          if (input) {
-              input.max = maxPersonnes;
-              if (parseInt(input.value) > maxPersonnes) {
-                  input.value = maxPersonnes;
-              }
-          }
-      });
-  }
+    function updateMaxPersonnes() {
+        const maxPersonnes = parseInt(nb_pers_Voyage.value);
+        
+        activityInputs.forEach(input => {
+            if (input) {
+                input.max = maxPersonnes;
+                if (parseInt(input.value) > maxPersonnes) {
+                    input.value = maxPersonnes;
+                }
+            }
+        });
+    }
 
-  if (nb_pers_Voyage) {
-      nb_pers_Voyage.addEventListener('input', updateMaxPersonnes);
-      updateMaxPersonnes(); 
-  }
-  activityInputs.forEach(input => {
-      if (input) {
-          input.addEventListener('input', function() {
-              const maxPersonnes = parseInt(nb_pers_Voyage.value);
-              if (parseInt(this.value) > maxPersonnes) {
-                  this.value = maxPersonnes;
-              }
-              updatePrice();
-          });
-      }
-  });
+    if (nb_pers_Voyage) {
+        nb_pers_Voyage.addEventListener('input', updateMaxPersonnes);
+        updateMaxPersonnes(); 
+    }
+    activityInputs.forEach(input => {
+        if (input) {
+            input.addEventListener('input', function() {
+                const maxPersonnes = parseInt(nb_pers_Voyage.value);
+                if (parseInt(this.value) > maxPersonnes) {
+                    this.value = maxPersonnes;
+                }
+                updatePrice();
+            });
+        }
+    });
   
     function updatePrice() {
-      
-      let nbVoyage = nb_pers_Voyage ? parseInt(nb_pers_Voyage.value) : 1;
-      let travelCost = basePrice * nbVoyage;
-      
-      let totalActivityCost = 0;
+        let nbVoyage = nb_pers_Voyage ? parseInt(nb_pers_Voyage.value) : 1;
+        let travelCost = basePrice * nbVoyage;
+        
+        let totalActivityCost = 0;
     
-      if (checkboxJedi && checkboxJedi.checked) {
-        let nbJedi = nb_personnes_jedi ? parseInt(nb_personnes_jedi.value) : 0;
-        totalActivityCost += nbJedi * activitePrix.jedi;
-      }
-      if (checkboxSpeeder && checkboxSpeeder.checked) {
-        let nbSpeeder = nb_personnes_speeder ? parseInt(nb_personnes_speeder.value) : 0;
-        totalActivityCost += nbSpeeder * activitePrix.speeder;
-      }
-      if (checkboxPalaisJabba && checkboxPalaisJabba.checked) {
-        let nbPalais = nb_personnes_palaisjabba ? parseInt(nb_personnes_palaisjabba.value) : 0;
-        totalActivityCost += nbPalais * activitePrix.palais_jabba;
-      }
-      if (checkboxTieFighter && checkboxTieFighter.checked) {
-        let nbTie = nb_personnes_tie ? parseInt(nb_personnes_tie.value) : 0;
-        totalActivityCost += nbTie * activitePrix.tie_fighter;
-      }
-      if (checkboxTir && checkboxTir.checked) {
-        let nbTir = nb_personnes_tir ? parseInt(nb_personnes_tir.value) : 0;
-        totalActivityCost += nbTir * activitePrix.tir;
-      }
-      if (checkboxSith && checkboxSith.checked) {
-        let nbSith = nb_personnes_sith ? parseInt(nb_personnes_sith.value) : 0;
-        totalActivityCost += nbSith * activitePrix.sith;
-      }
-      
-      let totalPrice = travelCost + totalActivityCost;
-      priceDynamicElement.textContent = "Prix estimé : " + new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(totalPrice) + "€";
+        if (checkboxJedi && checkboxJedi.checked) {
+            let nbJedi = nb_personnes_jedi ? parseInt(nb_personnes_jedi.value) : 0;
+            totalActivityCost += nbJedi * activitePrix.jedi;
+        }
+        if (checkboxSpeeder && checkboxSpeeder.checked) {
+            let nbSpeeder = nb_personnes_speeder ? parseInt(nb_personnes_speeder.value) : 0;
+            totalActivityCost += nbSpeeder * activitePrix.speeder;
+        }
+        if (checkboxPalaisJabba && checkboxPalaisJabba.checked) {
+            let nbPalais = nb_personnes_palaisjabba ? parseInt(nb_personnes_palaisjabba.value) : 0;
+            totalActivityCost += nbPalais * activitePrix.palais_jabba;
+        }
+        if (checkboxTieFighter && checkboxTieFighter.checked) {
+            let nbTie = nb_personnes_tie ? parseInt(nb_personnes_tie.value) : 0;
+            totalActivityCost += nbTie * activitePrix.tie_fighter;
+        }
+        if (checkboxTir && checkboxTir.checked) {
+            let nbTir = nb_personnes_tir ? parseInt(nb_personnes_tir.value) : 0;
+            totalActivityCost += nbTir * activitePrix.tir;
+        }
+        if (checkboxSith && checkboxSith.checked) {
+            let nbSith = nb_personnes_sith ? parseInt(nb_personnes_sith.value) : 0;
+            totalActivityCost += nbSith * activitePrix.sith;
+        }
+        
+        let totalPrice = (travelCost + totalActivityCost) * vipReduction;
+        
+        let priceText = "Prix estimé : " + new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(totalPrice) + "€";
+        
+        priceDynamicElement.textContent = priceText;
     }
 
     if (nb_pers_Voyage) nb_pers_Voyage.addEventListener('change', updatePrice);
@@ -129,4 +132,4 @@ document.addEventListener('DOMContentLoaded', function(){
     if (nb_personnes_sith) nb_personnes_sith.addEventListener('change', updatePrice);
   
     updatePrice();
-  });
+});
