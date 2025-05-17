@@ -75,102 +75,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if (isset($_POST[$posted_activites_key]) && is_array($_POST[$posted_activites_key])) {
             $selected_activites_for_etape = $_POST[$posted_activites_key];
-            $new_options_selected[$posted_activites_key] = $selected_activites_for_etape; // Store all selected, even if already present for simplicity here, can refine
+            $new_options_selected[$posted_activites_key] = $selected_activites_for_etape;
             
             foreach ($selected_activites_for_etape as $activite_code) {
-                // Check if it's genuinely a new activity not previously selected for this etape
-                $current_etape_activities_key = 'activites_' . $clean_etape_name;
-                $already_selected_activities_for_etape = $current_trip_options[$current_etape_activities_key] ?? [];
-                
-                if (!in_array($activite_code, $already_selected_activities_for_etape)) {
-                    $nb_personnes_for_activite = isset($_POST['nb_personnes'][$activite_code]) ? intval($_POST['nb_personnes'][$activite_code]) : 1;
-                    $price_of_activite = $current_trip_options['activite_prix'][$activite_code] ?? 0; // Prices should be in current_trip_options from Commande.json
-                    $total_new_price += $price_of_activite * $nb_personnes_for_activite;
-                    $new_nb_personnes_map[$activite_code] = $nb_personnes_for_activite;
-                }
+                $nb_personnes_for_activite = isset($_POST['nb_personnes'][$activite_code]) ? intval($_POST['nb_personnes'][$activite_code]) : 1;
+                $price_of_activite = $current_trip_options['activite_prix'][$activite_code] ?? 0;
+                $total_new_price += $price_of_activite * $nb_personnes_for_activite;
+                $new_nb_personnes_map[$activite_code] = $nb_personnes_for_activite;
             }
         }
     }
     
     if ($total_new_price > 0) {
-        $new_payment_transaction_id = uniqid('pay_'); // Make it distinct
-        // Update Commande.json
-        $updated_commandes = $commandes; // Work on a copy
+        // Mise à jour directe de Commande.json
+        $updated_commandes = $commandes;
         $commande_found_for_update = false;
-        foreach ($updated_commandes as &$cmd_ref) { // Use reference
+        
+        foreach ($updated_commandes as &$cmd_ref) {
             if (isset($cmd_ref['transaction_id']) && $cmd_ref['transaction_id'] === $transaction_id) {
-                 $commande_found_for_update = true;
+                $commande_found_for_update = true;
                 if (isset($cmd_ref['options']) && is_array($cmd_ref['options'])) {
-                    foreach ($cmd_ref['options'] as &$opt_ref) { // Use reference
+                    foreach ($cmd_ref['options'] as &$opt_ref) {
                         if (isset($opt_ref['user_id']) && $opt_ref['user_id'] === $user_id) {
-                            // Merge newly selected activities
+                            // Fusion des nouvelles activités sélectionnées
                             foreach ($new_options_selected as $key_activites_etape => $value_new_activites) {
                                 if (!isset($opt_ref[$key_activites_etape]) || !is_array($opt_ref[$key_activites_etape])) {
                                     $opt_ref[$key_activites_etape] = [];
                                 }
                                 $opt_ref[$key_activites_etape] = array_unique(array_merge($opt_ref[$key_activites_etape], $value_new_activites));
                             }
-                            // Merge nb_personnes for these new activities
+                            
+                            // Mise à jour du nombre de personnes
                             if (!isset($opt_ref['nb_personnes']) || !is_array($opt_ref['nb_personnes'])) {
                                 $opt_ref['nb_personnes'] = [];
                             }
                             $opt_ref['nb_personnes'] = array_merge($opt_ref['nb_personnes'], $new_nb_personnes_map);
                             $opt_ref['prix_total'] = ($opt_ref['prix_total'] ?? 0) + $total_new_price;
-                            // Potentially update a "last_modified_options" timestamp or similar if needed
-                            break; // Found and updated the specific user's options
+                            break;
                         }
                     }
                 }
-                break; // Found and processed the main commande
+                break;
             }
         }
-        unset($cmd_ref); unset($opt_ref); // Unset references
+        unset($cmd_ref); unset($opt_ref);
 
         if ($commande_found_for_update) {
             if (file_put_contents($commandes_file, json_encode($updated_commandes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))) {
-                 // Create a new entry in options.json (if that's its purpose for payment logging) or similar
-                 // For now, redirecting to payment page.
-                 // The new_transaction_id for payment should be distinct.
-                 // Let's assume options.json is for logging successful additions that go to payment
-                $options_log_file = 'json/options.json';
-                $options_log_data = [];
-                if(file_exists($options_log_file)) {
-                    $options_log_json = file_get_contents($options_log_file);
-                    if ($options_log_json !== false) {
-                        $options_log_data = json_decode($options_log_json, true);
-                        if ($options_log_data === null) $options_log_data = [];
-                    }
-                }
-                // Construct an entry for what's being paid for NOW
-                $payment_log_entry = [
-                    'payment_transaction_id' => $new_payment_transaction_id,
-                    'original_transaction_id' => $transaction_id,
-                    'user_id' => $user_id,
-                    'added_options' => $new_options_selected, // what was just added
-                    'nb_personnes_for_added' => $new_nb_personnes_map,
-                    'added_price' => $total_new_price,
-                    'date_added' => date('Y-m-d H:i:s'),
-                    'status' => 'pending_payment' // Update upon successful payment
-                ];
-                $options_log_data[] = $payment_log_entry;
-                file_put_contents($options_log_file, json_encode($options_log_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-
-                header("Location: pagePayer.php?transaction_id=" . $new_payment_transaction_id . "&montant=" . $total_new_price . "&type=options");
+                header("Location: pagePayer.php?transaction_id=" . $transaction_id . "&montant=" . $total_new_price . "&type=options");
                 exit();
             } else {
-                // Error saving Commande.json
-                // Handle this error (e.g., display message to user)
-                 echo "Erreur: Impossible de sauvegarder les modifications dans Commande.json.";
-                 exit;
+                echo "Erreur: Impossible de sauvegarder les modifications dans Commande.json.";
+                exit;
             }
         } else {
-            // Commande not found for update, should not happen if initial checks passed
             echo "Erreur: Commande non trouvée pour la mise à jour.";
             exit;
         }
-    } else {
-        // No new options selected or price is zero, perhaps redirect back or show message
-        // For now, just falling through will re-render the page.
     }
 }
 ?>

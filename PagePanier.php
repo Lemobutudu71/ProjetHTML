@@ -36,6 +36,11 @@ if (file_exists($optionsFile)) {
                                 au <?php echo date('d/m/Y', strtotime($voyage['return_date'] ?? 'now')); ?>
                             </div>
                         </a>
+                        <div class='recherche'>
+                        <form>
+                            <input type="button" class='Page-Accueil-button' value="revenir à la page précédente" onclick="history.go(-1)">
+                        </form>
+                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
