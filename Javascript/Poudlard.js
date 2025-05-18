@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', function(){
     const isVip = document.querySelector('.Page-Accueil2-text').getAttribute('data-vip') === 'true';
     const vipReduction = isVip ? 0.9 : 1;
     
+    // Appliquer la réduction VIP aux prix si nécessaire
+    if (isVip) {
+        basePrice = basePrice * vipReduction;
+        for (let key in activitePrix) {
+            activitePrix[key] = activitePrix[key] * vipReduction;
+        }
+    }
+    
     const nb_pers_Voyage = document.getElementById('nb_personnes_voyage');
     const priceDynamicElement = document.getElementById('prix-total-dynamique');
 

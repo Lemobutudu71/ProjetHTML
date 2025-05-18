@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $activite_total_prix += $personnes * $activite_prix['honeydukes'];
     }
 
-    $prix = 3666;
+   
     $nb_personnes_voyage = isset($_POST['nb_personnes_voyage']) ? $_POST['nb_personnes_voyage'] : 1;
     $prix_total = $prix * $nb_personnes_voyage + $activite_total_prix;
 

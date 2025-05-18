@@ -151,7 +151,7 @@ if (file_exists($etapes_file)) {
 
                                             $prix_activite = 0;
                                             if(isset($trip_details['activite_prix'][$activite_code])) {
-                                                $prix_activite = intval($trip_details['activite_prix'][$activite_code]);
+                                                $prix_activite = floatval($trip_details['activite_prix'][$activite_code]);
                                             }
                                             
                                             $prix_total_activite = $prix_activite * $nb_personnes_for_activite;
