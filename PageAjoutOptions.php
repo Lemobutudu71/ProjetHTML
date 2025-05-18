@@ -158,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php endforeach; ?>
         
         <div class="recherche">
-            <button type="submit" class="Page-Accueil-button">Ajouter les options sélectionnées et Payer</button>
+            <button type="submit" class="Page-Accueil-button">Ajouter </button>
             <a href="PageMesvoyages.php?id=<?php echo urlencode($transaction_id); ?>" class="Page-Accueil-button">Retour à Mon Voyage</a>
         </div>
     </form>

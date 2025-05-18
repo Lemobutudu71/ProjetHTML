@@ -81,7 +81,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $prix_total = $prix * $nb_personnes_voyage + $activite_total_prix;
 
-/
 $etapes = ['Tatooine', 'Etoile'];
 $return_date = null;
     if ($departure_date) {

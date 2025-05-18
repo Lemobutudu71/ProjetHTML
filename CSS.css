@@ -343,7 +343,7 @@ footer .bas-de-page li a:hover {
 @media screen and (max-width: 600px) {
     .recherche {
         flex-direction: column; 
-        align-items: center;
+        align-items: stretch;
         gap: 15px; 
     }
 

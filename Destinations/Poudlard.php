@@ -18,7 +18,7 @@ $activite_prix = [
 
  $prix =3666;
   if (isset($_SESSION['user']['Vip']) && $_SESSION['user']['Vip'] === "Oui") {
-        $prix = $prix * 0.9; // Réduction de 10%
+        $prix = $prix * 0.9;
          foreach ($activite_prix as $key => $price) {
         $activite_prix[$key] = $price * 0.9;
         }

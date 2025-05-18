@@ -113,7 +113,7 @@ $total_etapes = $option_voyage['nb_etapes'];
                                     
                                     $prix_total_activite = $prix_activite * $nb_personnes;
                                     
-                                    echo "<li>" . htmlspecialchars($activite_libelle . " - " . $nb_personnes . " personne" . ($nb_personnes > 1 ? "s" : "")) . " - " . number_format($prix_total_activite, 2, ',', ' ') . " € </li>";
+                                    echo "<li>" . htmlspecialchars($activite_libelle . " - " . $nb_personnes . " personne" . ($nb_personnes > 1 ? "s" : "")) . " - " . $prix_total_activite . " € </li>";
                                  }
                             ?>
                         </ul>
@@ -138,8 +138,10 @@ $total_etapes = $option_voyage['nb_etapes'];
                 <div class='recherche'>
                     <?php if ($commande['status'] === 'accepted'): ?>
                     <div class="form-actions">
-                        <a href="PageAjoutOptions.php?id=<?php echo urlencode($transaction_id); ?>" class="Page-Accueil-button">Ajouter des options supplémentaires</a>
+                        <a href="PageAjoutOptions.php?id=<?php echo urlencode($transaction_id); ?>" class="Page-Accueil-button">Ajouter des options</a>
                     </div>
+                </div>
+                <div class="recherche">
                     <?php endif; ?>
                     <div class="form-actions">
                         <a href="PageProfil.php" class="Page-Accueil-button">Retour à mon profil</a>
