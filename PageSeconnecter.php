@@ -107,7 +107,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <p class="Page-Accueil-text" id="Compteur">0 / 30</p>
                     <button class="button" type="submit">Se connecter</button>
                 </form>
-                <p class="redirection"><a href="#">Mot de passe oublié ?</a></p>
             </div>
         </div>
 

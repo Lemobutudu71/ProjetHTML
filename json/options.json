@@ -1,36 +1,3 @@
 [
-    {
-        "user_id": "67e1306025b5f4.22789385",
-        "hebergement_poudlard": "serpentard",
-        "hebergement_preaulard": "sanglier",
-        "activites_poudlard": [],
-        "activites_preaulard": [
-            "degustation",
-            "honeydukes"
-        ],
-        "transport_poudlard": "balais",
-        "nb_personnes": {
-            "degustation": "1",
-            "honeydukes": "1"
-        },
-        "nb_personnes_voyage": "1",
-        "destination": "Poudlard",
-        "return_date": "2025-05-27",
-        "departure_date": "2025-05-20",
-        "prix_total": 3333.6,
-        "nb_etapes": 2,
-        "etapes": [
-            "Poudlard",
-            "PreauLard"
-        ],
-        "activite_prix": {
-            "sorts": 22.5,
-            "quidditch": 31.5,
-            "hyppogriffe": 36,
-            "zonko": 13.5,
-            "degustation": 18,
-            "honeydukes": 16.2
-        },
-        "transaction_id": "682a233513aaa"
-    }
+  
 ]
