@@ -57,12 +57,12 @@ require_once('header.php');
         
         <div class="info-group">
             <label>VIP:</label>
-            <?php echo htmlspecialchars($user['Vip']); ?>
+            <span><?php echo htmlspecialchars($user['Vip']); ?></span>
         </div>
         
         <div class="info-group">
             <label>Bloqué:</label>
-            <?php echo htmlspecialchars($user['Bloquer']); ?>
+            <span><?php echo htmlspecialchars($user['Bloquer']); ?></span>
         </div>
     </div>
     

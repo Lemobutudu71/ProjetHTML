@@ -4,11 +4,6 @@ require_once 'load_env.php';
 require_once('session.php');
 require('getapikey.php');
 
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['user'])) {
-    header("Location: PageSeconnecter.php");
-    exit();
-}
 
 // Vérifier la présence des paramètres nécessaires
 if (!isset($_GET['transaction']) || !isset($_GET['status']) || !isset($_GET['montant']) || !isset($_GET['vendeur']) || !isset($_GET['control'])) {

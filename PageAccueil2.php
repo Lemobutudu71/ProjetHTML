@@ -49,7 +49,7 @@ $voyagesT = json_decode($voyagesTendances, true);
                 </div>
                 <div class="Cadre">
                     <img src="images/Dimittry.jpg" alt="Choudhury Dimittri">
-                    <p>Choudhury Dimittri</p>
+                     <p>Choudhury Dimittri</p>
                 </div>
             </div>
             <p class="Page-Accueil-text">"Tout a commencé par une discussion animée autour d’un popcorn renversé :</br>
