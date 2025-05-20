@@ -54,7 +54,11 @@ $usersToShow = array_slice($users, $startIndex, $usersPerPage);
                                     <?php echo $user['Bloquer']; ?>
                                 </button>
                             </td>
-                            <td><button class="profil-btn">Voir</button></td>
+                            <td>
+                                <button class="profil-btn" data-user-id="<?php echo htmlspecialchars($user['id']); ?>">
+                                    Voir
+                                </button>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

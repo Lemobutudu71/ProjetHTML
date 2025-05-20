@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelectorAll('.Oui-btn, .Non-btn');
+  const profilButtons = document.querySelectorAll('.profil-btn');
 
+  // Gestion des boutons VIP et Bloqué
   buttons.forEach(btn => {
       btn.addEventListener('click', async () => {
           const userId = btn.dataset.userId;
@@ -31,6 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
               console.error('Erreur:', error);
               alert('Erreur lors de la mise à jour: ' + error.message);
           }
+      });
+  });
+
+  // Gestion des boutons Voir profil
+  profilButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+          const userId = btn.dataset.userId;
+          window.location.href = `voirProfil.php?id=${userId}`;
       });
   });
 });
