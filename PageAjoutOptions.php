@@ -119,6 +119,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $opt_ref['nb_personnes'] = [];
                             }
                             $opt_ref['nb_personnes'] = array_merge($opt_ref['nb_personnes'], $new_nb_personnes_map);
+                            
+                            // Stocker simplement le total des options
+                            $opt_ref['options_prix'] = $total_new_price;
                             $opt_ref['prix_total'] = ($opt_ref['prix_total'] ?? 0) + $total_new_price;
                             break;
                         }

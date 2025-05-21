@@ -18,32 +18,56 @@ $transaction_for_platform = null;
 $montant_for_platform = null;
 
 if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
-    // Vérification du montant pour les options
-   $montant_for_platform = $montant_get;
-    error_log("[pagePayer.php DEBUG INSIDE OPTIONS BLOCK] $montant_for_platform set to: " . print_r($montant_for_platform, true)); //écrit dans le journal d'erreur (le montant) pour le débogage
+    $montant_for_platform = $montant_get;
 
+    // Vérification du montant pour les options
+    $montant_verifie = false;
     $options_entry_for_payment = null;
-    if (file_exists($options_file)) {
-        $all_options_entries = json_decode(file_get_contents($options_file), true);
-        if (is_array($all_options_entries)) { // Vérifie si le fichier options.json existe et est un tableau
-            foreach ($all_options_entries as $entry) {
-                if (isset($entry['payment_transaction_id']) && $entry['payment_transaction_id'] === $transaction_id_get && 
-                    isset($entry['user_id']) && $entry['user_id'] == $user_id) {
-                    $options_entry_for_payment = $entry;
-                    break;
+    $prix_attendu = 0;
+    $prix_recu = round(floatval($montant_get), 2);
+    
+    if (file_exists($commandes_file)) {
+        $all_commandes = json_decode(file_get_contents($commandes_file), true);
+        if (is_array($all_commandes)) {
+            foreach ($all_commandes as $commande) {
+                if (isset($commande['transaction_id']) && $commande['transaction_id'] === $transaction_id_get) {
+                    if (isset($commande['options']) && is_array($commande['options'])) {
+                        foreach ($commande['options'] as $opt) {
+                            if (isset($opt['user_id']) && $opt['user_id'] === $user_id) {
+                                if (isset($opt['options_prix'])) {
+                                    $prix_attendu = round(floatval($opt['options_prix']), 2);
+                                    if ($prix_attendu === $prix_recu) {
+                                        $montant_verifie = true;
+                                        $options_entry_for_payment = $opt;
+                                        break 2;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 
+    if (!$montant_verifie) {
+        error_log("[pagePayer.php ERROR] Montant d'option incorrect - Attendu: " . $prix_attendu . ", Reçu: " . $prix_recu);
+        echo "<div style='background-color: #ffebee; padding: 10px; margin: 10px; border: 1px solid #ffcdd2;'>";
+        echo "<h3>Détails de l'erreur :</h3>";
+        echo "<p>Montant attendu : " . $prix_attendu . " €</p>";
+        echo "<p>Montant reçu : " . $prix_recu . " €</p>";
+        echo "<p>Transaction ID : " . htmlspecialchars($transaction_id_get) . "</p>";
+        echo "<p>User ID : " . htmlspecialchars($user_id) . "</p>";
+        echo "</div>";
+        die("Erreur: Le montant spécifié ne correspond pas au montant réel de l'option.");
+    }
+
     if ($options_entry_for_payment && isset($options_entry_for_payment['original_transaction_id'])) {
         $transaction_for_platform = $options_entry_for_payment['original_transaction_id'];
     } else {
-        error_log("[pagePayer.php ERROR] Could not find original_transaction_id for options payment: " . $transaction_id_get);
         $transaction_for_platform = $transaction_id_get; 
     }
     $_SESSION['transaction'] = $transaction_id_get;
-    error_log("[pagePayer.php DEBUG INSIDE OPTIONS BLOCK] $transaction_for_platform set to: " . print_r($transaction_for_platform, true));
 
   
     if (file_exists($commandes_file) && isset($transaction_for_platform)) {
@@ -71,26 +95,42 @@ if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
     $montant_for_platform = $montant_get;
     $_SESSION['transaction'] = $transaction_for_platform;
 
-    // Fetch details from Commande.json for display
-    if (file_exists($commandes_file)) {
-        $all_commandes = json_decode(file_get_contents($commandes_file), true);
-        if (is_array($all_commandes)) {
-            foreach ($all_commandes as $commande) {
-                if (isset($commande['transaction_id']) && $commande['transaction_id'] === $transaction_for_platform) {
-                    if (isset($commande['options']) && is_array($commande['options'])) {
-                        foreach ($commande['options'] as $opt) {
-                            if (isset($opt['user_id']) && $opt['user_id'] === $user_id) {
-                                $display_details = $opt; // Load all details
-                                break;
-                            }
+    // Vérification du montant pour les réservations
+    $montant_verifie = false;
+    $prix_attendu = 0;
+    $prix_recu = round(floatval($montant_get), 2);
+
+    // Vérifier dans options.json
+    if (file_exists($options_file)) {
+        $options_data = json_decode(file_get_contents($options_file), true);
+        if (is_array($options_data)) {
+            foreach ($options_data as $option) {
+                if (isset($option['transaction_id']) && $option['transaction_id'] === $transaction_for_platform &&
+                    isset($option['user_id']) && $option['user_id'] === $user_id) {
+                    if (isset($option['prix_total'])) {
+                        $prix_attendu = round(floatval($option['prix_total']), 2);
+                        if ($prix_attendu === $prix_recu) {
+                            $montant_verifie = true;
+                            $display_details = $option;
+                            break;
                         }
                     }
-                    break;
                 }
             }
         }
     }
-    
+
+    if (!$montant_verifie) {
+        error_log("[pagePayer.php ERROR] Montant incorrect - Attendu: " . $prix_attendu . ", Reçu: " . $prix_recu);
+        echo "<div style='background-color: #ffebee; padding: 10px; margin: 10px; border: 1px solid #ffcdd2;'>";
+        echo "<h3>Détails de l'erreur :</h3>";
+        echo "<p>Montant attendu : " . $prix_attendu . " €</p>";
+        echo "<p>Montant reçu : " . $prix_recu . " €</p>";
+        echo "<p>Transaction ID : " . htmlspecialchars($transaction_id_get) . "</p>";
+        echo "<p>User ID : " . htmlspecialchars($user_id) . "</p>";
+        echo "</div>";
+        die("Erreur: Le montant spécifié ne correspond pas au montant réel de la commande.");
+    }
 
     if (empty($display_details) && file_exists($options_file)) {
         $options_data = json_decode(file_get_contents($options_file), true);
@@ -152,23 +192,11 @@ $retour_url_query_transaction = $transaction_for_platform;
 $retour = "{$base_url}/retour_paiement.php?transaction={$retour_url_query_transaction}";
 $_SESSION['retour'] = $retour; 
 
-// Log values before generating control hash
-error_log("[pagePayer.php DEBUG] Payment Type: " . $payment_type);
-error_log("[pagePayer.php DEBUG] Transaction ID from GET: " . print_r($transaction_id_get, true));
-error_log("[pagePayer.php DEBUG] Montant from GET: " . print_r($montant_get, true));
-error_log("[pagePayer.php DEBUG] Transaction FOR PLATFORM (before hash): " . print_r($transaction_for_platform, true));
-error_log("[pagePayer.php DEBUG] Montant FOR PLATFORM (before hash): " . print_r($montant_for_platform, true)); // Log it again right before use
-error_log("[pagePayer.php DEBUG] Vendeur: " . print_r($vendeur, true));
-error_log("[pagePayer.php DEBUG] Retour URL for session (and used in hash): " . $retour);
-
-
 $api_key = getAPIKey($vendeur); 
 // Use $transaction_for_platform and $montant_for_platform for control hash generation
 $control = md5($api_key . "#" . $transaction_for_platform . "#" . $montant_for_platform . "#" . $vendeur . "#" . $retour . "#");
 $_SESSION['control'] = $control;
 
-error_log("[pagePayer.php DEBUG] API Key used: " . $api_key);
-error_log("[pagePayer.php DEBUG] Control hash generated (based on _for_platform vars): " . $control);
 
 ?>
 
