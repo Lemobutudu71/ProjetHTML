@@ -1,3 +1,60 @@
 [
-    
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_poudlard": "serpentard",
+        "hebergement_preaulard": "sanglier",
+        "activites_poudlard": [],
+        "activites_preaulard": [],
+        "transport_poudlard": "balais",
+        "nb_personnes": [],
+        "nb_personnes_voyage": "1",
+        "destination": "Poudlard",
+        "return_date": "2025-06-10",
+        "departure_date": "2025-06-03",
+        "prix_total": 3299.4,
+        "nb_etapes": 2,
+        "etapes": [
+            "Poudlard",
+            "PreauLard"
+        ],
+        "activite_prix": {
+            "sorts": 22.5,
+            "quidditch": 31.5,
+            "hyppogriffe": 36,
+            "zonko": 13.5,
+            "degustation": 18,
+            "honeydukes": 16.2
+        },
+        "transaction_id": "682e1f06c2096",
+        "status": "accepted"
+    },
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_poudlard": "serpentard",
+        "hebergement_preaulard": "sanglier",
+        "activites_poudlard": [],
+        "activites_preaulard": [],
+        "transport_poudlard": "balais",
+        "nb_personnes": [],
+        "nb_personnes_voyage": "1",
+        "destination": "Poudlard",
+        "return_date": "2025-06-03",
+        "departure_date": "2025-05-27",
+        "prix_total": 3299.4,
+        "nb_etapes": 2,
+        "etapes": [
+            "Poudlard",
+            "PreauLard"
+        ],
+        "activite_prix": {
+            "sorts": 22.5,
+            "quidditch": 31.5,
+            "hyppogriffe": 36,
+            "zonko": 13.5,
+            "degustation": 18,
+            "honeydukes": 16.2
+        },
+        "transaction_id": "682e1f5491456",
+        "status": "accepted"
+    }
 ]
