@@ -3,21 +3,32 @@
         "transaction_id": "682e1f06c2096",
         "status": "accepted",
         "date": "2025-05-21 18:45:00",
-        "validation_securite": "Valid\u00e9e",
+        "validation_securite": "Validée",
         "options": [
             {
                 "user_id": "67e1306025b5f4.22789385",
                 "hebergement_poudlard": "serpentard",
                 "hebergement_preaulard": "sanglier",
-                "activites_poudlard": [],
-                "activites_preaulard": [],
+                "activites_poudlard": [
+                    "sorts",
+                    "quidditch",
+                    "hyppogriffe"
+                ],
+                "activites_preaulard": [
+                    "honeydukes"
+                ],
                 "transport_poudlard": "balais",
-                "nb_personnes": [],
+                "nb_personnes": {
+                    "sorts": 1,
+                    "quidditch": 1,
+                    "hyppogriffe": 1,
+                    "honeydukes": 1
+                },
                 "nb_personnes_voyage": "1",
                 "destination": "Poudlard",
                 "return_date": "2025-06-10",
                 "departure_date": "2025-06-03",
-                "prix_total": 3299.4,
+                "prix_total": 3495.6,
                 "nb_etapes": 2,
                 "etapes": [
                     "Poudlard",
@@ -40,7 +51,7 @@
         "transaction_id": "682e1f5491456",
         "status": "accepted",
         "date": "2025-05-21 18:46:09",
-        "validation_securite": "Valid\u00e9e",
+        "validation_securite": "Validée",
         "options": [
             {
                 "user_id": "67e1306025b5f4.22789385",

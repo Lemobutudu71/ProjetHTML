@@ -19,26 +19,21 @@ $montant_for_platform = null;
 
 if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
     // Vérification du montant pour les options
-    $montant_verifie = false;
+   $montant_for_platform = $montant_get;
+    error_log("[pagePayer.php DEBUG INSIDE OPTIONS BLOCK] $montant_for_platform set to: " . print_r($montant_for_platform, true)); //écrit dans le journal d'erreur (le montant) pour le débogage
+
+    $options_entry_for_payment = null;
     if (file_exists($options_file)) {
         $all_options_entries = json_decode(file_get_contents($options_file), true);
-        if (is_array($all_options_entries)) {
+        if (is_array($all_options_entries)) { // Vérifie si le fichier options.json existe et est un tableau
             foreach ($all_options_entries as $entry) {
-                if (isset($entry['transaction_id']) && $entry['transaction_id'] === $transaction_id_get && 
+                if (isset($entry['payment_transaction_id']) && $entry['payment_transaction_id'] === $transaction_id_get && 
                     isset($entry['user_id']) && $entry['user_id'] == $user_id) {
-                    // Vérifier si le montant correspond
-                    if (isset($entry['prix_total']) && floatval($entry['prix_total']) === floatval($montant_get)) {
-                        $montant_verifie = true;
-                        $montant_for_platform = $montant_get;
-                        $options_entry_for_payment = $entry;
-                        break;
-                    }
+                    $options_entry_for_payment = $entry;
+                    break;
                 }
             }
         }
-    }
-    if (!$montant_verifie) {
-        die("Erreur: Le montant spécifié ne correspond pas au montant réel de la commande.");
     }
 
     if ($options_entry_for_payment && isset($options_entry_for_payment['original_transaction_id'])) {
@@ -72,34 +67,30 @@ if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
     }
 
 } elseif ($transaction_id_get && $montant_get) {
-    // Vérification du montant pour les réservations
-    $montant_verifie = false;
+    $transaction_for_platform = $transaction_id_get;
+    $montant_for_platform = $montant_get;
+    $_SESSION['transaction'] = $transaction_for_platform;
+
+    // Fetch details from Commande.json for display
     if (file_exists($commandes_file)) {
         $all_commandes = json_decode(file_get_contents($commandes_file), true);
         if (is_array($all_commandes)) {
             foreach ($all_commandes as $commande) {
-                if (isset($commande['transaction_id']) && $commande['transaction_id'] === $transaction_id_get) {
+                if (isset($commande['transaction_id']) && $commande['transaction_id'] === $transaction_for_platform) {
                     if (isset($commande['options']) && is_array($commande['options'])) {
                         foreach ($commande['options'] as $opt) {
                             if (isset($opt['user_id']) && $opt['user_id'] === $user_id) {
-                                // Vérifier si le montant correspond
-                                if (isset($opt['prix_total']) && floatval($opt['prix_total']) === floatval($montant_get)) {
-                                    $montant_verifie = true;
-                                    $transaction_for_platform = $transaction_id_get;
-                                    $montant_for_platform = $montant_get;
-                                    $display_details = $opt;
-                                    break 2;
-                                }
+                                $display_details = $opt; // Load all details
+                                break;
                             }
                         }
                     }
+                    break;
                 }
             }
         }
     }
-    if (!$montant_verifie) {
-        die("Erreur: Le montant spécifié ne correspond pas au montant réel de la commande.");
-    }
+    
 
     if (empty($display_details) && file_exists($options_file)) {
         $options_data = json_decode(file_get_contents($options_file), true);
