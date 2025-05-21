@@ -6,30 +6,29 @@ require('getapikey.php');
 
 // Récupérer les informations de l'utilisateur et du voyage
 $user_id = $_SESSION['user']['id'];
-$display_details = []; // Array to hold details for display
+$display_details = []; 
 $options_file = 'json/options.json';
 $commandes_file = 'json/Commande.json';
 
 $transaction_id_get = $_GET['transaction_id'] ?? null;
 $montant_get = $_GET['montant'] ?? null;
-$payment_type = $_GET['type'] ?? 'reservation'; // Default to reservation
+$payment_type = $_GET['type'] ?? 'reservation'; 
 
 $transaction_for_platform = null;
 $montant_for_platform = null;
 
 if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
-    // This is a payment for additional options.
+   
     $montant_for_platform = $montant_get;
     error_log("[pagePayer.php DEBUG INSIDE OPTIONS BLOCK] $montant_for_platform set to: " . print_r($montant_for_platform, true));
 
-    // We need to find the original_transaction_id from options.json
-    // to send to the payment platform as the main 'transaction'.
+    
     $options_entry_for_payment = null;
     if (file_exists($options_file)) {
         $all_options_entries = json_decode(file_get_contents($options_file), true);
         if (is_array($all_options_entries)) {
             foreach ($all_options_entries as $entry) {
-                if (isset($entry['payment_transaction_id']) && $entry['payment_transaction_id'] === $transaction_id_get && 
+                if (isset($entry['transaction_id']) && $entry['transaction_id'] === $transaction_id_get && 
                     isset($entry['user_id']) && $entry['user_id'] == $user_id) {
                     $options_entry_for_payment = $entry;
                     break;
@@ -47,9 +46,7 @@ if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
     $_SESSION['transaction'] = $transaction_id_get;
     error_log("[pagePayer.php DEBUG INSIDE OPTIONS BLOCK] $transaction_for_platform set to: " . print_r($transaction_for_platform, true));
 
-    // For options, we might not need to load full original trip details for payer page display beyond the transaction ID and amount.
-    // However, $transaction_for_platform is the original trip ID here.
-    // We can load the original trip's destination for better display context if desired.
+  
     if (file_exists($commandes_file) && isset($transaction_for_platform)) {
         $all_commandes = json_decode(file_get_contents($commandes_file), true);
         if (is_array($all_commandes)) {
@@ -59,7 +56,7 @@ if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
                         foreach ($commande['options'] as $opt) {
                             if (isset($opt['user_id']) && $opt['user_id'] === $user_id) {
                                 $display_details['destination'] = $opt['destination'] ?? 'N/A';
-                                // Add other details if necessary for options payment display
+                              
                                 break;
                             }
                         }
@@ -71,12 +68,12 @@ if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
     }
 
 } elseif ($transaction_id_get && $montant_get) {
-    // This is likely an initial payment being retried, or type not specified as options
+ 
     $transaction_for_platform = $transaction_id_get;
     $montant_for_platform = $montant_get;
     $_SESSION['transaction'] = $transaction_for_platform;
 
-    // Fetch details from Commande.json for display
+    
     if (file_exists($commandes_file)) {
         $all_commandes = json_decode(file_get_contents($commandes_file), true);
         if (is_array($all_commandes)) {
@@ -85,7 +82,7 @@ if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
                     if (isset($commande['options']) && is_array($commande['options'])) {
                         foreach ($commande['options'] as $opt) {
                             if (isset($opt['user_id']) && $opt['user_id'] === $user_id) {
-                                $display_details = $opt; // Load all details
+                                $display_details = $opt; 
                                 break;
                             }
                         }
@@ -95,7 +92,7 @@ if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
             }
         }
     }
-    // Fallback to options.json if Commande.json didn't yield details (less likely for reservations)
+
     if (empty($display_details) && file_exists($options_file)) {
         $options_data = json_decode(file_get_contents($options_file), true);
         if (is_array($options_data)) {
@@ -109,9 +106,8 @@ if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
         }
     }
 } else {
-    // Fallback: transaction_id and montant not in GET (original logic)
-    // This part is less ideal and should ideally be avoided by always passing details via GET.
-    $user_choices_fallback = null; // Renaming to avoid confusion with $user_choices in outer scope if any
+    
+    $user_choices_fallback = null; 
     if (file_exists($options_file)) {
         $user_data = json_decode(file_get_contents($options_file), true);
         if(is_array($user_data)) {
@@ -153,14 +149,9 @@ $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
 $host = $_SERVER['HTTP_HOST'];
 $base_url = $protocol . "://" . $host . $script_dir;
 
-// Use $transaction_for_platform in the retour URL query string for consistency if platform expects it
-// However, the session $_SESSION['retour'] is what retour_paiement.php uses for its hash.
-// The key is that what goes into pagePayer's control hash for 'retour' must match what retour_paiement.php uses from session.
-
-// Let's make the ?transaction= in the retour URL consistently the ID that was sent to the platform
 $retour_url_query_transaction = $transaction_for_platform; 
 $retour = "{$base_url}/retour_paiement.php?transaction={$retour_url_query_transaction}";
-$_SESSION['retour'] = $retour; // This is what retour_paiement.php will use
+$_SESSION['retour'] = $retour; 
 
 // Log values before generating control hash
 error_log("[pagePayer.php DEBUG] Payment Type: " . $payment_type);
@@ -171,7 +162,7 @@ error_log("[pagePayer.php DEBUG] Montant FOR PLATFORM (before hash): " . print_r
 error_log("[pagePayer.php DEBUG] Vendeur: " . print_r($vendeur, true));
 error_log("[pagePayer.php DEBUG] Retour URL for session (and used in hash): " . $retour);
 
-// Générer le contrôle pour la sécurité
+
 $api_key = getAPIKey($vendeur); 
 // Use $transaction_for_platform and $montant_for_platform for control hash generation
 $control = md5($api_key . "#" . $transaction_for_platform . "#" . $montant_for_platform . "#" . $vendeur . "#" . $retour . "#");

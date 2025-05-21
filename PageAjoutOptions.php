@@ -12,23 +12,34 @@ if (!$transaction_id) {
 
 $commandes_file = 'json/Commande.json';
 $etapes_file = 'json/Etapes_Options.json';
-// $options_file = 'json/options.json'; // This file seems to be a log, not a source of options
+// $options_file = 'json/options.json'; 
 
 $commandes = [];
-$etapes_options_data = []; // Renamed for clarity
+$etapes_options_data = []; 
 
 if (file_exists($commandes_file)) {
     $commandes_json = file_get_contents($commandes_file);
-    if ($commandes_json === false) { /* Handle error reading commandes_file */ $commandes = []; }
-    else { $commandes = json_decode($commandes_json, true); }
-    if ($commandes === null) { /* Handle JSON decode error for commandes */ $commandes = []; }
+    if ($commandes_json === false) { 
+         $commandes = []; 
+        }
+    else { 
+        $commandes = json_decode($commandes_json, true);
+     }
+    if ($commandes === null) { 
+        $commandes = []; }
 }
 
 if (file_exists($etapes_file)) {
     $etapes_options_json = file_get_contents($etapes_file);
-    if ($etapes_options_json === false) { /* Handle error reading etapes_file */ $etapes_options_data = []; }
-    else { $etapes_options_data = json_decode($etapes_options_json, true); }
-    if ($etapes_options_data === null) { /* Handle JSON decode error for etapes_options */ $etapes_options_data = []; }
+    if ($etapes_options_json === false) {
+         $etapes_options_data = []; 
+        }
+    else {
+         $etapes_options_data = json_decode($etapes_options_json, true); 
+        }
+    if ($etapes_options_data === null) { 
+         $etapes_options_data = []; 
+        }
 }
 
 $commande_details = null;
@@ -50,8 +61,7 @@ foreach ($commandes as $cmd_item) {
 }
 
 if (!$commande_details || !$current_trip_options) {
-    // Consider a user-friendly error page or message
-    // For now, redirecting as before
+    
     header("Location: PageProfil.php?error=trip_not_found");
     exit();
 }
@@ -63,7 +73,6 @@ if (isset($current_trip_options['etapes'])) {
 }
 
 
-// POST handling logic remains the same for now
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_options_selected = [];
     $total_new_price = 0;
@@ -151,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 <div class="activites-container" id="activites-container-<?php echo htmlspecialchars($clean_etape_name_render); ?>">
                     <h3>Activités disponibles</h3>
-                    <!-- JavaScript will populate this section -->
+                    
                     <p class="loading-text">Chargement des activités...</p>
                 </div>
             </div>
@@ -166,18 +175,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 <script>
-    // Pass PHP data to JavaScript
     const tripDataForJS = <?php echo json_encode([
         'destination' => $destination_name,
         'etapes' => $trip_etapes_names,
-        'etapesOptions' => $etapes_options_data, // All available options
-        'currentTripOptions' => $current_trip_options, // User's current selections from Commande.json
-        'nbPersonnesVoyage' => $current_trip_options['nb_personnes_voyage'] ?? 1 // Max persons for the trip
+        'etapesOptions' => $etapes_options_data, 
+        'currentTripOptions' => $current_trip_options, 
+        'nbPersonnesVoyage' => $current_trip_options['nb_personnes_voyage'] ?? 1 
     ], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE); ?>;
 </script>
 
 <?php 
-// Include the new JS file here (assuming it will be created in Javascript/dynamicTripOptions.js)
 $scripts = '<script src="Javascript/dynamicTripOptions.js"></script>';
 require_once('footer.php'); 
 ?>

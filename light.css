@@ -1145,3 +1145,39 @@ input[disabled] {
     cursor: pointer;
     color: var(--color-white);
   }
+
+  .profil-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profil-info {
+    margin: 2rem 0;
+}
+
+.info-group {
+    display: flex;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-group label {
+    font-weight: bold;
+    width: 200px;
+    color: var(--text-color);
+}
+
+.info-group span {
+    flex: 1;
+    color: var(--text-color);
+}
+
+.profil-actions {
+    margin-top: 2rem;
+    text-align: center;
+}
