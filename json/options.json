@@ -1,3 +1,44 @@
 [
-    
+    {
+        "user_id": "67e1306025b5f4.22789385",
+        "hebergement_winterfell": "chateau_stark",
+        "hebergement_portreal": "donjon_royal",
+        "hebergement_meereen": "pyramide",
+        "activites_winterfell": [],
+        "activites_portreal": [],
+        "activites_meereen": [
+            "gladiateur",
+            "marche"
+        ],
+        "transport_winterfell": "chevaux",
+        "transport_portreal": "bateau",
+        "nb_personnes": {
+            "gladiateur": "1",
+            "marche": "1"
+        },
+        "prix_total": 4848.3,
+        "nb_personnes_voyage": "1",
+        "departure_date": "2025-05-22",
+        "return_date": "2025-05-29",
+        "destination": "Westeros",
+        "nb_etapes": 3,
+        "etapes": [
+            "Winterfell",
+            "PortReal",
+            "Meereen"
+        ],
+        "activite_prix": {
+            "combat": 18,
+            "chasse": 31.5,
+            "mur": 27,
+            "tournoi": 10.8,
+            "trone": 27,
+            "fleuve": 45,
+            "dragons": 90,
+            "gladiateur": 69.3,
+            "marche": 9
+        },
+        "transaction_id": "682e449a81776",
+        "status": "acepted"
+    }
 ]

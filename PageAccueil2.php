@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once 'load_env.php';
@@ -52,28 +51,28 @@ $voyagesT = json_decode($voyagesTendances, true);
                      <p>Choudhury Dimittri</p>
                 </div>
             </div>
-            <p class="Page-Accueil-text">"Tout a commencé par une discussion animée autour d’un popcorn renversé :</br>
+            <p class="Page-Accueil-text">"Tout a commencé par une discussion animée autour d'un popcorn renversé :</br>
                 — « Et si on pouvait VRAIMENT visiter Poudlard ? »</br>
                 — « Ou partir sur Tatooine sans finir grillé façon brochette ? »</br>
                 — « Et si on créait Movietrip ? »</br>
                 
-                C’est ainsi que nos trois fondateurs, animés par une passion démesurée pour le cinéma (et une légère obsession pour les cartes d’embarquement), ont décidé de transformer les rêves en voyages.
+                C'est ainsi que nos trois fondateurs, animés par une passion démesurée pour le cinéma (et une légère obsession pour les cartes d'embarquement), ont décidé de transformer les rêves en voyages.
                 
-                Aujourd’hui, grâce à eux, vous pouvez marcher sur les traces de vos héros, explorer des mondes iconiques et, soyons honnêtes… prendre des photos épiques pour rendre jaloux vos amis.
+                Aujourd'hui, grâce à eux, vous pouvez marcher sur les traces de vos héros, explorer des mondes iconiques et, soyons honnêtes… prendre des photos épiques pour rendre jaloux vos amis.
                 
                 Alors, prêts à embarquer ? Movietrip vous attend, baguette (ou sabre laser) en main !"</p>
         
         <div class="recherche">
-            <form method="GET" class="recherche">
-                <input type="text" name="search" placeholder="Rechercher un voyage..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+            <form id="searchForm" method="GET" class="recherche">
+                <input type="text" name="search" id="searchInput" placeholder="Rechercher un voyage..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
                 <button type="submit">Rechercher</button>
             </form>
         </div>
-        <h2 class="Titre">
+        <h2 class="Titre" id="searchTitle">
                 <?= empty($motCle) ? "NOS SÉJOURS TENDANCES" : "RÉSULTATS DE VOTRE RECHERCHE" ?>
             </h2>
 
-            <div class="ListePhotos">
+            <div class="ListePhotos" id="searchResults">
                 <?php if (empty($motCle)): ?>
                     <!-- Affichage des voyages tendances par défaut -->
                     <?php foreach ($voyagesT as $voyage): ?>
@@ -106,6 +105,29 @@ $voyagesT = json_decode($voyagesTendances, true);
 
     <?php 
 $scripts = '
+<script>
+document.getElementById("searchForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const searchValue = document.getElementById("searchInput").value;
+    
+    fetch(window.location.pathname + "?search=" + encodeURIComponent(searchValue))
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            
+            // Mettre à jour le titre
+            document.getElementById("searchTitle").innerHTML = doc.getElementById("searchTitle").innerHTML;
+            
+            // Mettre à jour les résultats
+            document.getElementById("searchResults").innerHTML = doc.getElementById("searchResults").innerHTML;
+            
+            // Mettre à jour l\'URL sans recharger la page
+            const newUrl = window.location.pathname + "?search=" + encodeURIComponent(searchValue);
+            window.history.pushState({path: newUrl}, "", newUrl);
+        });
+});
+</script>
 ';
 require_once('footer.php'); 
 ?>

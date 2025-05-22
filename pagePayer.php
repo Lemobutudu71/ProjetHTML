@@ -17,7 +17,7 @@ $payment_type = $_GET['type'] ?? 'reservation';
 $transaction_for_platform = null;
 $montant_for_platform = null;
 
-if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
+if ($payment_type === 'options' && $transaction_id_get && $montant_get) { //si c'est un paiement d'options
     $montant_for_platform = $montant_get;
 
     // Vérification du montant pour les options
@@ -90,7 +90,7 @@ if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
         }
     }
 
-} elseif ($transaction_id_get && $montant_get) {
+} elseif ($transaction_id_get && $montant_get) { //si c'est un paiement de réservation
     $transaction_for_platform = $transaction_id_get;
     $montant_for_platform = $montant_get;
     $_SESSION['transaction'] = $transaction_for_platform;
@@ -161,7 +161,7 @@ if ($payment_type === 'options' && $transaction_id_get && $montant_get) {
         $montant_for_platform = $user_choices_fallback['prix_total'] ?? null;
         $transaction_for_platform = $user_choices_fallback['transaction_id'] ?? null;
         $_SESSION['transaction'] = $transaction_for_platform;
-        $display_details = $user_choices_fallback; // Populate $display_details
+        $display_details = $user_choices_fallback; 
     } else {
         die("Erreur: Impossible de récupérer les détails de la transaction pour le paiement.");
     }
@@ -193,7 +193,7 @@ $retour = "{$base_url}/retour_paiement.php?transaction={$retour_url_query_transa
 $_SESSION['retour'] = $retour; 
 
 $api_key = getAPIKey($vendeur); 
-// Use $transaction_for_platform and $montant_for_platform for control hash generation
+
 $control = md5($api_key . "#" . $transaction_for_platform . "#" . $montant_for_platform . "#" . $vendeur . "#" . $retour . "#");
 $_SESSION['control'] = $control;
 
@@ -205,9 +205,9 @@ $_SESSION['control'] = $control;
         <div class="description">
             <h2 class='h2'>Récapitulatif de la commande</h2>
             <?php 
-                // Display based on what was actually processed for the platform
+                
                 $display_montant = $montant_for_platform;
-                $display_transaction = $transaction_for_platform; // Or $transaction_id_get if more appropriate for display
+                $display_transaction = $transaction_for_platform; 
             ?>
             <?php if ($payment_type === 'options'): ?>
                 <p><strong>Type de paiement :</strong> Options supplémentaires</p>

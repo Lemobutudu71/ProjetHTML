@@ -1,7 +1,7 @@
 <?php
-session_start(); // faire un fichier session.php pour mutualiser la gestion de la session 
+session_start(); 
 
-$debug_messages = []; // Array to hold debug messages
+$debug_messages = []; 
 
 if (isset($_SESSION['user'])) {
     header("Location: PageProfil.php");
@@ -17,8 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $debug_messages[] = "Login attempt started.";
     $debug_messages[] = "Submitted Email: " . $email;
-    // For security, avoid logging the raw password to the browser console in production.
-    // We log its length here for a basic check.
+    
     $debug_messages[] = "Submitted Password Length: " . strlen($password);
 
     if (file_exists($file)) {
@@ -41,8 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $user_found = true;
                         $debug_messages[] = "User found in JSON: " . $user['email'];
                         $debug_messages[] = "Stored Password Hash: " . $user['password'];
-                        // The actual submitted password will be passed to password_verify directly.
-                        // Do not log $password directly to browser console in production.
+                       
 
                         if (password_verify($password, $user['password'])) {
                             $debug_messages[] = "Password verification SUCCESSFUL for " . $email;
@@ -55,21 +53,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 "Vip" => $user['Vip'],
                                 "Bloquer" => $user['Bloquer'],
                             ];
-                            // If you need to see debug messages even on successful login before redirect,
-                            // you might temporarily echo them here, but it's generally not recommended
-                            // as it can break headers if not handled with output buffering.
-                            // echo "<script>console.log('PHP Debug (Success Pre-redirect):', " . json_encode($debug_messages) . ");</script>";
+        
                             header("Location: PageProfil.php");
                             exit;
                         } else {
                             $error_message = "Le mot de passe est incorrect.";
                             $debug_messages[] = "Password verification FAILED for " . $email;
                         }
-                        break; // Email found, no need to check further users
+                        break; 
                     }
                 }
 
-                if (!$user_found && empty($error_message)) { // Ensure error_message isn't already set
+                if (!$user_found && empty($error_message)) { 
                     $error_message = "L\'email n\'existe pas.";
                     $debug_messages[] = "Email not found in user list: " . $email;
                 }
@@ -80,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $debug_messages[] = "Error: User file (' . $file . ') not found.";
     }
 
-    // This check might be redundant if the logic above is comprehensive
+
     if (empty($error_message) && !$user_found) {
         $error_message = "L\'email n\'existe pas.";
         $debug_messages[] = "Final check: Email not found - " . $email;
@@ -111,9 +106,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <?php 
-// Output debug messages to browser console if form was submitted (typically when there's an error and page re-renders)
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($debug_messages)) {
-    // json_encode flags are important for safe embedding in <script>
+   
     echo "<script>console.log('PHP Debug Messages:', " . json_encode($debug_messages, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) . ");</script>";
 }
 
