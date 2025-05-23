@@ -79,4 +79,82 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
     }
+
+    // Récupère les éléments <select> pour la gare de départ et la gare de retour.
+    const departureStationSelect = document.getElementById('departure_station');
+    const returningStationSelect = document.getElementById('returning_station');
+
+    // Vérifie si les deux éléments <select> existent avant de continuer.
+    if (!departureStationSelect || !returningStationSelect) {
+        // Si l'un ou l'autre n'existe pas, affiche une erreur dans la console et arrête le script.
+        console.error('Les éléments select de gare de départ ou de retour sont introuvables.');
+        return;
+    }
+
+    // Stocke les options initiales de la gare de retour. 
+    // Cela est utilisé pour restaurer toutes les options si nécessaire.
+    let initialReturningOptions = [];
+    // Parcourt toutes les options initiales du <select> de la gare de retour.
+    for (let i = 0; i < returningStationSelect.options.length; i++) {
+        // Ajoute chaque option (valeur et texte) au tableau initialReturningOptions.
+        initialReturningOptions.push({
+            value: returningStationSelect.options[i].value,
+            text: returningStationSelect.options[i].text
+        });
+    }
+
+    // Fonction pour mettre à jour les options de la gare de retour.
+    function updateReturningStations() {
+        // Récupère la valeur de la gare de départ sélectionnée.
+        const selectedDepartureStation = departureStationSelect.value;
+        // Mémorise la valeur actuellement sélectionnée pour la gare de retour (si elle existe).
+        const currentReturningStationValue = returningStationSelect.value;
+
+        // Vide les options actuelles du <select> de la gare de retour.
+        returningStationSelect.innerHTML = '';
+
+        // Filtre les options initiales pour ne garder que celles qui sont différentes de la gare de départ sélectionnée.
+        // Ou si l'option a une valeur vide (souvent utilisée pour "Choisissez une option").
+        const filteredOptions = initialReturningOptions.filter(option => option.value === "" || option.value !== selectedDepartureStation);
+
+        // Ajoute les options filtrées au <select> de la gare de retour.
+        filteredOptions.forEach(optionData => {
+            const option = document.createElement('option');
+            option.value = optionData.value;
+            option.textContent = optionData.text;
+            // Si l'option de données correspond à la valeur précédemment sélectionnée pour la gare de retour,
+            // et que cette valeur n'est pas la même que la gare de départ nouvellement sélectionnée,
+            // alors cette option est marquée comme sélectionnée.
+            if (optionData.value === currentReturningStationValue && currentReturningStationValue !== selectedDepartureStation) {
+                option.selected = true;
+            }
+            returningStationSelect.appendChild(option);
+        });
+        
+        // Si, après le filtrage, la gare de retour sélectionnée est la même que la gare de départ,
+        // ou si aucune option n'est sélectionnée (et qu'il y a des options disponibles),
+        // alors on tente de sélectionner la première option valide.
+        if (returningStationSelect.value === selectedDepartureStation || (returningStationSelect.selectedIndex === -1 && returningStationSelect.options.length > 0)) {
+            // On cherche la première option qui n'est pas vide et qui n'est pas la gare de départ.
+            let newSelectionMade = false;
+            for (let i = 0; i < returningStationSelect.options.length; i++) {
+                if (returningStationSelect.options[i].value !== "" && returningStationSelect.options[i].value !== selectedDepartureStation) {
+                    returningStationSelect.selectedIndex = i;
+                    newSelectionMade = true;
+                    break;
+                }
+            }
+            // Si aucune option valide n'a été trouvée (par exemple, toutes les options restantes sont vides ou la gare de départ),
+            // et si la première option est une option vide "Choisissez...", on la sélectionne.
+            if (!newSelectionMade && returningStationSelect.options.length > 0 && returningStationSelect.options[0].value === "") {
+                returningStationSelect.selectedIndex = 0;
+            }
+        }
+    }
+
+    // Ajoute un écouteur d'événement 'change' pour appeler updateReturningStations lorsque la sélection de la gare de départ change.
+    departureStationSelect.addEventListener('change', updateReturningStations);
+    // Appelle la fonction une fois au chargement pour initialiser les options de la gare de retour 
+    // en fonction de la sélection initiale de la gare de départ.
+    updateReturningStations();
 }); 
